@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KEINGINAN usaha - Naikkan Level Bisnismu!</title>
+    <title>Vita - Naikkan Level Bisnismu!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
     
     <script>
         tailwind.config = {
@@ -41,21 +40,307 @@
                         'fade-in': 'fade-in 0.8s ease-out',
                         'scale-in': 'scale-in 0.5s ease-out',
                         'shimmer': 'shimmer 2s linear infinite'
+                    },
+                    keyframes: {
+                        'marquee-left': {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        },
+                        'marquee-right': {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0%)' }
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-12px) rotate(1deg)' }
+                        },
+                        'pulse-ring': {
+                            '0%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0.4)' },
+                            '70%': { boxShadow: '0 0 0 15px rgba(14, 165, 233, 0)' },
+                            '100%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0)' }
+                        },
+                        'slide-up': {
+                            'from': { transform: 'translateY(30px)', opacity: '0' },
+                            'to': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        'fade-in': {
+                            'from': { opacity: '0' },
+                            'to': { opacity: '1' }
+                        },
+                        'scale-in': {
+                            'from': { transform: 'scale(0.95)', opacity: '0' },
+                            'to': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        'shimmer': {
+                            '0%': { backgroundPosition: '-468px 0' },
+                            '100%': { backgroundPosition: '468px 0' }
+                        }
                     }
                 }
             }
         }
     </script>
+    
+    <style>
+        /* Custom styles yang tidak bisa dikonversi ke Tailwind */
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #0ea5e9, #f59e0b);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0284c7, #0c4a6e);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #0369a1;
+            border: 2px solid #0ea5e9;
+        }
+        
+        .btn-secondary:hover {
+            background: #0ea5e9;
+            color: white;
+        }
+        
+        .mood-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mood-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .mood-card:hover::before {
+            left: 100%;
+        }
+        
+        .flip-card { 
+            perspective: 1000px; 
+        }
+        
+        .flip-card-inner {
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+        }
+        
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Mobile Menu Styles */
+        #mobileMenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        
+        #mobileMenu.active {
+            max-height: 500px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Dropdown Styles */
+        .dropdown-menu {
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .group:hover .dropdown-menu {
+            transform: translateY(0);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #0284c7, #0c4a6e);
+        }
+    </style>
 </head>
 
-<body class="font-inter bg-gradient-to-b from-white to-slate-50 text-slate-800">
-    <div id="navbar-container"></div>
+<body class="font-inter bg-gradient-to-b from-white to-slate-50 text-slate-800 scroll-smooth">
+    <!-- Navbar -->
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20 transition-all duration-300">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="font-outfit text-2xl font-semibold gradient-text">Vita</div>
+                    </div>
+                </div>
 
-    <section id="hero" class="relative min-h-screen flex items-center overflow-hidden pt-16">
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors active">Beranda</a>
+                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Tentang Kami</a>
+                    
+                    <!-- Dropdown Materi Bisnis -->
+                    <div class="relative group">
+                        <button class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors flex items-center">
+                            Materi Bisnis
+                            <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"></i>
+                        </button>
+                        
+                        <!-- Dropdown Menu -->
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <div class="py-3">
+                                <a href="panduan-memulai.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-rocket text-primary-500 mr-3 w-4"></i>
+                                    Panduan Memulai
+                                </a>
+                                <a href="pemasaran-digital.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-bullhorn text-accent-500 mr-3 w-4"></i>
+                                    Pemasaran Digital
+                                </a>
+                                <a href="manajemen-keuangan.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-chart-line text-emerald-500 mr-3 w-4"></i>
+                                    Manajemen Keuangan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Kisah Sukses</a>
+                    <a href="pelatihan-materi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Pelatihan & Materi</a>
+                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Hubungi Kami</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden border-t border-slate-200 bg-white/98 backdrop-blur-sm rounded-b-2xl shadow-lg">
+                <div class="flex flex-col space-y-4 py-4">
+                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Beranda</a>
+                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Tentang Kami</a>
+                    
+                    <!-- Mobile Dropdown -->
+                    <div class="border-l-2 border-primary-200 pl-4 ml-2">
+                        <div class="text-sm font-semibold text-slate-600 mb-2">Materi Bisnis</div>
+                        <a href="panduan-memulai.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-rocket text-primary-500 mr-2"></i>Panduan Memulai
+                        </a>
+                        <a href="pemasaran-digital.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-bullhorn text-accent-500 mr-2"></i>Pemasaran Digital
+                        </a>
+                        <a href="manajemen-keuangan.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-chart-line text-emerald-500 mr-2"></i>Manajemen Keuangan
+                        </a>
+                    </div>
+                    
+                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Kisah Sukses</a>
+                    <a href="pelatihan-materi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Pelatihan & Materi</a>
+                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Hubungi Kami</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex pt-32 sm:pt-52 overflow-hidden">
+        <!-- Background Elements -->
         <div class="absolute inset-0">
-            <div class="absolute top-20 right-1/4 w-96 h-96 gradient-primary rounded-full opacity-10 blur-3xl floating-element"></div>
-            <div class="absolute bottom-20 left-1/4 w-80 h-80 gradient-accent rounded-full opacity-10 blur-3xl floating-element"></div>
-            <div class="absolute top-1/2 left-10 w-64 h-64 bg-emerald-400 rounded-full opacity-5 blur-3xl floating-element"></div>
+            <div class="absolute top-20 right-1/4 w-96 h-96 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full opacity-10 blur-3xl animate-float"></div>
+            <div class="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full opacity-10 blur-3xl animate-float" style="animation-delay: -2s;"></div>
+            <div class="absolute top-1/2 left-10 w-64 h-64 bg-emerald-400 rounded-full opacity-5 blur-3xl animate-float" style="animation-delay: -4s;"></div>
         </div>
 
         <div class="container mx-auto px-6 relative z-10">
@@ -67,55 +352,54 @@
                     </div>
 
                     <div class="space-y-6">
-                        <h1 class="heading-main text-5xl lg:text-7xl leading-tight">
+                        <h1 class="font-outfit text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight">
                             <span class="block text-slate-900 mb-2">NAIKKAN</span>
-                            <span class="block gradient-text mb-2">LEVEL</span>
-                            <span class="block text-slate-900">Bisnismu!</span>
+                            <span class="block gradient-text">Level Bisnismu!</span>
                         </h1>
                         
                         <div class="flex items-center space-x-4">
-                            <div class="w-16 h-1 gradient-primary rounded-full"></div>
-                            <div class="w-8 h-1 gradient-accent rounded-full"></div>
+                            <div class="w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                            <div class="w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
                             <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
                         </div>
                     </div>
 
-                    <p class="text-xl leading-relaxed text-slate-600 max-w-xl text-body">
+                    <p class="text-xl leading-relaxed text-slate-600 max-w-xl font-inter">
                         Bergabunglah dengan <span class="font-semibold text-primary-600">10,000+ pengusaha sukses</span> yang telah mengembangkan bisnis mereka melalui platform edukasi terlengkap di Indonesia.
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="btn-primary px-8 py-4 text-lg flex items-center justify-center group">
+                        <button class="btn-primary px-8 py-4 text-lg flex items-center justify-center group text-white font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary-500/30 transition-all">
                             <i class="fas fa-graduation-cap mr-3 group-hover:rotate-12 transition-transform"></i>
                             Mulai Belajar Gratis
                         </button>
-                        <button class="btn-secondary px-8 py-4 text-lg flex items-center justify-center group">
-                            <i class="fas fa-play mr-3 group-hover:translate-x-1 transition-transform"></i>
-                            Tonton Demo
+                        <button class="btn-secondary px-8 py-4 text-lg flex items-center justify-center group font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all">
+                            <i class="fas fa-book mr-3 group-hover:rotate-12 transition-transform"></i>
+                            Lihat Kisah Sukses
                         </button>
                     </div>
 
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-8">
-                        <div class="card-elevated p-4 text-center hover-lift">
+                        <div class="bg-white rounded-2xl p-4 text-center shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
                             <div class="text-3xl font-bold gradient-text mb-1">100%</div>
                             <div class="text-xs text-slate-500 font-medium uppercase tracking-wide">Gratis</div>
                         </div>
-                        <div class="card-elevated p-4 text-center hover-lift">
+                        <div class="bg-white rounded-2xl p-4 text-center shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
                             <div class="text-3xl font-bold gradient-text mb-1">500+</div>
                             <div class="text-xs text-slate-500 font-medium uppercase tracking-wide">Materi</div>
                         </div>
-                        <div class="card-elevated p-4 text-center hover-lift">
+                        <div class="bg-white rounded-2xl p-4 text-center shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
                             <div class="text-3xl font-bold gradient-text mb-1">10K+</div>
                             <div class="text-xs text-slate-500 font-medium uppercase tracking-wide">Pelajar</div>
                         </div>
-                        <div class="card-elevated p-4 text-center hover-lift">
+                        <div class="bg-white rounded-2xl p-4 text-center shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
                             <div class="text-3xl font-bold gradient-text mb-1">34</div>
                             <div class="text-xs text-slate-500 font-medium uppercase tracking-wide">Provinsi</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="relative animate-fade-in">
+                <div class="relative animate-fade-in hidden sm:block">
                     <div class="relative">
                         <div class="relative overflow-hidden rounded-3xl shadow-2xl">
                             <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="UMKM Success" class="w-full h-[400px] lg:h-[500px] object-cover">
@@ -149,13 +433,13 @@
                             </div>
                         </div>
                         
-                        <div class="absolute -top-6 -left-6 w-16 h-16 card-elevated flex items-center justify-center floating-element">
+                        <div class="absolute -top-6 -left-6 w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center animate-float">
                             <i class="fas fa-lightbulb text-2xl text-accent-500"></i>
                         </div>
-                        <div class="absolute -top-6 -right-6 w-16 h-16 card-elevated flex items-center justify-center floating-element">
+                        <div class="absolute -top-6 -right-6 w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center animate-float" style="animation-delay: -2s;">
                             <i class="fas fa-rocket text-2xl text-primary-500"></i>
                         </div>
-                        <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-16 h-16 card-elevated flex items-center justify-center floating-element">
+                        <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center animate-float" style="animation-delay: -4s;">
                             <i class="fas fa-trophy text-2xl text-emerald-500"></i>
                         </div>
                     </div>
@@ -163,8 +447,9 @@
             </div>
         </div>
 
-        <div class="absolute bottom-24 left-1/2 -translate-x-1/2 w-[200%] rotate-1 overflow-hidden">
-            <div class="flex animate-marquee-left section-bg-gradient text-white py-4 text-lg font-semibold">
+        <!-- Marquee Banners -->
+        <div class="absolute bottom-20 left-1/2 -translate-x-1/2 w-[200%] rotate-1 overflow-hidden hidden sm:block">
+            <div class="flex animate-marquee-left bg-gradient-to-r from-primary-500 to-primary-700 text-white py-4 text-lg font-semibold">
                 <span class="mx-12 flex items-center">
                     <i class="fas fa-graduation-cap mr-3"></i>
                     BELAJAR GRATIS
@@ -199,7 +484,7 @@
                 </span>
             </div>
         </div>
-        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 w-[200%] -rotate-1 overflow-hidden">
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-[200%] -rotate-1 overflow-hidden hidden sm:block">
             <div class="flex animate-marquee-right bg-white border-2 border-primary-200 text-slate-800 py-4 text-lg font-semibold">
                 <span class="mx-12 flex items-center">
                     <i class="fas fa-shield-alt text-primary-500 mr-3"></i>
@@ -237,36 +522,37 @@
         </div>
     </section>
 
-    <section id="tantangan" class="py-20 section-bg-subtle">
+    <!-- Tentang Section -->
+    <section id="tentang" class="py-20 bg-gradient-to-b from-slate-50 to-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <div class="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm border border-primary-200 rounded-full text-sm font-medium mb-6 shadow-lg">
                     <div class="w-2 h-2 bg-primary-500 rounded-full mr-3 animate-pulse"></div>
                     <span class="gradient-text font-semibold">Solusi Tepat</span>
                 </div>
-                <h2 class="heading-main text-4xl lg:text-6xl mb-6 text-slate-900">
+                <h2 class="font-outfit text-4xl lg:text-6xl font-extrabold mb-6 text-slate-900 tracking-tight">
                     TANTANGAN <span class="gradient-text">UMKM</span> INDONESIA
                 </h2>
                 <div class="flex items-center justify-center space-x-2 mb-6">
-                    <div class="w-16 h-1 gradient-primary rounded-full"></div>
-                    <div class="w-8 h-1 gradient-accent rounded-full"></div>
+                    <div class="w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                    <div class="w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
                     <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
                 </div>
-                <p class="text-xl text-slate-600 max-w-3xl mx-auto text-body">
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto font-inter leading-relaxed">
                     Kami memahami kesulitan yang dihadapi oleh pelaku UMKM. Berikut beberapa tantangan umum yang bisa kami bantu untuk Anda atasi.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="group opacity-100 transform translate-y-0">
-                    <div class="card-premium p-8 hover-lift group-hover:border-primary-300 transition-all duration-500 h-full opacity-100">
-                        <div class="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div class="group">
+                    <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-8 hover:-translate-y-2 hover:shadow-2xl group-hover:border-primary-300 transition-all duration-500 h-full">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <i class="fas fa-question-circle text-2xl text-white"></i>
                         </div>
-                        <h3 class="heading-sub text-xl mb-4 text-slate-900">
+                        <h3 class="font-outfit text-xl font-semibold mb-4 text-slate-900">
                             Bingung Cara Memulai Bisnis
                         </h3>
-                        <p class="text-slate-600 mb-6 text-body">
+                        <p class="text-slate-600 mb-6 font-inter leading-relaxed">
                             Mau mulai usaha tapi bingung dari mana? Pelajari langkah-langkah memulai usaha secara sistematis dengan panduan praktis kami.
                         </p>
                         <a href="#" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-colors group">
@@ -276,15 +562,15 @@
                     </div>
                 </div>
 
-                <div class="group opacity-100 transform translate-y-0">
-                    <div class="card-premium p-8 hover-lift group-hover:border-accent-300 transition-all duration-500 h-full opacity-100">
-                        <div class="w-16 h-16 gradient-accent rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div class="group">
+                    <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-8 hover:-translate-y-2 hover:shadow-2xl group-hover:border-accent-300 transition-all duration-500 h-full">
+                        <div class="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <i class="fas fa-bullhorn text-2xl text-white"></i>
                         </div>
-                        <h3 class="heading-sub text-xl mb-4 text-slate-900">
+                        <h3 class="font-outfit text-xl font-semibold mb-4 text-slate-900">
                             Kesulitan Promosi & Pemasaran
                         </h3>
-                        <p class="text-slate-600 mb-6 text-body">
+                        <p class="text-slate-600 mb-6 font-inter leading-relaxed">
                             Sudah jualan tapi belum tahu cara promosi? Temukan strategi pemasaran digital yang efektif untuk bisnis kecil dengan budget terbatas.
                         </p>
                         <a href="#" class="inline-flex items-center text-accent-600 font-semibold hover:text-accent-700 transition-colors group">
@@ -294,15 +580,15 @@
                     </div>
                 </div>
 
-                <div class="group opacity-100 transform translate-y-0">
-                    <div class="card-premium p-8 hover-lift group-hover:border-emerald-300 transition-all duration-500 h-full opacity-100">
+                <div class="group">
+                    <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-8 hover:-translate-y-2 hover:shadow-2xl group-hover:border-emerald-300 transition-all duration-500 h-full">
                         <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <i class="fas fa-calculator text-2xl text-white"></i>
                         </div>
-                        <h3 class="heading-sub text-xl mb-4 text-slate-900">
+                        <h3 class="font-outfit text-xl font-semibold mb-4 text-slate-900">
                             Manajemen Keuangan Rumit
                         </h3>
-                        <p class="text-slate-600 mb-6 text-body">
+                        <p class="text-slate-600 mb-6 font-inter leading-relaxed">
                             Pengen atur keuangan bisnis tapi belum paham caranya? Kuasai dasar-dasar manajemen keuangan untuk UMKM dengan cara yang mudah dipahami.
                         </p>
                         <a href="#" class="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition-colors group">
@@ -315,6 +601,7 @@
         </div>
     </section>
 
+    <!-- Mood Section -->
     <section id="mood-section" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -322,109 +609,110 @@
                     <div class="w-2 h-2 bg-accent-500 rounded-full mr-3 animate-pulse"></div>
                     Personalisasi Belajar
                 </div>
-                <h2 class="heading-main text-4xl lg:text-6xl mb-6 text-slate-900">
+                <h2 class="font-outfit text-4xl lg:text-6xl font-extrabold mb-6 text-slate-900 tracking-tight">
                     BAGAIMANA <span class="gradient-text">MOOD</span> BELAJAR KAMU?
                 </h2>
                 <div class="flex items-center justify-center space-x-2 mb-6">
-                    <div class="w-16 h-1 gradient-primary rounded-full"></div>
-                    <div class="w-8 h-1 gradient-accent rounded-full"></div>
+                    <div class="w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                    <div class="w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
                     <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
                 </div>
-                <p class="text-xl text-slate-600 max-w-3xl mx-auto text-body">
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto font-inter leading-relaxed">
                     Pilih sesuai mood dan kondisi kamu saat ini, kami akan memberikan rekomendasi materi pembelajaran yang paling tepat!
                 </p>
             </div>
 
             <div class="max-w-6xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-3xl overflow-hidden border-2 border-slate-200 shadow-2xl">
-                    <div class="mood-card bg-white border-b-2 md:border-r-2 border-slate-200 p-8 cursor-pointer group" data-mood="semangat">
+                    <div class="mood-card bg-white border-b-2 md:border-r-2 border-slate-200 p-8 cursor-pointer group hover:-translate-y-1 transition-all" data-mood="semangat">
                         <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform">
+                            <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fas fa-fire"></i>
                             </div>
                             <div>
-                                <h3 class="heading-sub text-xl mb-2 text-slate-900">Semangat Tinggi</h3>
+                                <h3 class="font-outfit text-xl font-semibold mb-2 text-slate-900">Semangat Tinggi</h3>
                                 <p class="text-slate-600">Lagi semangat banget buat maju!</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mood-card bg-white border-b-2 border-slate-200 p-8 cursor-pointer group" data-mood="santai">
+                    <div class="mood-card bg-white border-b-2 border-slate-200 p-8 cursor-pointer group hover:-translate-y-1 transition-all" data-mood="santai">
                         <div class="flex items-center space-x-6">
                             <div class="w-16 h-16 bg-slate-100 border-2 border-slate-300 rounded-2xl flex items-center justify-center text-slate-600 text-2xl group-hover:bg-primary-500 group-hover:text-white group-hover:border-primary-500 transition-all">
                                 <i class="fas fa-coffee"></i>
                             </div>
                             <div>
-                                <h3 class="heading-sub text-xl mb-2 text-slate-900">Mode Santai</h3>
+                                <h3 class="font-outfit text-xl font-semibold mb-2 text-slate-900">Mode Santai</h3>
                                 <p class="text-slate-600">Pengen belajar dengan rileks</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mood-card bg-white border-b-2 md:border-r-2 border-slate-200 p-8 cursor-pointer group" data-mood="bingung">
+                    <div class="mood-card bg-white border-b-2 md:border-r-2 border-slate-200 p-8 cursor-pointer group hover:-translate-y-1 transition-all" data-mood="bingung">
                         <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 gradient-accent rounded-2xl flex items-center justify-center text-white text-2xl group-hover:rotate-12 transition-transform">
+                            <div class="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center text-white text-2xl group-hover:rotate-12 transition-transform">
                                 <i class="fas fa-question"></i>
                             </div>
                             <div>
-                                <h3 class="heading-sub text-xl mb-2 text-slate-900">Masih Bingung</h3>
+                                <h3 class="font-outfit text-xl font-semibold mb-2 text-slate-900">Masih Bingung</h3>
                                 <p class="text-slate-600">Bingung mau mulai dari mana</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mood-card bg-white border-b-2 border-slate-200 p-8 cursor-pointer group" data-mood="fokus">
+                    <div class="mood-card bg-white border-b-2 border-slate-200 p-8 cursor-pointer group hover:-translate-y-1 transition-all" data-mood="fokus">
                         <div class="flex items-center space-x-6">
                             <div class="w-16 h-16 bg-slate-100 border-2 border-slate-300 rounded-2xl flex items-center justify-center text-slate-600 text-2xl group-hover:bg-emerald-500 group-hover:text-white group-hover:border-emerald-500 transition-all">
                                 <i class="fas fa-crosshairs"></i>
                             </div>
                             <div>
-                                <h3 class="heading-sub text-xl mb-2 text-slate-900">Super Fokus</h3>
+                                <h3 class="font-outfit text-xl font-semibold mb-2 text-slate-900">Super Fokus</h3>
                                 <p class="text-slate-600">Fokus banget mau sukses</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mood-card bg-white border-b-2 md:border-b-0 md:border-r-2 border-slate-200 p-8 cursor-pointer group" data-mood="optimis">
+                    <div class="mood-card bg-white border-b-2 md:border-b-0 md:border-r-2 border-slate-200 p-8 cursor-pointer group hover:-translate-y-1 transition-all" data-mood="optimis">
                         <div class="flex items-center space-x-6">
                             <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl group-hover:animate-bounce">
                                 <i class="fas fa-star"></i>
                             </div>
                             <div>
-                                <h3 class="heading-sub text-xl mb-2 text-slate-900">Optimis Tinggi</h3>
+                                <h3 class="font-outfit text-xl font-semibold mb-2 text-slate-900">Optimis Tinggi</h3>
                                 <p class="text-slate-600">Optimis mau berubah</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mood-card bg-white p-8 cursor-pointer group" data-mood="serius">
+                    <div class="mood-card bg-white p-8 cursor-pointer group hover:-translate-y-1 transition-all" data-mood="serius">
                         <div class="flex items-center space-x-6">
                             <div class="w-16 h-16 bg-slate-100 border-2 border-slate-300 rounded-2xl flex items-center justify-center text-slate-600 text-2xl group-hover:bg-slate-800 group-hover:text-white group-hover:border-slate-800 transition-all">
                                 <i class="fas fa-briefcase"></i>
                             </div>
                             <div>
-                                <h3 class="heading-sub text-xl mb-2 text-slate-900">Sangat Serius</h3>
+                                <h3 class="font-outfit text-xl font-semibold mb-2 text-slate-900">Sangat Serius</h3>
                                 <p class="text-slate-600">Serius banget mau bisnis</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
+        <!-- Mood Modal -->
         <div id="mood-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden">
-            <div class="card-premium p-8 max-w-xl w-[90%] relative animate-scale-in">
+            <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-8 max-w-xl w-[90%] relative animate-scale-in shadow-2xl">
                 <button id="mood-modal-close" class="absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center transition-colors">
                     <i class="fas fa-times text-slate-600"></i>
                 </button>
                 <div class="flex items-start space-x-4 mb-6">
-                    <div id="mood-icon" class="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center text-white text-2xl flex-shrink-0"></div>
+                    <div id="mood-icon" class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center text-white text-2xl flex-shrink-0"></div>
                     <div class="flex-1">
-                        <h4 id="mood-materi" class="heading-sub text-xl mb-2 text-slate-900"></h4>
-                        <p id="mood-desc" class="text-slate-600 text-body"></p>
+                        <h4 id="mood-materi" class="font-outfit text-xl font-semibold mb-2 text-slate-900"></h4>
+                        <p id="mood-desc" class="text-slate-600 font-inter leading-relaxed"></p>
                     </div>
                 </div>
-                <button id="mood-link" class="btn-primary px-6 py-3 font-semibold w-full">
+                <button id="mood-link" class="btn-primary px-6 py-3 font-semibold w-full text-white rounded-xl">
                     <i class="fas fa-play mr-2"></i>
                     Mulai Belajar Sekarang
                 </button>
@@ -432,7 +720,8 @@
         </div>
     </section>
 
-    <section id="materi" class="py-20 section-bg-gradient text-white">
+    <!-- Materi Section -->
+    <section id="materi" class="py-20 bg-gradient-to-r from-primary-500 to-primary-700 text-white">
         <div class="container mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="space-y-8">
@@ -442,7 +731,7 @@
                     </div>
                     
                     <div>
-                        <h2 class="heading-main text-5xl lg:text-7xl mb-4 text-white">
+                        <h2 class="font-outfit text-5xl lg:text-7xl font-extrabold mb-4 text-white tracking-tight">
                             <span class="block">MATERI</span>
                             <span class="block text-accent-400">UNGGULAN</span>
                         </h2>
@@ -451,10 +740,10 @@
                             <div class="w-8 h-1 bg-accent-400 rounded-full"></div>
                             <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
                         </div>
-                        <p class="text-xl text-blue-100 text-body">Belajar dari dasar sampai mahir jadi pengusaha sukses dengan kurikulum yang telah terbukti</p>
+                        <p class="text-xl text-blue-100 font-inter leading-relaxed">Belajar dari dasar sampai mahir jadi pengusaha sukses dengan kurikulum yang telah terbukti</p>
                     </div>
                     
-                    <button class="btn-secondary px-8 py-4 font-semibold text-lg">
+                    <button class="btn-secondary px-8 py-4 font-semibold text-lg rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all">
                         <i class="fas fa-external-link-alt mr-3"></i>
                         Lihat Semua Materi
                     </button>
@@ -462,44 +751,44 @@
 
                 <div class="relative">
                     <div class="relative w-full max-w-lg mx-auto h-96">
-                        <div class="learning-card absolute left-0 top-0 w-full card-premium p-6 z-30" id="card-0">
+                        <div class="absolute left-0 top-0 w-full bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-6 z-30 shadow-xl" id="card-0">
                             <div class="flex justify-between items-start mb-4">
-                                <div class="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center text-white font-bold">
+                                <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white font-bold">
                                     01
                                 </div>
                                 <span class="bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-semibold">GRATIS</span>
                             </div>
-                            <h3 class="heading-sub text-xl mb-2 text-slate-900">Panduan Memulai Bisnis</h3>
-                            <p class="text-slate-600 text-sm mb-4 text-body">Langkah demi langkah memulai bisnis dari nol. Cocok buat yang masih bingung mau mulai dari mana.</p>
-                            <div class="w-full h-16 gradient-subtle rounded-xl flex items-center justify-center">
+                            <h3 class="font-outfit text-xl font-semibold mb-2 text-slate-900">Panduan Memulai</h3>
+                            <p class="text-slate-600 text-sm mb-4 font-inter leading-relaxed">Langkah demi langkah memulai bisnis dari nol. Cocok buat yang masih bingung mau mulai dari mana.</p>
+                            <div class="w-full h-16 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl flex items-center justify-center">
                                 <i class="fas fa-rocket text-2xl text-primary-600"></i>
                             </div>
                         </div>
                         
-                        <div class="learning-card absolute left-4 top-2 w-full card-premium p-6 z-20" id="card-1">
+                        <div class="absolute left-4 top-2 w-full bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-6 z-20 shadow-xl" id="card-1">
                             <div class="flex justify-between items-start mb-4">
-                                <div class="w-12 h-12 gradient-accent rounded-xl flex items-center justify-center text-white font-bold">
+                                <div class="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center text-white font-bold">
                                     02
                                 </div>
                                 <span class="bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-semibold">GRATIS</span>
                             </div>
-                            <h3 class="heading-sub text-xl mb-2 text-slate-900">Digital Marketing</h3>
-                            <p class="text-slate-600 text-sm mb-4 text-body">Strategi promosi online yang efektif dengan budget minim. Dari Instagram sampai marketplace.</p>
-                            <div class="w-full h-16 gradient-subtle rounded-xl flex items-center justify-center">
+                            <h3 class="font-outfit text-xl font-semibold mb-2 text-slate-900">Digital Marketing</h3>
+                            <p class="text-slate-600 text-sm mb-4 font-inter leading-relaxed">Strategi promosi online yang efektif dengan budget minim. Dari Instagram sampai marketplace.</p>
+                            <div class="w-full h-16 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl flex items-center justify-center">
                                 <i class="fas fa-bullhorn text-2xl text-accent-600"></i>
                             </div>
                         </div>
                         
-                        <div class="learning-card absolute left-8 top-4 w-full card-premium p-6 z-10" id="card-2">
+                        <div class="absolute left-8 top-4 w-full bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-6 z-10 shadow-xl" id="card-2">
                             <div class="flex justify-between items-start mb-4">
                                 <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center text-white font-bold">
                                     03
                                 </div>
                                 <span class="bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-semibold">GRATIS</span>
                             </div>
-                            <h3 class="heading-sub text-xl mb-2 text-slate-900">Manajemen Keuangan</h3>
-                            <p class="text-slate-600 text-sm mb-4 text-body">Atur keuangan bisnis dengan mudah. Dari pembukuan sederhana sampai analisis profit.</p>
-                            <div class="w-full h-16 gradient-subtle rounded-xl flex items-center justify-center">
+                            <h3 class="font-outfit text-xl font-semibold mb-2 text-slate-900">Manajemen Keuangan</h3>
+                            <p class="text-slate-600 text-sm mb-4 font-inter leading-relaxed">Atur keuangan bisnis dengan mudah. Dari pembukuan sederhana sampai analisis profit.</p>
+                            <div class="w-full h-16 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl flex items-center justify-center">
                                 <i class="fas fa-chart-line text-2xl text-emerald-600"></i>
                             </div>
                         </div>
@@ -518,45 +807,33 @@
         </div>
     </section>
 
-    <section id="kisahSukses" class="py-20 section-bg-subtle">
+    <!-- Kisah Sukses Section -->
+    <section id="kisahSukses" class="py-20 bg-gradient-to-b from-slate-50 to-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <div class="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm border border-primary-200 rounded-full text-sm font-medium mb-6 shadow-lg">
                     <div class="w-2 h-2 bg-emerald-500 rounded-full mr-3 animate-pulse"></div>
                     <span class="gradient-text font-semibold">Inspirasi Nyata</span>
                 </div>
-                <h2 class="heading-main text-4xl lg:text-6xl mb-6 text-slate-900">
+                <h2 class="font-outfit text-4xl lg:text-6xl font-extrabold mb-6 text-slate-900 tracking-tight">
                     KISAH <span class="gradient-text">SUKSES</span> UMKM
                 </h2>
                 <div class="flex items-center justify-center space-x-2 mb-6">
-                    <div class="w-16 h-1 gradient-primary rounded-full"></div>
-                    <div class="w-8 h-1 gradient-accent rounded-full"></div>
+                    <div class="w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                    <div class="w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
                     <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
                 </div>
-                <p class="text-xl text-slate-600 max-w-3xl mx-auto text-body">
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto font-inter leading-relaxed">
                     Belajar dari pengalaman pelaku UMKM yang telah berhasil mengembangkan bisnisnya dengan strategi yang tepat.
                 </p>
             </div>
 
             <div class="mb-16">
-                <div class="card-premium overflow-hidden hover-lift">
+                <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500">
                     <div class="grid lg:grid-cols-2">
-                        <div class="relative section-bg-gradient text-white p-12 flex items-center justify-center">
+                        <div class="relative bg-gradient-to-r from-primary-500 to-primary-700 text-white p-12 flex items-center justify-center">
                             <div class="absolute inset-0">
-                                <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Bu Darmi Bakso" class="w-full h-full object-cover opacity-30">
-                            </div>
-                            <div class="relative text-center z-10">
-                                <div class="w-32 h-32 bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-3xl flex items-center justify-center text-6xl mb-8 mx-auto overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1494790108755-2616c2d58e2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Bu Darmi" class="w-full h-full object-cover">
-                                </div>
-                                <div class="space-y-2">
-                                    <div class="text-sm text-blue-200 font-medium">// SUCCESS STORY</div>
-                                    <div class="heading-sub text-3xl">Bu Darmi</div>
-                                    <div class="text-blue-200">Bakso Legendaris Yogyakarta</div>
-                                </div>
-                            </div>
-                            <div class="absolute top-6 left-6">
-                                <span class="bg-accent-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">FEATURED</span>
+                                <img src="assets/img/ibu-jualan-bakso.jpeg" alt="Bu Darmi Bakso" class="w-full h-full object-cover opacity-30">
                             </div>
                         </div>
 
@@ -564,9 +841,9 @@
                             <div class="mb-6">
                                 <span class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-semibold">Kuliner</span>
                             </div>
-                            <h3 class="heading-sub text-3xl mb-6 text-slate-900">Bu Darmi - Bakso Legendaris</h3>
+                            <h3 class="font-outfit text-3xl font-semibold mb-6 text-slate-900">Bu Darmi - Bakso Legendaris</h3>
                             <div class="flex items-center mb-6">
-                                <div class="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center text-white mr-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white mr-4">
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
                                 <div>
@@ -575,25 +852,25 @@
                                 </div>
                             </div>
                             <div class="mb-6 p-4 bg-slate-50 border-l-4 border-primary-500 rounded-r-xl">
-                                <p class="text-slate-600 italic text-body">
+                                <p class="text-slate-600 italic font-inter leading-relaxed">
                                     "Dari jualan rumahan hingga GoFood terkenal. Kuncinya: branding yang konsisten dan pelayanan cepat, terutama untuk pesanan online."
                                 </p>
                             </div>
                             <div class="grid grid-cols-2 gap-4 mb-6">
                                 <div class="flex items-center">
-                                    <div class="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center text-white mr-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white mr-3">
                                         <i class="fas fa-chart-line"></i>
                                     </div>
                                     <span class="text-sm font-semibold text-slate-700">300% Peningkatan Omset</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <div class="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center text-white mr-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white mr-3">
                                         <i class="fas fa-store"></i>
                                     </div>
                                     <span class="text-sm font-semibold text-slate-700">2 Outlet Baru</span>
                                 </div>
                             </div>
-                            <button class="btn-primary px-6 py-3 font-semibold">
+                            <button class="btn-primary px-6 py-3 font-semibold text-white rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all">
                                 <i class="fas fa-book-open mr-2"></i>
                                 Baca Kisah Lengkap
                             </button>
@@ -603,30 +880,30 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <div class="flip-card h-96">
+                <div class="flip-card sm:h-[26rem] h-[28rem]">
                     <div class="flip-card-inner relative w-full h-full">
-                        <div class="flip-card-front absolute inset-0 card-premium p-8 flex flex-col">
+                        <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-8 flex flex-col shadow-xl">
                             <div class="text-center mb-6">
                                 <div class="w-20 h-20 rounded-2xl overflow-hidden mx-auto mb-4 shadow-lg">
-                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Mas Fikri" class="w-full h-full object-cover">
+                                    <img src="assets/img/fikri.jpg" alt="Mas Fikri" class="w-full h-full object-cover">
                                 </div>
                                 <span class="bg-accent-100 text-accent-700 px-3 py-1 rounded-full text-xs font-semibold">Jasa</span>
                             </div>
-                            <h4 class="heading-sub text-xl mb-2 text-center text-slate-900">Mas Fikri</h4>
+                            <h4 class="font-outfit text-xl font-semibold mb-2 text-center text-slate-900">Mas Fikri</h4>
                             <p class="text-center text-slate-600 text-sm mb-4">Laundry Sukses • Jakarta</p>
-                            <p class="text-slate-600 mb-6 flex-1 text-center text-body">
+                            <p class="text-slate-600 mb-6 flex-1 text-center font-inter leading-relaxed">
                                 Dari mesin bekas hingga 4 cabang franchise lokal. Fokus pada pelayanan konsisten dan digitalisasi layanan.
                             </p>
-                            <button class="flip-prompt w-full btn-secondary py-5 flex items-center justify-center font-semibold">
+                            <button class="flip-prompt w-full btn-secondary py-4 flex items-center justify-center font-semibold rounded-xl">
                                 <i class="fas fa-eye mr-2"></i>
                                 Lihat Detail
                             </button>
                         </div>
 
-                        <div class="flip-card-back absolute inset-0 section-bg-gradient text-white p-8 flex items-center rounded-2xl">
+                        <div class="flip-card-back absolute inset-0 bg-gradient-to-r from-primary-500 to-primary-700 text-white p-8 flex items-center rounded-3xl">
                             <div class="w-full">
-                                <h4 class="heading-sub text-xl mb-6 border-b-2 border-white/30 pb-2">Kunci Sukses:</h4>
-                                <ul class="space-y-3 mb-8 text-sm text-body">
+                                <h4 class="font-outfit text-xl font-semibold mb-6 border-b-2 border-white/30 pb-2">Kunci Sukses:</h4>
+                                <ul class="space-y-3 mb-8 text-sm font-inter leading-relaxed">
                                     <li class="flex items-center">
                                         <i class="fas fa-check-circle text-emerald-400 mr-3"></i>
                                         Sistem pelayanan terstandar
@@ -657,30 +934,30 @@
                     </div>
                 </div>
 
-                <div class="flip-card h-96">
+                <div class="flip-card sm:h-[26rem] h-[28rem]">
                     <div class="flip-card-inner relative w-full h-full">
-                        <div class="flip-card-front absolute inset-0 card-premium p-8 flex flex-col">
+                        <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-8 flex flex-col shadow-xl">
                             <div class="text-center mb-6">
                                 <div class="w-20 h-20 rounded-2xl overflow-hidden mx-auto mb-4 shadow-lg">
-                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Mbak Siti" class="w-full h-full object-cover">
+                                    <img src="assets/img/siti.jpg" alt="Mbak Siti" class="w-full h-full object-cover">
                                 </div>
                                 <span class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-semibold">Fashion</span>
                             </div>
-                            <h4 class="heading-sub text-xl mb-2 text-center text-slate-900">Mbak Siti</h4>
+                            <h4 class="font-outfit text-xl font-semibold mb-2 text-center text-slate-900">Mbak Siti</h4>
                             <p class="text-center text-slate-600 text-sm mb-4">Hijab Handmade • Bandung</p>
-                            <p class="text-slate-600 mb-6 flex-1 text-center text-body">
+                            <p class="text-slate-600 mb-6 flex-1 text-center font-inter leading-relaxed">
                                 Berawal dari hobi menjahit, kini produk hijab handmade Mbak Siti telah diekspor ke Malaysia dan Singapura.
                             </p>
-                            <button class="flip-prompt w-full btn-secondary py-5 flex items-center justify-center font-semibold">
+                            <button class="flip-prompt w-full btn-secondary py-4 flex items-center justify-center font-semibold rounded-xl">
                                 <i class="fas fa-eye mr-2"></i>
                                 Lihat Detail
                             </button>
                         </div>
 
-                        <div class="flip-card-back absolute inset-0 bg-gradient-to-br from-pink-500 to-purple-500 text-white p-8 flex items-center rounded-2xl">
+                        <div class="flip-card-back absolute inset-0 bg-gradient-to-r from-primary-500 to-primary-700 text-white p-8 flex items-center rounded-3xl">
                             <div class="w-full">
-                                <h4 class="heading-sub text-xl mb-6 border-b-2 border-white/30 pb-2">Kunci Sukses:</h4>
-                                <ul class="space-y-3 mb-8 text-sm text-body">
+                                <h4 class="font-outfit text-xl font-semibold mb-6 border-b-2 border-white/30 pb-2">Kunci Sukses:</h4>
+                                <ul class="space-y-3 mb-8 text-sm font-inter leading-relaxed">
                                     <li class="flex items-center">
                                         <i class="fas fa-check-circle text-yellow-300 mr-3"></i>
                                         Keunikan produk handmade
@@ -714,198 +991,30 @@
         </div>
     </section>
 
+    <!-- Testimoni Section -->
     <section id="testimoni" class="py-20 bg-white overflow-hidden">
         <div class="text-center mb-16">
             <div class="inline-flex items-center px-6 py-3 bg-slate-900 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
                 <div class="w-2 h-2 bg-accent-500 rounded-full mr-3 animate-pulse"></div>
                 Apa Kata Mereka?
             </div>
-            <h2 class="heading-main text-4xl lg:text-6xl mb-6 text-slate-900">
-                TESTIMONI DARI <span class="gradient-text">PELAJAR</span>
+            <h2 class="font-outfit text-4xl lg:text-6xl font-extrabold mb-6 text-slate-900 tracking-tight">
+                TESTIMONI DARI <span class="gradient-text">UMKM</span>
             </h2>
             <div class="flex items-center justify-center space-x-2">
-                <div class="w-16 h-1 gradient-primary rounded-full"></div>
-                <div class="w-8 h-1 gradient-accent rounded-full"></div>
+                <div class="w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                <div class="w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
                 <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
             </div>
         </div>
         
-        <div class="overflow-hidden">
-            <div class="flex animate-marquee-left w-max space-x-6">
-                <div class="flex space-x-6">
-                    <div class="testimonial-card rounded-2xl p-8 w-[90vw] sm:w-[400px] md:w-[480px] min-h-[280px] shadow-lg">
-                        <div class="text-6xl text-primary-500 mb-4 font-serif">"</div>
-                        <p class="text-lg leading-relaxed mb-6 text-body">Materi di KEINGINAN usaha sangat mudah dipahami. Berkat belajar di sini, omset toko online saya naik 200%!</p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 gradient-primary rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                AP
-                            </div>
-                            <div>
-                                <div class="font-semibold text-slate-900">Andi Prasetyo</div>
-                                <div class="text-sm text-slate-500">Pemilik Toko Online</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card testimonial-dark rounded-2xl p-8 w-[90vw] sm:w-[400px] md:w-[480px] min-h-[280px] shadow-lg">
-                        <div class="text-6xl text-blue-200 mb-4 font-serif">"</div>
-                        <p class="text-lg leading-relaxed mb-6 text-body text-white">Gratis tapi berkualitas! Materi pemasaran digitalnya benar-benar praktikal dan bisa langsung diterapin.</p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-white/20 border border-white/30 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                SN
-                            </div>
-                            <div>
-                                <div class="font-semibold text-white">Siti Nurhaliza</div>
-                                <div class="text-sm text-blue-200">Pengusaha Makanan</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card rounded-2xl p-8 w-[90vw] sm:w-[400px] md:w-[480px] min-h-[280px] shadow-lg">
-                        <div class="text-6xl text-primary-500 mb-4 font-serif">"</div>
-                        <p class="text-lg leading-relaxed mb-6 text-body">Dulu bingung mau mulai bisnis dari mana. Sekarang udah punya warung sendiri berkat panduan di sini!</p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 gradient-accent rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                BS
-                            </div>
-                            <div>
-                                <div class="font-semibold text-slate-900">Budi Santoso</div>
-                                <div class="text-sm text-slate-500">Pemilik Warung</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex space-x-6">
-                    <div class="testimonial-card rounded-2xl p-8 w-[90vw] sm:w-[400px] md:w-[480px] min-h-[280px] shadow-lg">
-                        <div class="text-6xl text-primary-500 mb-4 font-serif">"</div>
-                        <p class="text-lg leading-relaxed mb-6 text-body">Materi di KEINGINAN usaha sangat mudah dipahami. Berkat belajar di sini, omset toko online saya naik 200%!</p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 gradient-primary rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                AP
-                            </div>
-                            <div>
-                                <div class="font-semibold text-slate-900">Andi Prasetyo</div>
-                                <div class="text-sm text-slate-500">Pemilik Toko Online</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card testimonial-dark rounded-2xl p-8 w-[90vw] sm:w-[400px] md:w-[480px] min-h-[280px] shadow-lg">
-                        <div class="text-6xl text-blue-200 mb-4 font-serif">"</div>
-                        <p class="text-lg leading-relaxed mb-6 text-body text-white">Gratis tapi berkualitas! Materi pemasaran digitalnya benar-benar praktikal dan bisa langsung diterapin.</p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-white/20 border border-white/30 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                SN
-                            </div>
-                            <div>
-                                <div class="font-semibold text-white">Siti Nurhaliza</div>
-                                <div class="text-sm text-blue-200">Pengusaha Makanan</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card rounded-2xl p-8 w-[90vw] sm:w-[400px] md:w-[480px] min-h-[280px] shadow-lg">
-                        <div class="text-6xl text-primary-500 mb-4 font-serif">"</div>
-                        <p class="text-lg leading-relaxed mb-6 text-body">Dulu bingung mau mulai bisnis dari mana. Sekarang udah punya warung sendiri berkat panduan di sini!</p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 gradient-accent rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                BS
-                            </div>
-                            <div>
-                                <div class="font-semibold text-slate-900">Budi Santoso</div>
-                                <div class="text-sm text-slate-500">Pemilik Warung</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="overflow-hidden mt-8">
-            <div class="flex animate-marquee-right w-max space-x-6">
-                <div class="flex space-x-6">
-                    <div class="testimonial-card testimonial-dark rounded-2xl p-8 w-[90vw] sm:w-[400px] md:w-[480px] min-h-[280px] shadow-lg">
-                        <div class="text-6xl text-blue-200 mb-4 font-serif">"</div>
-                        <p class="text-lg leading-relaxed mb-6 text-body text-white">Platform yang sangat membantu para pemula seperti saya. Materinya lengkap dan mudah diikuti step by step.</p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-white/20 border border-white/30 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                MS
-                            </div>
-                            <div>
-                                <div class="font-semibold text-white">Maya Sari</div>
-                                <div class="text-sm text-blue-200">Pemilik Salon</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card rounded-2xl p-8 w-[90vw] sm:w-[400px] md:w-[480px] min-h-[280px] shadow-lg">
-                        <div class="text-6xl text-primary-500 mb-4 font-serif">"</div>
-                        <p class="text-lg leading-relaxed mb-6 text-body">Berkat belajar manajemen keuangan di sini, sekarang bisnis saya lebih teratur dan profit jadi jelas!</p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                RP
-                            </div>
-                            <div>
-                                <div class="font-semibold text-slate-900">Riko Pratama</div>
-                                <div class="text-sm text-slate-500">Pengusaha Konveksi</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card testimonial-dark rounded-2xl p-8 w-[90vw] sm:w-[400px] md:w-[480px] min-h-[280px] shadow-lg">
-                        <div class="text-6xl text-blue-200 mb-4 font-serif">"</div>
-                        <p class="text-lg leading-relaxed mb-6 text-body text-white">KEINGINAN usaha tuh bener-bener game changer buat UMKM kayak kita. Materi berkualitas tanpa bayar!</p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-white/20 border border-white/30 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                DL
-                            </div>
-                            <div>
-                                <div class="font-semibold text-white">Devi Lestari</div>
-                                <div class="text-sm text-blue-200">Pemilik Katering</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex space-x-6">
-                    <div class="testimonial-card testimonial-dark rounded-2xl p-8 w-[90vw] sm:w-[400px] md:w-[480px] min-h-[280px] shadow-lg">
-                        <div class="text-6xl text-blue-200 mb-4 font-serif">"</div>
-                        <p class="text-lg leading-relaxed mb-6 text-body text-white">Platform yang sangat membantu para pemula seperti saya. Materinya lengkap dan mudah diikuti step by step.</p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-white/20 border border-white/30 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                MS
-                            </div>
-                            <div>
-                                <div class="font-semibold text-white">Maya Sari</div>
-                                <div class="text-sm text-blue-200">Pemilik Salon</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card rounded-2xl p-8 w-[90vw] sm:w-[400px] md:w-[480px] min-h-[280px] shadow-lg">
-                        <div class="text-6xl text-primary-500 mb-4 font-serif">"</div>
-                        <p class="text-lg leading-relaxed mb-6 text-body">Berkat belajar manajemen keuangan di sini, sekarang bisnis saya lebih teratur dan profit jadi jelas!</p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                RP
-                            </div>
-                            <div>
-                                <div class="font-semibold text-slate-900">Riko Pratama</div>
-                                <div class="text-sm text-slate-500">Pengusaha Konveksi</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card testimonial-dark rounded-2xl p-8 w-[90vw] sm:w-[400px] md:w-[480px] min-h-[280px] shadow-lg">
-                        <div class="text-6xl text-blue-200 mb-4 font-serif">"</div>
-                        <p class="text-lg leading-relaxed mb-6 text-body text-white">KEINGINAN usaha tuh bener-bener game changer buat UMKM kayak kita. Materi berkualitas tanpa bayar!</p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-white/20 border border-white/30 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                DL
-                            </div>
-                            <div>
-                                <div class="font-semibold text-white">Devi Lestari</div>
-                                <div class="text-sm text-blue-200">Pemilik Katering</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="testimoni-container">
+            <!-- Testimoni akan dirender oleh JavaScript -->
         </div>
     </section>
 
-    <section class="py-20 section-bg-gradient text-white relative overflow-hidden">
+    <!-- CTA Section -->
+    <section id="pelatihan-materi" class="py-20 bg-gradient-to-r from-primary-500 to-primary-700 text-white relative overflow-hidden">
         <div class="absolute inset-0">
             <div class="absolute top-1/4 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
             <div class="absolute bottom-1/4 right-10 w-80 h-80 bg-accent-500/20 rounded-full blur-3xl"></div>
@@ -918,7 +1027,7 @@
                     <span class="text-white font-semibold">Ready to Level Up?</span>
                 </div>
                 
-                <h2 class="heading-main text-5xl lg:text-7xl mb-8 text-white">
+                <h2 class="font-outfit text-5xl lg:text-7xl font-extrabold mb-8 text-white tracking-tight">
                     SIAP NAIKKAN<br>
                     <span class="text-accent-400">LEVEL</span> BISNISMU?
                 </h2>
@@ -929,13 +1038,13 @@
                     <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
                 </div>
                 
-                <p class="text-xl mb-12 max-w-3xl mx-auto text-blue-100 text-body leading-relaxed">
+                <p class="text-xl mb-12 max-w-3xl mx-auto text-blue-100 font-inter leading-relaxed">
                     Jangan cuma jadi penonton kesuksesan orang lain. Saatnya ambil action dan wujudkan bisnis impianmu! 
                     Semua materi gratis menanti, tinggal kamu yang harus mulai.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                    <button class="btn-secondary px-8 py-4 font-semibold text-lg">
+                    <button class="btn-secondary px-8 py-4 font-semibold text-lg rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all">
                         <i class="fas fa-graduation-cap mr-3"></i>
                         Mulai Belajar Sekarang
                     </button>
@@ -945,29 +1054,132 @@
                     </button>
                 </div>
                 
-                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
                     <div class="text-center">
-                        <div class="heading-sub text-3xl font-bold mb-2 text-accent-400">24/7</div>
+                        <div class="font-outfit text-3xl font-bold mb-2 text-accent-400">24/7</div>
                         <div class="text-sm text-blue-200">Akses Tanpa Batas</div>
                     </div>
                     <div class="text-center">
-                        <div class="heading-sub text-3xl font-bold mb-2 text-accent-400">0%</div>
+                        <div class="font-outfit text-3xl font-bold mb-2 text-accent-400">0%</div>
                         <div class="text-sm text-blue-200">Biaya Tersembunyi</div>
                     </div>
                     <div class="text-center">
-                        <div class="heading-sub text-3xl font-bold mb-2 text-accent-400">∞</div>
+                        <div class="font-outfit text-3xl font-bold mb-2 text-accent-400">∞</div>
                         <div class="text-sm text-blue-200">Potensi Pertumbuhan</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="font-outfit text-3xl font-bold mb-2 text-accent-400">24/7</div>
+                        <div class="text-sm text-blue-200">AI Asisten</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="footer-container"></div>
+    <!-- Footer -->
+    <footer id="hubungi" class="bg-slate-900 text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-outfit text-2xl font-semibold text-white">Vita</div>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 font-inter leading-relaxed">
+                        Platform edukasi interaktif untuk membantu UMKM lokal belajar bisnis secara mandiri, gratis, dan efektif.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
 
-    <script src="js/config.js"></script>
-    <script src="js/components.js"></script>
+                <div>
+                    <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Navigasi</h5>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-slate-300 hover:text-primary-400 transition-colors">Beranda</a></li>
+                        <li><a href="tentang.html" class="text-slate-300 hover:text-primary-400 transition-colors">Tentang Kami</a></li>
+                        <li><a href="#" class="text-slate-300 hover:text-primary-400 transition-colors">Materi Bisnis</a></li>
+                        <li><a href="kisah-sukses.html" class="text-slate-300 hover:text-primary-400 transition-colors">Kisah Sukses</a></li>
+                        <li><a href="pelatihan-materi.html" class="text-slate-300 hover:text-primary-400 transition-colors">Pelatihan & Materi</a></li>
+                        <li><a href="hubungi.html" class="text-slate-300 hover:text-primary-400 transition-colors">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Materi</h5>
+                    <ul class="space-y-3">
+                        <li><a href="pemasaran-digital.html" class="text-slate-300 hover:text-primary-400 transition-colors">Pemasaran Digital</a></li>
+                        <li><a href="manajemen-keuangan.html" class="text-slate-300 hover:text-primary-400 transition-colors">Manajemen Keuangan</a></li>
+                        <li><a href="panduan-memulai.html" class="text-slate-300 hover:text-primary-400 transition-colors">Panduan Memulai</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Kontak</h5>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-5 h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300">Email</div>
+                                <div class="text-sm text-slate-400">support@vita.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-5 h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300">Telepon</div>
+                                <div class="text-sm text-slate-400">+62 859 1264 62972</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-5 h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300">Lokasi</div>
+                                <div class="text-sm text-slate-400">Yogyakarta, Indonesia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="text-slate-400 text-sm">
+                        © 2025 Vita. All rights reserved.
+                    </div>
+                    <div class="flex items-center space-x-6 text-sm">
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Kebijakan Privasi</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Syarat & Ketentuan</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Bantuan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script src="js/script.js"></script>
 </body>
 
 </html>
+
