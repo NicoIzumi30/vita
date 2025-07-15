@@ -1,0 +1,2459 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Keuangan - Vita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e'
+                        },
+                        accent: {
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'outfit': ['Outfit', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-ring': 'pulse-ring 2s infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'fade-in': 'fade-in 0.8s ease-out',
+                        'scale-in': 'scale-in 0.5s ease-out',
+                        'shimmer': 'shimmer 2s linear infinite'
+                    },
+                    keyframes: {
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-12px) rotate(1deg)' }
+                        },
+                        'pulse-ring': {
+                            '0%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0.4)' },
+                            '70%': { boxShadow: '0 0 0 15px rgba(14, 165, 233, 0)' },
+                            '100%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0)' }
+                        },
+                        'slide-up': {
+                            'from': { transform: 'translateY(30px)', opacity: '0' },
+                            'to': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        'fade-in': {
+                            'from': { opacity: '0' },
+                            'to': { opacity: '1' }
+                        },
+                        'scale-in': {
+                            'from': { transform: 'scale(0.95)', opacity: '0' },
+                            'to': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        'shimmer': {
+                            '0%': { backgroundPosition: '-468px 0' },
+                            '100%': { backgroundPosition: '468px 0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #0ea5e9, #f59e0b);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #0369a1;
+            border: 2px solid #0ea5e9;
+        }
+
+        .btn-secondary:hover {
+            background: #0ea5e9;
+            color: white;
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.8) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .sidebar-sticky {
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element-delay {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: -2s;
+        }
+
+        .floating-element-delay-2 {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: -4s;
+        }
+
+        #mobileMenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        #mobileMenu.active {
+            max-height: 500px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu {
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .group:hover .dropdown-menu {
+            transform: translateY(0);
+        }
+
+        .checklist-item {
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:hover {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
+            transform: translateX(4px);
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .icon-bounce {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            53%,
+            80%,
+            100% {
+                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                transform: translate3d(0, 0, 0);
+            }
+
+            40%,
+            43% {
+                animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                transform: translate3d(0, -30px, 0);
+            }
+
+            70% {
+                animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                transform: translate3d(0, -15px, 0);
+            }
+
+            90% {
+                transform: translate3d(0, -4px, 0);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-inter bg-gradient-to-b from-white to-slate-50 text-slate-800 scroll-smooth">
+    <!-- Navbar -->
+    <nav id="mainNav"
+        class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20 transition-all duration-300">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="font-outfit text-2xl font-semibold gradient-text">Vita</div>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Beranda</a>
+                    <a href="tentang.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Tentang
+                        Kami</a>
+
+                    <!-- Dropdown Materi Bisnis -->
+                    <div class="relative group">
+                        <button
+                            class="nav-link text-primary-600 font-medium transition-colors flex items-center active">
+                            Materi Bisnis
+                            <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"></i>
+                        </button>
+
+                        <div
+                            class="dropdown-menu absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <div class="py-3">
+                                <a href="panduan-memulai.html"
+                                    class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-rocket text-primary-500 mr-3 w-4"></i>
+                                    Panduan Memulai
+                                </a>
+                                <a href="pemasaran-digital.html"
+                                    class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-bullhorn text-accent-500 mr-3 w-4"></i>
+                                    Pemasaran Digital
+                                </a>
+                                <a href="manajemen-keuangan.html"
+                                    class="block px-4 py-3 text-primary-600 bg-primary-50 font-medium transition-colors">
+                                    <i class="fas fa-chart-line text-emerald-500 mr-3 w-4"></i>
+                                    Manajemen Keuangan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="kisah-sukses.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Kisah
+                        Sukses</a>
+                    <a href="pelatihan-materi.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Pelatihan &
+                        Materi</a>
+                    <a href="hubungi.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Hubungi
+                        Kami</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn"
+                    class="md:hidden w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu"
+                class="md:hidden border-t border-slate-200 bg-white/98 backdrop-blur-sm rounded-b-2xl shadow-lg">
+                <div class="flex flex-col space-y-4 py-4">
+                    <a href="index.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Beranda</a>
+                    <a href="tentang.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Tentang
+                        Kami</a>
+
+                    <div class="border-l-2 border-primary-200 pl-4 ml-2">
+                        <div class="text-sm font-semibold text-slate-600 mb-2">Materi Bisnis</div>
+                        <a href="panduan-memulai.html"
+                            class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-rocket text-primary-500 mr-2"></i>Panduan Memulai
+                        </a>
+                        <a href="pemasaran-digital.html"
+                            class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-bullhorn text-accent-500 mr-2"></i>Pemasaran Digital
+                        </a>
+                        <a href="manajemen-keuangan.html"
+                            class="block py-2 text-primary-600 font-medium transition-colors">
+                            <i class="fas fa-chart-line text-emerald-500 mr-2"></i>Manajemen Keuangan
+                        </a>
+                    </div>
+
+                    <a href="kisah-sukses.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Kisah
+                        Sukses</a>
+                    <a href="pelatihan-materi.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Pelatihan
+                        & Materi</a>
+                    <a href="hubungi.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Hubungi
+                        Kami</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen items-center flex pt-32 sm:pt-0 sm:pb-0 pb-20 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div
+                class="absolute top-20 right-1/4 w-96 h-96 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full opacity-10 blur-3xl floating-element">
+            </div>
+            <div
+                class="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full opacity-10 blur-3xl floating-element-delay">
+            </div>
+            <div
+                class="absolute top-1/3 left-10 w-16 h-16 bg-emerald-500/20 rounded-2xl flex items-center justify-center floating-element">
+                <i class="fas fa-chart-pie text-2xl text-emerald-500"></i>
+            </div>
+            <div
+                class="absolute top-1/2 right-10 w-16 h-16 bg-primary-500/20 rounded-2xl flex items-center justify-center floating-element-delay">
+                <i class="fas fa-wallet text-2xl text-primary-500"></i>
+            </div>
+            <div
+                class="absolute bottom-1/4 left-1/3 w-12 h-12 bg-accent-500/20 rounded-xl flex items-center justify-center floating-element-delay-2">
+                <i class="fas fa-calculator text-xl text-accent-500"></i>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8 animate-slide-up">
+                    <div
+                        class="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm border border-emerald-200 rounded-full text-sm font-medium shadow-lg">
+                        <div class="w-2 h-2 bg-emerald-500 rounded-full mr-3 animate-pulse"></div>
+                        <span class="gradient-text font-semibold">Keuangan UMKM</span>
+                    </div>
+
+                    <div class="space-y-6">
+                        <h1 class="font-outfit text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+                            <span class="text-slate-900">Kelola </span>
+                            <span class="gradient-text">Keuangan Bisnis</span>
+                            <span class="text-slate-900"> dengan Cerdas</span>
+                        </h1>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-1 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"></div>
+                            <div class="w-8 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                            <div class="w-4 h-1 bg-accent-500 rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <p class="text-xl text-slate-600 leading-relaxed">
+                        Dari pencatatan transaksi hingga analisis keuntungan, pelajari cara mengelola keuangan bisnis
+                        yang sehat dan menguntungkan untuk <span class="font-semibold text-primary-600">UMKM
+                            Indonesia</span>.
+                    </p>
+
+                    <div class="bg-gradient-to-r from-red-50 to-accent-50 rounded-3xl p-6 border border-red-200">
+                        <div class="flex items-center">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 text-white rounded-2xl flex items-center justify-center mr-6 icon-bounce">
+                                <i class="fas fa-exclamation-triangle text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-2xl font-bold text-red-600">70%</h4>
+                                <p class="text-slate-700 font-medium">UMKM tutup dalam 5 tahun pertama karena masalah
+                                    keuangan</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#mengapaKeuanganPenting"
+                            class="btn-primary px-8 py-4 text-lg flex items-center justify-center group text-white font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary-500/30 transition-all">
+                            <i class="fas fa-play mr-3 group-hover:rotate-12 transition-transform"></i>
+                            Mulai Belajar
+                        </a>
+                        <a href="#kalkulatorKeuangan"
+                            class="btn-secondary px-8 py-4 text-lg flex items-center justify-center group font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all">
+                            <i class="fas fa-calculator mr-3 group-hover:rotate-12 transition-transform"></i>
+                            Kalkulator Finansial
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden lg:block relative animate-fade-in">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                            alt="Manajemen Keuangan UMKM" class="w-full h-auto rounded-3xl shadow-2xl">
+                        <div
+                            class="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl opacity-20 blur-2xl">
+                        </div>
+                        <div
+                            class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary-500 to-primary-700 rounded-3xl opacity-20 blur-2xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-4 gap-8">
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="sidebar-sticky">
+                        <div class="glass rounded-2xl p-6 border border-slate-200">
+                            <h3
+                                class="font-outfit text-xl font-bold mb-6 gradient-text border-b border-primary/20 pb-3">
+                                Panduan Lengkap
+                            </h3>
+                            <nav class="space-y-3">
+                                <a href="#mengapaKeuanganPenting"
+                                    class="sidebar-link active flex items-center p-3 rounded-xl transition-all duration-300 bg-primary-50 text-primary-600">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-xl flex items-center justify-center mr-3 text-sm">
+                                        <i class="fas fa-question"></i>
+                                    </div>
+                                    <span class="font-medium">Mengapa Penting?</span>
+                                </a>
+                                <a href="#dasarKeuangan"
+                                    class="sidebar-link flex items-center p-3 rounded-xl transition-all duration-300 text-slate-700 hover:bg-primary-50 hover:text-primary-600">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-slate-400 to-slate-600 text-white rounded-xl flex items-center justify-center mr-3 text-sm">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <span class="font-medium">Dasar Keuangan</span>
+                                </a>
+                                <a href="#pencatatanTransaksi"
+                                    class="sidebar-link flex items-center p-3 rounded-xl transition-all duration-300 text-slate-700 hover:bg-primary-50 hover:text-primary-600">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-slate-400 to-slate-600 text-white rounded-xl flex items-center justify-center mr-3 text-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </div>
+                                    <span class="font-medium">Pencatatan</span>
+                                </a>
+                                <a href="#analisisKeuangan"
+                                    class="sidebar-link flex items-center p-3 rounded-xl transition-all duration-300 text-slate-700 hover:bg-primary-50 hover:text-primary-600">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-slate-400 to-slate-600 text-white rounded-xl flex items-center justify-center mr-3 text-sm">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </div>
+                                    <span class="font-medium">Analisis Keuangan</span>
+                                </a>
+                                <a href="#toolsAplikasi"
+                                    class="sidebar-link flex items-center p-3 rounded-xl transition-all duration-300 text-slate-700 hover:bg-primary-50 hover:text-primary-600">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-slate-400 to-slate-600 text-white rounded-xl flex items-center justify-center mr-3 text-sm">
+                                        <i class="fas fa-tools"></i>
+                                    </div>
+                                    <span class="font-medium">Tools & Aplikasi</span>
+                                </a>
+                                <a href="#kalkulatorKeuangan"
+                                    class="sidebar-link flex items-center p-3 rounded-xl transition-all duration-300 text-slate-700 hover:bg-primary-50 hover:text-primary-600">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-slate-400 to-slate-600 text-white rounded-xl flex items-center justify-center mr-3 text-sm">
+                                        <i class="fas fa-calculator"></i>
+                                    </div>
+                                    <span class="font-medium">Kalkulator</span>
+                                </a>
+                            </nav>
+
+                            <div
+                                class="mt-8 bg-gradient-to-br from-emerald-50 to-primary-50 rounded-2xl p-6 text-center border border-emerald-200">
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-headset text-2xl"></i>
+                                </div>
+                                <h4 class="font-outfit text-lg font-bold text-slate-900 mb-2">Butuh Konsultasi?</h4>
+                                <p class="text-sm text-slate-600 mb-4">
+                                    Tim ahli kami siap membantu masalah keuangan bisnismu
+                                </p>
+                                <a href="hubungi.html"
+                                    class="btn-primary px-6 py-3 text-sm font-medium rounded-xl text-white hover:-translate-y-0.5 transition-all block">
+                                    Konsultasi Gratis
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="lg:col-span-3 space-y-20">
+                    <div id="mengapaKeuanganPenting" class="scroll-mt-24">
+                        <div class="mb-2">
+                            <div
+                                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                                <i class="fas fa-exclamation-triangle mr-3"></i>
+                                Realita UMKM
+                            </div>
+                        </div>
+                        <h2 class="outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                            Mengapa Manajemen Keuangan Sangat Penting?
+                            </h2>
+                            <p class="text-xl text-slate-600 leading-relaxed">
+                                Kebanyakan UMKM gagal bukan karena produk buruk atau pelanggan tidak ada, tapi karena
+                                pengelolaan keuangan yang
+                                tidak tepat.
+                            </p>
+
+                        <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                            <div
+                                class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover text-center">
+                                <div
+                                    class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-6">
+                                    <i class="fas fa-circle-xmark text-3xl"></i>
+                                </div>
+                                <h4 class="font-outfit text-xl font-bold text-slate-900 mb-4">70% UMKM Tutup</h4>
+                                <p class="text-slate-600">Dalam 5 tahun pertama karena masalah pengelolaan keuangan yang
+                                    buruk</p>
+                            </div>
+
+                            <div
+                                class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover text-center">
+                                <div
+                                    class="w-20 h-20 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-6">
+                                    <i class="fas fa-hand-holding-water text-3xl"></i>
+                                </div>
+                                <h4 class="font-outfit text-xl font-bold text-slate-900 mb-4">Cash Flow Negatif</h4>
+                                <p class="text-slate-600">Masalah utama UMKM: kehabisan uang tunai meskipun bisnis
+                                    menguntungkan</p>
+                            </div>
+
+                            <div
+                                class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover text-center">
+                                <div
+                                    class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-6">
+                                    <i class="fas fa-eye-slash text-3xl"></i>
+                                </div>
+                                <h4 class="font-outfit text-xl font-bold text-slate-900 mb-4">Tidak Ada Visibilitas</h4>
+                                <p class="text-slate-600">Pemilik tidak tahu kondisi keuangan real-time bisnisnya</p>
+                            </div>
+                        </div>
+
+                        <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30">
+                            <h3 class="font-outfit text-2xl font-bold mb-8 text-slate-900 text-center">
+                                Dengan Manajemen Keuangan yang Baik, Anda Bisa:
+                            </h3>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="space-y-4">
+                                    <div class="flex items-start checklist-item p-4 rounded-xl">
+                                        <div
+                                            class="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                            <i class="fas fa-check text-sm"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-outfit font-bold text-slate-900 mb-1">Prediksi Arus Kas</h5>
+                                            <p class="text-slate-600 text-sm">Tahu kapan bisnis akan kekurangan atau
+                                                kelebihan uang</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start checklist-item p-4 rounded-xl">
+                                        <div
+                                            class="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                            <i class="fas fa-check text-sm"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-outfit font-bold text-slate-900 mb-1">Keputusan Berbasis
+                                                Data</h5>
+                                            <p class="text-slate-600 text-sm">Buat keputusan bisnis berdasarkan angka,
+                                                bukan feeling</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start checklist-item p-4 rounded-xl">
+                                        <div
+                                            class="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                            <i class="fas fa-check text-sm"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-outfit font-bold text-slate-900 mb-1">Identifikasi Peluang
+                                            </h5>
+                                            <p class="text-slate-600 text-sm">Temukan produk/layanan mana yang paling
+                                                menguntungkan</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-start checklist-item p-4 rounded-xl">
+                                        <div
+                                            class="w-8 h-8 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                            <i class="fas fa-check text-sm"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-outfit font-bold text-slate-900 mb-1">Akses Pembiayaan</h5>
+                                            <p class="text-slate-600 text-sm">Dapatkan pinjaman bank dengan laporan
+                                                keuangan yang rapi</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start checklist-item p-4 rounded-xl">
+                                        <div
+                                            class="w-8 h-8 bg-gradient-to-br from-red-500 to-red-600 text-white rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                            <i class="fas fa-check text-sm"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-outfit font-bold text-slate-900 mb-1">Hindari Kebangkrutan
+                                            </h5>
+                                            <p class="text-slate-600 text-sm">Deteksi masalah keuangan sebelum terlambat
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start checklist-item p-4 rounded-xl">
+                                        <div
+                                            class="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                            <i class="fas fa-check text-sm"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-outfit font-bold text-slate-900 mb-1">Skalabilitas Bisnis
+                                            </h5>
+                                            <p class="text-slate-600 text-sm">Rencanakan pertumbuhan berdasarkan
+                                                kemampuan finansial</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Dasar Keuangan -->
+                    <div id="dasarKeuangan" class="scroll-mt-24">
+                        <div class="mb-12">
+                            <div
+                                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-700 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                                <span
+                                    class="w-6 h-6 bg-white text-primary-600 rounded-full flex items-center justify-center mr-3 text-xs font-bold">1</span>
+                                Dasar Keuangan
+                            </div>
+                            <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                                5 Pilar Dasar Keuangan UMKM
+                            </h2>
+                            <p class="text-xl text-slate-600 leading-relaxed">
+                                Sebelum masuk ke teknis, pahami dulu 5 prinsip fundamental yang akan
+                                menyelamatkan bisnis Anda.
+                            </p>
+                        </div>
+
+                        <div class="space-y-8">
+                            <!-- Pilar 1 -->
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                                <div class="grid lg:grid-cols-5 gap-8 items-center">
+                                    <div class="lg:col-span-1 text-center">
+                                        <div
+                                            class="w-24 h-24 bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-3xl flex items-center justify-center mx-auto mb-4">
+                                            <span class="text-2xl font-bold">1</span>
+                                        </div>
+                                        <div
+                                            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto">
+                                            <i class="fas fa-users-cog text-2xl"></i>
+                                        </div>
+                                    </div>
+                                    <div class="lg:col-span-4">
+                                        <h3 class="font-outfit text-2xl font-bold text-slate-900 mb-4">Pisahkan
+                                            Keuangan Pribadi & Bisnis</h3>
+                                        <p class="text-slate-600 mb-6">
+                                            Ini adalah kesalahan terbesar UMKM! Mencampur uang pribadi dan
+                                            bisnis membuat Anda tidak tahu mana keuntungan real dan mana uang
+                                            pribadi.
+                                        </p>
+                                        <div class="grid md:grid-cols-2 gap-6">
+                                            <div class="bg-green-50 rounded-2xl p-6 border border-green-200">
+                                                <h5 class="font-outfit font-bold text-green-800 mb-3">✅ Yang
+                                                    Harus Dilakukan:</h5>
+                                                <ul class="space-y-2 text-green-700 text-sm">
+                                                    <li class="flex items-center"><i class="fas fa-check mr-2"></i>Buka
+                                                        rekening bank
+                                                        khusus bisnis</li>
+                                                    <li class="flex items-center"><i
+                                                            class="fas fa-check mr-2"></i>Tetapkan gaji bulanan
+                                                        untuk diri sendiri</li>
+                                                    <li class="flex items-center"><i class="fas fa-check mr-2"></i>Semua
+                                                        transaksi bisnis
+                                                        via rekening bisnis</li>
+                                                    <li class="flex items-center"><i class="fas fa-check mr-2"></i>Buat
+                                                        kontrak/nota saat
+                                                        ambil uang</li>
+                                                </ul>
+                                            </div>
+                                            <div class="bg-red-50 rounded-2xl p-6 border border-red-200">
+                                                <h5 class="font-outfit font-bold text-red-800 mb-3">❌ Jangan
+                                                    Lakukan:</h5>
+                                                <ul class="space-y-2 text-red-700 text-sm">
+                                                    <li class="flex items-center"><i class="fas fa-times mr-2"></i>Pakai
+                                                        uang bisnis
+                                                        untuk belanja pribadi</li>
+                                                    <li class="flex items-center"><i
+                                                            class="fas fa-times mr-2"></i>Campurkan nota pribadi
+                                                        & bisnis</li>
+                                                    <li class="flex items-center"><i class="fas fa-times mr-2"></i>Gaji
+                                                        tidak
+                                                        teratur/sesuai mood</li>
+                                                    <li class="flex items-center"><i class="fas fa-times mr-2"></i>Pakai
+                                                        kartu kredit
+                                                        pribadi untuk bisnis</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pilar 2 -->
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                                <div class="grid lg:grid-cols-5 gap-8 items-center">
+                                    <div class="lg:col-span-1 text-center">
+                                        <div
+                                            class="w-24 h-24 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-4">
+                                            <span class="text-2xl font-bold">2</span>
+                                        </div>
+                                        <div
+                                            class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-2xl flex items-center justify-center mx-auto">
+                                            <i class="fas fa-tint text-2xl"></i>
+                                        </div>
+                                    </div>
+                                    <div class="lg:col-span-4">
+                                        <h3 class="font-outfit text-2xl font-bold text-slate-900 mb-4">Pahami
+                                            Cash Flow (Arus Kas)</h3>
+                                        <p class="text-slate-600 mb-6">
+                                            Banyak bisnis untung di atas kertas tapi bangkrut karena kehabisan
+                                            kas. Cash flow adalah jiwa bisnis!
+                                        </p>
+                                        <div
+                                            class="bg-gradient-to-r from-emerald-50 to-primary-50 rounded-2xl p-6 border border-emerald-200">
+                                            <h5 class="font-outfit font-bold text-slate-900 mb-4">Formula Cash
+                                                Flow Sederhana:</h5>
+                                            <div class="grid md:grid-cols-3 gap-4 text-center">
+                                                <div class="bg-white rounded-xl p-4 shadow-sm">
+                                                    <div class="text-2xl font-bold text-emerald-600 mb-2">💰
+                                                    </div>
+                                                    <div class="text-sm font-semibold text-slate-700">Kas Masuk
+                                                    </div>
+                                                    <div class="text-xs text-slate-600">Penjualan, Piutang
+                                                        Terbayar</div>
+                                                </div>
+                                                <div class="bg-white rounded-xl p-4 shadow-sm">
+                                                    <div class="text-2xl font-bold text-slate-600 mb-2">➖</div>
+                                                    <div class="text-sm font-semibold text-slate-700">Kas Keluar
+                                                    </div>
+                                                    <div class="text-xs text-slate-600">Operasional, Hutang,
+                                                        Gaji</div>
+                                                </div>
+                                                <div class="bg-white rounded-xl p-4 shadow-sm">
+                                                    <div class="text-2xl font-bold text-primary-600 mb-2">💯
+                                                    </div>
+                                                    <div class="text-sm font-semibold text-slate-700">Sisa Kas
+                                                    </div>
+                                                    <div class="text-xs text-slate-600">Untuk Operasional Bulan
+                                                        Depan</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pilar 3 -->
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                                <div class="grid lg:grid-cols-5 gap-8 items-center">
+                                    <div class="lg:col-span-1 text-center">
+                                        <div
+                                            class="w-24 h-24 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-4">
+                                            <span class="text-2xl font-bold">3</span>
+                                        </div>
+                                        <div
+                                            class="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-2xl flex items-center justify-center mx-auto">
+                                            <i class="fas fa-shield-alt text-2xl"></i>
+                                        </div>
+                                    </div>
+                                    <div class="lg:col-span-4">
+                                        <h3 class="font-outfit text-2xl font-bold text-slate-900 mb-4">Dana
+                                            Darurat Bisnis</h3>
+                                        <p class="text-slate-600 mb-6">
+                                            Seperti manusia butuh dana darurat, bisnis juga butuh! Minimal 3-6
+                                            bulan biaya operasional.
+                                        </p>
+                                        <div class="grid md:grid-cols-2 gap-6">
+                                            <div>
+                                                <h5 class="font-outfit font-bold text-slate-900 mb-3">💡 Kenapa
+                                                    Penting?</h5>
+                                                <ul class="space-y-2 text-slate-600 text-sm">
+                                                    <li class="flex items-start"><i
+                                                            class="fas fa-circle text-accent-500 mr-2 mt-1.5 text-xs"></i>Hadapi
+                                                        penurunan penjualan mendadak</li>
+                                                    <li class="flex items-start"><i
+                                                            class="fas fa-circle text-accent-500 mr-2 mt-1.5 text-xs"></i>Bayar
+                                                        gaji saat cash flow bermasalah</li>
+                                                    <li class="flex items-start"><i
+                                                            class="fas fa-circle text-accent-500 mr-2 mt-1.5 text-xs"></i>Ganti
+                                                        peralatan rusak tanpa hutang</li>
+                                                    <li class="flex items-start"><i
+                                                            class="fas fa-circle text-accent-500 mr-2 mt-1.5 text-xs"></i>Ambil
+                                                        peluang bisnis mendadak</li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <h5 class="font-outfit font-bold text-slate-900 mb-3">🎯 Cara
+                                                    Membangun:</h5>
+                                                <ul class="space-y-2 text-slate-600 text-sm">
+                                                    <li class="flex items-start"><i
+                                                            class="fas fa-check text-emerald-500 mr-2 mt-1.5 text-xs"></i>Sisihkan
+                                                        10-20% keuntungan bulanan</li>
+                                                    <li class="flex items-start"><i
+                                                            class="fas fa-check text-emerald-500 mr-2 mt-1.5 text-xs"></i>Simpan
+                                                        di rekening terpisah</li>
+                                                    <li class="flex items-start"><i
+                                                            class="fas fa-check text-emerald-500 mr-2 mt-1.5 text-xs"></i>Jangan
+                                                        gunakan kecuali darurat</li>
+                                                    <li class="flex items-start"><i
+                                                            class="fas fa-check text-emerald-500 mr-2 mt-1.5 text-xs"></i>Target
+                                                        6 bulan biaya operasional</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pilar 4 -->
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                                <div class="grid lg:grid-cols-5 gap-8 items-center">
+                                    <div class="lg:col-span-1 text-center">
+                                        <div
+                                            class="w-24 h-24 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-4">
+                                            <span class="text-2xl font-bold">4</span>
+                                        </div>
+                                        <div
+                                            class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto">
+                                            <i class="fas fa-chart-pie text-2xl"></i>
+                                        </div>
+                                    </div>
+                                    <div class="lg:col-span-4">
+                                        <h3 class="font-outfit text-2xl font-bold text-slate-900 mb-4">Pahami
+                                            Unit Economics</h3>
+                                        <p class="text-slate-600 mb-6">
+                                            Tahu untung/rugi per unit produk yang dijual. Ini yang menentukan
+                                            bisnis sustainable atau tidak.
+                                        </p>
+                                        <div
+                                            class="bg-gradient-to-r from-purple-50 to-primary-50 rounded-2xl p-6 border border-purple-200">
+                                            <h5 class="font-outfit font-bold text-slate-900 mb-4">Contoh: Warung
+                                                Nasi Gudeg</h5>
+                                            <div class="overflow-x-auto">
+                                                <table class="w-full">
+                                                    <thead>
+                                                        <tr class="border-b border-purple-200">
+                                                            <th class="text-left py-2 font-outfit">Item</th>
+                                                            <th class="text-right py-2 font-outfit">Per Porsi
+                                                            </th>
+                                                            <th class="text-right py-2 font-outfit">Per Hari (50
+                                                                porsi)</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="text-sm">
+                                                        <tr class="border-b border-purple-100">
+                                                            <td class="py-2 text-slate-700">Harga Jual</td>
+                                                            <td class="py-2 text-right font-semibold text-emerald-600">
+                                                                Rp 15.000</td>
+                                                            <td class="py-2 text-right font-semibold text-emerald-600">
+                                                                Rp 750.000</td>
+                                                        </tr>
+                                                        <tr class="border-b border-purple-100">
+                                                            <td class="py-2 text-slate-700">Biaya Bahan</td>
+                                                            <td class="py-2 text-right text-red-600">Rp 6.000
+                                                            </td>
+                                                            <td class="py-2 text-right text-red-600">Rp 300.000
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="border-b border-purple-100">
+                                                            <td class="py-2 text-slate-700">Biaya Variabel Lain
+                                                            </td>
+                                                            <td class="py-2 text-right text-red-600">Rp 2.000
+                                                            </td>
+                                                            <td class="py-2 text-right text-red-600">Rp 100.000
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="border-t-2 border-purple-200">
+                                                            <td class="py-2 font-bold text-slate-900">Margin per
+                                                                Unit</td>
+                                                            <td class="py-2 text-right font-bold text-primary-600">
+                                                                Rp 7.000</td>
+                                                            <td class="py-2 text-right font-bold text-primary-600">
+                                                                Rp 350.000</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <p class="text-xs text-slate-600 mt-4">
+                                                *Margin per unit Rp 7.000 harus bisa menutup biaya tetap (sewa,
+                                                gaji, listrik) dan masih ada untung
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pilar 5 -->
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                                <div class="grid lg:grid-cols-5 gap-8 items-center">
+                                    <div class="lg:col-span-1 text-center">
+                                        <div
+                                            class="w-24 h-24 bg-gradient-to-br from-red-500 to-red-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-4">
+                                            <span class="text-2xl font-bold">5</span>
+                                        </div>
+                                        <div
+                                            class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 text-white rounded-2xl flex items-center justify-center mx-auto">
+                                            <i class="fas fa-clock text-2xl"></i>
+                                        </div>
+                                    </div>
+                                    <div class="lg:col-span-4">
+                                        <h3 class="font-outfit text-2xl font-bold text-slate-900 mb-4">Review
+                                            Keuangan Berkala</h3>
+                                        <p class="text-slate-600 mb-6">
+                                            Jangan tunggu akhir tahun! Review keuangan minimal bulanan untuk
+                                            deteksi masalah sejak dini.
+                                        </p>
+                                        <div class="grid md:grid-cols-3 gap-4">
+                                            <div class="bg-white rounded-2xl p-6 border border-red-200 text-center">
+                                                <div
+                                                    class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 text-white rounded-xl flex items-center justify-center mx-auto mb-4">
+                                                    <i class="fas fa-calendar-day"></i>
+                                                </div>
+                                                <h6 class="font-outfit font-bold text-slate-900 mb-2">Harian
+                                                </h6>
+                                                <ul class="text-xs text-slate-600 space-y-1">
+                                                    <li>• Cek saldo kas</li>
+                                                    <li>• Input transaksi</li>
+                                                    <li>• Monitor penjualan</li>
+                                                </ul>
+                                            </div>
+                                            <div class="bg-white rounded-2xl p-6 border border-accent-200 text-center">
+                                                <div
+                                                    class="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-xl flex items-center justify-center mx-auto mb-4">
+                                                    <i class="fas fa-calendar-week"></i>
+                                                </div>
+                                                <h6 class="font-outfit font-bold text-slate-900 mb-2">Mingguan
+                                                </h6>
+                                                <ul class="text-xs text-slate-600 space-y-1">
+                                                    <li>• Rekonsiliasi bank</li>
+                                                    <li>• Update piutang</li>
+                                                    <li>• Cek inventory</li>
+                                                </ul>
+                                            </div>
+                                            <div class="bg-white rounded-2xl p-6 border border-primary-200 text-center">
+                                                <div
+                                                    class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center mx-auto mb-4">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </div>
+                                                <h6 class="font-outfit font-bold text-slate-900 mb-2">Bulanan
+                                                </h6>
+                                                <ul class="text-xs text-slate-600 space-y-1">
+                                                    <li>• Laporan laba rugi</li>
+                                                    <li>• Analisis cash flow</li>
+                                                    <li>• Evaluasi target</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pencatatan Transaksi -->
+                    <div id="pencatatanTransaksi" class="scroll-mt-24">
+                        <div class="mb-12">
+                            <div
+                                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                                <span
+                                    class="w-6 h-6 bg-white text-emerald-600 rounded-full flex items-center justify-center mr-3 text-xs font-bold">2</span>
+                                Pencatatan
+                            </div>
+                            <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                                Sistem Pencatatan yang Tidak Ribet
+                            </h2>
+                            <p class="text-xl text-slate-600 leading-relaxed">
+                                Kebanyakan UMKM berhenti mencatat karena sistem yang terlalu rumit. Ini cara
+                                sederhana yang bisa diterapkan hari ini juga.
+                            </p>
+                        </div>
+
+                        <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30">
+                                <h3 class="font-outfit text-2xl font-bold text-slate-900 mb-6 text-center">📱
+                                    Metode Manual</h3>
+                                <div class="space-y-6">
+                                    <div>
+                                        <h5 class="font-outfit font-bold text-slate-900 mb-3">✅ Kelebihan:</h5>
+                                        <ul class="space-y-2 text-slate-600 text-sm">
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-check text-emerald-500 mr-2"></i>Gratis, tidak
+                                                perlu aplikasi</li>
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-check text-emerald-500 mr-2"></i>Bisa
+                                                dilakukan di mana saja</li>
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-check text-emerald-500 mr-2"></i>Tidak perlu
+                                                internet</li>
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-check text-emerald-500 mr-2"></i>Mudah
+                                                dipahami semua orang</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-outfit font-bold text-slate-900 mb-3">❌ Kekurangan:</h5>
+                                        <ul class="space-y-2 text-slate-600 text-sm">
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-times text-red-500 mr-2"></i>Rawan
+                                                hilang/rusak</li>
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-times text-red-500 mr-2"></i>Sulit buat
+                                                laporan otomatis</li>
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-times text-red-500 mr-2"></i>Tidak bisa backup
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-emerald-50 rounded-2xl p-4 border border-emerald-200">
+                                        <p class="text-emerald-700 text-sm font-medium">
+                                            🎯 <strong>Cocok untuk:</strong> Bisnis baru, transaksi sedikit
+                                            (&lt;20/hari)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30">
+                                <h3 class="font-outfit text-2xl font-bold text-slate-900 mb-6 text-center">📱
+                                    Metode Digital</h3>
+                                <div class="space-y-6">
+                                    <div>
+                                        <h5 class="font-outfit font-bold text-slate-900 mb-3">✅ Kelebihan:</h5>
+                                        <ul class="space-y-2 text-slate-600 text-sm">
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-check text-emerald-500 mr-2"></i>Auto backup
+                                                ke cloud</li>
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-check text-emerald-500 mr-2"></i>Laporan
+                                                otomatis</li>
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-check text-emerald-500 mr-2"></i>Bisa diakses
+                                                dari mana saja</li>
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-check text-emerald-500 mr-2"></i>Integrasi
+                                                dengan bank</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-outfit font-bold text-slate-900 mb-3">❌ Kekurangan:</h5>
+                                        <ul class="space-y-2 text-slate-600 text-sm">
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-times text-red-500 mr-2"></i>Perlu belajar
+                                                aplikasi</li>
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-times text-red-500 mr-2"></i>Butuh internet
+                                                stabil</li>
+                                            <li class="flex items-center"><i
+                                                    class="fas fa-times text-red-500 mr-2"></i>Kadang ada biaya
+                                                langganan</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-primary-50 rounded-2xl p-4 border border-primary-200">
+                                        <p class="text-primary-700 text-sm font-medium">
+                                            🎯 <strong>Cocok untuk:</strong> Bisnis berkembang, transaksi banyak
+                                            (&gt;20/hari)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Template Pencatatan -->
+                        <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 mb-8">
+                            <h3 class="font-outfit text-2xl font-bold text-slate-900 mb-8 text-center">
+                                📋 Template Buku Kas Sederhana
+                            </h3>
+
+                            <div class="overflow-x-auto mb-6">
+                                <table
+                                    class="w-full border-collapse border border-slate-300 rounded-xl overflow-hidden">
+                                    <thead>
+                                        <tr class="bg-gradient-to-r from-primary-500 to-primary-700 text-white">
+                                            <th class="border border-slate-300 p-4 text-left font-outfit">
+                                                Tanggal</th>
+                                            <th class="border border-slate-300 p-4 text-left font-outfit">
+                                                Keterangan</th>
+                                            <th class="border border-slate-300 p-4 text-left font-outfit">
+                                                Kategori</th>
+                                            <th class="border border-slate-300 p-4 text-right font-outfit">Masuk
+                                                (Rp)</th>
+                                            <th class="border border-slate-300 p-4 text-right font-outfit">
+                                                Keluar (Rp)</th>
+                                            <th class="border border-slate-300 p-4 text-right font-outfit">Saldo
+                                                (Rp)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-sm">
+                                        <tr class="hover:bg-slate-50">
+                                            <td class="border border-slate-300 p-3">01/12/2024</td>
+                                            <td class="border border-slate-300 p-3">Saldo awal bulan</td>
+                                            <td class="border border-slate-300 p-3 text-center">-</td>
+                                            <td class="border border-slate-300 p-3 text-right">-</td>
+                                            <td class="border border-slate-300 p-3 text-right">-</td>
+                                            <td class="border border-slate-300 p-3 text-right font-bold">
+                                                5.000.000</td>
+                                        </tr>
+                                        <tr class="hover:bg-slate-50">
+                                            <td class="border border-slate-300 p-3">01/12/2024</td>
+                                            <td class="border border-slate-300 p-3">Jual gudeg 20 porsi</td>
+                                            <td class="border border-slate-300 p-3">Penjualan</td>
+                                            <td
+                                                class="border border-slate-300 p-3 text-right text-emerald-600 font-semibold">
+                                                300.000</td>
+                                            <td class="border border-slate-300 p-3 text-right">-</td>
+                                            <td class="border border-slate-300 p-3 text-right font-bold">
+                                                5.300.000</td>
+                                        </tr>
+                                        <tr class="hover:bg-slate-50">
+                                            <td class="border border-slate-300 p-3">01/12/2024</td>
+                                            <td class="border border-slate-300 p-3">Beli ayam & bumbu</td>
+                                            <td class="border border-slate-300 p-3">Bahan baku</td>
+                                            <td class="border border-slate-300 p-3 text-right">-</td>
+                                            <td
+                                                class="border border-slate-300 p-3 text-right text-red-600 font-semibold">
+                                                120.000</td>
+                                            <td class="border border-slate-300 p-3 text-right font-bold">
+                                                5.180.000</td>
+                                        </tr>
+                                        <tr class="hover:bg-slate-50">
+                                            <td class="border border-slate-300 p-3">01/12/2024</td>
+                                            <td class="border border-slate-300 p-3">Bayar listrik warung</td>
+                                            <td class="border border-slate-300 p-3">Operasional</td>
+                                            <td class="border border-slate-300 p-3 text-right">-</td>
+                                            <td
+                                                class="border border-slate-300 p-3 text-right text-red-600 font-semibold">
+                                                200.000</td>
+                                            <td class="border border-slate-300 p-3 text-right font-bold">
+                                                4.980.000</td>
+                                        </tr>
+                                        <tr class="hover:bg-slate-50">
+                                            <td class="border border-slate-300 p-3">02/12/2024</td>
+                                            <td class="border border-slate-300 p-3">Jual gudeg 25 porsi</td>
+                                            <td class="border border-slate-300 p-3">Penjualan</td>
+                                            <td
+                                                class="border border-slate-300 p-3 text-right text-emerald-600 font-semibold">
+                                                375.000</td>
+                                            <td class="border border-slate-300 p-3 text-right">-</td>
+                                            <td class="border border-slate-300 p-3 text-right font-bold">
+                                                5.355.000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-200 text-center">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-list"></i>
+                                    </div>
+                                    <h5 class="font-outfit font-bold text-slate-900 mb-3">Kategori Pemasukan
+                                    </h5>
+                                    <ul class="text-xs text-slate-600 space-y-2">
+                                        <li>• Penjualan Cash</li>
+                                        <li>• Penjualan Kredit</li>
+                                        <li>• Piutang Terbayar</li>
+                                        <li>• Pendapatan Lain</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-red-50 rounded-2xl p-6 border border-red-200 text-center">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 text-white rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-list"></i>
+                                    </div>
+                                    <h5 class="font-outfit font-bold text-slate-900 mb-3">Kategori Pengeluaran
+                                    </h5>
+                                    <ul class="text-xs text-slate-600 space-y-2">
+                                        <li>• Bahan Baku</li>
+                                        <li>• Operasional</li>
+                                        <li>• Gaji/Upah</li>
+                                        <li>• Pemasaran</li>
+                                        <li>• Pajak & Fees</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-primary-50 rounded-2xl p-6 border border-primary-200 text-center">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </div>
+                                    <h5 class="font-outfit font-bold text-slate-900 mb-3">Tips Pencatatan</h5>
+                                    <ul class="text-xs text-slate-600 space-y-2">
+                                        <li>• Catat segera setelah transaksi</li>
+                                        <li>• Simpan semua nota/bukti</li>
+                                        <li>• Rekonsiliasi dengan bank</li>
+                                        <li>• Backup data rutin</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-8">
+                                <a href="#"
+                                    class="btn-primary px-8 py-4 font-semibold rounded-xl text-white hover:-translate-y-1 transition-all inline-flex items-center">
+                                    <i class="fas fa-download mr-3"></i>
+                                    Download Template Excel Gratis
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analisis Keuangan -->
+                    <div id="analisisKeuangan" class="scroll-mt-24">
+                        <div class="mb-12">
+                            <div
+                                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                                <span
+                                    class="w-6 h-6 bg-white text-purple-600 rounded-full flex items-center justify-center mr-3 text-xs font-bold">3</span>
+                                Analisis & Evaluasi
+                            </div>
+                            <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                                Baca Laporan Keuangan Seperti Dokter
+                            </h2>
+                            <p class="text-xl text-slate-600 leading-relaxed">
+                                Data mentah tidak berguna. Yang penting adalah cara membaca dan menganalisis
+                                laporan untuk ambil keputusan bisnis yang tepat.
+                            </p>
+                        </div>
+
+                        <!-- Laporan Laba Rugi -->
+                        <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 mb-8">
+                            <h3 class="font-outfit text-2xl font-bold text-slate-900 mb-8 text-center">
+                                📊 Laporan Laba Rugi Sederhana
+                            </h3>
+
+                            <div class="grid lg:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 class="font-outfit text-xl font-bold text-slate-900 mb-6">Warung Gudeg
+                                        Pak Tono - Desember 2024</h4>
+                                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+                                        <table class="w-full">
+                                            <tr class="bg-emerald-50">
+                                                <td class="p-4 font-bold text-emerald-800">PENDAPATAN</td>
+                                                <td class="p-4 text-right font-bold text-emerald-800">Rp</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100">
+                                                <td class="p-3 pl-6">Penjualan Gudeg</td>
+                                                <td class="p-3 text-right">8.500.000</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100">
+                                                <td class="p-3 pl-6">Penjualan Minuman</td>
+                                                <td class="p-3 text-right">1.500.000</td>
+                                            </tr>
+                                            <tr class="bg-emerald-100 font-bold">
+                                                <td class="p-3">Total Pendapatan</td>
+                                                <td class="p-3 text-right">10.000.000</td>
+                                            </tr>
+
+                                            <tr class="bg-red-50">
+                                                <td class="p-4 font-bold text-red-800">BIAYA</td>
+                                                <td class="p-4 text-right font-bold text-red-800">Rp</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100">
+                                                <td class="p-3 pl-6">Bahan Baku</td>
+                                                <td class="p-3 text-right">3.500.000</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100">
+                                                <td class="p-3 pl-6">Gaji Karyawan</td>
+                                                <td class="p-3 text-right">2.000.000</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100">
+                                                <td class="p-3 pl-6">Sewa Tempat</td>
+                                                <td class="p-3 text-right">1.500.000</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100">
+                                                <td class="p-3 pl-6">Listrik, Air, Gas</td>
+                                                <td class="p-3 text-right">500.000</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100">
+                                                <td class="p-3 pl-6">Lain-lain</td>
+                                                <td class="p-3 text-right">300.000</td>
+                                            </tr>
+                                            <tr class="bg-red-100 font-bold">
+                                                <td class="p-3">Total Biaya</td>
+                                                <td class="p-3 text-right">7.800.000</td>
+                                            </tr>
+
+                                            <tr class="bg-gradient-to-r from-primary-500 to-primary-700 text-white">
+                                                <td class="p-4 font-bold">LABA BERSIH</td>
+                                                <td class="p-4 text-right font-bold text-xl">2.200.000</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 class="font-outfit text-xl font-bold text-slate-900 mb-6">🔍 Analisis
+                                        Performa</h4>
+                                    <div class="space-y-6">
+                                        <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-200">
+                                            <div class="flex items-center justify-between mb-4">
+                                                <h5 class="font-outfit font-bold text-emerald-800">Margin
+                                                    Keuntungan</h5>
+                                                <span class="text-2xl font-bold text-emerald-600">22%</span>
+                                            </div>
+                                            <div class="w-full bg-emerald-200 rounded-full h-3">
+                                                <div class="bg-gradient-to-r from-emerald-500 to-emerald-600 h-3 rounded-full"
+                                                    style="width: 22%"></div>
+                                            </div>
+                                            <p class="text-emerald-700 text-sm mt-2">
+                                                Dari setiap Rp 100 penjualan, untung Rp 22. Ini sudah sangat
+                                                bagus untuk bisnis kuliner!
+                                            </p>
+                                        </div>
+
+                                        <div class="bg-primary-50 rounded-2xl p-6 border border-primary-200">
+                                            <h5 class="font-outfit font-bold text-primary-800 mb-4">Breakdown
+                                                Biaya</h5>
+                                            <div class="space-y-3">
+                                                <div class="flex items-center justify-between">
+                                                    <span class="text-slate-700">Bahan Baku</span>
+                                                    <div class="flex items-center">
+                                                        <div class="w-20 bg-slate-200 rounded-full h-2 mr-3">
+                                                            <div class="bg-red-500 h-2 rounded-full" style="width: 45%">
+                                                            </div>
+                                                        </div>
+                                                        <span class="text-sm font-semibold">45%</span>
+                                                    </div>
+                                                </div>
+                                                <div class="flex items-center justify-between">
+                                                    <span class="text-slate-700">Gaji</span>
+                                                    <div class="flex items-center">
+                                                        <div class="w-20 bg-slate-200 rounded-full h-2 mr-3">
+                                                            <div class="bg-accent-500 h-2 rounded-full"
+                                                                style="width: 26%"></div>
+                                                        </div>
+                                                        <span class="text-sm font-semibold">26%</span>
+                                                    </div>
+                                                </div>
+                                                <div class="flex items-center justify-between">
+                                                    <span class="text-slate-700">Sewa</span>
+                                                    <div class="flex items-center">
+                                                        <div class="w-20 bg-slate-200 rounded-full h-2 mr-3">
+                                                            <div class="bg-purple-500 h-2 rounded-full"
+                                                                style="width: 19%"></div>
+                                                        </div>
+                                                        <span class="text-sm font-semibold">19%</span>
+                                                    </div>
+                                                </div>
+                                                <div class="flex items-center justify-between">
+                                                    <span class="text-slate-700">Lainnya</span>
+                                                    <div class="flex items-center">
+                                                        <div class="w-20 bg-slate-200 rounded-full h-2 mr-3">
+                                                            <div class="bg-primary-500 h-2 rounded-full"
+                                                                style="width: 10%"></div>
+                                                        </div>
+                                                        <span class="text-sm font-semibold">10%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="bg-yellow-50 rounded-2xl p-6 border border-yellow-200">
+                                            <h5 class="font-outfit font-bold text-yellow-800 mb-3">💡
+                                                Rekomendasi</h5>
+                                            <ul class="space-y-2 text-yellow-700 text-sm">
+                                                <li class="flex items-start"><i
+                                                        class="fas fa-arrow-up text-emerald-500 mr-2 mt-1"></i>Margin
+                                                    sudah sangat sehat</li>
+                                                <li class="flex items-start"><i
+                                                        class="fas fa-eye text-accent-500 mr-2 mt-1"></i>Monitor
+                                                    food cost tetap di 35-40%</li>
+                                                <li class="flex items-start"><i
+                                                        class="fas fa-chart-line text-primary-500 mr-2 mt-1"></i>Fokus
+                                                    tingkatkan volume penjualan</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Key Performance Indicators -->
+                        <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30">
+                            <h3 class="font-outfit text-2xl font-bold text-slate-900 mb-8 text-center">
+                                🎯 KPI (Key Performance Indicators) UMKM
+                            </h3>
+
+                            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                <div
+                                    class="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-2xl p-6 text-center">
+                                    <div
+                                        class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-percentage text-2xl"></i>
+                                    </div>
+                                    <h5 class="font-outfit font-bold mb-2">Gross Margin</h5>
+                                    <div class="text-3xl font-bold mb-2">65%</div>
+                                    <p class="text-emerald-100 text-sm">Target: 60-70%</p>
+                                    <div class="mt-3 flex items-center justify-center">
+                                        <i class="fas fa-arrow-up mr-1"></i>
+                                        <span class="text-sm">Sangat Baik</span>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl p-6 text-center">
+                                    <div
+                                        class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-tint text-2xl"></i>
+                                    </div>
+                                    <h5 class="font-outfit font-bold mb-2">Cash Ratio</h5>
+                                    <div class="text-3xl font-bold mb-2">1.8</div>
+                                    <p class="text-primary-100 text-sm">Target: >1.5</p>
+                                    <div class="mt-3 flex items-center justify-center">
+                                        <i class="fas fa-arrow-up mr-1"></i>
+                                        <span class="text-sm">Sehat</span>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-2xl p-6 text-center">
+                                    <div
+                                        class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-sync-alt text-2xl"></i>
+                                    </div>
+                                    <h5 class="font-outfit font-bold mb-2">Inventory Turn</h5>
+                                    <div class="text-3xl font-bold mb-2">24x</div>
+                                    <p class="text-accent-100 text-sm">Target: >20x</p>
+                                    <div class="mt-3 flex items-center justify-center">
+                                        <i class="fas fa-arrow-up mr-1"></i>
+                                        <span class="text-sm">Efisien</span>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl p-6 text-center">
+                                    <div
+                                        class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-clock text-2xl"></i>
+                                    </div>
+                                    <h5 class="font-outfit font-bold mb-2">DSO</h5>
+                                    <div class="text-3xl font-bold mb-2">5</div>
+                                    <p class="text-purple-100 text-sm">Target: <10 hari</p>
+                                            <div class="mt-3 flex items-center justify-center">
+                                                <i class="fas fa-arrow-up mr-1"></i>
+                                                <span class="text-sm">Excellent</span>
+                                            </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 bg-white rounded-2xl p-6 border border-slate-200">
+                                <h5 class="font-outfit font-bold text-slate-900 mb-4">📚 Penjelasan KPI:</h5>
+                                <div class="grid md:grid-cols-2 gap-6 text-sm">
+                                    <div>
+                                        <p class="mb-2"><strong>Gross Margin:</strong> Persentase keuntungan
+                                            kotor dari penjualan</p>
+                                        <p class="mb-2"><strong>Cash Ratio:</strong> Kemampuan bayar hutang
+                                            jangka pendek</p>
+                                    </div>
+                                    <div>
+                                        <p class="mb-2"><strong>Inventory Turn:</strong> Berapa kali stok
+                                            berputar dalam setahun</p>
+                                        <p class="mb-2"><strong>DSO:</strong> Rata-rata hari untuk menagih
+                                            piutang</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mengapa Keuangan Penting -->
+                    <div id="toolsAplikasi" class="scroll-mt-24">
+                        <div class="mb-12">
+                            <div
+                                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                                <span
+                                    class="w-6 h-6 bg-white text-blue-600 rounded-full flex items-center justify-center mr-3 text-xs font-bold">4</span>
+                                Tools & Teknologi
+                            </div>
+
+                            <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                                Aplikasi Keuangan Terbaik untuk UMKM
+                            </h2>
+                            <p class="text-xl text-slate-600 leading-relaxed">
+                                Pilih tools yang tepat sesuai ukuran dan kebutuhan bisnis Anda. Mulai dari yang
+                                gratis hingga yang berbayar dengan fitur lengkap.
+                            </p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                            <!-- BukuWarung -->
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                                <div class="text-center mb-6">
+                                    <div
+                                        class="w-20 h-20 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-book text-3xl"></i>
+                                    </div>
+                                    <h4 class="font-outfit text-xl font-bold text-slate-900">BukuWarung</h4>
+                                    <p class="text-slate-600 text-sm">GRATIS • Indonesia</p>
+                                </div>
+                                <div class="space-y-4 mb-6">
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Pencatatan transaksi real-time</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Manajemen hutang piutang</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Laporan laba rugi otomatis</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Reminder pembayaran</span>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <a href="https://bukuwarung.com/" target="_blank"
+                                        class="btn-primary px-6 py-3 font-semibold rounded-xl text-white hover:-translate-y-1 transition-all w-full block">
+                                        Coba Gratis
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Si Apik -->
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                                <div class="text-center mb-6">
+                                    <div
+                                        class="w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-mobile-alt text-3xl"></i>
+                                    </div>
+                                    <h4 class="font-outfit text-xl font-bold text-slate-900">Si Apik</h4>
+                                    <p class="text-slate-600 text-sm">GRATIS • by OJK</p>
+                                </div>
+                                <div class="space-y-4 mb-6">
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Pencatatan keuangan sederhana</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Perencanaan anggaran</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Edukasi literasi keuangan</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Offline support</span>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <a href="#"
+                                        class="btn-primary px-6 py-3 font-semibold rounded-xl text-white hover:-translate-y-1 transition-all w-full block">
+                                        Download APK
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Jurnal -->
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                                <div class="text-center mb-6">
+                                    <div
+                                        class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-chart-bar text-3xl"></i>
+                                    </div>
+                                    <h4 class="font-outfit text-xl font-bold text-slate-900">Jurnal by Mekari
+                                    </h4>
+                                    <p class="text-slate-600 text-sm">FREEMIUM • Professional</p>
+                                </div>
+                                <div class="space-y-4 mb-6">
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Akuntansi double entry</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Multi-company & multi-user</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Laporan finansial lengkap</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Integrasi e-commerce</span>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <a href="https://www.jurnal.id/" target="_blank"
+                                        class="btn-primary px-6 py-3 font-semibold rounded-xl text-white hover:-translate-y-1 transition-all w-full block">
+                                        Trial 14 Hari
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Excel Template -->
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                                <div class="text-center mb-6">
+                                    <div
+                                        class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-file-excel text-3xl"></i>
+                                    </div>
+                                    <h4 class="font-outfit text-xl font-bold text-slate-900">Excel Template</h4>
+                                    <p class="text-slate-600 text-sm">GRATIS • DIY</p>
+                                </div>
+                                <div class="space-y-4 mb-6">
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Template siap pakai</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Bisa custom sesuai kebutuhan</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Tidak butuh internet</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Learning curve rendah</span>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <a href="#"
+                                        class="btn-primary px-6 py-3 font-semibold rounded-xl text-white hover:-translate-y-1 transition-all w-full block">
+                                        Download Template
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Moka POS -->
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                                <div class="text-center mb-6">
+                                    <div
+                                        class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-cash-register text-3xl"></i>
+                                    </div>
+                                    <h4 class="font-outfit text-xl font-bold text-slate-900">Moka POS</h4>
+                                    <p class="text-slate-600 text-sm">FREEMIUM • Retail/F&B</p>
+                                </div>
+                                <div class="space-y-4 mb-6">
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>POS system terintegrasi</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Inventory management</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Customer loyalty program</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Multi payment gateway</span>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <a href="https://www.mokapos.com/" target="_blank"
+                                        class="btn-primary px-6 py-3 font-semibold rounded-xl text-white hover:-translate-y-1 transition-all w-full block">
+                                        Coba Gratis
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Paper.id -->
+                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                                <div class="text-center mb-6">
+                                    <div
+                                        class="w-20 h-20 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-receipt text-3xl"></i>
+                                    </div>
+                                    <h4 class="font-outfit text-xl font-bold text-slate-900">Paper.id</h4>
+                                    <p class="text-slate-600 text-sm">FREEMIUM • Invoice</p>
+                                </div>
+                                <div class="space-y-4 mb-6">
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Invoice digital profesional</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Auto payment reminder</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Link pembayaran online</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <i class="fas fa-check text-emerald-500 mr-3"></i>
+                                        <span>Track invoice status</span>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <a href="https://paper.id/" target="_blank"
+                                        class="btn-primary px-6 py-3 font-semibold rounded-xl text-white hover:-translate-y-1 transition-all w-full block">
+                                        Mulai Gratis
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Comparison Chart -->
+                        <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30">
+                            <h3 class="font-outfit text-2xl font-bold text-slate-900 mb-8 text-center">
+                                📊 Perbandingan Aplikasi Keuangan
+                            </h3>
+
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                    <thead>
+                                        <tr class="bg-gradient-to-r from-primary-500 to-primary-700 text-white">
+                                            <th class="p-4 text-left font-outfit">Aplikasi</th>
+                                            <th class="p-4 text-center font-outfit">Harga</th>
+                                            <th class="p-4 text-center font-outfit">Kemudahan</th>
+                                            <th class="p-4 text-center font-outfit">Fitur</th>
+                                            <th class="p-4 text-center font-outfit">Cocok Untuk</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-slate-200 hover:bg-slate-50">
+                                            <td class="p-4 font-semibold">BukuWarung</td>
+                                            <td class="p-4 text-center">
+                                                <span
+                                                    class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full text-xs">Gratis</span>
+                                            </td>
+                                            <td class="p-4 text-center">
+                                                <div class="flex justify-center">⭐⭐⭐⭐⭐</div>
+                                            </td>
+                                            <td class="p-4 text-center">
+                                                <div class="flex justify-center">⭐⭐⭐⭐</div>
+                                            </td>
+                                            <td class="p-4 text-center text-xs">Warung, Toko</td>
+                                        </tr>
+                                        <tr class="border-b border-slate-200 hover:bg-slate-50">
+                                            <td class="p-4 font-semibold">Si Apik (OJK)</td>
+                                            <td class="p-4 text-center">
+                                                <span
+                                                    class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full text-xs">Gratis</span>
+                                            </td>
+                                            <td class="p-4 text-center">
+                                                <div class="flex justify-center">⭐⭐⭐⭐⭐</div>
+                                            </td>
+                                            <td class="p-4 text-center">
+                                                <div class="flex justify-center">⭐⭐⭐</div>
+                                            </td>
+                                            <td class="p-4 text-center text-xs">Pemula</td>
+                                        </tr>
+                                        <tr class="border-b border-slate-200 hover:bg-slate-50">
+                                            <td class="p-4 font-semibold">Excel Template</td>
+                                            <td class="p-4 text-center">
+                                                <span
+                                                    class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full text-xs">Gratis</span>
+                                            </td>
+                                            <td class="p-4 text-center">
+                                                <div class="flex justify-center">⭐⭐⭐</div>
+                                            </td>
+                                            <td class="p-4 text-center">
+                                                <div class="flex justify-center">⭐⭐⭐</div>
+                                            </td>
+                                            <td class="p-4 text-center text-xs">Semua</td>
+                                        </tr>
+                                        <tr class="border-b border-slate-200 hover:bg-slate-50">
+                                            <td class="p-4 font-semibold">Moka POS</td>
+                                            <td class="p-4 text-center">
+                                                <span
+                                                    class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Freemium</span>
+                                            </td>
+                                            <td class="p-4 text-center">
+                                                <div class="flex justify-center">⭐⭐⭐⭐</div>
+                                            </td>
+                                            <td class="p-4 text-center">
+                                                <div class="flex justify-center">⭐⭐⭐⭐⭐</div>
+                                            </td>
+                                            <td class="p-4 text-center text-xs">Retail, F&B</td>
+                                        </tr>
+                                        <tr class="border-b border-slate-200 hover:bg-slate-50">
+                                            <td class="p-4 font-semibold">Paper.id</td>
+                                            <td class="p-4 text-center">
+                                                <span
+                                                    class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Freemium</span>
+                                            </td>
+                                            <td class="p-4 text-center">
+                                                <div class="flex justify-center">⭐⭐⭐⭐⭐</div>
+                                            </td>
+                                            <td class="p-4 text-center">
+                                                <div class="flex justify-center">⭐⭐⭐⭐</div>
+                                            </td>
+                                            <td class="p-4 text-center text-xs">Jasa, B2B</td>
+                                        </tr>
+                                        <tr class="hover:bg-slate-50">
+                                            <td class="p-4 font-semibold">Jurnal</td>
+                                            <td class="p-4 text-center">
+                                                <span
+                                                    class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Berbayar</span>
+                                            </td>
+                                            <td class="p-4 text-center">
+                                                <div class="flex justify-center">⭐⭐⭐</div>
+                                            </td>
+                                            <td class="p-4 text-center">
+                                                <div class="flex justify-center">⭐⭐⭐⭐⭐</div>
+                                            </td>
+                                            <td class="p-4 text-center text-xs">Menengah+</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Kalkulator Keuangan -->
+                    <div id="kalkulatorKeuangan" class="scroll-mt-24">
+                        <div class="mb-12">
+                            <div
+                                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                                <span
+                                    class="w-6 h-6 bg-white text-accent-600 rounded-full flex items-center justify-center mr-3 text-xs font-bold">5</span>
+                                Tools Praktis
+                            </div>
+                            <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                                Kalkulator Kesehatan Finansial
+                            </h2>
+                            <p class="text-xl text-slate-600 leading-relaxed">
+                                Cek kondisi keuangan bisnis Anda sekarang juga dengan kalkulator sederhana ini.
+                                Dapatkan rekomendasi berdasarkan data real Anda.
+                            </p>
+                        </div>
+
+                        <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30">
+                            <form id="financialCalculator" class="space-y-8">
+                                <div class="grid md:grid-cols-2 gap-8">
+                                    <div>
+                                        <label for="monthlyRevenue"
+                                            class="block text-sm font-medium text-slate-700 mb-3">
+                                            <i class="fas fa-chart-line text-emerald-500 mr-2"></i>
+                                            Pendapatan Bulanan (Rp)
+                                        </label>
+                                        <div class="relative">
+                                            <span
+                                                class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 font-medium">Rp</span>
+                                            <input type="number" id="monthlyRevenue" placeholder="Contoh: 10000000"
+                                                required
+                                                class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-slate-900 font-medium transition-all duration-300">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="monthlyCosts" class="block text-sm font-medium text-slate-700 mb-3">
+                                            <i class="fas fa-receipt text-red-500 mr-2"></i>
+                                            Total Biaya Bulanan (Rp)
+                                        </label>
+                                        <div class="relative">
+                                            <span
+                                                class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 font-medium">Rp</span>
+                                            <input type="number" id="monthlyCosts" placeholder="Contoh: 7000000"
+                                                required
+                                                class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-slate-900 font-medium transition-all duration-300">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="emergencyFund"
+                                            class="block text-sm font-medium text-slate-700 mb-3">
+                                            <i class="fas fa-shield-alt text-accent-500 mr-2"></i>
+                                            Dana Darurat Saat Ini (Rp)
+                                        </label>
+                                        <div class="relative">
+                                            <span
+                                                class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 font-medium">Rp</span>
+                                            <input type="number" id="emergencyFund" placeholder="Contoh: 15000000"
+                                                required
+                                                class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-slate-900 font-medium transition-all duration-300">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="businessType" class="block text-sm font-medium text-slate-700 mb-3">
+                                            <i class="fas fa-store text-purple-500 mr-2"></i>
+                                            Jenis Usaha
+                                        </label>
+                                        <select id="businessType" required
+                                            class="w-full px-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-slate-900 font-medium transition-all duration-300">
+                                            <option value="" disabled selected>Pilih jenis usaha...</option>
+                                            <option value="kuliner">Kuliner/Makanan</option>
+                                            <option value="retail">Retail/Fashion</option>
+                                            <option value="jasa">Jasa/Konsultan</option>
+                                            <option value="produksi">Produksi/Kerajinan</option>
+                                            <option value="digital">Digital/Online</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit"
+                                        class="btn-primary px-12 py-4 font-bold text-lg rounded-xl text-white hover:-translate-y-1 transition-all duration-300 shadow-lg animate-pulse-ring">
+                                        <i class="fas fa-calculator mr-3"></i>Analisis Kesehatan Finansial
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div id="financialResults" class="mt-8"></div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Final -->
+                    <div
+                        class="bg-gradient-to-r from-primary-500 to-primary-700 text-white rounded-3xl p-12 text-center relative overflow-hidden">
+                        <div class="absolute inset-0">
+                            <div class="absolute top-1/4 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl">
+                            </div>
+                            <div class="absolute bottom-1/4 right-10 w-40 h-40 bg-accent-500/20 rounded-full blur-3xl">
+                            </div>
+                        </div>
+
+                        <div class="relative z-10">
+                            <div
+                                class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-sm font-medium mb-8">
+                                <div class="w-2 h-2 bg-accent-400 rounded-full mr-3 animate-pulse"></div>
+                                <span class="text-white font-semibold">Mulai Kelola Keuangan Hari Ini</span>
+                            </div>
+
+                            <h3 class="font-outfit text-3xl lg:text-4xl font-bold mb-6">Siap Transformasi
+                                Finansial Bisnis?</h3>
+                            <p class="text-xl opacity-90 mb-10 max-w-2xl mx-auto leading-relaxed">
+                                Jangan biarkan bisnis Anda menjadi bagian dari 70% UMKM yang tutup karena
+                                masalah keuangan. Mulai terapkan sistem keuangan yang sehat sekarang juga!
+                            </p>
+                            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                                <a href="pelatihan-materi.html"
+                                    class="btn-secondary px-8 py-4 font-semibold text-lg rounded-xl hover:-translate-y-1 transition-all duration-300">
+                                    <i class="fas fa-graduation-cap mr-3"></i>Ikuti Pelatihan Lengkap
+                                </a>
+                                <a href="hubungi.html"
+                                    class="bg-white/20 border-2 border-white/30 backdrop-blur-sm text-white px-8 py-4 font-semibold text-lg rounded-xl hover:bg-white hover:text-primary-600 transition-colors">
+                                    <i class="fas fa-comments mr-3"></i>Konsultasi Gratis
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-outfit text-2xl font-semibold text-white">Vita</div>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 font-inter leading-relaxed">
+                        Platform edukasi interaktif untuk membantu UMKM lokal belajar bisnis secara mandiri, gratis, dan
+                        efektif.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Navigasi</h5>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Beranda</a></li>
+                        <li><a href="tentang.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Tentang Kami</a></li>
+                        <li><a href="kisah-sukses.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Kisah Sukses</a></li>
+                        <li><a href="pelatihan-materi.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Pelatihan & Materi</a>
+                        </li>
+                        <li><a href="hubungi.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Materi</h5>
+                    <ul class="space-y-3">
+                        <li><a href="panduan-memulai.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Panduan Memulai</a></li>
+                        <li><a href="pemasaran-digital.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Pemasaran Digital</a>
+                        </li>
+                        <li><a href="manajemen-keuangan.html" class="text-primary-400 font-medium">Manajemen
+                                Keuangan</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Kontak</h5>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="w-5 h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300">Email</div>
+                                <div class="text-sm text-slate-400">support@vita.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="w-5 h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300">Telepon</div>
+                                <div class="text-sm text-slate-400">+62 859 1264 62972</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="w-5 h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300">Lokasi</div>
+                                <div class="text-sm text-slate-400">Yogyakarta, Indonesia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="text-slate-400 text-sm">
+                        © 2025 Vita. All rights reserved.
+                    </div>
+                    <div class="flex items-center space-x-6 text-sm">
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Kebijakan
+                            Privasi</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Syarat &
+                            Ketentuan</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Bantuan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (mobileMenuBtn && mobileMenu) {
+                const toggleMenu = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    mobileMenu.classList.toggle('active');
+
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (mobileMenu.classList.contains('active')) {
+                        icon.className = 'fas fa-times text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                    } else {
+                        icon.className = 'fas fa-bars text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                };
+
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+                mobileMenuBtn.addEventListener('touchend', toggleMenu, { passive: false });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        mobileMenu.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.className = 'fas fa-bars text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.className = 'fas fa-bars text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            // Navbar scroll behavior
+            const navbar = document.getElementById('mainNav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Sidebar navigation
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 120,
+                            behavior: 'smooth'
+                        });
+
+                        // Update active state
+                        sidebarLinks.forEach(innerLink => {
+                            innerLink.classList.remove('active', 'bg-primary-50', 'text-primary-600');
+                            innerLink.classList.add('text-slate-700');
+                            const icon = innerLink.querySelector('.w-10');
+                            icon.classList.remove('from-primary-500', 'to-primary-700');
+                            icon.classList.add('from-slate-400', 'to-slate-600');
+                        });
+
+                        this.classList.add('active', 'bg-primary-50', 'text-primary-600');
+                        this.classList.remove('text-slate-700');
+                        const activeIcon = this.querySelector('.w-10');
+                        activeIcon.classList.remove('from-slate-400', 'to-slate-600');
+                        activeIcon.classList.add('from-primary-500', 'to-primary-700');
+                    }
+                });
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        e.preventDefault();
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 120,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Scroll spy for sidebar
+            window.addEventListener('scroll', function () {
+                const scrollPosition = window.scrollY + 150;
+
+                document.querySelectorAll('div[id]').forEach(section => {
+                    if (section.id === 'mengapaKeuanganPenting' || section.id === 'dasarKeuangan' ||
+                        section.id === 'pencatatanTransaksi' || section.id === 'analisisKeuangan' ||
+                        section.id === 'toolsAplikasi' || section.id === 'kalkulatorKeuangan') {
+
+                        const sectionTop = section.offsetTop;
+                        const sectionBottom = sectionTop + section.offsetHeight;
+
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                            sidebarLinks.forEach(link => {
+                                link.classList.remove('active', 'bg-primary-50', 'text-primary-600');
+                                link.classList.add('text-slate-700');
+                                const icon = link.querySelector('.w-10');
+                                if (icon) {
+                                    icon.classList.remove('from-primary-500', 'to-primary-700');
+                                    icon.classList.add('from-slate-400', 'to-slate-600');
+                                }
+
+                                if (link.getAttribute('href') === '#' + section.id) {
+                                    link.classList.add('active', 'bg-primary-50', 'text-primary-600');
+                                    link.classList.remove('text-slate-700');
+                                    const activeIcon = link.querySelector('.w-10');
+                                    if (activeIcon) {
+                                        activeIcon.classList.remove('from-slate-400', 'to-slate-600');
+                                        activeIcon.classList.add('from-primary-500', 'to-primary-700');
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Financial Calculator
+            const financialCalculator = document.getElementById('financialCalculator');
+            const financialResults = document.getElementById('financialResults');
+
+            if (financialCalculator && financialResults) {
+                financialCalculator.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    const monthlyRevenue = parseFloat(document.getElementById('monthlyRevenue').value);
+                    const monthlyCosts = parseFloat(document.getElementById('monthlyCosts').value);
+                    const emergencyFund = parseFloat(document.getElementById('emergencyFund').value);
+                    const businessType = document.getElementById('businessType').value;
+
+                    const monthlyProfit = monthlyRevenue - monthlyCosts;
+                    const profitMargin = monthlyRevenue > 0 ? (monthlyProfit / monthlyRevenue) * 100 : 0;
+                    const emergencyMonths = monthlyCosts > 0 ? emergencyFund / monthlyCosts : 0;
+                    const annualProfit = monthlyProfit * 12;
+
+                    let healthScore = 0;
+                    let recommendations = [];
+                    let healthStatus = '';
+                    let healthColor = '';
+
+                    // Calculate health score
+                    if (monthlyProfit > 0) healthScore += 25;
+                    if (profitMargin >= 20) healthScore += 25;
+                    else if (profitMargin >= 10) healthScore += 15;
+                    else if (profitMargin >= 5) healthScore += 10;
+
+                    if (emergencyMonths >= 6) healthScore += 25;
+                    else if (emergencyMonths >= 3) healthScore += 15;
+                    else if (emergencyMonths >= 1) healthScore += 10;
+
+                    if (monthlyRevenue > monthlyCosts * 1.5) healthScore += 25;
+                    else if (monthlyRevenue > monthlyCosts * 1.2) healthScore += 15;
+                    else if (monthlyRevenue > monthlyCosts) healthScore += 10;
+
+                    // Determine health status
+                    if (healthScore >= 80) {
+                        healthStatus = 'Sangat Sehat 💪';
+                        healthColor = 'emerald';
+                        recommendations.push('Selamat! Keuangan bisnis Anda sangat sehat. Pertimbangkan untuk ekspansi atau diversifikasi.');
+                        recommendations.push('Tingkatkan investasi untuk R&D atau marketing untuk pertumbuhan lebih lanjut.');
+                    } else if (healthScore >= 60) {
+                        healthStatus = 'Sehat 👍';
+                        healthColor = 'blue';
+                        recommendations.push('Keuangan bisnis Anda dalam kondisi baik. Fokus pada optimisasi dan efisiensi.');
+                        recommendations.push('Tingkatkan dana darurat jika belum mencapai 6 bulan biaya operasional.');
+                    } else if (healthScore >= 40) {
+                        healthStatus = 'Perlu Perhatian ⚠️';
+                        healthColor = 'yellow';
+                        recommendations.push('Ada beberapa area yang perlu diperbaiki untuk kesehatan finansial yang lebih baik.');
+                        recommendations.push('Fokus pada peningkatan margin keuntungan dan membangun dana darurat.');
+                    } else {
+                        healthStatus = 'Butuh Perbaikan Segera 🚨';
+                        healthColor = 'red';
+                        recommendations.push('Keuangan bisnis memerlukan perhatian segera untuk menghindari masalah.');
+                        recommendations.push('Evaluasi struktur biaya dan strategi peningkatan pendapatan.');
+                    }
+
+                    // Business type specific recommendations
+                    switch (businessType) {
+                        case 'kuliner':
+                            recommendations.push('Untuk bisnis kuliner: Jaga food cost ratio di 28-35% dan fokus pada customer retention.');
+                            break;
+                        case 'retail':
+                            recommendations.push('Untuk retail: Optimalkan inventory turnover dan manfaatkan data penjualan untuk stocking.');
+                            break;
+                        case 'jasa':
+                            recommendations.push('Untuk bisnis jasa: Fokus pada value-based pricing dan bangun recurring revenue stream.');
+                            break;
+                        case 'produksi':
+                            recommendations.push('Untuk produksi: Optimalkan supply chain dan pertimbangkan automation untuk efisiensi.');
+                            break;
+                        case 'digital':
+                            recommendations.push('Untuk bisnis digital: Fokus pada customer acquisition cost (CAC) dan lifetime value (LTV).');
+                            break;
+                    }
+
+                    function formatCurrency(amount) {
+                        return new Intl.NumberFormat('id-ID', {
+                            style: 'currency',
+                            currency: 'IDR',
+                            minimumFractionDigits: 0
+                        }).format(amount);
+                    }
+
+                    const scoreColor = healthColor === 'emerald' ? 'emerald-500' :
+                        healthColor === 'blue' ? 'blue-500' :
+                            healthColor === 'yellow' ? 'yellow-500' : 'red-500';
+
+                    financialResults.innerHTML = `
+                        <div class="step-card rounded-3xl p-8 mt-8 shadow-xl border border-white/30">
+                            <div class="text-center mb-8">
+                                <h3 class="font-outfit text-3xl font-bold text-slate-900 mb-6">📊 Analisis Kesehatan Finansial</h3>
+                                
+                                <!-- Health Score Circle -->
+                                <div class="relative w-32 h-32 mx-auto mb-6">
+                                    <svg class="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
+                                        <path class="text-slate-200" stroke="currentColor" stroke-width="3" fill="none" 
+                                              d="M18,2.0845 a 15.9155,15.9155 0 0,1 0,31.831 a 15.9155,15.9155 0 0,1 0,-31.831"/>
+                                        <path class="text-${scoreColor}" stroke="currentColor" stroke-width="3" stroke-dasharray="${healthScore}, 100" 
+                                              fill="none" d="M18,2.0845 a 15.9155,15.9155 0 0,1 0,31.831 a 15.9155,15.9155 0 0,1 0,-31.831"/>
+                                    </svg>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <div class="text-center">
+                                            <div class="text-2xl font-bold text-slate-900">${healthScore}</div>
+                                            <div class="text-xs text-slate-600">/ 100</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="inline-flex items-center px-6 py-3 rounded-full text-lg font-bold ${healthColor === 'emerald' ? 'bg-emerald-100 text-emerald-800' :
+                            healthColor === 'blue' ? 'bg-blue-100 text-blue-800' :
+                                healthColor === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
+                                    'bg-red-100 text-red-800'
+                        }">
+                                    ${healthStatus}
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                                <div class="bg-white rounded-2xl p-6 border border-slate-200 text-center">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <h5 class="font-outfit font-bold text-slate-900 mb-2">Keuntungan Bulanan</h5>
+                                    <div class="text-2xl font-bold ${monthlyProfit > 0 ? 'text-emerald-600' : 'text-red-600'} mb-1">
+                                        ${formatCurrency(monthlyProfit)}
+                                    </div>
+                                    <div class="text-sm text-slate-600">
+                                        Margin: ${profitMargin.toFixed(1)}%
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-2xl p-6 border border-slate-200 text-center">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <h5 class="font-outfit font-bold text-slate-900 mb-2">Dana Darurat</h5>
+                                    <div class="text-2xl font-bold text-primary-600 mb-1">
+                                        ${emergencyMonths.toFixed(1)} Bulan
+                                    </div>
+                                    <div class="text-sm text-slate-600">
+                                        Target: 6 Bulan
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-2xl p-6 border border-slate-200 text-center">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <h5 class="font-outfit font-bold text-slate-900 mb-2">Proyeksi Tahunan</h5>
+                                    <div class="text-2xl font-bold text-slate-900 mb-1">
+                                        ${formatCurrency(annualProfit)}
+                                    </div>
+                                    <div class="text-sm text-slate-600">
+                                        Jika konsisten
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-r from-blue-50 to-primary-50 rounded-2xl p-6 border border-blue-200">
+                                <h4 class="font-outfit text-xl font-bold text-slate-900 mb-6 flex items-center">
+                                    <i class="fas fa-lightbulb text-accent-500 mr-3"></i>
+                                    Rekomendasi Untuk Bisnis Anda
+                                </h4>
+                                <div class="grid gap-4">
+                                    ${recommendations.map((rec, index) => `
+                                        <div class="flex items-start p-4 bg-white rounded-xl border border-blue-200">
+                                            <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0 text-sm font-bold">
+                                                ${index + 1}
+                                            </div>
+                                            <span class="text-slate-700">${rec}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            
+                            <div class="text-center mt-8">
+                                <a href="hubungi.html" class="btn-primary px-8 py-4 font-semibold rounded-xl text-white hover:-translate-y-1 transition-all inline-flex items-center">
+                                    <i class="fas fa-comments mr-3"></i>Konsultasi dengan Ahli
+                                </a>
+                            </div>
+                        </div>
+                    `;
+
+                    financialResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

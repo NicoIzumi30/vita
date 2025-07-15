@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelatihan & Materi - Vita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: { 'inter': ['Inter', 'sans-serif'], 'outfit': ['Outfit', 'sans-serif'] },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite', 'pulse-ring': 'pulse-ring 2s infinite',
+                        'slide-up': 'slide-up 0.6s ease-out', 'fade-in': 'fade-in 0.8s ease-out',
+                        'scale-in': 'scale-in 0.5s ease-out', 'shimmer': 'shimmer 2s linear infinite'
+                    },
+                    keyframes: {
+                        'float': { '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' }, '50%': { transform: 'translateY(-12px) rotate(1deg)' } },
+                        'pulse-ring': { '0%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0.4)' }, '70%': { boxShadow: '0 0 0 15px rgba(14, 165, 233, 0)' }, '100%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0)' } },
+                        'slide-up': { 'from': { transform: 'translateY(30px)', opacity: '0' }, 'to': { transform: 'translateY(0)', opacity: '1' } },
+                        'fade-in': { 'from': { opacity: '0' }, 'to': { opacity: '1' } },
+                        'scale-in': { 'from': { transform: 'scale(0.95)', opacity: '0' }, 'to': { transform: 'scale(1)', opacity: '1' } },
+                        'shimmer': { '0%': { backgroundPosition: '-468px 0' }, '100%': { backgroundPosition: '468px 0' } }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); }
+        .gradient-text { background: linear-gradient(135deg, #0ea5e9, #0369a1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-link { position: relative; overflow: hidden; }
+        .nav-link::before { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: linear-gradient(135deg, #0ea5e9, #f59e0b); transition: all 0.3s ease; transform: translateX(-50%); }
+        .nav-link:hover::before, .nav-link.active::before { width: 100%; }
+        .btn-primary { background: linear-gradient(135deg, #0ea5e9, #0369a1); position: relative; overflow: hidden; }
+        .btn-primary::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: left 0.5s; }
+        .btn-primary:hover::before { left: 100%; }
+        .btn-secondary { background: white; color: #0369a1; border: 2px solid #0ea5e9; }
+        .btn-secondary:hover { background: #0ea5e9; color: white; }
+        .card-hover { transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+        .step-card { background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.8) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .floating-element { animation: float 6s ease-in-out infinite; }
+        .floating-element-delay { animation: float 6s ease-in-out infinite; animation-delay: -2s; }
+        .floating-element-delay-2 { animation: float 6s ease-in-out infinite; animation-delay: -4s; }
+        #mobileMenu { max-height: 0; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0; transform: translateY(-10px); }
+        #mobileMenu.active { max-height: 500px; opacity: 1; transform: translateY(0); }
+        .dropdown-menu { transform: translateY(-10px); transition: all 0.3s ease; }
+        .group:hover .dropdown-menu { transform: translateY(0); }
+        .progress-bar { transition: width 1s ease-in-out; }
+        .mood-btn { transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); cursor: pointer; border: 2px solid transparent; }
+        .mood-btn:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+        .mood-btn.active { border-color: #0ea5e9; background: rgba(14, 165, 233, 0.05); }
+        .pulse-mood { animation: pulseMood 2s infinite; }
+        @keyframes pulseMood { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } }
+        
+        /* Line clamp utilities */
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        /* Material card hover effects */
+        .material-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .material-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        /* Button hover effects */
+        .btn-start { transition: all 0.2s ease; }
+        .btn-start:hover { transform: translateY(-1px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        
+        /* Loading shimmer effect */
+        .shimmer { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    </style>
+</head>
+
+<body class="font-inter bg-gradient-to-b from-white to-slate-50 text-slate-800 scroll-smooth">
+    <!-- Navbar -->
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20 transition-all duration-300">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                    </div>
+                    <div class="font-outfit text-2xl font-semibold gradient-text">Vita</div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Beranda</a>
+                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Tentang Kami</a>
+                    
+                    <div class="relative group">
+                        <button class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors flex items-center">
+                            Materi Bisnis <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"></i>
+                        </button>
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <div class="py-3">
+                                <a href="panduan-memulai.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-rocket text-primary-500 mr-3 w-4"></i>Panduan Memulai
+                                </a>
+                                <a href="pemasaran-digital.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-bullhorn text-accent-500 mr-3 w-4"></i>Pemasaran Digital
+                                </a>
+                                <a href="manajemen-keuangan.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-chart-line text-emerald-500 mr-3 w-4"></i>Manajemen Keuangan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Kisah Sukses</a>
+                    <a href="pelatihan-materi.html" class="nav-link active text-primary-600 font-medium transition-colors">Pelatihan & Materi</a>
+                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Hubungi Kami</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden border-t border-slate-200 bg-white/98 backdrop-blur-sm rounded-b-2xl shadow-lg">
+                <div class="flex flex-col space-y-4 py-4">
+                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Beranda</a>
+                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Tentang Kami</a>
+                    <div class="border-l-2 border-primary-200 pl-4 ml-2">
+                        <div class="text-sm font-semibold text-slate-600 mb-2">Materi Bisnis</div>
+                        <a href="panduan-memulai.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-rocket text-primary-500 mr-2"></i>Panduan Memulai
+                        </a>
+                        <a href="pemasaran-digital.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-bullhorn text-accent-500 mr-2"></i>Pemasaran Digital
+                        </a>
+                        <a href="manajemen-keuangan.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-chart-line text-emerald-500 mr-2"></i>Manajemen Keuangan
+                        </a>
+                    </div>
+                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Kisah Sukses</a>
+                    <a href="pelatihan-materi.html" class="nav-link text-primary-600 font-medium transition-colors px-2 py-1">Pelatihan & Materi</a>
+                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Hubungi Kami</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen items-center flex pt-32 sm:pt-0 sm:pb-0 pb-20 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-20 right-1/4 w-96 h-96 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full opacity-10 blur-3xl floating-element"></div>
+            <div class="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full opacity-10 blur-3xl floating-element-delay"></div>
+            <div class="absolute top-1/3 left-10 w-16 h-16 bg-emerald-500/20 rounded-2xl flex items-center justify-center floating-element">
+                <i class="fas fa-book-open text-2xl text-emerald-500"></i>
+            </div>
+            <div class="absolute top-1/2 right-10 w-16 h-16 bg-primary-500/20 rounded-2xl flex items-center justify-center floating-element-delay">
+                <i class="fas fa-graduation-cap text-2xl text-primary-500"></i>
+            </div>
+            <div class="absolute bottom-1/4 left-1/3 w-12 h-12 bg-accent-500/20 rounded-xl flex items-center justify-center floating-element-delay-2">
+                <i class="fas fa-lightbulb text-xl text-accent-500"></i>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8 animate-slide-up">
+                    <div class="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm border border-emerald-200 rounded-full text-sm font-medium shadow-lg">
+                        <div class="w-2 h-2 bg-emerald-500 rounded-full mr-3 animate-pulse"></div>
+                        <span class="gradient-text font-semibold">Learning Hub</span>
+                    </div>
+
+                    <div class="space-y-6">
+                        <h1 class="font-outfit text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+                            <span class="text-slate-900">Pelatihan & </span>
+                            <span class="gradient-text">Materi Bisnis</span>
+                        </h1>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-1 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"></div>
+                            <div class="w-8 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                            <div class="w-4 h-1 bg-accent-500 rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <p class="text-xl text-slate-600 leading-relaxed">
+                        Pelajari semua aspek bisnis dari nol hingga mahir. Materi lengkap, interaktif, dan disesuaikan dengan kebutuhan <span class="font-semibold text-primary-600">UMKM Indonesia</span>.
+                    </p>
+
+                    <div id="heroStats" class="grid grid-cols-3 gap-4"></div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#learning-paths" class="btn-primary px-8 py-4 text-lg flex items-center justify-center group text-white font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary-500/30 transition-all">
+                            <i class="fas fa-play mr-3 group-hover:rotate-12 transition-transform"></i>Mulai Belajar
+                        </a>
+                        <a href="#categories" class="btn-secondary px-8 py-4 text-lg flex items-center justify-center group font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all">
+                            <i class="fas fa-th-large mr-3 group-hover:rotate-12 transition-transform"></i>Jelajahi Kategori
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden lg:block relative animate-fade-in">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Pelatihan Bisnis" class="w-full h-auto rounded-3xl shadow-2xl">
+                        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl opacity-20 blur-2xl"></div>
+                        <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary-500 to-primary-700 rounded-3xl opacity-20 blur-2xl"></div>
+                        <div class="absolute -top-4 -left-4 w-12 h-12 bg-accent-500 rounded-full flex items-center justify-center floating-element text-white">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="absolute -top-4 -right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center floating-element-delay shadow-lg">
+                            <i class="fas fa-book text-primary-500"></i>
+                        </div>
+                        <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-accent-500 rounded-full flex items-center justify-center floating-element-delay-2 text-white">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+
+    <!-- Search Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="step-card rounded-3xl shadow-xl border border-white/30 p-8">
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="font-outfit text-2xl font-bold mb-4 text-slate-900">Cari Materi yang Anda Butuhkan</h3>
+                        <div class="relative">
+                            <input type="text" id="searchMaterial" placeholder="Cari materi, topik, atau keyword..." 
+                                class="w-full pl-4 pr-12 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-slate-900 font-medium transition-all duration-300">
+                            <button onclick="searchMaterials()" class="absolute right-4 top-4 w-6 h-6 flex items-center justify-center text-slate-400 hover:text-primary-500 transition-colors">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="mt-5">
+                            <label class="block text-sm font-semibold mb-3 text-slate-800">Kategori</label>
+                            <select id="filterCategory" onchange="filterMaterials()" class="w-full px-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-slate-900 font-medium transition-all duration-300">
+                                <option value="all">Semua Kategori</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-3 text-slate-800">Level Kesulitan</label>
+                            <div id="levelFilters" class="space-y-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Paths Section -->
+    <section id="learning-paths" class="pb-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                    <i class="fas fa-route mr-3"></i>Learning Paths
+                </div>
+                <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">Jalur Pembelajaran Terstruktur</h2>
+                <p class="text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto">
+                    Ikuti jalur pembelajaran yang telah disusun sistematis untuk mengembangkan kemampuan bisnis Anda step by step.
+                </p>
+            </div>
+            <div id="learningPaths" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </div>
+    </section>
+   <!-- Mood Based Learning Section -->
+    <section class="py-20 bg-gradient-to-br from-slate-50 to-slate-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                    <i class="fas fa-heart mr-3"></i>Mood Learning
+                </div>
+                <h2 class="font-outfit text-3xl lg:text-4xl font-bold mb-4 gradient-text">Belajar Sesuai Mood Anda</h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">Bagaimana perasaan Anda hari ini? Kami akan merekomendasikan materi yang paling cocok dengan mood Anda!</p>
+            </div>
+
+            <div id="moodButtons" class="grid md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12"></div>
+
+            <!-- Mood Result -->
+            <div id="moodResult" class="hidden">
+                <div class="step-card rounded-3xl shadow-xl p-8 mb-8">
+                    <div class="flex items-start gap-6 mb-8">
+                        <div id="moodIcon" class="w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-heart text-3xl text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 id="moodTitle" class="font-outfit text-2xl font-bold mb-3 text-slate-900">Rekomendasi Berdasarkan Mood</h3>
+                            <p id="moodDescription" class="text-slate-600 mb-4 leading-relaxed"></p>
+                            <div class="flex items-center gap-4">
+                                <span class="px-4 py-2 bg-primary-100 text-primary-800 rounded-full font-semibold">Kategori Focus:</span>
+                                <span id="moodMaterial" class="font-semibold text-slate-900"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Materials List -->
+                    <div class="border-t border-slate-200 pt-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h4 class="font-outfit text-xl font-bold text-slate-900">📚 Materi yang Cocok untuk Anda</h4>
+                            <span id="materialCount" class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold"></span>
+                        </div>
+                        
+                        <div id="moodMaterialsList" class="grid md:grid-cols-2 gap-6">
+                            <!-- Materials will be rendered here -->
+                        </div>
+                        
+                        <div class="text-center mt-8">
+                            <a href="#learning-paths" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl hover:-translate-y-1 transition-all font-semibold shadow-lg">
+                                <i class="fas fa-graduation-cap mr-2"></i>
+                                Lihat Semua Materi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Popular Materials Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                    <i class="fas fa-star mr-3"></i>Materi Unggulan
+                </div>
+                <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">Materi Paling Populer</h2>
+                <p class="text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto">
+                    Materi yang paling banyak dipelajari dan mendapat rating tertinggi dari komunitas UMKM.
+                </p>
+            </div>
+            <div id="popularMaterials" class="grid lg:grid-cols-2 gap-8"></div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                    <i class="fas fa-tools mr-3"></i>Tools Interaktif
+                </div>
+                <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">Simulator & Tools Praktis</h2>
+                <p class="text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto">
+                    Praktikkan pengetahuan Anda dengan simulator bisnis dan tools interaktif yang membantu pengambilan keputusan.
+                </p>
+            </div>
+            <div id="toolsGrid" class="grid md:grid-cols-2 gap-8"></div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="mb-8">
+                        <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                            <i class="fas fa-users mr-3"></i>Komunitas Pembelajar
+                        </div>
+                        <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">Belajar Bersama Komunitas UMKM</h2>
+                        <p class="text-xl text-slate-600 leading-relaxed">
+                            Bergabung dengan ribuan pelajar lainnya, sharing pengalaman, dan saling support dalam perjalanan bisnis.
+                        </p>
+                    </div>
+                    
+                    <div id="communityStats" class="grid grid-cols-3 gap-4 mb-8"></div>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-comments text-primary-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-outfit font-semibold mb-1 text-slate-900">Forum Diskusi</h4>
+                                <p class="text-sm text-slate-600">Tanya jawab langsung dengan mentor dan sesama pelaku UMKM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-video text-primary-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-outfit font-semibold mb-1 text-slate-900">Live Session</h4>
+                                <p class="text-sm text-slate-600">Webinar mingguan dengan expert dan case study real business</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-handshake text-primary-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-outfit font-semibold mb-1 text-slate-900">Networking</h4>
+                                <p class="text-sm text-slate-600">Connect dengan potential business partners dan collaborators</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="btn-primary px-6 py-3 text-white rounded-xl hover:-translate-y-1 transition-all font-medium flex items-center">
+                            <i class="fab fa-whatsapp mr-2"></i>Join WhatsApp Group
+                        </a>
+                        <a href="#" class="btn-secondary px-6 py-3 rounded-xl hover:-translate-y-1 transition-all font-medium flex items-center">
+                            <i class="fab fa-facebook mr-2"></i>Facebook Community
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Community" class="w-full h-96 object-cover rounded-3xl shadow-2xl">
+                        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl opacity-20 blur-2xl"></div>
+                        <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary-500 to-primary-700 rounded-3xl opacity-20 blur-2xl"></div>
+                        <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary-500 rounded-full flex items-center justify-center text-white floating-element">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="absolute -top-4 -right-4 w-12 h-12 bg-accent-500 rounded-full flex items-center justify-center text-white floating-element-delay">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white floating-element-delay-2">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gradient-to-r from-primary-500 to-primary-700 text-white rounded-3xl p-12 text-center relative overflow-hidden">
+                    <div class="absolute inset-0">
+                        <div class="absolute top-1/4 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+                        <div class="absolute bottom-1/4 right-10 w-40 h-40 bg-accent-500/20 rounded-full blur-3xl"></div>
+                        <div class="absolute top-4 left-4 w-16 h-16 bg-accent-500/30 rounded-full floating-element"></div>
+                        <div class="absolute top-12 right-8 w-12 h-12 bg-accent-500/50 rounded-full floating-element-delay"></div>
+                        <div class="absolute bottom-8 left-1/3 w-8 h-8 bg-accent-500/30 rounded-full floating-element-delay-2"></div>
+                    </div>
+                    
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-sm font-medium mb-8">
+                            <div class="w-2 h-2 bg-accent-400 rounded-full mr-3 animate-pulse"></div>
+                            <span class="text-white font-semibold">Mulai Perjalanan Pembelajaran Anda</span>
+                        </div>
+
+                        <h2 class="font-outfit text-3xl lg:text-4xl font-bold mb-6">Investasi Terbaik adalah Investasi pada Pengetahuan</h2>
+                        <p class="text-xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
+                            Mulai belajar hari ini dan rasakan perubahannya! Bergabunglah dengan ribuan UMKM yang telah merasakan manfaatnya.
+                        </p>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <a href="#learning-paths" class="btn-secondary px-8 py-4 rounded-xl font-semibold text-lg flex items-center hover:-translate-y-1 transition-all">
+                                <i class="fas fa-play-circle mr-2"></i>Mulai Belajar Gratis
+                            </a>
+                            <a href="hubungi.html" class="bg-white/20 border-2 border-white/30 backdrop-blur-sm text-white px-8 py-4 font-semibold text-lg rounded-xl hover:bg-white hover:text-primary-600 transition-colors flex items-center">
+                                <i class="fas fa-question-circle mr-2"></i>Punya Pertanyaan?
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-xl"></i>
+                        </div>
+                        <div class="font-outfit text-2xl font-semibold text-white">Vita</div>
+                    </div>
+                    <p class="text-slate-300 font-inter leading-relaxed">
+                        Platform edukasi interaktif untuk membantu UMKM lokal belajar bisnis secara mandiri, gratis, dan efektif.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Navigasi</h5>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-slate-300 hover:text-primary-400 transition-colors">Beranda</a></li>
+                        <li><a href="tentang.html" class="text-slate-300 hover:text-primary-400 transition-colors">Tentang Kami</a></li>
+                        <li><a href="kisah-sukses.html" class="text-slate-300 hover:text-primary-400 transition-colors">Kisah Sukses</a></li>
+                        <li><a href="pelatihan-materi.html" class="text-primary-400 font-medium">Pelatihan & Materi</a></li>
+                        <li><a href="hubungi.html" class="text-slate-300 hover:text-primary-400 transition-colors">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Materi</h5>
+                    <ul class="space-y-3">
+                        <li><a href="panduan-memulai.html" class="text-slate-300 hover:text-primary-400 transition-colors">Panduan Memulai</a></li>
+                        <li><a href="pemasaran-digital.html" class="text-slate-300 hover:text-primary-400 transition-colors">Pemasaran Digital</a></li>
+                        <li><a href="manajemen-keuangan.html" class="text-slate-300 hover:text-primary-400 transition-colors">Manajemen Keuangan</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Kontak</h5>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-5 h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300">Email</div>
+                                <div class="text-sm text-slate-400">support@vita.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-5 h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300">Telepon</div>
+                                <div class="text-sm text-slate-400">+62 859 1264 62972</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-5 h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300">Lokasi</div>
+                                <div class="text-sm text-slate-400">Yogyakarta, Indonesia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="text-slate-400 text-sm">© 2025 Vita. All rights reserved.</div>
+                    <div class="flex items-center space-x-6 text-sm">
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Kebijakan Privasi</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Syarat & Ketentuan</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Bantuan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== DATA SECTION ====================
+        
+        // Mood Data
+        const moodData = {
+            semangat: {
+                desc: "Luar biasa! Semangat tinggi kamu akan membantu dalam pembelajaran advanced. Mari fokus pada strategi scaling dan leadership bisnis!",
+                materi: "Advanced Business Strategy & Leadership",
+                icon: "fas fa-fire",
+                color: "from-red-500 to-orange-500",
+                label: "Semangat",
+                subtitle: "Energy Tinggi"
+            },
+            santai: {
+                desc: "Perfect! Mood santai sangat cocok untuk pembelajaran fundamental. Mari mulai dengan dasar-dasar bisnis yang solid.",
+                materi: "Fundamental Bisnis & Mindset Entrepreneur",
+                icon: "fas fa-coffee",
+                color: "from-blue-500 to-cyan-500",
+                label: "Santai",
+                subtitle: "Rileks"
+            },
+            bingung: {
+                desc: "Tidak apa-apa, setiap entrepreneur pernah mengalami fase ini. Mari mulai dengan panduan step-by-step yang mudah diikuti.",
+                materi: "Panduan Lengkap: Dari Ide ke Eksekusi",
+                icon: "fas fa-question",
+                color: "from-amber-500 to-yellow-500",
+                label: "Bingung",
+                subtitle: "Butuh Arahan"
+            },
+            fokus: {
+                desc: "Mantap! Fokus tinggi akan memaksimalkan hasil pembelajaran. Saatnya deep dive ke analisis dan strategi detail.",
+                materi: "Deep Dive Analytics & Strategic Planning",
+                icon: "fas fa-crosshairs",
+                color: "from-emerald-500 to-green-500",
+                label: "Fokus",
+                subtitle: "Konsentrasi"
+            },
+            optimis: {
+                desc: "Mindset optimis adalah asset terbesar entrepreneur! Mari belajar cara membangun brand yang kuat dan memorable.",
+                materi: "Brand Building & Customer Experience",
+                icon: "fas fa-star",
+                color: "from-pink-500 to-rose-500",
+                label: "Optimis",
+                subtitle: "Positif"
+            },
+            serius: {
+                desc: "Komitmen tinggi adalah kunci sukses! Saatnya menguasai financial planning dan business model yang profitable.",
+                materi: "Financial Mastery & Business Modeling",
+                icon: "fas fa-briefcase",
+                color: "from-slate-600 to-slate-700",
+                label: "Serius",
+                subtitle: "Profesional"
+            }
+        };
+
+        // Course Data
+        const courseData = [
+            {
+                id: 1, title: "Pemula Total", category: "pemula", level: "pemula", duration: "8 Jam", materials: 12, progress: 0,
+                description: "Mulai dari nol hingga memahami dasar-dasar bisnis. Cocok untuk yang baru memulai atau ingin memantapkan fondasi.",
+                image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 4.8, reviews: 124, learners: 3200, status: "available", badges: ["Pemula"],
+                keywords: ["dasar", "fundamental", "pemula", "bisnis", "entrepreneur"]
+            },
+            {
+                id: 2, title: "Marketing Master", category: "pemasaran", level: "menengah", duration: "12 Jam", materials: 18, progress: 35,
+                description: "Kuasai semua aspek pemasaran digital dan konvensional. Dari media sosial hingga strategi branding yang efektif.",
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 4.9, reviews: 89, learners: 2400, status: "available", badges: ["Menengah"],
+                keywords: ["marketing", "pemasaran", "digital", "branding", "sosial media"]
+            },
+            {
+                id: 3, title: "Digital Transformation", category: "digital", level: "lanjut", duration: "10 Jam", materials: 15, progress: 0,
+                description: "Transformasi bisnis ke era digital. Otomatisasi, analitik data, dan strategi teknologi untuk skala bisnis.",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 5.0, reviews: 23, learners: 945, status: "available", badges: ["Lanjut"],
+                keywords: ["digital", "transformasi", "teknologi", "otomatisasi", "data"]
+            },
+            {
+                id: 4, title: "Financial Management", category: "keuangan", level: "menengah", duration: "9 Jam", materials: 14, progress: 60,
+                description: "Mengelola keuangan bisnis dengan baik. Pembukuan, cash flow, investasi, dan perencanaan keuangan jangka panjang.",
+                image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 4.7, reviews: 156, learners: 1800, status: "available", badges: ["Menengah"],
+                keywords: ["keuangan", "financial", "pembukuan", "cash flow", "investasi"]
+            },
+            {
+                id: 5, title: "Scale & Growth", category: "operasional", level: "lanjut", duration: "15 Jam", materials: 20, progress: 0,
+                description: "Strategi scaling bisnis dari UMKM ke enterprise. Manajemen tim, ekspansi pasar, dan sustainable growth.",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 4.6, reviews: 67, learners: 1200, status: "available", badges: ["Lanjut"],
+                keywords: ["scaling", "growth", "ekspansi", "manajemen", "sustainable"]
+            },
+            {
+                id: 6, title: "Leadership & Management", category: "leadership", level: "lanjut", duration: "11 Jam", materials: 16, progress: 0,
+                description: "Kembangkan skill leadership dan manajemen tim. Building culture, motivasi karyawan, dan strategic planning.",
+                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 0, reviews: 0, learners: 0, status: "coming_soon", badges: ["Gratis"],
+                keywords: ["leadership", "management", "kepemimpinan", "tim", "culture"]
+            }
+        ];
+
+        // Popular Materials Data
+        const popularMaterials = [
+            {
+                id: 7, title: "Social Media Marketing untuk UMKM", category: "pemasaran", level: "menengah", duration: "2.5 Jam", materials: 8,
+                description: "Strategi lengkap mengelola media sosial untuk bisnis. Dari content planning hingga engagement optimization.",
+                image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 4.9, reviews: 89, learners: 2400, status: "available", badges: ["⭐ TOP RATED"],
+                keywords: ["social media", "instagram", "facebook", "content", "engagement", "marketing"]
+            },
+            {
+                id: 8, title: "Financial Planning & Budgeting", category: "keuangan", level: "pemula", duration: "3 Jam", materials: 10,
+                description: "Perencanaan keuangan bisnis yang solid. Cash flow management, budgeting, dan investment planning.",
+                image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 4.7, reviews: 156, learners: 1800, status: "available", badges: ["🔥 TRENDING"],
+                keywords: ["budgeting", "planning", "cash flow", "perencanaan", "keuangan", "financial"]
+            },
+            {
+                id: 9, title: "Digital Transformation Roadmap", category: "digital", level: "lanjut", duration: "4 Jam", materials: 12,
+                description: "Panduan step-by-step transformasi bisnis ke digital. Dari website hingga e-commerce dan automation.",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 5.0, reviews: 23, learners: 945, status: "available", badges: ["🆕 NEW"],
+                keywords: ["digital", "website", "e-commerce", "automation", "roadmap", "teknologi"]
+            },
+            {
+                id: 10, title: "Customer Service Excellence", category: "operasional", level: "menengah", duration: "2 Jam", materials: 6,
+                description: "Membangun customer service yang luar biasa. Handling complaints, building loyalty, dan customer retention.",
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 4.8, reviews: 67, learners: 1500, status: "available", badges: ["💎 ESSENTIAL"],
+                keywords: ["customer service", "pelayanan", "complaints", "loyalty", "retention", "operasional"]
+            },
+            {
+                id: 11, title: "Instagram Marketing Mastery", category: "pemasaran", level: "menengah", duration: "3.5 Jam", materials: 14,
+                description: "Kuasai Instagram untuk bisnis. Stories, Reels, IGTV, Instagram Shopping, dan strategi viral content.",
+                image: "https://images.unsplash.com/photo-1611262588024-d12430b98920?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 4.8, reviews: 142, learners: 2100, status: "available", badges: ["📱 TRENDY"],
+                keywords: ["instagram", "social media", "reels", "stories", "viral", "content", "marketing"]
+            },
+            {
+                id: 12, title: "Cashflow Management 101", category: "keuangan", level: "pemula", duration: "2 Jam", materials: 8,
+                description: "Mengelola arus kas bisnis dengan efektif. Prediksi cashflow, mengatasi masalah likuiditas, dan perencanaan keuangan.",
+                image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 4.6, reviews: 98, learners: 1650, status: "available", badges: ["💰 SMART"],
+                keywords: ["cashflow", "cash flow", "arus kas", "likuiditas", "keuangan", "financial", "planning"]
+            },
+            {
+                id: 13, title: "E-Commerce Setup Guide", category: "digital", level: "menengah", duration: "5 Jam", materials: 16,
+                description: "Panduan lengkap membangun toko online. Platform selection, payment gateway, logistik, dan marketing strategy.",
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 4.7, reviews: 76, learners: 1200, status: "available", badges: ["🛒 POPULAR"],
+                keywords: ["e-commerce", "toko online", "online shop", "digital", "website", "platform"]
+            },
+            {
+                id: 14, title: "Business Idea Validation", category: "pemula", level: "pemula", duration: "1.5 Jam", materials: 6,
+                description: "Validasi ide bisnis sebelum eksekusi. Market research, customer interview, MVP testing, dan pivot strategy.",
+                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                rating: 4.5, reviews: 134, learners: 2800, status: "available", badges: ["🚀 STARTER"],
+                keywords: ["validation", "ide bisnis", "market research", "mvp", "startup", "fundamental", "dasar"]
+            }
+        ];
+
+        // Categories Data
+        const categoriesData = [
+            {
+                id: "pemula", title: "Untuk Pemula", icon: "fas fa-play-circle", color: "from-primary-500 to-primary-700",
+                description: "Mulai dari nol hingga memahami dasar-dasar bisnis. Foundation yang solid untuk perjalanan entrepreneurship Anda.",
+                materials: 25, status: "Gratis"
+            },
+            {
+                id: "pemasaran", title: "Pemasaran & Promosi", icon: "fas fa-bullhorn", color: "from-accent-500 to-accent-600",
+                description: "Strategi marketing digital dan konvensional. Dari social media marketing hingga traditional advertising.",
+                materials: 18, status: "Gratis"
+            },
+            {
+                id: "keuangan", title: "Keuangan & Akuntansi", icon: "fas fa-calculator", color: "from-emerald-500 to-emerald-600",
+                description: "Mengelola keuangan bisnis dengan baik. Pembukuan, cash flow, pajak, dan perencanaan finansial.",
+                materials: 22, status: "Gratis"
+            },
+            {
+                id: "digital", title: "Transformasi Digital", icon: "fas fa-laptop-code", color: "from-purple-500 to-purple-700",
+                description: "Digitalisasi bisnis untuk era modern. Website, e-commerce, automation, dan teknologi terkini.",
+                materials: 15, status: "Gratis"
+            },
+            {
+                id: "operasional", title: "Operasional & Produksi", icon: "fas fa-cogs", color: "from-blue-500 to-blue-700",
+                description: "Efisiensi operasional bisnis. Supply chain management, quality control, dan process optimization.",
+                materials: 12, status: "Gratis"
+            },
+            {
+                id: "leadership", title: "Manajemen & Leadership", icon: "fas fa-users", color: "from-orange-500 to-orange-700",
+                description: "Memimpin tim dan mengelola SDM. Team building, motivasi, performance management, dan company culture.",
+                materials: 8, status: "Gratis"
+            }
+        ];
+
+        // Tools Data
+        const toolsData = [
+            {
+                id: 1, title: "Financial Calculator", subtitle: "Hitung ROI, Break Even Point, dan proyeksi keuangan",
+                icon: "fas fa-calculator", color: "from-primary-500 to-primary-700",
+                description: "Tool perhitungan keuangan bisnis yang membantu Anda membuat keputusan investasi dan perencanaan modal yang tepat.",
+                status: "Gratis", available: true
+            },
+            {
+                id: 2, title: "Marketing Simulator", subtitle: "Simulasi strategi pemasaran dan budget allocation",
+                icon: "fas fa-chart-line", color: "from-accent-500 to-accent-600",
+                description: "Coba berbagai strategi marketing dalam lingkungan simulasi untuk melihat dampaknya pada bisnis tanpa risiko kerugian.",
+                status: "Gratis", available: true
+            },
+            {
+                id: 3, title: "Business Plan Generator", subtitle: "Buat business plan profesional dengan mudah",
+                icon: "fas fa-clipboard-check", color: "from-blue-500 to-blue-700",
+                description: "Template dan wizard interaktif untuk membuat business plan yang comprehensive dan investor-ready.",
+                status: "Gratis", available: false
+            },
+            {
+                id: 4, title: "Business Assessment", subtitle: "Evaluasi kesehatan dan potensi bisnis Anda",
+                icon: "fas fa-brain", color: "from-purple-500 to-purple-700",
+                description: "Kuis komprehensif untuk menganalisis strength, weakness, dan opportunity bisnis Anda dengan rekomendasi actionable.",
+                status: "Gratis", available: true
+            }
+        ];
+
+        // Statistics Data
+        const statsData = {
+            hero: [
+                { value: "500+", label: "Materi Gratis" },
+                { value: "50+", label: "Video Tutorial" },
+                { value: "25+", label: "Simulasi Bisnis" }
+            ],
+            community: [
+                { value: "12.5k", label: "Active Learners" },
+                { value: "850+", label: "Success Stories" },
+                { value: "95%", label: "Satisfaction Rate" }
+            ]
+        };
+
+        // ==================== RENDER FUNCTIONS ====================
+
+        function renderHeroStats() {
+            const container = document.getElementById('heroStats');
+            container.innerHTML = statsData.hero.map(stat => `
+                <div class="glass rounded-2xl p-6 text-center card-hover">
+                    <div class="text-3xl font-bold gradient-text mb-2">${stat.value}</div>
+                    <div class="text-slate-600 text-sm">${stat.label}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderMoodButtons() {
+            const container = document.getElementById('moodButtons');
+            container.innerHTML = Object.keys(moodData).map(mood => {
+                const data = moodData[mood];
+                return `
+                    <button onclick="selectMood('${mood}')" class="mood-btn glass rounded-2xl p-6 text-center card-hover group" data-mood="${mood}">
+                        <div class="w-16 h-16 bg-gradient-to-br ${data.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <i class="${data.icon} text-2xl text-white"></i>
+                        </div>
+                        <div class="font-semibold text-slate-900 mb-1">${data.label}</div>
+                        <div class="text-sm text-slate-600">${data.subtitle}</div>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function renderFilterOptions() {
+            // Category filter
+            const categorySelect = document.getElementById('filterCategory');
+            const uniqueCategories = [...new Set(courseData.map(course => course.category))];
+            categorySelect.innerHTML += uniqueCategories.map(cat => {
+                const categoryData = categoriesData.find(c => c.id === cat);
+                return `<option value="${cat}">${categoryData ? categoryData.title : cat}</option>`;
+            }).join('');
+
+            // Level filters
+            const levelContainer = document.getElementById('levelFilters');
+            const levels = [
+                { id: 'pemula', label: 'Pemula', color: 'bg-emerald-500' },
+                { id: 'menengah', label: 'Menengah', color: 'bg-accent-500' },
+                { id: 'lanjut', label: 'Lanjut', color: 'bg-red-500' }
+            ];
+            
+            levelContainer.innerHTML = levels.map(level => `
+                <label class="flex items-center text-slate-700 cursor-pointer">
+                    <input type="checkbox" id="level${level.id.charAt(0).toUpperCase() + level.id.slice(1)}" value="${level.id}" checked onchange="filterMaterials()" class="mr-3 text-primary-500 focus:ring-primary-500 rounded">
+                    <span class="w-3 h-3 ${level.color} rounded-full mr-2"></span>${level.label}
+                </label>
+            `).join('');
+        }
+
+        function renderLearningPaths() {
+            const container = document.getElementById('learningPaths');
+            container.innerHTML = courseData.map(course => {
+                const levelColor = course.level === 'pemula' ? 'emerald' : course.level === 'menengah' ? 'amber' : 'red';
+                const statusButton = course.status === 'available' 
+                    ? `<a href="detail-course.html" class="btn-primary px-6 py-3 text-white rounded-xl hover:-translate-y-1 transition-all font-medium">${course.progress > 0 ? 'Lanjutkan' : 'Mulai Belajar'}</a>`
+                    : `<button class="px-6 py-3 border-2 border-slate-300 text-slate-500 rounded-xl cursor-not-allowed font-medium">Coming Soon</button>`;
+                
+                return `
+                    <div class="step-card rounded-3xl shadow-xl overflow-hidden card-hover h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="${course.image}" alt="${course.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-${levelColor}-500 text-white text-sm font-medium rounded-full">${course.badges[0]}</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">${course.title}</h3>
+                            <div class="flex items-center gap-4 text-sm text-slate-600 mb-3">
+                                <span><i class="fas fa-book mr-1"></i>${course.materials} Materi</span>
+                                <span><i class="fas fa-clock mr-1"></i>${course.duration}</span>
+                            </div>
+                            <p class="text-slate-600 mb-4">${course.description}</p>
+                            <div class="mb-4">
+                                <div class="flex justify-between text-sm mb-2 text-slate-700">
+                                    <span>Progress</span>
+                                    <span>${course.progress}%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-${levelColor}-500 h-2 rounded-full progress-bar" style="width: ${course.progress}%"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                ${statusButton}
+                                <span class="text-sm ${course.status === 'available' ? 'text-emerald-600' : course.status === 'Gratis' ? 'text-blue-600' : 'text-slate-500'} font-semibold">
+                                    ${course.status === 'available' ? 'Gratis' : course.status === 'Gratis' ? 'Gratis' : 'Coming Soon'}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderPopularMaterials() {
+            const container = document.getElementById('popularMaterials');
+            container.innerHTML = popularMaterials.map(material => {
+                const levelColor = material.level === 'pemula' ? 'emerald' : material.level === 'menengah' ? 'amber' : 'red';
+                const badgeColor = material.badges[0].includes('TOP') ? 'emerald' : material.badges[0].includes('TRENDING') ? 'red' : material.badges[0].includes('NEW') ? 'blue' : 'purple';
+                
+                return `
+                    <div class="step-card rounded-3xl shadow-xl overflow-hidden card-hover">
+                        <div class="md:flex">
+                            <div class="md:w-2/5 relative">
+                                <img src="${material.image}" alt="${material.title}" class="w-full h-48 md:h-full object-cover">
+                                <span class="absolute top-4 left-4 px-3 py-1 bg-${levelColor}-500 text-white text-sm font-medium rounded-full">${material.level.charAt(0).toUpperCase() + material.level.slice(1)}</span>
+                                <div class="absolute top-4 right-4 bg-${badgeColor}-500 text-white px-2 py-1 rounded text-xs font-bold">${material.badges[0]}</div>
+                            </div>
+                            <div class="md:w-3/5 p-6">
+                                <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">${material.title}</h3>
+                                <p class="text-slate-600 mb-4">${material.description}</p>
+                                <div class="flex items-center gap-4 text-sm mb-4">
+                                    <span class="px-2 py-1 bg-${levelColor}-100 text-${levelColor}-800 rounded-full">${material.level.charAt(0).toUpperCase() + material.level.slice(1)}</span>
+                                    <span class="text-slate-600"><i class="fas fa-clock mr-1"></i>${material.duration}</span>
+                                    <span class="text-slate-600"><i class="fas fa-users mr-1"></i>${(material.learners / 1000).toFixed(1)}k learners</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div class="text-accent-500">★★★★★</div>
+                                        <span class="ml-2 text-sm text-slate-600">${material.rating} (${material.reviews} reviews)</span>
+                                    </div>
+                                    <a href="detail-course.html" class="btn-primary px-4 py-2 text-white rounded-lg hover:-translate-y-1 transition-all font-medium">Mulai Belajar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderTools() {
+            const container = document.getElementById('toolsGrid');
+            container.innerHTML = toolsData.map(tool => `
+                <div class="step-card rounded-3xl shadow-xl p-8 card-hover h-full">
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br ${tool.color} rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="${tool.icon} text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">${tool.title}</h3>
+                            <p class="text-slate-600">${tool.subtitle}</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 mb-6">${tool.description}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="px-3 py-1 ${tool.status === 'Gratis' ? 'bg-emerald-100 text-emerald-800' : 'bg-accent-100 text-accent-800'} rounded-full text-sm font-medium">${tool.status}</span>
+                        ${tool.available 
+                            ? `<a href="detail-course.html" class="btn-secondary px-6 py-3 rounded-xl hover:-translate-y-1 transition-all font-medium">Coba Sekarang</a>`
+                            : `<button class="px-6 py-3 border-2 border-slate-300 text-slate-500 rounded-xl cursor-not-allowed font-medium">Coming Soon</button>`
+                        }
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderCommunityStats() {
+            const container = document.getElementById('communityStats');
+            container.innerHTML = statsData.community.map(stat => `
+                <div class="text-center">
+                    <div class="text-3xl font-bold gradient-text">${stat.value}</div>
+                    <div class="text-sm text-slate-600">${stat.label}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderMoodMaterials(materials) {
+            const container = document.getElementById('moodMaterialsList');
+            const countContainer = document.getElementById('materialCount');
+            
+            countContainer.textContent = `${materials.length} Materi`;
+            
+            container.innerHTML = materials.map(material => {
+                const levelColor = material.level === 'pemula' ? 'emerald' : material.level === 'menengah' ? 'amber' : 'red';
+                const difficultyIcon = material.level === 'pemula' ? 'fa-seedling' : material.level === 'menengah' ? 'fa-chart-line' : 'fa-rocket';
+                
+                return `
+                    <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+                                <img src="${material.image}" alt="${material.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h5 class="font-outfit text-lg font-bold text-slate-900 mb-2 line-clamp-2">${material.title}</h5>
+                                <div class="flex items-center gap-3 text-sm text-slate-600 mb-2">
+                                    <span class="flex items-center">
+                                        <i class="fas ${difficultyIcon} text-${levelColor}-500 mr-1"></i>
+                                        ${material.level.charAt(0).toUpperCase() + material.level.slice(1)}
+                                    </span>
+                                    <span class="flex items-center">
+                                        <i class="fas fa-clock text-slate-400 mr-1"></i>
+                                        ${material.duration}
+                                    </span>
+                                    <span class="flex items-center">
+                                        <i class="fas fa-book text-slate-400 mr-1"></i>
+                                        ${material.materials} materi
+                                    </span>
+                                </div>
+                                ${material.rating > 0 ? `
+                                    <div class="flex items-center gap-2 text-sm">
+                                        <div class="flex text-accent-500">
+                                            ${'★'.repeat(Math.floor(material.rating))}${'☆'.repeat(5 - Math.floor(material.rating))}
+                                        </div>
+                                        <span class="text-slate-500">${material.rating} (${material.reviews} reviews)</span>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-600 text-sm mb-4 line-clamp-2">${material.description}</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                ${material.progress > 0 ? `
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-20 bg-slate-200 rounded-full h-2">
+                                            <div class="bg-${levelColor}-500 h-2 rounded-full" style="width: ${material.progress}%"></div>
+                                        </div>
+                                        <span class="text-xs text-slate-500">${material.progress}%</span>
+                                    </div>
+                                ` : `
+                                    <span class="px-2 py-1 bg-${levelColor}-100 text-${levelColor}-800 rounded-full text-xs font-semibold">
+                                        ${material.status === 'available' ? 'Tersedia' : material.status === 'coming_soon' ? 'Segera' : 'Gratis'}
+                                    </span>
+                                `}
+                            </div>
+                            
+                            ${material.status === 'available' ? `
+                                <button onclick="startLearning(${material.id})" class="px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg hover:from-primary-600 hover:to-primary-700 transition-all font-semibold text-sm shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2">
+                                    <i class="fas fa-play text-xs"></i>
+                                    ${material.progress > 0 ? 'Lanjutkan' : 'Mulai Belajar'}
+                                </button>
+                            ` : material.status === 'coming_soon' ? `
+                                <button class="px-4 py-2 bg-slate-300 text-slate-500 rounded-lg cursor-not-allowed text-sm font-semibold">
+                                    Coming Soon
+                                </button>
+                            ` : `
+                                <button class="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-lg text-sm font-semibold">
+                                    Upgrade Gratis
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Add empty state if no materials
+            if (materials.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-2 text-center py-12">
+                        <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-search text-2xl text-slate-400"></i>
+                        </div>
+                        <h5 class="font-outfit text-lg font-semibold text-slate-900 mb-2">Belum Ada Materi</h5>
+                        <p class="text-slate-600">Materi untuk mood ini sedang dalam pengembangan. Coba mood lainnya!</p>
+                    </div>
+                `;
+            }
+        }
+
+        function startLearning(materialId) {
+            const material = [...courseData, ...popularMaterials].find(m => m.id === materialId);
+            if (material) {
+                // Update button to loading state
+                const button = event.target.closest('button');
+                const originalContent = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Mempersiapkan...';
+                button.disabled = true;
+                
+                
+                // Track learning start
+                trackLearningStart(material);
+                
+                // Simulate course preparation
+                setTimeout(() => {
+                    // Restore button (in case user is still on page)
+                    button.innerHTML = originalContent;
+                    button.disabled = false;
+                    
+                    // Navigate to course detail
+                    window.location.href = `detail-course.html?id=${materialId}&mood=${getCurrentMood()}`;
+                }, 1500);
+            }
+        }
+
+        function getCurrentMood() {
+            const activeBtn = document.querySelector('.mood-btn.ring-4');
+            return activeBtn ? activeBtn.getAttribute('data-mood') : null;
+        }
+
+        function trackLearningStart(material) {
+            // Learning analytics
+            const analytics = {
+                event: 'learning_started',
+                material_id: material.id,
+                material_title: material.title,
+                category: material.category,
+                level: material.level,
+                mood: getCurrentMood(),
+                timestamp: new Date().toISOString(),
+                user_session: generateSessionId()
+            };
+        }
+
+        function generateSessionId() {
+            return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        }
+
+        function showLoadingState() {
+            const container = document.getElementById('moodMaterialsList');
+            container.innerHTML = Array.from({length: 4}, () => `
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-xl bg-slate-200 shimmer"></div>
+                        <div class="flex-1">
+                            <div class="h-4 bg-slate-200 rounded shimmer mb-2"></div>
+                            <div class="h-3 bg-slate-200 rounded shimmer w-3/4 mb-2"></div>
+                            <div class="h-3 bg-slate-200 rounded shimmer w-1/2"></div>
+                        </div>
+                    </div>
+                    <div class="h-3 bg-slate-200 rounded shimmer mb-4"></div>
+                    <div class="flex justify-between items-center">
+                        <div class="h-6 bg-slate-200 rounded shimmer w-20"></div>
+                        <div class="h-8 bg-slate-200 rounded shimmer w-24"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addMoodRecommendationEngine() {
+            // Advanced mood-based recommendation
+            const moodPreferences = {
+                semangat: { 
+                    preferredDuration: 'long', 
+                    preferredComplexity: 'high',
+                    categories: ['leadership', 'operasional', 'digital']
+                },
+                santai: { 
+                    preferredDuration: 'short', 
+                    preferredComplexity: 'low',
+                    categories: ['pemula', 'keuangan']
+                },
+                bingung: { 
+                    preferredDuration: 'medium', 
+                    preferredComplexity: 'low',
+                    categories: ['pemula', 'keuangan']
+                },
+                fokus: { 
+                    preferredDuration: 'long', 
+                    preferredComplexity: 'high',
+                    categories: ['digital', 'keuangan', 'operasional']
+                },
+                optimis: { 
+                    preferredDuration: 'medium', 
+                    preferredComplexity: 'medium',
+                    categories: ['pemasaran', 'digital']
+                },
+                serius: { 
+                    preferredDuration: 'long', 
+                    preferredComplexity: 'high',
+                    categories: ['keuangan', 'operasional', 'leadership']
+                }
+            };
+            
+            return moodPreferences;
+        }
+
+        function enhanceFilterMaterialsByMood(mood) {
+            const allMaterials = [...courseData, ...popularMaterials];
+            const preferences = addMoodRecommendationEngine()[mood];
+            
+            if (!preferences) return allMaterials.slice(0, 6);
+            
+            // Score-based filtering
+            const scoredMaterials = allMaterials
+                .filter(m => m.status === 'available')
+                .map(material => {
+                    let score = 0;
+                    
+                    // Category preference
+                    if (preferences.categories.includes(material.category)) score += 3;
+                    
+                    // Complexity preference  
+                    const complexityLevel = { 'pemula': 1, 'menengah': 2, 'lanjut': 3 }[material.level];
+                    const preferredComplexity = { 'low': 1, 'medium': 2, 'high': 3 }[preferences.preferredComplexity];
+                    if (complexityLevel === preferredComplexity) score += 2;
+                    
+                    // Duration preference
+                    const duration = parseInt(material.duration);
+                    const durationScore = preferences.preferredDuration === 'short' ? (duration <= 3 ? 2 : 0) :
+                                         preferences.preferredDuration === 'medium' ? (duration >= 3 && duration <= 8 ? 2 : 0) :
+                                         preferences.preferredDuration === 'long' ? (duration > 8 ? 2 : 0) : 0;
+                    score += durationScore;
+                    
+                    // Rating bonus
+                    score += (material.rating || 0) / 5;
+                    
+                    // Progress bonus (prioritize partially completed)
+                    if (material.progress > 0 && material.progress < 100) score += 1;
+                    
+                    return { ...material, score };
+                })
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 6);
+            
+            return scoredMaterials;
+        }
+
+        function selectMood(mood) {
+            // Remove active class from all mood buttons
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.classList.remove('ring-4', 'ring-primary-300', 'bg-primary-50');
+                btn.style.transform = '';
+                btn.style.boxShadow = '';
+            });
+            
+            // Add active class to selected mood
+            const selectedBtn = document.querySelector(`[data-mood="${mood}"]`);
+            selectedBtn.classList.add('ring-4', 'ring-primary-300', 'bg-primary-50');
+            selectedBtn.style.transform = 'translateY(-2px) scale(1.05)';
+            selectedBtn.style.boxShadow = '0 15px 30px rgba(14, 165, 233, 0.3)';
+            
+            // Show mood result
+            const moodResult = document.getElementById('moodResult');
+            const moodIcon = document.getElementById('moodIcon');
+            const moodTitle = document.getElementById('moodTitle');
+            const moodDescription = document.getElementById('moodDescription');
+            const moodMaterial = document.getElementById('moodMaterial');
+            
+            const selectedMood = moodData[mood];
+            
+            // Add loading state
+            moodResult.style.opacity = '0.5';
+            moodResult.classList.remove('hidden');
+            
+            setTimeout(() => {
+                moodIcon.className = `w-20 h-20 bg-gradient-to-br ${selectedMood.color} rounded-2xl flex items-center justify-center flex-shrink-0 animate-scale-in`;
+                moodIcon.innerHTML = `<i class="${selectedMood.icon} text-3xl text-white"></i>`;
+                
+                moodTitle.textContent = `Rekomendasi untuk Mood: ${selectedMood.label}`;
+                moodDescription.textContent = selectedMood.desc;
+                moodMaterial.textContent = selectedMood.materi;
+                
+                moodResult.style.transition = 'opacity 0.5s ease';
+                moodResult.style.opacity = '1';
+                
+                setTimeout(() => {
+                    moodResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 200);
+                
+                filterMaterialsByMood(mood);
+            }, 500);
+        }
+
+        // ==================== FUNCTIONALITY ====================
+
+        function selectMood(mood) {
+            // Remove active class from all mood buttons
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.classList.remove('ring-4', 'ring-primary-300', 'bg-primary-50');
+                btn.style.transform = '';
+                btn.style.boxShadow = '';
+            });
+            
+            // Add active class to selected mood
+            const selectedBtn = document.querySelector(`[data-mood="${mood}"]`);
+            selectedBtn.classList.add('ring-4', 'ring-primary-300', 'bg-primary-50');
+            selectedBtn.style.transform = 'translateY(-2px) scale(1.05)';
+            selectedBtn.style.boxShadow = '0 15px 30px rgba(14, 165, 233, 0.3)';
+            
+            // Show mood result with loading
+            const moodResult = document.getElementById('moodResult');
+            const moodIcon = document.getElementById('moodIcon');
+            const moodTitle = document.getElementById('moodTitle');
+            const moodDescription = document.getElementById('moodDescription');
+            const moodMaterial = document.getElementById('moodMaterial');
+            
+            const selectedMood = moodData[mood];
+            
+            // Show result container first
+            moodResult.classList.remove('hidden');
+            
+            // Show loading state
+            moodIcon.className = `w-20 h-20 bg-gradient-to-br ${selectedMood.color} rounded-2xl flex items-center justify-center flex-shrink-0`;
+            moodIcon.innerHTML = `<i class="fas fa-spinner fa-spin text-3xl text-white"></i>`;
+            
+            moodTitle.textContent = `Mempersiapkan rekomendasi untuk mood: ${selectedMood.label}...`;
+            moodDescription.textContent = 'Sedang menganalisis dan mencocokkan materi terbaik untuk Anda...';
+            moodMaterial.textContent = '⏳ Loading...';
+            
+            // Show loading skeleton for materials
+            showLoadingState();
+            
+            // Simulate analysis time
+            setTimeout(() => {
+                // Update content
+                moodIcon.innerHTML = `<i class="${selectedMood.icon} text-3xl text-white"></i>`;
+                moodTitle.textContent = `Rekomendasi untuk Mood: ${selectedMood.label}`;
+                moodDescription.textContent = selectedMood.desc;
+                moodMaterial.textContent = selectedMood.materi;
+                
+                // Use enhanced filtering
+                const filteredMaterials = enhanceFilterMaterialsByMood(mood);
+                renderMoodMaterials(filteredMaterials);
+                
+                // Smooth scroll to result
+                setTimeout(() => {
+                    moodResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+                
+                // Success notification with more details
+                const avgRating = filteredMaterials.reduce((sum, m) => sum + (m.rating || 0), 0) / filteredMaterials.length;
+                
+                // Track mood selection
+                trackMoodSelection(mood, filteredMaterials.length);
+                
+            }, 1200); // Realistic loading time
+        }
+
+        function trackMoodSelection(mood, materialCount) {
+            const analytics = {
+                event: 'mood_selected',
+                mood: mood,
+                materials_found: materialCount,
+                timestamp: new Date().toISOString(),
+                user_session: generateSessionId()
+            };
+            
+        }
+
+        function filterMaterialsByMood(mood) {
+            const allMaterials = [...courseData, ...popularMaterials];
+            let filteredMaterials = [];
+            
+            switch(mood) {
+                case 'semangat':
+                    // Untuk semangat tinggi - materi advanced dan leadership
+                    filteredMaterials = allMaterials.filter(m => 
+                        m.level === 'lanjut' || 
+                        m.category === 'leadership' ||
+                        m.keywords.includes('scaling') ||
+                        m.keywords.includes('growth') ||
+                        m.keywords.includes('strategic')
+                    );
+                    break;
+                    
+                case 'santai':
+                    // Untuk mood santai - materi fundamental dan pemula
+                    filteredMaterials = allMaterials.filter(m => 
+                        m.level === 'pemula' ||
+                        m.keywords.includes('fundamental') ||
+                        m.keywords.includes('dasar')
+                    );
+                    break;
+                    
+                case 'bingung':
+                    // Untuk yang bingung - panduan step-by-step
+                    filteredMaterials = allMaterials.filter(m => 
+                        m.keywords.includes('dasar') || 
+                        m.keywords.includes('fundamental') || 
+                        m.keywords.includes('pemula') ||
+                        m.keywords.includes('planning') ||
+                        m.title.toLowerCase().includes('panduan')
+                    );
+                    break;
+                    
+                case 'fokus':
+                    // Untuk fokus tinggi - materi analytical dan detailed
+                    filteredMaterials = allMaterials.filter(m => 
+                        m.keywords.includes('data') || 
+                        m.keywords.includes('planning') || 
+                        m.keywords.includes('strategic') ||
+                        m.keywords.includes('financial') ||
+                        m.keywords.includes('analytics')
+                    );
+                    break;
+                    
+                case 'optimis':
+                    // Untuk optimis - branding dan marketing
+                    filteredMaterials = allMaterials.filter(m => 
+                        m.category === 'pemasaran' || 
+                        m.keywords.includes('branding') ||
+                        m.keywords.includes('marketing') ||
+                        m.keywords.includes('social media')
+                    );
+                    break;
+                    
+                case 'serius':
+                    // Untuk serius - financial dan business modeling
+                    filteredMaterials = allMaterials.filter(m => 
+                        m.category === 'keuangan' || 
+                        m.keywords.includes('financial') ||
+                        m.keywords.includes('budgeting') ||
+                        m.keywords.includes('business')
+                    );
+                    break;
+                    
+                default:
+                    filteredMaterials = allMaterials.slice(0, 4); // Default fallback
+            }
+            
+            // Limit to top 6 materials and prioritize available ones
+            return filteredMaterials
+                .filter(m => m.status === 'available')
+                .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+                .slice(0, 6);
+        }
+
+        function searchMaterials() {
+            const searchTerm = document.getElementById('searchMaterial').value.toLowerCase();
+            const filtered = [...courseData, ...popularMaterials].filter(material => 
+                material.title.toLowerCase().includes(searchTerm) ||
+                material.description.toLowerCase().includes(searchTerm) ||
+                material.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm))
+            );
+            
+            const message = filtered.length > 0 
+                ? `Ditemukan ${filtered.length} materi yang sesuai dengan "${searchTerm}"`
+                : `Tidak ditemukan materi untuk "${searchTerm}"`;
+        }
+
+        function filterMaterials() {
+            const category = document.getElementById('filterCategory').value;
+            const selectedLevels = [];
+            
+            document.querySelectorAll('input[id^="level"]:checked').forEach(checkbox => {
+                selectedLevels.push(checkbox.value);
+            });
+            
+            let filtered = [...courseData, ...popularMaterials].filter(material => {
+                const categoryMatch = category === 'all' || material.category === category;
+                const levelMatch = selectedLevels.includes(material.level);
+                return categoryMatch && levelMatch;
+            });
+            
+        }
+
+        // ==================== INITIALIZATION ====================
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Render all components
+            renderHeroStats();
+            renderMoodButtons();
+            renderFilterOptions();
+            renderLearningPaths();
+            renderPopularMaterials();
+            renderTools();
+            renderCommunityStats();
+
+            // Mobile menu functionality
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (mobileMenuBtn && mobileMenu) {
+                const toggleMenu = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    mobileMenu.classList.toggle('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (mobileMenu.classList.contains('active')) {
+                        icon.className = 'fas fa-times text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                    } else {
+                        icon.className = 'fas fa-bars text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                };
+
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+                mobileMenuBtn.addEventListener('touchend', toggleMenu, { passive: false });
+
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        mobileMenu.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.className = 'fas fa-bars text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.className = 'fas fa-bars text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            // Search functionality
+            const searchInput = document.getElementById('searchMaterial');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    if (this.value.length >= 2) searchMaterials();
+                });
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') searchMaterials();
+                });
+            }
+
+            // Progress bar animations
+            const progressBars = document.querySelectorAll('.progress-bar');
+            const progressObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const progressBar = entry.target;
+                        const width = progressBar.style.width;
+                        progressBar.style.width = '0%';
+                        
+                        setTimeout(() => {
+                            progressBar.style.width = width;
+                        }, 200);
+                        
+                        progressObserver.unobserve(progressBar);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            progressBars.forEach(bar => progressObserver.observe(bar));
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        e.preventDefault();
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 120,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Navbar scroll effect
+            const navbar = document.getElementById('mainNav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // 1-6: Select mood
+                if (e.key >= '1' && e.key <= '6') {
+                    const moodKeys = Object.keys(moodData);
+                    const index = parseInt(e.key) - 1;
+                    if (moodKeys[index]) {
+                        selectMood(moodKeys[index]);
+                    }
+                }
+                
+                // Ctrl/Cmd + K for quick search focus
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    document.getElementById('searchMaterial').focus();
+                }
+                
+                // Escape to clear search
+                if (e.key === 'Escape') {
+                    const searchInput = document.getElementById('searchMaterial');
+                    if (searchInput && searchInput.value) {
+                        searchInput.value = '';
+                        searchInput.blur();
+                    }
+                }
+            });
+
+            // Welcome message with tips
+            setTimeout(() => {
+                const totalMaterials = courseData.length + popularMaterials.length;
+                const welcomeMessage = `
+                    🎓 Selamat datang di Vita Learning Hub! 
+                    
+                    📊 Yang tersedia untuk Anda:
+                    • ${totalMaterials} materi pembelajaran berkualitas
+                    • ${Object.keys(moodData).length} mood learning recommendations
+                    • ${categoriesData.length} kategori pembelajaran
+                    • ${toolsData.length} tools interaktif
+                    
+                    💡 Tips cepat:
+                    • Pilih mood Anda untuk rekomendasi personal
+                    • Gunakan pencarian dengan keyword spesifik
+                    • Shortcut: 1-6 untuk mood, Ctrl+K untuk search
+                    
+                    Selamat belajar! 🚀
+                `;
+                
+            }, 1500);
+
+            // Add material interaction tracking
+            function addMaterialInteractionTracking() {
+                // Track material card views
+                const materialObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const materialElement = entry.target;
+                            const materialTitle = materialElement.querySelector('h5')?.textContent;
+                        }
+                    });
+                }, { threshold: 0.7 });
+
+                // Observe material cards when they're rendered
+                setTimeout(() => {
+                    document.querySelectorAll('.material-card, [class*="bg-white rounded-2xl"]').forEach(card => {
+                        materialObserver.observe(card);
+                    });
+                }, 2000);
+            }
+
+            // Initialize material tracking
+            addMaterialInteractionTracking();
+
+            // Add Easter egg for power users
+            let konamiCode = [];
+            const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+            
+            document.addEventListener('keydown', function(e) {
+                konamiCode.push(e.code);
+                if (konamiCode.length > konamiSequence.length) {
+                    konamiCode.shift();
+                }
+                
+                if (konamiCode.length === konamiSequence.length && 
+                    konamiCode.every((code, index) => code === konamiSequence[index])) {
+                    document.body.style.animation = 'rainbow 2s infinite';
+                    setTimeout(() => {
+                        document.body.style.animation = '';
+                    }, 5000);
+                }
+            });
+
+            // Add rainbow animation for easter egg
+            const rainbowCSS = `
+                @keyframes rainbow {
+                    0% { filter: hue-rotate(0deg); }
+                    100% { filter: hue-rotate(360deg); }
+                }
+            `;
+            const style = document.createElement('style');
+            style.textContent = rainbowCSS;
+            document.head.appendChild(style);
+
+        });
+    </script>
+</body>
+</html>

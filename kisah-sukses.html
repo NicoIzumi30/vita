@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelatihan & Materi - Vita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e'
+                        },
+                        accent: {
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'outfit': ['Outfit', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-ring': 'pulse-ring 2s infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'fade-in': 'fade-in 0.8s ease-out',
+                        'scale-in': 'scale-in 0.5s ease-out',
+                        'shimmer': 'shimmer 2s linear infinite'
+                    },
+                    keyframes: {
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-12px) rotate(1deg)' }
+                        },
+                        'pulse-ring': {
+                            '0%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0.4)' },
+                            '70%': { boxShadow: '0 0 0 15px rgba(14, 165, 233, 0)' },
+                            '100%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0)' }
+                        },
+                        'slide-up': {
+                            'from': { transform: 'translateY(30px)', opacity: '0' },
+                            'to': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        'fade-in': {
+                            'from': { opacity: '0' },
+                            'to': { opacity: '1' }
+                        },
+                        'scale-in': {
+                            'from': { transform: 'scale(0.95)', opacity: '0' },
+                            'to': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        'shimmer': {
+                            '0%': { backgroundPosition: '-468px 0' },
+                            '100%': { backgroundPosition: '468px 0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #0ea5e9, #f59e0b);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #0369a1;
+            border: 2px solid #0ea5e9;
+        }
+
+        .btn-secondary:hover {
+            background: #0ea5e9;
+            color: white;
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.8) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element-delay {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: -2s;
+        }
+
+        .floating-element-delay-2 {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: -4s;
+        }
+
+        #mobileMenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        #mobileMenu.active {
+            max-height: 500px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu {
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .group:hover .dropdown-menu {
+            transform: translateY(0);
+        }
+
+        .progress-bar {
+            transition: width 1s ease-in-out;
+        }
+
+        .course-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.8) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.8) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .icon-bounce {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% {
+                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                transform: translate3d(0, 0, 0);
+            }
+            40%, 43% {
+                animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                transform: translate3d(0, -30px, 0);
+            }
+            70% {
+                animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                transform: translate3d(0, -15px, 0);
+            }
+            90% {
+                transform: translate3d(0, -4px, 0);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-inter bg-gradient-to-b from-white to-slate-50 text-slate-800 scroll-smooth">
+    <!-- Navbar -->
+    <nav id="mainNav"
+        class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20 transition-all duration-300">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="font-outfit text-2xl font-semibold gradient-text">Vita</div>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Beranda</a>
+                    <a href="tentang.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Tentang
+                        Kami</a>
+
+                    <!-- Dropdown Materi Bisnis -->
+                    <div class="relative group">
+                        <button
+                            class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors flex items-center">
+                            Materi Bisnis
+                            <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"></i>
+                        </button>
+
+                        <div
+                            class="dropdown-menu absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <div class="py-3">
+                                <a href="panduan-memulai.html"
+                                    class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-rocket text-primary-500 mr-3 w-4"></i>
+                                    Panduan Memulai
+                                </a>
+                                <a href="pemasaran-digital.html"
+                                    class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-bullhorn text-accent-500 mr-3 w-4"></i>
+                                    Pemasaran Digital
+                                </a>
+                                <a href="manajemen-keuangan.html"
+                                    class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-chart-line text-emerald-500 mr-3 w-4"></i>
+                                    Manajemen Keuangan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="kisah-sukses.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Kisah
+                        Sukses</a>
+                    <a href="pelatihan-materi.html"
+                        class="nav-link active text-primary-600 font-medium transition-colors">Pelatihan &
+                        Materi</a>
+                    <a href="hubungi.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Hubungi
+                        Kami</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn"
+                    class="md:hidden w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu"
+                class="md:hidden border-t border-slate-200 bg-white/98 backdrop-blur-sm rounded-b-2xl shadow-lg">
+                <div class="flex flex-col space-y-4 py-4">
+                    <a href="index.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Beranda</a>
+                    <a href="tentang.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Tentang
+                        Kami</a>
+
+                    <div class="border-l-2 border-primary-200 pl-4 ml-2">
+                        <div class="text-sm font-semibold text-slate-600 mb-2">Materi Bisnis</div>
+                        <a href="panduan-memulai.html"
+                            class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-rocket text-primary-500 mr-2"></i>Panduan Memulai
+                        </a>
+                        <a href="pemasaran-digital.html"
+                            class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-bullhorn text-accent-500 mr-2"></i>Pemasaran Digital
+                        </a>
+                        <a href="manajemen-keuangan.html"
+                            class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-chart-line text-emerald-500 mr-2"></i>Manajemen Keuangan
+                        </a>
+                    </div>
+
+                    <a href="kisah-sukses.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Kisah
+                        Sukses</a>
+                    <a href="pelatihan-materi.html"
+                        class="nav-link text-primary-600 font-medium transition-colors px-2 py-1">Pelatihan
+                        & Materi</a>
+                    <a href="hubungi.html"
+                        class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Hubungi
+                        Kami</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen items-center flex pt-32 sm:pt-0 sm:pb-0 pb-20 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div
+                class="absolute top-20 right-1/4 w-96 h-96 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full opacity-10 blur-3xl floating-element">
+            </div>
+            <div
+                class="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full opacity-10 blur-3xl floating-element-delay">
+            </div>
+            <div
+                class="absolute top-1/3 left-10 w-16 h-16 bg-emerald-500/20 rounded-2xl flex items-center justify-center floating-element">
+                <i class="fas fa-book-open text-2xl text-emerald-500"></i>
+            </div>
+            <div
+                class="absolute top-1/2 right-10 w-16 h-16 bg-primary-500/20 rounded-2xl flex items-center justify-center floating-element-delay">
+                <i class="fas fa-graduation-cap text-2xl text-primary-500"></i>
+            </div>
+            <div
+                class="absolute bottom-1/4 left-1/3 w-12 h-12 bg-accent-500/20 rounded-xl flex items-center justify-center floating-element-delay-2">
+                <i class="fas fa-lightbulb text-xl text-accent-500"></i>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8 animate-slide-up">
+                    <div
+                        class="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm border border-emerald-200 rounded-full text-sm font-medium shadow-lg">
+                        <div class="w-2 h-2 bg-emerald-500 rounded-full mr-3 animate-pulse"></div>
+                        <span class="gradient-text font-semibold">Learning Hub</span>
+                    </div>
+
+                    <div class="space-y-6">
+                        <h1 class="font-outfit text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+                            <span class="text-slate-900">Pelatihan & </span>
+                            <span class="gradient-text">Materi Bisnis</span>
+                        </h1>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-1 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"></div>
+                            <div class="w-8 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                            <div class="w-4 h-1 bg-accent-500 rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <p class="text-xl text-slate-600 leading-relaxed">
+                        Pelajari semua aspek bisnis dari nol hingga mahir. Materi lengkap, interaktif, dan disesuaikan dengan kebutuhan <span class="font-semibold text-primary-600">UMKM Indonesia</span>.
+                    </p>
+
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="glass rounded-2xl p-6 text-center card-hover">
+                            <div class="text-3xl font-bold gradient-text mb-2">500+</div>
+                            <div class="text-slate-600 text-sm">Materi Gratis</div>
+                        </div>
+                        <div class="glass rounded-2xl p-6 text-center card-hover">
+                            <div class="text-3xl font-bold gradient-text mb-2">50+</div>
+                            <div class="text-slate-600 text-sm">Video Tutorial</div>
+                        </div>
+                        <div class="glass rounded-2xl p-6 text-center card-hover">
+                            <div class="text-3xl font-bold gradient-text mb-2">25+</div>
+                            <div class="text-slate-600 text-sm">Simulasi Bisnis</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#learning-paths"
+                            class="btn-primary px-8 py-4 text-lg flex items-center justify-center group text-white font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary-500/30 transition-all">
+                            <i class="fas fa-play mr-3 group-hover:rotate-12 transition-transform"></i>
+                            Mulai Belajar
+                        </a>
+                        <a href="#categories"
+                            class="btn-secondary px-8 py-4 text-lg flex items-center justify-center group font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all">
+                            <i class="fas fa-th-large mr-3 group-hover:rotate-12 transition-transform"></i>
+                            Jelajahi Kategori
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden lg:block relative animate-fade-in">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                            alt="Pelatihan Bisnis" class="w-full h-auto rounded-3xl shadow-2xl">
+                        <div
+                            class="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl opacity-20 blur-2xl">
+                        </div>
+                        <div
+                            class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary-500 to-primary-700 rounded-3xl opacity-20 blur-2xl">
+                        </div>
+                        <div class="absolute -top-4 -left-4 w-12 h-12 bg-accent-500 rounded-full flex items-center justify-center floating-element text-white">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="absolute -top-4 -right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center floating-element-delay shadow-lg">
+                            <i class="fas fa-book text-primary-500"></i>
+                        </div>
+                        <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-accent-500 rounded-full flex items-center justify-center floating-element-delay-2 text-white">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mood-Based Learning Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div
+                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                    <i class="fas fa-heart mr-3"></i>Mood-Based Learning
+                </div>
+                <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                    Belajar Sesuai Mood Hari Ini
+                </h2>
+                <p class="text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto">
+                    Setiap hari mood kita berbeda. Pilih pembelajaran yang sesuai dengan energi dan kondisi psikologis Anda untuk hasil yang maksimal.
+                </p>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="step-card rounded-3xl shadow-xl border border-white/30 p-8 mb-12">
+                    <h3 class="font-outfit text-2xl font-bold text-center mb-8 text-slate-900">
+                        Bagaimana mood Anda hari ini?
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="mood-option cursor-pointer p-6 border-2 border-slate-200 rounded-2xl hover:border-primary-500 hover:bg-primary-50 transition-all duration-300 text-center" data-mood="semangat">
+                            <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-fire text-2xl text-white"></i>
+                            </div>
+                            <h4 class="font-outfit text-lg font-bold text-slate-900 mb-2">Semangat Tinggi</h4>
+                            <p class="text-sm text-slate-600">Energi penuh, siap tantangan besar</p>
+                        </div>
+
+                        <div class="mood-option cursor-pointer p-6 border-2 border-slate-200 rounded-2xl hover:border-primary-500 hover:bg-primary-50 transition-all duration-300 text-center" data-mood="santai">
+                            <div class="w-16 h-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-coffee text-2xl text-white"></i>
+                            </div>
+                            <h4 class="font-outfit text-lg font-bold text-slate-900 mb-2">Santai</h4>
+                            <p class="text-sm text-slate-600">Rileks, ingin belajar dengan tempo slow</p>
+                        </div>
+
+                        <div class="mood-option cursor-pointer p-6 border-2 border-slate-200 rounded-2xl hover:border-primary-500 hover:bg-primary-50 transition-all duration-300 text-center" data-mood="bingung">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-question text-2xl text-white"></i>
+                            </div>
+                            <h4 class="font-outfit text-lg font-bold text-slate-900 mb-2">Bingung</h4>
+                            <p class="text-sm text-slate-600">Butuh panduan yang jelas dan terstruktur</p>
+                        </div>
+
+                        <div class="mood-option cursor-pointer p-6 border-2 border-slate-200 rounded-2xl hover:border-primary-500 hover:bg-primary-50 transition-all duration-300 text-center" data-mood="fokus">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-crosshairs text-2xl text-white"></i>
+                            </div>
+                            <h4 class="font-outfit text-lg font-bold text-slate-900 mb-2">Sangat Fokus</h4>
+                            <p class="text-sm text-slate-600">Konsentrasi tinggi, siap deep learning</p>
+                        </div>
+
+                        <div class="mood-option cursor-pointer p-6 border-2 border-slate-200 rounded-2xl hover:border-primary-500 hover:bg-primary-50 transition-all duration-300 text-center" data-mood="optimis">
+                            <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-star text-2xl text-white"></i>
+                            </div>
+                            <h4 class="font-outfit text-lg font-bold text-slate-900 mb-2">Optimis</h4>
+                            <p class="text-sm text-slate-600">Positif thinking, siap membangun brand</p>
+                        </div>
+
+                        <div class="mood-option cursor-pointer p-6 border-2 border-slate-200 rounded-2xl hover:border-primary-500 hover:bg-primary-50 transition-all duration-300 text-center" data-mood="serius">
+                            <div class="w-16 h-16 bg-gradient-to-br from-slate-600 to-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-briefcase text-2xl text-white"></i>
+                            </div>
+                            <h4 class="font-outfit text-lg font-bold text-slate-900 mb-2">Serius</h4>
+                            <p class="text-sm text-slate-600">Business mode on, saatnya financial planning</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mood Result Section -->
+                <div id="moodResult" class="hidden">
+                    <div class="step-card rounded-3xl shadow-xl border border-white/30 p-8 card-hover">
+                        <div class="text-center mb-8">
+                            <div id="moodIcon" class="w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-600 rounded-3xl flex items-center justify-center mx-auto mb-4 icon-bounce">
+                                <i class="fas fa-heart text-3xl text-white"></i>
+                            </div>
+                            <h3 class="font-outfit text-2xl font-bold text-slate-900 mb-4">Rekomendasi Pembelajaran untuk Anda</h3>
+                            <p id="moodDesc" class="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto"></p>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-primary-50 to-accent-50 rounded-2xl p-8 mb-8">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <h4 class="font-outfit text-xl font-bold text-slate-900 mb-2">Materi yang Direkomendasikan:</h4>
+                                    <p id="moodMateri" class="text-lg font-semibold text-primary-600"></p>
+                                </div>
+                                <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg">
+                                    <i id="moodRecommendationIcon" class="fas fa-lightbulb text-2xl text-accent-500"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-3 gap-4 mb-6">
+                                <div class="bg-white rounded-xl p-4 text-center">
+                                    <div class="text-2xl font-bold text-emerald-600">✓</div>
+                                    <div class="text-sm text-slate-600">Sesuai Mood</div>
+                                </div>
+                                <div class="bg-white rounded-xl p-4 text-center">
+                                    <div class="text-2xl font-bold text-primary-600">⚡</div>
+                                    <div class="text-sm text-slate-600">Efektif</div>
+                                </div>
+                                <div class="bg-white rounded-xl p-4 text-center">
+                                    <div class="text-2xl font-bold text-accent-600">🎯</div>
+                                    <div class="text-sm text-slate-600">Targeted</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <a href="#learning-paths" class="btn-primary px-8 py-4 text-lg flex items-center justify-center group text-white font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary-500/30 transition-all">
+                                <i class="fas fa-play mr-3 group-hover:rotate-12 transition-transform"></i>
+                                Mulai Pembelajaran
+                            </a>
+                            <button id="resetMood" class="btn-secondary px-8 py-4 text-lg flex items-center justify-center group font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all">
+                                <i class="fas fa-refresh mr-3 group-hover:rotate-180 transition-transform"></i>
+                                Pilih Mood Lain
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="step-card rounded-3xl shadow-xl border border-white/30 p-8">
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="font-outfit text-2xl font-bold mb-4 text-slate-900">Cari Materi yang Anda Butuhkan</h3>
+                        <div class="relative">
+                            <input type="text" id="searchMaterial" placeholder="Cari materi, topik, atau keyword..." 
+                                class="w-full pl-4 pr-12 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-slate-900 font-medium transition-all duration-300">
+                            <button class="absolute right-4 top-4 w-6 h-6 flex items-center justify-center text-slate-400 hover:text-primary-500 transition-colors">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold mb-3 text-slate-800">Kategori</label>
+                            <select id="filterCategory" class="w-full px-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-slate-900 font-medium transition-all duration-300">
+                                <option value="all">Semua Kategori</option>
+                                <option value="pemula">Untuk Pemula</option>
+                                <option value="pemasaran">Pemasaran</option>
+                                <option value="keuangan">Keuangan</option>
+                                <option value="digital">Digital</option>
+                                <option value="operasional">Operasional</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-3 text-slate-800">Level Kesulitan</label>
+                            <div class="space-y-3">
+                                <label class="flex items-center text-slate-700 cursor-pointer">
+                                    <input type="checkbox" id="levelPemula" value="pemula" checked class="mr-3 text-primary-500 focus:ring-primary-500 rounded">
+                                    <span class="w-3 h-3 bg-emerald-500 rounded-full mr-2"></span>Pemula
+                                </label>
+                                <label class="flex items-center text-slate-700 cursor-pointer">
+                                    <input type="checkbox" id="levelMenengah" value="menengah" checked class="mr-3 text-primary-500 focus:ring-primary-500 rounded">
+                                    <span class="w-3 h-3 bg-accent-500 rounded-full mr-2"></span>Menengah
+                                </label>
+                                <label class="flex items-center text-slate-700 cursor-pointer">
+                                    <input type="checkbox" id="levelLanjut" value="lanjut" checked class="mr-3 text-primary-500 focus:ring-primary-500 rounded">
+                                    <span class="w-3 h-3 bg-red-500 rounded-full mr-2"></span>Lanjut
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Paths Section -->
+    <section id="learning-paths" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div
+                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                    <i class="fas fa-route mr-3"></i>Learning Paths
+                </div>
+                <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                    Jalur Pembelajaran Terstruktur
+                </h2>
+                <p class="text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto">
+                    Ikuti jalur pembelajaran yang telah disusun sistematis untuk mengembangkan kemampuan bisnis Anda step by step.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course Card 1 -->
+                <div class="course-card rounded-3xl shadow-xl overflow-hidden card-hover h-full">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Pemula Total" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 bg-emerald-500 text-white text-sm font-medium rounded-full">Pemula</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Pemula Total</h3>
+                        <div class="flex items-center gap-4 text-sm text-slate-600 mb-3">
+                            <span><i class="fas fa-book mr-1"></i>12 Materi</span>
+                            <span><i class="fas fa-clock mr-1"></i>8 Jam</span>
+                        </div>
+                        <p class="text-slate-600 mb-4">Mulai dari nol hingga memahami dasar-dasar bisnis. Cocok untuk yang baru memulai atau ingin memantapkan fondasi.</p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-2 text-slate-700">
+                                <span>Progress</span>
+                                <span>0%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2">
+                                <div class="bg-emerald-500 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <a href="detail-course.html" class="btn-primary px-6 py-3 text-white rounded-xl hover:-translate-y-1 transition-all font-medium">Mulai Belajar</a>
+                            <span class="text-sm text-emerald-600 font-semibold">Gratis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="course-card rounded-3xl shadow-xl overflow-hidden card-hover h-full">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Marketing Master" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 bg-accent-500 text-white text-sm font-medium rounded-full">Menengah</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Marketing Master</h3>
+                        <div class="flex items-center gap-4 text-sm text-slate-600 mb-3">
+                            <span><i class="fas fa-book mr-1"></i>18 Materi</span>
+                            <span><i class="fas fa-clock mr-1"></i>12 Jam</span>
+                        </div>
+                        <p class="text-slate-600 mb-4">Kuasai semua aspek pemasaran digital dan konvensional. Dari media sosial hingga strategi branding yang efektif.</p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-2 text-slate-700">
+                                <span>Progress</span>
+                                <span>35%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2">
+                                <div class="bg-accent-500 h-2 rounded-full progress-bar" style="width: 35%"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <a href="detail-course.html" class="btn-primary px-6 py-3 text-white rounded-xl hover:-translate-y-1 transition-all font-medium">Lanjutkan</a>
+                            <span class="text-sm text-emerald-600 font-semibold">Gratis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div class="course-card rounded-3xl shadow-xl overflow-hidden card-hover h-full">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Digital Transformation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 bg-red-500 text-white text-sm font-medium rounded-full">Lanjut</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Digital Transformation</h3>
+                        <div class="flex items-center gap-4 text-sm text-slate-600 mb-3">
+                            <span><i class="fas fa-book mr-1"></i>15 Materi</span>
+                            <span><i class="fas fa-clock mr-1"></i>10 Jam</span>
+                        </div>
+                        <p class="text-slate-600 mb-4">Transformasi bisnis ke era digital. Otomatisasi, analitik data, dan strategi teknologi untuk skala bisnis.</p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-2 text-slate-700">
+                                <span>Progress</span>
+                                <span>0%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2">
+                                <div class="bg-red-500 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <a href="detail-course.html" class="btn-primary px-6 py-3 text-white rounded-xl hover:-translate-y-1 transition-all font-medium">Mulai Belajar</a>
+                            <span class="text-sm text-emerald-600 font-semibold">Gratis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 4 -->
+                <div class="course-card rounded-3xl shadow-xl overflow-hidden card-hover h-full">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Financial Management" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 bg-accent-500 text-white text-sm font-medium rounded-full">Menengah</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Financial Management</h3>
+                        <div class="flex items-center gap-4 text-sm text-slate-600 mb-3">
+                            <span><i class="fas fa-book mr-1"></i>14 Materi</span>
+                            <span><i class="fas fa-clock mr-1"></i>9 Jam</span>
+                        </div>
+                        <p class="text-slate-600 mb-4">Mengelola keuangan bisnis dengan baik. Pembukuan, cash flow, investasi, dan perencanaan keuangan jangka panjang.</p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-2 text-slate-700">
+                                <span>Progress</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2">
+                                <div class="bg-accent-500 h-2 rounded-full progress-bar" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <a href="detail-course.html" class="btn-primary px-6 py-3 text-white rounded-xl hover:-translate-y-1 transition-all font-medium">Lanjutkan</a>
+                            <span class="text-sm text-emerald-600 font-semibold">Gratis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 5 -->
+                <div class="course-card rounded-3xl shadow-xl overflow-hidden card-hover h-full">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Scale & Growth" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 bg-red-500 text-white text-sm font-medium rounded-full">Lanjut</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Scale & Growth</h3>
+                        <div class="flex items-center gap-4 text-sm text-slate-600 mb-3">
+                            <span><i class="fas fa-book mr-1"></i>20 Materi</span>
+                            <span><i class="fas fa-clock mr-1"></i>15 Jam</span>
+                        </div>
+                        <p class="text-slate-600 mb-4">Strategi scaling bisnis dari UMKM ke enterprise. Manajemen tim, ekspansi pasar, dan sustainable growth.</p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-2 text-slate-700">
+                                <span>Progress</span>
+                                <span>0%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2">
+                                <div class="bg-red-500 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <a href="detail-course.html" class="btn-primary px-6 py-3 text-white rounded-xl hover:-translate-y-1 transition-all font-medium">Mulai Belajar</a>
+                            <span class="text-sm text-emerald-600 font-semibold">Gratis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 6 -->
+                <div class="course-card rounded-3xl shadow-xl overflow-hidden card-hover h-full">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Leadership & Management" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded-full">Premium</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Leadership & Management</h3>
+                        <div class="flex items-center gap-4 text-sm text-slate-600 mb-3">
+                            <span><i class="fas fa-book mr-1"></i>16 Materi</span>
+                            <span><i class="fas fa-clock mr-1"></i>11 Jam</span>
+                        </div>
+                        <p class="text-slate-600 mb-4">Kembangkan skill leadership dan manajemen tim. Building culture, motivasi karyawan, dan strategic planning.</p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-2 text-slate-700">
+                                <span>Progress</span>
+                                <span>0%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button class="px-6 py-3 border-2 border-slate-300 text-slate-500 rounded-xl cursor-not-allowed font-medium">Coming Soon</button>
+                            <span class="text-sm text-blue-600 font-semibold">Premium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Materials Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div
+                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                    <i class="fas fa-star mr-3"></i>Materi Unggulan
+                </div>
+                <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                    Materi Paling Populer
+                </h2>
+                <p class="text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto">
+                    Materi yang paling banyak dipelajari dan mendapat rating tertinggi dari komunitas UMKM.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Popular Material 1 -->
+                <div class="step-card rounded-3xl shadow-xl overflow-hidden card-hover">
+                    <div class="md:flex">
+                        <div class="md:w-2/5 relative">
+                            <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Social Media Marketing" class="w-full h-48 md:h-full object-cover">
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-accent-500 text-white text-sm font-medium rounded-full">Marketing</span>
+                            <div class="absolute top-4 right-4 bg-emerald-500 text-white px-2 py-1 rounded text-xs font-bold">⭐ TOP RATED</div>
+                        </div>
+                        <div class="md:w-3/5 p-6">
+                            <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Social Media Marketing untuk UMKM</h3>
+                            <p class="text-slate-600 mb-4">Strategi lengkap mengelola media sosial untuk bisnis. Dari content planning hingga engagement optimization.</p>
+                            <div class="flex items-center gap-4 text-sm mb-4">
+                                <span class="px-2 py-1 bg-accent-100 text-accent-800 rounded-full">Menengah</span>
+                                <span class="text-slate-600"><i class="fas fa-clock mr-1"></i>2.5 Jam</span>
+                                <span class="text-slate-600"><i class="fas fa-users mr-1"></i>2.4k learners</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="text-accent-500">★★★★★</div>
+                                    <span class="ml-2 text-sm text-slate-600">4.9 (89 reviews)</span>
+                                </div>
+                                <a href="detail-course.html" class="btn-primary px-4 py-2 text-white rounded-lg hover:-translate-y-1 transition-all font-medium">Mulai Belajar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popular Material 2 -->
+                <div class="step-card rounded-3xl shadow-xl overflow-hidden card-hover">
+                    <div class="md:flex">
+                        <div class="md:w-2/5 relative">
+                            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Financial Planning" class="w-full h-48 md:h-full object-cover">
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-emerald-500 text-white text-sm font-medium rounded-full">Keuangan</span>
+                            <div class="absolute top-4 right-4 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">🔥 TRENDING</div>
+                        </div>
+                        <div class="md:w-3/5 p-6">
+                            <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Financial Planning & Budgeting</h3>
+                            <p class="text-slate-600 mb-4">Perencanaan keuangan bisnis yang solid. Cash flow management, budgeting, dan investment planning.</p>
+                            <div class="flex items-center gap-4 text-sm mb-4">
+                                <span class="px-2 py-1 bg-emerald-100 text-emerald-800 rounded-full">Pemula</span>
+                                <span class="text-slate-600"><i class="fas fa-clock mr-1"></i>3 Jam</span>
+                                <span class="text-slate-600"><i class="fas fa-users mr-1"></i>1.8k learners</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="text-accent-500">★★★★★</div>
+                                    <span class="ml-2 text-sm text-slate-600">4.7 (156 reviews)</span>
+                                </div>
+                                <a href="detail-course.html" class="btn-primary px-4 py-2 text-white rounded-lg hover:-translate-y-1 transition-all font-medium">Mulai Belajar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popular Material 3 -->
+                <div class="step-card rounded-3xl shadow-xl overflow-hidden card-hover">
+                    <div class="md:flex">
+                        <div class="md:w-2/5 relative">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Digital Transformation" class="w-full h-48 md:h-full object-cover">
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-primary-500 text-white text-sm font-medium rounded-full">Digital</span>
+                            <div class="absolute top-4 right-4 bg-blue-500 text-white px-2 py-1 rounded text-xs font-bold">🆕 NEW</div>
+                        </div>
+                        <div class="md:w-3/5 p-6">
+                            <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Digital Transformation Roadmap</h3>
+                            <p class="text-slate-600 mb-4">Panduan step-by-step transformasi bisnis ke digital. Dari website hingga e-commerce dan automation.</p>
+                            <div class="flex items-center gap-4 text-sm mb-4">
+                                <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full">Lanjut</span>
+                                <span class="text-slate-600"><i class="fas fa-clock mr-1"></i>4 Jam</span>
+                                <span class="text-slate-600"><i class="fas fa-users mr-1"></i>945 learners</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="text-accent-500">★★★★★</div>
+                                    <span class="ml-2 text-sm text-slate-600">5.0 (23 reviews)</span>
+                                </div>
+                                <a href="detail-course.html" class="btn-primary px-4 py-2 text-white rounded-lg hover:-translate-y-1 transition-all font-medium">Mulai Belajar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popular Material 4 -->
+                <div class="step-card rounded-3xl shadow-xl overflow-hidden card-hover">
+                    <div class="md:flex">
+                        <div class="md:w-2/5 relative">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Customer Service" class="w-full h-48 md:h-full object-cover">
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-purple-500 text-white text-sm font-medium rounded-full">Operasional</span>
+                            <div class="absolute top-4 right-4 bg-purple-500 text-white px-2 py-1 rounded text-xs font-bold">💎 ESSENTIAL</div>
+                        </div>
+                        <div class="md:w-3/5 p-6">
+                            <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Customer Service Excellence</h3>
+                            <p class="text-slate-600 mb-4">Membangun customer service yang luar biasa. Handling complaints, building loyalty, dan customer retention.</p>
+                            <div class="flex items-center gap-4 text-sm mb-4">
+                                <span class="px-2 py-1 bg-accent-100 text-accent-800 rounded-full">Menengah</span>
+                                <span class="text-slate-600"><i class="fas fa-clock mr-1"></i>2 Jam</span>
+                                <span class="text-slate-600"><i class="fas fa-users mr-1"></i>1.5k learners</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="text-accent-500">★★★★★</div>
+                                    <span class="ml-2 text-sm text-slate-600">4.8 (67 reviews)</span>
+                                </div>
+                                <a href="detail-course.html" class="btn-primary px-4 py-2 text-white rounded-lg hover:-translate-y-1 transition-all font-medium">Mulai Belajar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div
+                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                    <i class="fas fa-th-large mr-3"></i>Kategori Materi
+                </div>
+                <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                    Jelajahi Berdasarkan Kategori
+                </h2>
+                <p class="text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto">
+                    Temukan materi sesuai dengan kebutuhan spesifik bisnis Anda.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Category 1 -->
+                <div class="category-card rounded-3xl shadow-xl p-8 card-hover h-full">
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-play-circle text-2xl text-white"></i>
+                    </div>
+                    <h3 class="font-outfit text-2xl font-bold mb-4 text-slate-900">Untuk Pemula</h3>
+                    <p class="text-slate-600 mb-6">Mulai dari nol hingga memahami dasar-dasar bisnis. Foundation yang solid untuk perjalanan entrepreneurship Anda.</p>
+                    <div class="flex gap-2 mb-6">
+                        <span class="px-3 py-1 bg-accent-500 text-white rounded-full text-sm font-bold">25 Materi</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">Gratis</span>
+                    </div>
+                    <a href="detail-course.html" class="inline-flex items-center text-primary-600 font-bold hover:text-accent-500 transition-colors">
+                        Lihat Materi <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="category-card rounded-3xl shadow-xl p-8 card-hover h-full">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-bullhorn text-2xl text-white"></i>
+                    </div>
+                    <h3 class="font-outfit text-2xl font-bold mb-4 text-slate-900">Pemasaran & Promosi</h3>
+                    <p class="text-slate-600 mb-6">Strategi marketing digital dan konvensional. Dari social media marketing hingga traditional advertising.</p>
+                    <div class="flex gap-2 mb-6">
+                        <span class="px-3 py-1 bg-accent-500 text-white rounded-full text-sm font-bold">18 Materi</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">Gratis</span>
+                    </div>
+                    <a href="detail-course.html" class="inline-flex items-center text-primary-600 font-bold hover:text-accent-500 transition-colors">
+                        Lihat Materi <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="category-card rounded-3xl shadow-xl p-8 card-hover h-full">
+                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-calculator text-2xl text-white"></i>
+                    </div>
+                    <h3 class="font-outfit text-2xl font-bold mb-4 text-slate-900">Keuangan & Akuntansi</h3>
+                    <p class="text-slate-600 mb-6">Mengelola keuangan bisnis dengan baik. Pembukuan, cash flow, pajak, dan perencanaan finansial.</p>
+                    <div class="flex gap-2 mb-6">
+                        <span class="px-3 py-1 bg-accent-500 text-white rounded-full text-sm font-bold">22 Materi</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">Gratis</span>
+                    </div>
+                    <a href="detail-course.html" class="inline-flex items-center text-primary-600 font-bold hover:text-accent-500 transition-colors">
+                        Lihat Materi <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Category 4 -->
+                <div class="category-card rounded-3xl shadow-xl p-8 card-hover h-full">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-laptop-code text-2xl text-white"></i>
+                    </div>
+                    <h3 class="font-outfit text-2xl font-bold mb-4 text-slate-900">Transformasi Digital</h3>
+                    <p class="text-slate-600 mb-6">Digitalisasi bisnis untuk era modern. Website, e-commerce, automation, dan teknologi terkini.</p>
+                    <div class="flex gap-2 mb-6">
+                        <span class="px-3 py-1 bg-accent-500 text-white rounded-full text-sm font-bold">15 Materi</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">Gratis</span>
+                    </div>
+                    <a href="detail-course.html" class="inline-flex items-center text-primary-600 font-bold hover:text-accent-500 transition-colors">
+                        Lihat Materi <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Category 5 -->
+                <div class="category-card rounded-3xl shadow-xl p-8 card-hover h-full">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-cogs text-2xl text-white"></i>
+                    </div>
+                    <h3 class="font-outfit text-2xl font-bold mb-4 text-slate-900">Operasional & Produksi</h3>
+                    <p class="text-slate-600 mb-6">Efisiensi operasional bisnis. Supply chain management, quality control, dan process optimization.</p>
+                    <div class="flex gap-2 mb-6">
+                        <span class="px-3 py-1 bg-accent-500 text-white rounded-full text-sm font-bold">12 Materi</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">Gratis</span>
+                    </div>
+                    <a href="detail-course.html" class="inline-flex items-center text-primary-600 font-bold hover:text-accent-500 transition-colors">
+                        Lihat Materi <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Category 6 -->
+                <div class="category-card rounded-3xl shadow-xl p-8 card-hover h-full">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-users text-2xl text-white"></i>
+                    </div>
+                    <h3 class="font-outfit text-2xl font-bold mb-4 text-slate-900">Manajemen & Leadership</h3>
+                    <p class="text-slate-600 mb-6">Memimpin tim dan mengelola SDM. Team building, motivasi, performance management, dan company culture.</p>
+                    <div class="flex gap-2 mb-6">
+                        <span class="px-3 py-1 bg-accent-500 text-white rounded-full text-sm font-bold">8 Materi</span>
+                        <span class="px-3 py-1 bg-accent-100 text-accent-800 rounded-full text-sm">Premium</span>
+                    </div>
+                    <span class="inline-flex items-center text-slate-500 font-semibold">
+                        Coming Soon <i class="fas fa-arrow-right ml-2"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div
+                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                    <i class="fas fa-tools mr-3"></i>Tools Interaktif
+                </div>
+                <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                    Simulator & Tools Praktis
+                </h2>
+                <p class="text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto">
+                    Praktikkan pengetahuan Anda dengan simulator bisnis dan tools interaktif yang membantu pengambilan keputusan.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Tool 1 -->
+                <div class="step-card rounded-3xl shadow-xl p-8 card-hover h-full">
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-calculator text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Financial Calculator</h3>
+                            <p class="text-slate-600">Hitung ROI, Break Even Point, dan proyeksi keuangan</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 mb-6">Tool perhitungan keuangan bisnis yang membantu Anda membuat keputusan investasi dan perencanaan modal yang tepat.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium">Gratis</span>
+                        <a href="detail-course.html" class="btn-secondary px-6 py-3 rounded-xl hover:-translate-y-1 transition-all font-medium">Coba Sekarang</a>
+                    </div>
+                </div>
+
+                <!-- Tool 2 -->
+                <div class="step-card rounded-3xl shadow-xl p-8 card-hover h-full">
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-chart-line text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Marketing Simulator</h3>
+                            <p class="text-slate-600">Simulasi strategi pemasaran dan budget allocation</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 mb-6">Coba berbagai strategi marketing dalam lingkungan simulasi untuk melihat dampaknya pada bisnis tanpa risiko kerugian.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium">Gratis</span>
+                        <a href="detail-course.html" class="btn-secondary px-6 py-3 rounded-xl hover:-translate-y-1 transition-all font-medium">Coba Sekarang</a>
+                    </div>
+                </div>
+
+                <!-- Tool 3 -->
+                <div class="step-card rounded-3xl shadow-xl p-8 card-hover h-full">
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-clipboard-check text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Business Plan Generator</h3>
+                            <p class="text-slate-600">Buat business plan profesional dengan mudah</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 mb-6">Template dan wizard interaktif untuk membuat business plan yang comprehensive dan investor-ready.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="px-3 py-1 bg-accent-100 text-accent-800 rounded-full text-sm font-medium">Premium</span>
+                        <button class="px-6 py-3 border-2 border-slate-300 text-slate-500 rounded-xl cursor-not-allowed font-medium">Coming Soon</button>
+                    </div>
+                </div>
+
+                <!-- Tool 4 -->
+                <div class="step-card rounded-3xl shadow-xl p-8 card-hover h-full">
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-brain text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-outfit text-xl font-bold mb-2 text-slate-900">Business Assessment</h3>
+                            <p class="text-slate-600">Evaluasi kesehatan dan potensi bisnis Anda</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 mb-6">Kuis komprehensif untuk menganalisis strength, weakness, dan opportunity bisnis Anda dengan rekomendasi actionable.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium">Gratis</span>
+                        <a href="detail-course.html" class="btn-secondary px-6 py-3 rounded-xl hover:-translate-y-1 transition-all font-medium">Mulai Assessment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="mb-8">
+                        <div
+                            class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
+                            <i class="fas fa-users mr-3"></i>Komunitas Pembelajar
+                        </div>
+                        <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">Belajar Bersama Komunitas UMKM</h2>
+                        <p class="text-xl text-slate-600 leading-relaxed">
+                            Bergabung dengan ribuan pelajar lainnya, sharing pengalaman, dan saling support dalam perjalanan bisnis.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-4 mb-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold gradient-text">12.5k</div>
+                            <div class="text-sm text-slate-600">Active Learners</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold gradient-text">850+</div>
+                            <div class="text-sm text-slate-600">Success Stories</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold gradient-text">95%</div>
+                            <div class="text-sm text-slate-600">Satisfaction Rate</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-comments text-primary-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-outfit font-semibold mb-1 text-slate-900">Forum Diskusi</h4>
+                                <p class="text-sm text-slate-600">Tanya jawab langsung dengan mentor dan sesama pelaku UMKM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-video text-primary-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-outfit font-semibold mb-1 text-slate-900">Live Session</h4>
+                                <p class="text-sm text-slate-600">Webinar mingguan dengan expert dan case study real business</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-handshake text-primary-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-outfit font-semibold mb-1 text-slate-900">Networking</h4>
+                                <p class="text-sm text-slate-600">Connect dengan potential business partners dan collaborators</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="btn-primary px-6 py-3 text-white rounded-xl hover:-translate-y-1 transition-all font-medium flex items-center">
+                            <i class="fab fa-whatsapp mr-2"></i>Join WhatsApp Group
+                        </a>
+                        <a href="#" class="btn-secondary px-6 py-3 rounded-xl hover:-translate-y-1 transition-all font-medium flex items-center">
+                            <i class="fab fa-facebook mr-2"></i>Facebook Community
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Community" class="w-full h-96 object-cover rounded-3xl shadow-2xl">
+                        <div
+                            class="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl opacity-20 blur-2xl">
+                        </div>
+                        <div
+                            class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary-500 to-primary-700 rounded-3xl opacity-20 blur-2xl">
+                        </div>
+                        <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary-500 rounded-full flex items-center justify-center text-white floating-element">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="absolute -top-4 -right-4 w-12 h-12 bg-accent-500 rounded-full flex items-center justify-center text-white floating-element-delay">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white floating-element-delay-2">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div
+                    class="bg-gradient-to-r from-primary-500 to-primary-700 text-white rounded-3xl p-12 text-center relative overflow-hidden">
+                    <div class="absolute inset-0">
+                        <div class="absolute top-1/4 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl">
+                        </div>
+                        <div class="absolute bottom-1/4 right-10 w-40 h-40 bg-accent-500/20 rounded-full blur-3xl">
+                        </div>
+                        <div class="absolute top-4 left-4 w-16 h-16 bg-accent-500/30 rounded-full floating-element"></div>
+                        <div class="absolute top-12 right-8 w-12 h-12 bg-accent-500/50 rounded-full floating-element-delay"></div>
+                        <div class="absolute bottom-8 left-1/3 w-8 h-8 bg-accent-500/30 rounded-full floating-element-delay-2"></div>
+                    </div>
+                    
+                    <div class="relative z-10">
+                        <div
+                            class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-sm font-medium mb-8">
+                            <div class="w-2 h-2 bg-accent-400 rounded-full mr-3 animate-pulse"></div>
+                            <span class="text-white font-semibold">Mulai Perjalanan Pembelajaran Anda</span>
+                        </div>
+
+                        <h2 class="font-outfit text-3xl lg:text-4xl font-bold mb-6">Investasi Terbaik adalah Investasi pada Pengetahuan</h2>
+                        <p class="text-xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
+                            Mulai belajar hari ini dan rasakan perubahannya! Bergabunglah dengan ribuan UMKM yang telah merasakan manfaatnya.
+                        </p>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <a href="#learning-paths" class="btn-secondary px-8 py-4 rounded-xl font-semibold text-lg flex items-center hover:-translate-y-1 transition-all">
+                                <i class="fas fa-play-circle mr-2"></i>Mulai Belajar Gratis
+                            </a>
+                            <a href="hubungi.html" class="bg-white/20 border-2 border-white/30 backdrop-blur-sm text-white px-8 py-4 font-semibold text-lg rounded-xl hover:bg-white hover:text-primary-600 transition-colors flex items-center">
+                                <i class="fas fa-question-circle mr-2"></i>Punya Pertanyaan?
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-outfit text-2xl font-semibold text-white">Vita</div>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 font-inter leading-relaxed">
+                        Platform edukasi interaktif untuk membantu UMKM lokal belajar bisnis secara mandiri, gratis, dan
+                        efektif.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Navigasi</h5>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Beranda</a></li>
+                        <li><a href="tentang.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Tentang Kami</a></li>
+                        <li><a href="kisah-sukses.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Kisah Sukses</a></li>
+                        <li><a href="pelatihan-materi.html"
+                                class="text-primary-400 font-medium">Pelatihan & Materi</a>
+                        </li>
+                        <li><a href="hubungi.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Materi</h5>
+                    <ul class="space-y-3">
+                        <li><a href="panduan-memulai.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Panduan Memulai</a></li>
+                        <li><a href="pemasaran-digital.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Pemasaran Digital</a>
+                        </li>
+                        <li><a href="manajemen-keuangan.html"
+                                class="text-slate-300 hover:text-primary-400 transition-colors">Manajemen Keuangan</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Kontak</h5>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="w-5 h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300">Email</div>
+                                <div class="text-sm text-slate-400">support@vita.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="w-5 h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300">Telepon</div>
+                                <div class="text-sm text-slate-400">+62 859 1264 62972</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="w-5 h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300">Lokasi</div>
+                                <div class="text-sm text-slate-400">Yogyakarta, Indonesia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="text-slate-400 text-sm">
+                        © 2025 Vita. All rights reserved.
+                    </div>
+                    <div class="flex items-center space-x-6 text-sm">
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Kebijakan
+                            Privasi</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Syarat &
+                            Ketentuan</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Bantuan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mood Data
+        const moodData = {
+            semangat: {
+                desc: "Luar biasa! Semangat tinggi kamu akan membantu dalam pembelajaran advanced. Mari fokus pada strategi scaling dan leadership bisnis!",
+                materi: "Advanced Business Strategy & Leadership",
+                icon: "fas fa-fire",
+                color: "from-red-500 to-red-600"
+            },
+            santai: {
+                desc: "Perfect! Mood santai sangat cocok untuk pembelajaran fundamental. Mari mulai dengan dasar-dasar bisnis yang solid.",
+                materi: "Fundamental Bisnis & Mindset Entrepreneur",
+                icon: "fas fa-coffee",
+                color: "from-amber-500 to-amber-600"
+            },
+            bingung: {
+                desc: "Tidak apa-apa, setiap entrepreneur pernah mengalami fase ini. Mari mulai dengan panduan step-by-step yang mudah diikuti.",
+                materi: "Panduan Lengkap: Dari Ide ke Eksekusi",
+                icon: "fas fa-question",
+                color: "from-orange-500 to-orange-600"
+            },
+            fokus: {
+                desc: "Mantap! Fokus tinggi akan memaksimalkan hasil pembelajaran. Saatnya deep dive ke analisis dan strategi detail.",
+                materi: "Deep Dive Analytics & Strategic Planning",
+                icon: "fas fa-crosshairs",
+                color: "from-blue-500 to-blue-600"
+            },
+            optimis: {
+                desc: "Mindset optimis adalah asset terbesar entrepreneur! Mari belajar cara membangun brand yang kuat dan memorable.",
+                materi: "Brand Building & Customer Experience",
+                icon: "fas fa-star",
+                color: "from-emerald-500 to-emerald-600"
+            },
+            serius: {
+                desc: "Komitmen tinggi adalah kunci sukses! Saatnya menguasai financial planning dan business model yang profitable.",
+                materi: "Financial Mastery & Business Modeling",
+                icon: "fas fa-briefcase",
+                color: "from-slate-600 to-slate-700"
+            }
+        };
+
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (mobileMenuBtn && mobileMenu) {
+                const toggleMenu = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    mobileMenu.classList.toggle('active');
+
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (mobileMenu.classList.contains('active')) {
+                        icon.className = 'fas fa-times text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                    } else {
+                        icon.className = 'fas fa-bars text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                };
+
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+                mobileMenuBtn.addEventListener('touchend', toggleMenu, { passive: false });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        mobileMenu.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.className = 'fas fa-bars text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.className = 'fas fa-bars text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            // Mood-based learning functionality
+            const moodOptions = document.querySelectorAll('.mood-option');
+            const moodResult = document.getElementById('moodResult');
+            const moodIcon = document.getElementById('moodIcon');
+            const moodDesc = document.getElementById('moodDesc');
+            const moodMateri = document.getElementById('moodMateri');
+            const moodRecommendationIcon = document.getElementById('moodRecommendationIcon');
+            const resetMoodBtn = document.getElementById('resetMood');
+
+            // Mood selection handler
+            moodOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedMood = this.getAttribute('data-mood');
+                    const moodInfo = moodData[selectedMood];
+                    
+                    // Remove active class from all options
+                    moodOptions.forEach(opt => {
+                        opt.classList.remove('border-primary-500', 'bg-primary-50', 'ring-2', 'ring-primary-500');
+                    });
+                    
+                    // Add active class to selected option
+                    this.classList.add('border-primary-500', 'bg-primary-50', 'ring-2', 'ring-primary-500');
+                    
+                    // Update mood result display
+                    moodDesc.textContent = moodInfo.desc;
+                    moodMateri.textContent = moodInfo.materi;
+                    
+                    // Update icons
+                    moodIcon.innerHTML = `<i class="${moodInfo.icon} text-3xl text-white"></i>`;
+                    moodIcon.className = `w-20 h-20 bg-gradient-to-br ${moodInfo.color} rounded-3xl flex items-center justify-center mx-auto mb-4 icon-bounce`;
+                    
+                    moodRecommendationIcon.className = `${moodInfo.icon} text-2xl text-accent-500`;
+                    
+                    // Show result with animation
+                    moodResult.classList.remove('hidden');
+                    moodResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Add bounce animation to the selected card
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            // Reset mood functionality
+            if (resetMoodBtn) {
+                resetMoodBtn.addEventListener('click', function() {
+                    // Hide result
+                    moodResult.classList.add('hidden');
+                    
+                    // Remove active classes from all mood options
+                    moodOptions.forEach(opt => {
+                        opt.classList.remove('border-primary-500', 'bg-primary-50', 'ring-2', 'ring-primary-500');
+                    });
+                    
+                    // Scroll back to mood selection
+                    document.querySelector('.mood-option').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            }
+
+            // Enhanced mood option hover effects
+            moodOptions.forEach(option => {
+                option.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('border-primary-500')) {
+                        this.style.transform = 'translateY(-4px)';
+                        this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+                    }
+                });
+                
+                option.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('border-primary-500')) {
+                        this.style.transform = '';
+                        this.style.boxShadow = '';
+                    }
+                });
+            });
+
+            // Progress bar animations
+            const progressBars = document.querySelectorAll('.progress-bar');
+            const progressObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const progressBar = entry.target;
+                        const width = progressBar.style.width;
+                        progressBar.style.width = '0%';
+                        
+                        setTimeout(() => {
+                            progressBar.style.width = width;
+                        }, 200);
+                        
+                        progressObserver.unobserve(progressBar);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            progressBars.forEach(bar => {
+                progressObserver.observe(bar);
+            });
+
+            // Search and filter functionality
+            const searchInput = document.getElementById('searchMaterial');
+            const categoryFilter = document.getElementById('filterCategory');
+            const levelCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="level"]');
+            
+            function filterMaterials() {
+                // This would filter materials based on search and category
+                // Implementation would depend on having material items to filter
+                console.log('Filtering materials...');
+            }
+
+            if (searchInput) {
+                searchInput.addEventListener('input', filterMaterials);
+            }
+
+            if (categoryFilter) {
+                categoryFilter.addEventListener('change', filterMaterials);
+            }
+
+            levelCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', filterMaterials);
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        e.preventDefault();
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 120,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Navbar scroll effect
+            const navbar = document.getElementById('mainNav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Statistics animation
+            const animateCounter = (element, target) => {
+                let current = 0;
+                const increment = target / 100;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = target + (element.textContent.includes('k') ? 'k' : element.textContent.includes('%') ? '%' : '');
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current) + (element.textContent.includes('k') ? 'k' : element.textContent.includes('%') ? '%' : '');
+                    }
+                }, 20);
+            };
+
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const statElements = entry.target.querySelectorAll('.text-3xl');
+                        statElements.forEach(stat => {
+                            const text = stat.textContent;
+                            let number = parseInt(text.replace(/\D/g, ''));
+                            
+                            if (text.includes('k')) {
+                                number = parseFloat(text.replace('k', '')) * 1000;
+                            }
+                            
+                            if (number) {
+                                stat.textContent = '0';
+                                animateCounter(stat, text.includes('k') ? parseFloat(text.replace('k', '')) : number);
+                            }
+                        });
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            // Observe statistics containers
+            document.querySelectorAll('.grid.grid-cols-3').forEach(container => {
+                if (container.querySelector('.text-3xl')) {
+                    statsObserver.observe(container);
+                }
+            });
+
+            // Card hover effects enhancement
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                    this.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.15)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    this.style.boxShadow = '';
+                });
+            });
+
+            // Course card interactions
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach(card => {
+                const img = card.querySelector('img');
+                
+                card.addEventListener('mouseenter', function() {
+                    if (img) {
+                        img.style.transform = 'scale(1.1)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    if (img) {
+                        img.style.transform = '';
+                    }
+                });
+            });
+
+            // Category card interactions
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                const icon = card.querySelector('.w-16');
+                
+                card.addEventListener('mouseenter', function() {
+                    if (icon) {
+                        icon.style.transform = 'scale(1.1) rotate(5deg)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    if (icon) {
+                        icon.style.transform = '';
+                    }
+                });
+            });
+        });
+
+        // Add CSS animations for enhanced interactions
+        const style = document.createElement('style');
+        style.textContent = `
+            .mood-option {
+                transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+            
+            .mood-option:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+            
+            .mood-option.active {
+                transform: translateY(-2px);
+                box-shadow: 0 15px 35px rgba(14, 165, 233, 0.2);
+            }
+            
+            .course-card img {
+                transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+            
+            .category-card .w-16 {
+                transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+            
+            .scrolled {
+                backdrop-filter: blur(20px);
+                background: rgba(255, 255, 255, 0.98);
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            }
+            
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .animate-slide-up {
+                animation: slideInUp 0.8s ease-out;
+            }
+            
+            .animate-fade-in {
+                animation: fadeIn 1s ease-out;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            #moodResult {
+                animation: slideInUp 0.6s ease-out;
+            }
+            
+            .icon-bounce {
+                animation: bounce 2s infinite;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>

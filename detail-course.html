@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Marketing untuk UMKM - Vita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: { 'inter': ['Inter', 'sans-serif'], 'outfit': ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter bg-gradient-to-b from-white to-slate-50 text-slate-800 scroll-smooth">
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20 transition-all duration-300">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="flex items-center space-x-2" data-aos="fade-right" data-aos-duration="800">
+                    <span class="text-xl font-bold gradient-text">Vita</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Beranda</a>
+                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Tentang Kami</a>
+                    
+                    <div class="relative group">
+                        <button class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors flex items-center">
+                            Materi Bisnis <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"></i>
+                        </button>
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <div class="py-3">
+                                <a href="panduan-memulai.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-rocket text-primary-500 mr-3 w-4"></i>Panduan Memulai
+                                </a>
+                                <a href="pemasaran-digital.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-bullhorn text-accent-500 mr-3 w-4"></i>Pemasaran Digital
+                                </a>
+                                <a href="manajemen-keuangan.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
+                                    <i class="fas fa-chart-line text-emerald-500 mr-3 w-4"></i>Manajemen Keuangan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Kisah Sukses</a>
+                    <a href="pelatihan-materi.html" class="nav-link active text-primary-600 font-medium transition-colors">Pelatihan & Materi</a>
+                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Hubungi Kami</a>
+                    
+                    <button id="darkModeToggle" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors pulse-animation">
+                        <i class="fas fa-moon text-xl"></i>
+                    </button>
+                </div>
+                
+                <button id="mobileMenuBtn" class="md:hidden w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="mobileMenu" class="md:hidden border-t border-slate-200 bg-white/98 backdrop-blur-sm rounded-b-2xl shadow-lg">
+                <div class="flex flex-col space-y-4 py-4">
+                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Beranda</a>
+                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Tentang Kami</a>
+                    <div class="border-l-2 border-primary-200 pl-4 ml-2">
+                        <div class="text-sm font-semibold text-slate-600 mb-2">Materi Bisnis</div>
+                        <a href="panduan-memulai.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-rocket text-primary-500 mr-2"></i>Panduan Memulai
+                        </a>
+                        <a href="pemasaran-digital.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-bullhorn text-accent-500 mr-2"></i>Pemasaran Digital
+                        </a>
+                        <a href="manajemen-keuangan.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                            <i class="fas fa-chart-line text-emerald-500 mr-2"></i>Manajemen Keuangan
+                        </a>
+                    </div>
+                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Kisah Sukses</a>
+                    <a href="pelatihan-materi.html" class="nav-link text-primary-600 font-medium transition-colors px-2 py-1">Pelatihan & Materi</a>
+                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Hubungi Kami</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-20 pb-4 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <nav class="flex items-center space-x-2 text-sm" data-aos="fade-right">
+                <a href="index.html" class="text-gray-500 hover:text-primary transition-colors">
+                    <i class="fas fa-home mr-1"></i>Beranda
+                </a>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+                <a href="pelatihan-materi.html" class="text-gray-500 hover:text-primary transition-colors">Pelatihan & Materi</a>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+                <span class="text-primary font-medium">Social Media Marketing untuk UMKM</span>
+            </nav>
+        </div>
+    </section>
+
+    <section class="py-8 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2" data-aos="fade-up">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-accent-500 text-white rounded-full text-sm font-medium mb-4">Marketing Digital</span>
+                        <h1 class="text-3xl lg:text-4xl font-bold text-slate-800 mb-4">Social Media Marketing untuk UMKM</h1>
+                        <p class="text-lg text-slate-600 mb-6">Pelajari strategi pemasaran media sosial yang efektif untuk meningkatkan brand awareness dan penjualan UMKM Anda. Dari content planning hingga engagement optimization.</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-6 mb-6">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-clock text-primary-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-slate-500">Durasi</div>
+                                <div class="font-semibold text-slate-800">2.5 Jam</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-users text-primary-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-slate-500">Learners</div>
+                                <div class="font-semibold text-slate-800">2,431</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-star text-primary-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-slate-500">Rating</div>
+                                <div class="font-semibold text-slate-800">4.9/5</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-signal text-primary-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-slate-500">Level</div>
+                                <div class="font-semibold text-slate-800">Menengah</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium text-slate-700">Progress Course</span>
+                            <span class="text-sm text-slate-500" id="progressText">2 dari 8 materi</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressBar" style="width: 25%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1" data-aos="fade-left">
+                    <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24 border border-slate-200">
+                        <div class="text-center mb-6">
+                            <div class="text-3xl font-bold gradient-text mb-2">GRATIS</div>
+                            <p class="text-slate-600">Akses selamanya</p>
+                        </div>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-slate-600">8 Video Pembelajaran</span>
+                                <i class="fas fa-check text-green-500"></i>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-slate-600">Materi Downloadable</span>
+                                <i class="fas fa-check text-green-500"></i>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-slate-600">Quiz Interaktif</span>
+                                <i class="fas fa-check text-green-500"></i>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-slate-600">Sertifikat Digital</span>
+                                <i class="fas fa-check text-green-500"></i>
+                            </div>
+                        </div>
+
+                        <button onclick="toggleBookmark()" id="bookmarkBtn" class="w-full bg-primary-500 text-white py-3 rounded-lg font-semibold hover:bg-primary-600 transition-colors mb-4 pulse-animation">
+                            <i class="fas fa-bookmark mr-2"></i>Simpan Course
+                        </button>
+                        
+                        <div class="flex gap-2">
+                            <button onclick="openShareModal()" class="flex-1 border border-slate-300 text-slate-700 py-2 rounded-lg hover:bg-slate-100 transition-colors">
+                                <i class="fas fa-share-alt mr-2"></i>Bagikan
+                            </button>
+                            <button onclick="toggleFavorite()" id="favoriteBtn" class="flex-1 border border-slate-300 text-slate-700 py-2 rounded-lg hover:bg-slate-100 transition-colors">
+                                <i class="fas fa-heart mr-2"></i>Favorit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-8">
+                    <div data-aos="fade-up">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
+                            <div class="video-container" id="videoContainer">
+                                <iframe 
+                                    id="youtubePlayer"
+                                    src="https://www.youtube.com/embed/XGX7sdim3Dk?enablejsapi=1&rel=0&modestbranding=1"
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-aos="fade-up" data-aos-delay="100">
+                        <div class="bg-white rounded-xl shadow-lg p-6 border border-slate-200">
+                            <div class="flex flex-wrap items-center justify-between gap-4">
+                                <button onclick="navigateToPrevious()" class="flex items-center px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors">
+                                    <i class="fas fa-chevron-left mr-2"></i>Materi Sebelumnya
+                                </button>
+                                
+                                <div class="flex items-center gap-4">
+                                    <button onclick="refreshVideo()" class="w-10 h-10 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors" title="Refresh Video">
+                                        <i class="fas fa-redo"></i>
+                                    </button>
+                                    <button onclick="toggleFullscreen()" class="w-10 h-10 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors" title="Fullscreen">
+                                        <i class="fas fa-expand" id="fullscreenIcon"></i>
+                                    </button>
+                                </div>
+                                
+                                <button onclick="navigateToNext()" class="flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors">
+                                    Materi Selanjutnya<i class="fas fa-chevron-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-aos="fade-up" data-aos-delay="200">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white" id="currentVideoTitle">Pengenalan Instagram Marketing</h3>
+                            <div class="prose prose-gray dark:prose-invert max-w-none">
+                                <p class="text-gray-600 dark:text-gray-300 mb-4" id="currentVideoDescription">
+                                    Dalam video ini, Anda akan mempelajari dasar-dasar Instagram marketing yang efektif untuk UMKM. Materi mencakup:
+                                </p>
+                                <ul class="space-y-2 text-gray-600 dark:text-gray-300" id="currentVideoPoints">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        Mengoptimalkan profil Instagram business
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        Strategi content planning yang konsisten
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        Menggunakan hashtag untuk reach maksimal
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        Memahami algoritma Instagram terbaru
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        Tips engagement dan community building
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                <h4 class="font-semibold mb-3 text-gray-800 dark:text-white">Materi Tambahan</h4>
+                                <div class="flex flex-wrap gap-3" id="downloadMaterials">
+                                    <button onclick="downloadMaterial('pdf')" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-white dark:hover:bg-gray-600 transition-colors">
+                                        <i class="fas fa-file-pdf mr-2 text-red-500"></i>Template Content Calendar
+                                    </button>
+                                    <button onclick="downloadMaterial('guide')" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-white dark:hover:bg-gray-600 transition-colors">
+                                        <i class="fas fa-file-alt mr-2 text-blue-500"></i>Hashtag Research Guide
+                                    </button>
+                                    <button onclick="downloadMaterial('templates')" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-white dark:hover:bg-gray-600 transition-colors">
+                                        <i class="fas fa-images mr-2 text-green-500"></i>Design Template Pack
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1">
+                    <div class="sticky-sidebar">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden" data-aos="fade-left">
+                            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-white">Daftar Materi</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">8 video • 2.5 jam total</p>
+                            </div>
+                            
+                            <div class="p-4 space-y-3" id="courseList">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="share-modal" id="shareModal">
+        <div class="share-modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-white">Bagikan Course</h3>
+                <button onclick="closeShareModal()" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                    <i class="fas fa-times text-gray-600 dark:text-gray-400"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Link Course</label>
+                <div class="flex">
+                    <input type="text" id="shareLink" value="" readonly class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-l-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white">
+                    <button onclick="copyLink()" class="px-4 py-2 bg-primary text-white rounded-r-lg hover:bg-primary-dark transition-colors">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium mb-4 text-gray-700 dark:text-gray-300">Bagikan ke</label>
+                <div class="grid grid-cols-3 gap-3">
+                    <button onclick="shareToWhatsApp()" class="p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors flex flex-col items-center">
+                        <i class="fab fa-whatsapp text-xl mb-1"></i>
+                        <span class="text-xs">WhatsApp</span>
+                    </button>
+                    <button onclick="shareToFacebook()" class="p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex flex-col items-center">
+                        <i class="fab fa-facebook text-xl mb-1"></i>
+                        <span class="text-xs">Facebook</span>
+                    </button>
+                    <button onclick="shareToLinkedIn()" class="p-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors flex flex-col items-center">
+                        <i class="fab fa-linkedin text-xl mb-1"></i>
+                        <span class="text-xs">LinkedIn</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-check mr-2"></i>
+        <span id="notificationText">Berhasil!</span>
+    </div>
+
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 lg:p-12 text-center text-white relative overflow-hidden" data-aos="fade-up">
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute top-4 left-4 w-16 h-16 bg-secondary rounded-full floating-animation"></div>
+                    <div class="absolute top-12 right-8 w-12 h-12 bg-secondary/50 rounded-full floating-animation-delay"></div>
+                    <div class="absolute bottom-8 left-1/3 w-8 h-8 bg-secondary/30 rounded-full floating-animation-delay-2"></div>
+                </div>
+                
+                <div class="relative">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4">Jelajahi Lebih Banyak Course</h2>
+                    <p class="text-xl mb-8 text-white/90 max-w-2xl mx-auto">Tingkatkan skill bisnis Anda dengan ratusan course berkualitas lainnya yang tersedia gratis.</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="pelatihan-materi.html" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center">
+                            <i class="fas fa-graduation-cap mr-2"></i>Lihat Semua Course
+                        </a>
+                        <a href="hubungi.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors inline-flex items-center">
+                            <i class="fas fa-comments mr-2"></i>Butuh Bantuan?
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Vita</h3>
+                    <p class="text-gray-300 mb-4">
+                        Website edukasi interaktif untuk membantu UMKM lokal belajar bisnis secara mandiri, gratis, dan menyenangkan.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Navigasi</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-secondary transition-colors">Beranda</a></li>
+                        <li><a href="tentang.html" class="text-gray-300 hover:text-secondary transition-colors">Tentang Kami</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Materi</h3>
+                    <ul class="space-y-2">
+                        <li><a href="pemasaran-digital.html" class="text-gray-300 hover:text-secondary transition-colors">Pemasaran Digital</a></li>
+                        <li><a href="manajemen-keuangan.html" class="text-gray-300 hover:text-secondary transition-colors">Manajemen Keuangan</a></li>
+                        <li><a href="panduan-memulai.html" class="text-gray-300 hover:text-secondary transition-colors">Panduan Memulai</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Hubungi Kami</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-envelope mr-3"></i>
+                                <div class="text-sm text-slate-400">support@vita.com</div>
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-phone mr-3"></i>
+                            0859126462972
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-map-marker-alt mr-3"></i>
+                            Jl. Ring Road Utara, Ngringin, Condongcatur, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-300">&copy; 2025 Vita. Hak Cipta Dilindungi.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-300 hover:text-secondary transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-secondary transition-colors">
+                        <i class="fab fa-facebook text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-secondary transition-colors">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        const courseData = [
+            {
+                id: 1,
+                title: "Pengantar Instagram Marketing",
+                description: "Memahami potensi Instagram untuk bisnis UMKM",
+                duration: "12 min",
+                videoId: "XGX7sdim3Dk",
+                status: "completed",
+                points: [
+                    "Mengapa Instagram penting untuk UMKM",
+                    "Statistik pengguna Instagram Indonesia",
+                    "Potensi bisnis di platform visual",
+                    "Overview strategi marketing Instagram"
+                ],
+                materials: [
+                    { name: "Instagram Business Guide", type: "pdf" },
+                    { name: "Instagram Statistics 2024", type: "guide" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Setup Profil Instagram Business",
+                description: "Mengoptimalkan profil untuk menarik followers",
+                duration: "15 min",
+                videoId: "ny-b_-Y6cQk",
+                status: "current",
+                points: [
+                    "Mengoptimalkan profil Instagram business",
+                    "Strategi content planning yang konsisten",
+                    "Menggunakan hashtag untuk reach maksimal",
+                    "Memahami algoritma Instagram terbaru",
+                    "Tips engagement dan community building"
+                ],
+                materials: [
+                    { name: "Template Content Calendar", type: "pdf" },
+                    { name: "Hashtag Research Guide", type: "guide" },
+                    { name: "Design Template Pack", type: "templates" }
+                ]
+            },
+            {
+                id: 3,
+                title: "Content Strategy & Planning",
+                description: "Membuat rencana konten yang engaging",
+                duration: "18 min",
+                videoId: "34JRDxkd7ow",
+                status: "upcoming",
+                points: [
+                    "Formula konten 3E (Edukatif, Entertaining, Engaging)",
+                    "Membuat content calendar bulanan",
+                    "Tools untuk desain konten gratis",
+                    "Best practices posting time",
+                    "Mengukur performa konten"
+                ],
+                materials: [
+                    { name: "Content Calendar Template", type: "pdf" },
+                    { name: "Content Ideas Checklist", type: "guide" }
+                ]
+            },
+            {
+                id: 4,
+                title: "Instagram Reels untuk UMKM",
+                description: "Membuat video pendek yang viral",
+                duration: "22 min",
+                videoId: "EDS9sJFFBS8",
+                status: "upcoming",
+                points: [
+                    "Strategi Reels untuk UMKM",
+                    "Tools editing video gratis",
+                    "Tips membuat Reels viral",
+                    "Optimasi untuk algoritma",
+                    "Analisis performa Reels"
+                ],
+                materials: [
+                    { name: "Reels Ideas Template", type: "pdf" },
+                    { name: "Video Editing Guide", type: "guide" }
+                ]
+            },
+            {
+                id: 5,
+                title: "Instagram Ads Tutorial",
+                description: "Membuat iklan di instagram",
+                duration: "16 min",
+                videoId: "N8WoRLlPdV8",
+                status: "upcoming",
+                points: [
+                    "Maksimalkan fitur Stories",
+                    "Interactive stickers dan polls",
+                    "Stories highlights strategy",
+                    "Behind the scenes content",
+                    "Drive traffic dengan Stories"
+                ],
+                materials: [
+                    { name: "Stories Template Pack", type: "templates" },
+                    { name: "Interactive Stories Guide", type: "guide" }
+                ]
+            },
+            {
+                id: 6,
+                title: "Instagram Shopping & Product Tags",
+                description: "Menjual langsung melalui Instagram",
+                duration: "20 min",
+                videoId: "U3pHsWQnmwM",
+                status: "upcoming",
+                points: [
+                    "Setup Instagram Shopping",
+                    "Product tagging strategy",
+                    "Catalog management",
+                    "Instagram checkout",
+                    "Analytics untuk e-commerce"
+                ],
+                materials: [
+                    { name: "Shopping Setup Guide", type: "guide" },
+                    { name: "Product Photography Tips", type: "pdf" }
+                ]
+            },
+            {
+                id: 7,
+                title: "Analytics & Performance Tracking",
+                description: "Mengukur keberhasilan strategi marketing",
+                duration: "14 min",
+                videoId: "icg9b6itW6I",
+                status: "upcoming",
+                points: [
+                    "Instagram Insights overview",
+                    "KPI yang harus ditrack",
+                    "Tools analytics tambahan",
+                    "Laporan performa bulanan",
+                    "Optimasi berdasarkan data"
+                ],
+                materials: [
+                    { name: "Analytics Template", type: "pdf" },
+                    { name: "KPI Tracking Sheet", type: "guide" }
+                ]
+            },
+            {
+                id: 8,
+                title: "Quiz & Sertifikat",
+                description: "Uji pemahaman dan dapatkan sertifikat",
+                duration: "10 min",
+                videoId: "zmoFmciLD2I",
+                status: "upcoming",
+                points: [
+                    "Quiz komprehensif",
+                    "Review materi penting",
+                    "Tips implementasi",
+                    "Download sertifikat",
+                    "Next steps learning path"
+                ],
+                materials: [
+                    { name: "Certificate Template", type: "pdf" },
+                    { name: "Implementation Checklist", type: "guide" }
+                ]
+            }
+        ];
+
+        let currentCourseIndex = 1;
+        let isBookmarked = false;
+        let isFavorited = false;
+
+        function initializeCourse() {
+            updateCurrentVideo();
+            renderCourseList();
+            updateProgress();
+            document.getElementById('shareLink').value = window.location.href;
+        }
+
+        function updateCurrentVideo() {
+            const current = courseData[currentCourseIndex];
+            
+            const iframe = document.getElementById('youtubePlayer');
+            iframe.src = `https://www.youtube.com/embed/${current.videoId}?enablejsapi=1&rel=0&modestbranding=1`;
+            
+            document.getElementById('currentVideoTitle').textContent = current.title;
+            document.getElementById('currentVideoDescription').textContent = current.description;
+            
+            const pointsList = document.getElementById('currentVideoPoints');
+            pointsList.innerHTML = current.points.map(point => `
+                <li class="flex items-start">
+                    <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                    ${point}
+                </li>
+            `).join('');
+            
+            const materialsContainer = document.getElementById('downloadMaterials');
+            materialsContainer.innerHTML = current.materials.map(material => `
+                <button onclick="downloadMaterial('${material.type}')" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-white dark:hover:bg-gray-600 transition-colors">
+                    <i class="fas fa-file-${material.type === 'pdf' ? 'pdf' : material.type === 'templates' ? 'images' : 'alt'} mr-2 text-${material.type === 'pdf' ? 'red' : material.type === 'templates' ? 'green' : 'blue'}-500"></i>
+                    ${material.name}
+                </button>
+            `).join('');
+        }
+
+        function renderCourseList() {
+            const courseList = document.getElementById('courseList');
+            courseList.innerHTML = courseData.map((course, index) => {
+                let statusClass = '';
+                let statusIcon = '';
+                let statusText = '';
+                
+                if (course.status === 'completed') {
+                    statusClass = 'course-item completed';
+                    statusIcon = '<i class="fas fa-check text-sm"></i>';
+                    statusText = 'Selesai';
+                } else if (course.status === 'current' || index === currentCourseIndex) {
+                    statusClass = 'course-item current';
+                    statusIcon = '<i class="fas fa-play text-sm"></i>';
+                    statusText = 'Sedang Dipelajari';
+                } else {
+                    statusClass = 'course-item';
+                    statusIcon = `<span class="text-sm font-bold">${index + 1}</span>`;
+                    statusText = 'Belum Dimulai';
+                }
+                
+                return `
+                    <div class="${statusClass} p-4 border border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary transition-colors" onclick="navigateToVideo(${index})">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 ${course.status === 'completed' ? 'bg-green-500 text-white' : index === currentCourseIndex ? 'bg-primary text-white' : 'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-400'} rounded-full flex items-center justify-center mr-3">
+                                    ${statusIcon}
+                                </div>
+                                <span class="font-medium ${course.status === 'completed' ? 'text-green-700 dark:text-green-400' : index === currentCourseIndex ? 'text-primary' : 'text-gray-500 dark:text-gray-400'}">${statusText}</span>
+                            </div>
+                            <span class="text-sm text-gray-500">${course.duration}</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-800 dark:text-white mb-1">${course.id}. ${course.title}</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">${course.description}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateProgress() {
+            const completedCount = courseData.filter(course => course.status === 'completed').length + 1;
+            const totalCount = courseData.length;
+            const percentage = Math.round((completedCount / totalCount) * 100);
+            
+            document.getElementById('progressText').textContent = `${completedCount} dari ${totalCount} materi`;
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+        }
+
+        function navigateToVideo(index) {
+            if (index >= 0 && index < courseData.length) {
+                if (index > currentCourseIndex) {
+                    courseData[currentCourseIndex].status = 'completed';
+                }
+                
+                courseData[currentCourseIndex].status = 'completed';
+                currentCourseIndex = index;
+                courseData[currentCourseIndex].status = 'current';
+                
+                updateCurrentVideo();
+                renderCourseList();
+                updateProgress();
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function navigateToPrevious() {
+            if (currentCourseIndex > 0) {
+                navigateToVideo(currentCourseIndex - 1);
+            } else {
+                showNotification('Ini adalah materi pertama');
+            }
+        }
+
+        function navigateToNext() {
+            if (currentCourseIndex < courseData.length - 1) {
+                navigateToVideo(currentCourseIndex + 1);
+            } else {
+                showNotification('Anda telah menyelesaikan semua materi!');
+            }
+        }
+
+        function toggleFullscreen() {
+            const videoContainer = document.getElementById('videoContainer');
+            const fullscreenIcon = document.getElementById('fullscreenIcon');
+            
+            if (!document.fullscreenElement) {
+                videoContainer.requestFullscreen().then(() => {
+                    videoContainer.classList.add('fullscreen');
+                    fullscreenIcon.classList.remove('fa-expand');
+                    fullscreenIcon.classList.add('fa-compress');
+                }).catch(err => {
+                    console.log('Error attempting to enable fullscreen:', err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    videoContainer.classList.remove('fullscreen');
+                    fullscreenIcon.classList.remove('fa-compress');
+                    fullscreenIcon.classList.add('fa-expand');
+                });
+            }
+        }
+
+        function refreshVideo() {
+            const iframe = document.getElementById('youtubePlayer');
+            const currentSrc = iframe.src;
+            iframe.src = '';
+            setTimeout(() => {
+                iframe.src = currentSrc;
+            }, 100);
+            showNotification('Video di-refresh');
+        }
+
+        function toggleBookmark() {
+            isBookmarked = !isBookmarked;
+            const btn = document.getElementById('bookmarkBtn');
+            
+            if (isBookmarked) {
+                btn.innerHTML = '<i class="fas fa-bookmark-o mr-2"></i>Tersimpan';
+                btn.classList.add('bg-green-500');
+                btn.classList.remove('bg-primary');
+                showNotification('Course disimpan ke bookmark');
+            } else {
+                btn.innerHTML = '<i class="fas fa-bookmark mr-2"></i>Simpan Course';
+                btn.classList.remove('bg-green-500');
+                btn.classList.add('bg-primary');
+                showNotification('Course dihapus dari bookmark');
+            }
+        }
+
+        function toggleFavorite() {
+            isFavorited = !isFavorited;
+            const btn = document.getElementById('favoriteBtn');
+            const icon = btn.querySelector('i');
+            
+            if (isFavorited) {
+                icon.style.color = '#ef4444';
+                showNotification('Ditambahkan ke favorit');
+            } else {
+                icon.style.color = '';
+                showNotification('Dihapus dari favorit');
+            }
+        }
+
+        function openShareModal() {
+            document.getElementById('shareModal').classList.add('active');
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.remove('active');
+        }
+
+        function copyLink() {
+            const shareLink = document.getElementById('shareLink');
+            shareLink.select();
+            shareLink.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(shareLink.value).then(() => {
+                showNotification('Link berhasil disalin');
+            });
+        }
+
+        function shareToWhatsApp() {
+            const text = encodeURIComponent('Cek course keren ini: Social Media Marketing untuk UMKM');
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://wa.me/?text=${text} ${url}`, '_blank');
+        }
+
+        function shareToFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+        }
+
+        function shareToTwitter() {
+            const text = encodeURIComponent('Belajar Social Media Marketing untuk UMKM di KEINGINAN usaha');
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        }
+
+        function shareToLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+        }
+
+        function downloadMaterial(type) {
+            showNotification(`Mengunduh ${type}...`);
+            setTimeout(() => {
+                showNotification('Download berhasil!');
+            }, 1500);
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+
+            initializeCourse();
+        });
+
+        document.addEventListener('fullscreenchange', () => {
+            const videoContainer = document.getElementById('videoContainer');
+            const fullscreenIcon = document.getElementById('fullscreenIcon');
+            
+            if (!document.fullscreenElement) {
+                videoContainer.classList.remove('fullscreen');
+                fullscreenIcon.classList.remove('fa-compress');
+                fullscreenIcon.classList.add('fa-expand');
+            }
+        });
+
+        document.getElementById('shareModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('shareModal')) {
+                closeShareModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'f':
+                case 'F':
+                    if (e.ctrlKey || e.metaKey) {
+                        e.preventDefault();
+                        toggleFullscreen();
+                    }
+                    break;
+                case 'ArrowLeft':
+                    if (e.ctrlKey || e.metaKey) {
+                        e.preventDefault();
+                        navigateToPrevious();
+                    }
+                    break;
+                case 'ArrowRight':
+                    if (e.ctrlKey || e.metaKey) {
+                        e.preventDefault();
+                        navigateToNext();
+                    }
+                    break;
+                case 'Escape':
+                    closeShareModal();
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+live
