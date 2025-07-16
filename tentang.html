@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -40,177 +40,89 @@
                         'shimmer': 'shimmer 2s linear infinite',
                         'marquee-left': 'marquee-left 35s linear infinite',
                         'marquee-right': 'marquee-right 40s linear infinite'
-                    },
-                    keyframes: {
-                        'float': {
-                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-                            '50%': { transform: 'translateY(-12px) rotate(1deg)' }
-                        },
-                        'pulse-ring': {
-                            '0%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0.4)' },
-                            '70%': { boxShadow: '0 0 0 15px rgba(14, 165, 233, 0)' },
-                            '100%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0)' }
-                        },
-                        'slide-up': {
-                            'from': { transform: 'translateY(30px)', opacity: '0' },
-                            'to': { transform: 'translateY(0)', opacity: '1' }
-                        },
-                        'fade-in': {
-                            'from': { opacity: '0' },
-                            'to': { opacity: '1' }
-                        },
-                        'scale-in': {
-                            'from': { transform: 'scale(0.95)', opacity: '0' },
-                            'to': { transform: 'scale(1)', opacity: '1' }
-                        },
-                        'shimmer': {
-                            '0%': { backgroundPosition: '-468px 0' },
-                            '100%': { backgroundPosition: '468px 0' }
-                        },
-                        'marquee-left': {
-                            '0%': { transform: 'translateX(0%)' },
-                            '100%': { transform: 'translateX(-50%)' }
-                        },
-                        'marquee-right': {
-                            '0%': { transform: 'translateX(-50%)' },
-                            '100%': { transform: 'translateX(0%)' }
-                        }
                     }
                 }
             }
         }
     </script>
-    
+
     <style>
-        .glass {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
         }
         
-        .gradient-text {
-            background: linear-gradient(135deg, #0ea5e9, #0369a1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        @keyframes slide-up {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         
-        .nav-link {
-            position: relative;
-            overflow: hidden;
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(135deg, #0ea5e9, #f59e0b);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
+        @keyframes marquee-left {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
         }
         
-        .nav-link:hover::before,
-        .nav-link.active::before {
-            width: 100%;
+        @keyframes marquee-right {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0%); }
         }
         
-        .btn-primary {
-            background: linear-gradient(135deg, #0ea5e9, #0369a1);
-            position: relative;
-            overflow: hidden;
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
         }
         
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+        .animate-float-delay {
+            animation: float 6s ease-in-out infinite -2s;
         }
         
-        .btn-primary:hover::before {
-            left: 100%;
+        .animate-slide-up {
+            animation: slide-up 0.6s ease-out;
         }
         
-        .btn-secondary {
-            background: white;
-            color: #0369a1;
-            border: 2px solid #0ea5e9;
+        .animate-fade-in {
+            animation: fade-in 0.8s ease-out;
         }
         
-        .btn-secondary:hover {
-            background: #0ea5e9;
-            color: white;
+        .animate-marquee-left {
+            animation: marquee-left 35s linear infinite;
         }
         
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #10b981;
-            animation: pulse 2s infinite;
-        }
-
-        #mobileMenu {
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-        
-        #mobileMenu.active {
-            max-height: 500px;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .dropdown-menu {
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-        }
-        
-        .group:hover .dropdown-menu {
-            transform: translateY(0);
+        .animate-marquee-right {
+            animation: marquee-right 40s linear infinite;
         }
     </style>
 </head>
 
 <body class="font-inter bg-gradient-to-b from-white to-slate-50 text-slate-800 scroll-smooth">
-    <!-- Navbar -->
-    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20 transition-all duration-300">
-        <div class="container mx-auto px-6">
+    <!-- Navigation -->
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-white/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
                         <i class="fas fa-graduation-cap text-white text-lg"></i>
                     </div>
                     <div>
-                        <div class="font-outfit text-2xl font-semibold gradient-text">Vita</div>
+                        <div class="font-outfit text-2xl font-semibold bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">Vita</div>
                     </div>
                 </div>
 
-                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Beranda</a>
-                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors active">Tentang Kami</a>
+                    <a href="index.html" class="relative text-slate-700 hover:text-primary-600 font-medium transition-colors after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-500 after:to-accent-500 after:transition-all after:duration-300 after:-translate-x-1/2 hover:after:w-full">Beranda</a>
+                    <a href="tentang.html" class="relative text-slate-700 hover:text-primary-600 font-medium transition-colors after:absolute after:bottom-0 after:left-1/2 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-primary-500 after:to-accent-500 after:transition-all after:duration-300 after:-translate-x-1/2">Tentang Kami</a>
                     
-                    <!-- Dropdown Materi Bisnis -->
                     <div class="relative group">
-                        <button class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors flex items-center">
+                        <button class="relative text-slate-700 hover:text-primary-600 font-medium transition-colors flex items-center after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-500 after:to-accent-500 after:transition-all after:duration-300 after:-translate-x-1/2 group-hover:after:w-full">
                             Materi Bisnis
-                            <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"></i>
+                            <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform duration-300"></i>
                         </button>
                         
-                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                        <div class="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform -translate-y-2 group-hover:translate-y-0">
                             <div class="py-3">
                                 <a href="panduan-memulai.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
                                     <i class="fas fa-rocket text-primary-500 mr-3 w-4"></i>
@@ -228,22 +140,20 @@
                         </div>
                     </div>
                     
-                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Kisah Sukses</a>
-                    <a href="pelatihan-materi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Pelatihan & Materi</a>
-                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Hubungi Kami</a>
+                    <a href="kisah-sukses.html" class="relative text-slate-700 hover:text-primary-600 font-medium transition-colors after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-500 after:to-accent-500 after:transition-all after:duration-300 after:-translate-x-1/2 hover:after:w-full">Kisah Sukses</a>
+                    <a href="pelatihan-materi.html" class="relative text-slate-700 hover:text-primary-600 font-medium transition-colors after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-500 after:to-accent-500 after:transition-all after:duration-300 after:-translate-x-1/2 hover:after:w-full">Pelatihan & Materi</a>
+                    <a href="hubungi.html" class="relative text-slate-700 hover:text-primary-600 font-medium transition-colors after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-500 after:to-accent-500 after:transition-all after:duration-300 after:-translate-x-1/2 hover:after:w-full">Hubungi Kami</a>
                 </div>
 
-                <!-- Mobile Menu Button -->
                 <button id="mobileMenuBtn" class="md:hidden w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
 
-            <!-- Mobile Navigation -->
-            <div id="mobileMenu" class="md:hidden border-t border-slate-200 bg-white/98 backdrop-blur-sm rounded-b-2xl shadow-lg">
+            <div id="mobileMenu" class="md:hidden max-h-0 overflow-hidden transition-all duration-500 opacity-0 transform -translate-y-2 border-t border-slate-200 bg-white/98 backdrop-blur-sm rounded-b-2xl shadow-lg">
                 <div class="flex flex-col space-y-4 py-4">
-                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Beranda</a>
-                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Tentang Kami</a>
+                    <a href="index.html" class="text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Beranda</a>
+                    <a href="tentang.html" class="text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Tentang Kami</a>
                     
                     <div class="border-l-2 border-primary-200 pl-4 ml-2">
                         <div class="text-sm font-semibold text-slate-600 mb-2">Materi Bisnis</div>
@@ -258,59 +168,56 @@
                         </a>
                     </div>
                     
-                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Kisah Sukses</a>
-                    <a href="pelatihan-materi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Pelatihan & Materi</a>
-                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Hubungi Kami</a>
+                    <a href="kisah-sukses.html" class="text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Kisah Sukses</a>
+                    <a href="pelatihan-materi.html" class="text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Pelatihan & Materi</a>
+                    <a href="hubungi.html" class="text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Hubungi Kami</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen items-center flex pt-32 sm:pt-0 sm:pb-0 pb-20 overflow-hidden">
-        <!-- Background Elements -->
+    <section class="relative min-h-screen items-center flex pt-24 sm:pt-32 pb-12 sm:pb-20 overflow-hidden">
         <div class="absolute inset-0">
             <div class="absolute top-20 right-1/4 w-96 h-96 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full opacity-10 blur-3xl animate-float"></div>
-            <div class="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full opacity-10 blur-3xl animate-float" style="animation-delay: -2s;"></div>
+            <div class="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full opacity-10 blur-3xl animate-float-delay"></div>
         </div>
 
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="space-y-8 animate-slide-up">
+        <div class="max-w-7xl mx-auto px-6 xl:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center">
+                <div class="space-y-6 sm:space-y-8 animate-slide-up">
                     <div class="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm border border-primary-200 rounded-full text-sm font-medium shadow-lg">
-                        <div class="status-dot mr-3"></div>
-                        <span class="gradient-text font-semibold">Latang Belakang</span>
+                        <div class="w-2 h-2 bg-emerald-500 rounded-full mr-3 animate-pulse"></div>
+                        <span class="bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent font-semibold">Latar Belakang</span>
                     </div>
 
-                    <div class="space-y-6">
-                        <h1 class="font-outfit text-5xl lg:text-4xl font-extrabold leading-tight tracking-tight">
+                    <div class="space-y-4 sm:space-y-6">
+                        <h1 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight tracking-tight">
                             <span class="text-slate-900 mb-2">Mengapa </span>
-                            <span class=" gradient-text">VITA</span>
-                            <span class="text-slate-900 mb-2">Hadir</span>
-
+                            <span class="bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">VITA</span>
+                            <span class="text-slate-900 mb-2"> Hadir</span>
                         </h1>
                         
                         <div class="flex items-center space-x-4">
-                            <div class="w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
-                            <div class="w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
-                            <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
+                            <div class="w-12 sm:w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                            <div class="w-6 sm:w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
+                            <div class="w-3 sm:w-4 h-1 bg-emerald-400 rounded-full"></div>
                         </div>
                     </div>
                     
-                    <!-- Description -->
-                    <p class="text-lg text-slate-600 mb-6">
+                    <p class="text-base sm:text-lg lg:text-xl text-slate-600 mb-6">
                         Vita hadir karena kami percaya bahwa <span class="font-semibold text-primary-600">UMKM adalah tulang punggung ekonomi Indonesia</span>. Website ini dibuat untuk membantu UMKM belajar secara praktis, mandiri, dan menyenangkan.
                     </p>
-                    <p class="text-slate-600 mb-8">
+                    <p class="text-slate-600 mb-8 text-sm sm:text-base lg:text-lg">
                         Kami melihat masih banyak pelaku usaha mikro, kecil dan menengah yang kesulitan mendapatkan akses ke pendidikan bisnis yang mudah dimengerti dan sesuai dengan konteks lokal.
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#team-kami" class="btn-primary px-8 py-4 text-lg flex items-center justify-center group text-white font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary-500/30 transition-all">
+                        <a href="#team-kami" class="bg-gradient-to-r from-primary-500 to-primary-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg flex items-center justify-center group font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300 relative overflow-hidden before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:transition-all before:duration-500 hover:before:left-full">
                             <i class="fas fa-users mr-3 group-hover:rotate-12 transition-transform"></i>
                             Team Kami
                         </a>
-                        <a href="#visi-misi" class="btn-secondary px-8 py-4 text-lg flex items-center justify-center group font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all">
+                        <a href="#visi-misi" class="bg-white text-primary-700 border-2 border-primary-500 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg flex items-center justify-center group font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:bg-primary-500 hover:text-white transition-all duration-300">
                             <i class="fas fa-heart mr-3 group-hover:rotate-12 transition-transform"></i>
                             Misi & Visi
                         </a>
@@ -318,8 +225,7 @@
                 </div>
 
                 <div class="space-y-6">
-                    <!-- Card 1 -->
-                    <div class="card-elevated p-6 hover-lift transform bg-white shadow-2xl lg:rotate-[-2deg] ml-32 w-fit rounded-lg">
+                    <div class="bg-white p-6 shadow-xl hover:-translate-y-2 transform rotate-[-2deg] ml-16 sm:ml-32 w-fit rounded-lg transition-all duration-300">
                         <div class="flex items-start space-x-4">
                             <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white flex-shrink-0">
                                 <i class="fas fa-gift"></i>
@@ -331,8 +237,7 @@
                         </div>
                     </div>
                     
-                    <!-- Card 2 -->
-                    <div class="card-elevated p-6 hover-lift bg-white shadow-2xl rounded-lg transform lg:rotate-[1deg] lg:mr-4 w-fit">
+                    <div class="bg-white p-6 shadow-xl rounded-lg transform rotate-[1deg] mr-4 w-fit hover:-translate-y-2 transition-all duration-300">
                         <div class="flex items-start space-x-4">
                             <div class="w-12 h-12 bg-accent-500 rounded-xl flex items-center justify-center text-white flex-shrink-0">
                                 <i class="fas fa-hands-helping"></i>
@@ -344,8 +249,7 @@
                         </div>
                     </div>
                     
-                    <!-- Card 3 -->
-                    <div class="card-elevated p-6 hover-lift transform bg-white shadow-2xl rounded-lg lg:rotate-[-2deg] ml-32 w-fit">
+                    <div class="bg-white p-6 shadow-xl rounded-lg transform rotate-[-2deg] ml-16 sm:ml-32 w-fit hover:-translate-y-2 transition-all duration-300">
                         <div class="flex items-start space-x-4">
                             <div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center text-white flex-shrink-0">
                                 <i class="fas fa-map-marker-alt"></i>
@@ -361,35 +265,34 @@
         </div>
     </section>
 
-    <!-- Misi & Visi Section -->
-    <section class="py-20 bg-white" id="visi-misi">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
+    <!-- Visi Misi Section -->
+    <section class="py-16 sm:py-20 lg:py-24 bg-white" id="visi-misi">
+        <div class="max-w-7xl mx-auto px-6 xl:px-8">
+            <div class="text-center mb-12 sm:mb-16 lg:mb-20">
                 <div class="inline-flex items-center px-6 py-3 bg-slate-900 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
                     <div class="w-2 h-2 bg-accent-500 rounded-full mr-3 animate-pulse"></div>
                     Tujuan Kami
                 </div>
-                <h2 class="font-outfit text-4xl lg:text-6xl font-extrabold mb-6 text-slate-900 tracking-tight">
-                    MISI & <span class="gradient-text">VISI</span> KAMI
+                <h2 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-6 xl:mb-8 text-slate-900 tracking-tight">
+                    MISI & <span class="bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">VISI</span> KAMI
                 </h2>
-                <div class="flex items-center justify-center space-x-2 mb-6">
-                    <div class="w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
-                    <div class="w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
-                    <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
+                <div class="flex items-center justify-center space-x-2 mb-6 xl:mb-8">
+                    <div class="w-12 sm:w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                    <div class="w-6 sm:w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
+                    <div class="w-3 sm:w-4 h-1 bg-emerald-400 rounded-full"></div>
                 </div>
-                <p class="text-xl text-slate-600 max-w-3xl mx-auto font-inter leading-relaxed">
+                <p class="text-base sm:text-lg lg:text-xl text-slate-600 max-w-4xl mx-auto font-inter leading-relaxed">
                     Komitmen kami untuk mendukung pertumbuhan UMKM Indonesia melalui edukasi berkualitas
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Misi -->
-                <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-8 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500">
+            <div class="grid md:grid-cols-2 gap-8 xl:gap-10">
+                <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500">
                     <div class="text-center mb-8">
-                        <div class="w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center text-white mx-auto mb-4 animate-float">
-                            <i class="fas fa-bullseye text-3xl"></i>
+                        <div class="w-16 sm:w-20 h-16 sm:h-20 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center text-white mx-auto mb-4 animate-float">
+                            <i class="fas fa-bullseye text-2xl sm:text-3xl"></i>
                         </div>
-                        <h3 class="font-outfit text-3xl font-bold gradient-text">MISI KAMI</h3>
+                        <h3 class="font-outfit text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">MISI KAMI</h3>
                     </div>
                     
                     <p class="text-slate-600 font-inter text-center mb-8">
@@ -398,46 +301,45 @@
                     
                     <div class="grid grid-cols-2 gap-4">
                         <div class="bg-primary-50 rounded-2xl p-4 text-center hover:-translate-y-1 transition-all">
-                            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
-                                <i class="fas fa-gift"></i>
+                            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
+                                <i class="fas fa-gift text-sm sm:text-base"></i>
                             </div>
-                            <h5 class="font-semibold text-slate-900 mb-2">Edukasi Gratis</h5>
-                            <p class="text-sm text-slate-600">Pembelajaran berkualitas tanpa biaya</p>
+                            <h5 class="font-semibold text-slate-900 mb-2 text-sm sm:text-base">Edukasi Gratis</h5>
+                            <p class="text-xs sm:text-sm text-slate-600">Pembelajaran berkualitas tanpa biaya</p>
                         </div>
                         
                         <div class="bg-accent-50 rounded-2xl p-4 text-center hover:-translate-y-1 transition-all">
-                            <div class="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
-                                <i class="fas fa-laptop"></i>
+                            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
+                                <i class="fas fa-laptop text-sm sm:text-base"></i>
                             </div>
-                            <h5 class="font-semibold text-slate-900 mb-2">Go Digital</h5>
-                            <p class="text-sm text-slate-600">Dorong transformasi digital UMKM</p>
+                            <h5 class="font-semibold text-slate-900 mb-2 text-sm sm:text-base">Go Digital</h5>
+                            <p class="text-xs sm:text-sm text-slate-600">Dorong transformasi digital UMKM</p>
                         </div>
                         
                         <div class="bg-emerald-50 rounded-2xl p-4 text-center hover:-translate-y-1 transition-all">
-                            <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
-                                <i class="fas fa-star"></i>
+                            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
+                                <i class="fas fa-star text-sm sm:text-base"></i>
                             </div>
-                            <h5 class="font-semibold text-slate-900 mb-2">Inspiratif</h5>
-                            <p class="text-sm text-slate-600">Kisah sukses yang memotivasi</p>
+                            <h5 class="font-semibold text-slate-900 mb-2 text-sm sm:text-base">Inspiratif</h5>
+                            <p class="text-xs sm:text-sm text-slate-600">Kisah sukses yang memotivasi</p>
                         </div>
                         
                         <div class="bg-purple-50 rounded-2xl p-4 text-center hover:-translate-y-1 transition-all">
-                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
-                                <i class="fas fa-users"></i>
+                            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
+                                <i class="fas fa-users text-sm sm:text-base"></i>
                             </div>
-                            <h5 class="font-semibold text-slate-900 mb-2">Komunitas</h5>
-                            <p class="text-sm text-slate-600">Bangun jaringan pembelajaran</p>
+                            <h5 class="font-semibold text-slate-900 mb-2 text-sm sm:text-base">Komunitas</h5>
+                            <p class="text-xs sm:text-sm text-slate-600">Bangun jaringan pembelajaran</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Visi -->
-                <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-8 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500">
+                <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500">
                     <div class="text-center mb-8">
-                        <div class="w-20 h-20 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center text-white mx-auto mb-4 animate-float" style="animation-delay: -2s;">
-                            <i class="fas fa-eye text-3xl"></i>
+                        <div class="w-16 sm:w-20 h-16 sm:h-20 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center text-white mx-auto mb-4 animate-float-delay">
+                            <i class="fas fa-eye text-2xl sm:text-3xl"></i>
                         </div>
-                        <h3 class="font-outfit text-3xl font-bold gradient-text">VISI KAMI</h3>
+                        <h3 class="font-outfit text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">VISI KAMI</h3>
                     </div>
                     
                     <p class="text-slate-600 font-inter text-center mb-8">
@@ -446,35 +348,35 @@
                     
                     <div class="grid grid-cols-2 gap-4">
                         <div class="bg-primary-50 rounded-2xl p-4 text-center hover:-translate-y-1 transition-all">
-                            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
-                                <i class="fas fa-rocket"></i>
+                            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
+                                <i class="fas fa-rocket text-sm sm:text-base"></i>
                             </div>
-                            <h5 class="font-semibold text-slate-900 mb-2">Naik Kelas</h5>
-                            <p class="text-sm text-slate-600">Transformasi dari mikro ke menengah</p>
+                            <h5 class="font-semibold text-slate-900 mb-2 text-sm sm:text-base">Naik Kelas</h5>
+                            <p class="text-xs sm:text-sm text-slate-600">Transformasi dari mikro ke menengah</p>
                         </div>
                         
                         <div class="bg-accent-50 rounded-2xl p-4 text-center hover:-translate-y-1 transition-all">
-                            <div class="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
-                                <i class="fas fa-globe"></i>
+                            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
+                                <i class="fas fa-globe text-sm sm:text-base"></i>
                             </div>
-                            <h5 class="font-semibold text-slate-900 mb-2">Go Digital</h5>
-                            <p class="text-sm text-slate-600">Memanfaatkan teknologi digital</p>
+                            <h5 class="font-semibold text-slate-900 mb-2 text-sm sm:text-base">Go Digital</h5>
+                            <p class="text-xs sm:text-sm text-slate-600">Memanfaatkan teknologi digital</p>
                         </div>
                         
                         <div class="bg-emerald-50 rounded-2xl p-4 text-center hover:-translate-y-1 transition-all">
-                            <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
-                                <i class="fas fa-chart-line"></i>
+                            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
+                                <i class="fas fa-chart-line text-sm sm:text-base"></i>
                             </div>
-                            <h5 class="font-semibold text-slate-900 mb-2">Berkelanjutan</h5>
-                            <p class="text-sm text-slate-600">Bisnis yang tahan lama</p>
+                            <h5 class="font-semibold text-slate-900 mb-2 text-sm sm:text-base">Berkelanjutan</h5>
+                            <p class="text-xs sm:text-sm text-slate-600">Bisnis yang tahan lama</p>
                         </div>
                         
                         <div class="bg-pink-50 rounded-2xl p-4 text-center hover:-translate-y-1 transition-all">
-                            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
-                                <i class="fas fa-handshake"></i>
+                            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
+                                <i class="fas fa-handshake text-sm sm:text-base"></i>
                             </div>
-                            <h5 class="font-semibold text-slate-900 mb-2">Kolaboratif</h5>
-                            <p class="text-sm text-slate-600">Membangun jaringan bisnis</p>
+                            <h5 class="font-semibold text-slate-900 mb-2 text-sm sm:text-base">Kolaboratif</h5>
+                            <p class="text-xs sm:text-sm text-slate-600">Membangun jaringan bisnis</p>
                         </div>
                     </div>
                 </div>
@@ -482,107 +384,98 @@
         </div>
     </section>
 
-    <!-- Tim Section -->
-    <section class="py-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden" id="team-kami">
-        <!-- Background Elements -->
+    <!-- Team Section -->
+    <section class="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden" id="team-kami">
         <div class="absolute inset-0">
             <div class="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full opacity-5 blur-3xl animate-float"></div>
-            <div class="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full opacity-5 blur-3xl animate-float" style="animation-delay: -3s;"></div>
-            <div class="absolute top-1/2 left-1/4 w-48 h-48 bg-emerald-400 rounded-full opacity-5 blur-3xl animate-float" style="animation-delay: -1s;"></div>
+            <div class="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full opacity-5 blur-3xl animate-float-delay"></div>
+            <div class="absolute top-1/2 left-1/4 w-48 h-48 bg-emerald-400 rounded-full opacity-5 blur-3xl animate-float"></div>
         </div>
 
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-16">
+        <div class="max-w-7xl mx-auto px-6 xl:px-8 relative z-10">
+            <div class="text-center mb-12 sm:mb-16 lg:mb-20">
                 <div class="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm border border-primary-200 rounded-full text-sm font-medium mb-6 shadow-lg">
                     <div class="w-2 h-2 bg-emerald-500 rounded-full mr-3 animate-pulse"></div>
-                    <span class="gradient-text font-semibold">Tim Kami</span>
+                    <span class="bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent font-semibold">Tim Kami</span>
                 </div>
-                <h2 class="font-outfit text-4xl lg:text-6xl font-extrabold mb-6 text-slate-900 tracking-tight">
-                    TIM DI BALIK <span class="gradient-text">VITA</span>
+                <h2 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-6 xl:mb-8 text-slate-900 tracking-tight">
+                    TIM DI BALIK <span class="bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">VITA</span>
                 </h2>
-                <div class="flex items-center justify-center space-x-2 mb-6">
-                    <div class="w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
-                    <div class="w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
-                    <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
+                <div class="flex items-center justify-center space-x-2 mb-6 xl:mb-8">
+                    <div class="w-12 sm:w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                    <div class="w-6 sm:w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
+                    <div class="w-3 sm:w-4 h-1 bg-emerald-400 rounded-full"></div>
                 </div>
-                <p class="text-xl text-slate-600 max-w-3xl mx-auto font-inter leading-relaxed">
+                <p class="text-base sm:text-lg lg:text-xl text-slate-600 max-w-4xl mx-auto font-inter leading-relaxed">
                     Kelompok profesional yang berdedikasi untuk kemajuan UMKM Indonesia
                 </p>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-12  mx-auto">
-                <!-- Tim Member 1 -->
+            <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 xl:gap-16 max-w-6xl mx-auto">
                 <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 relative">
-                    <!-- Decorative Elements -->
                     <div class="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl opacity-10 animate-float"></div>
-                    <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl opacity-10 animate-float" style="animation-delay: -2s;"></div>
+                    <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl opacity-10 animate-float-delay"></div>
                     
-                    <div class="p-10">
-                        <div class="text-center mb-8">
+                    <div class="p-6 sm:p-8 lg:p-10">
+                        <div class="text-center mb-6 sm:mb-8">
                             <div class="relative inline-block">
-                                <div class="w-40 h-40 rounded-3xl overflow-hidden mx-auto mb-6 shadow-2xl ring-4 ring-white">
+                                <div class="w-32 sm:w-40 h-32 sm:h-40 rounded-3xl overflow-hidden mx-auto mb-4 sm:mb-6 shadow-2xl ring-4 ring-white">
                                     <img src="assets/img/rasya.jpg" alt="Rasya Athaya" class="w-full h-full object-cover">
                                 </div>
-                              
                             </div>
                         </div>
                         
                         <div class="text-center">
-                            <h4 class="font-outfit text-2xl font-bold mb-3 text-slate-900">RASYA ATHAYA DEZUKRA</h4>
-                            <p class="text-primary-600 font-semibold mb-6 text-lg">UI/UX Designer & Marketing</p>
-                            <p class="text-slate-600 font-inter mb-8 leading-relaxed text-lg">
+                            <h4 class="font-outfit text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-slate-900">RASYA ATHAYA DEZUKRA</h4>
+                            <p class="text-primary-600 font-semibold mb-4 sm:mb-6 text-base sm:text-lg">UI/UX Designer & Marketing</p>
+                            <p class="text-slate-600 font-inter mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base lg:text-lg">
                                 Passionate tentang menciptakan pengalaman pengguna yang memudahkan UMKM belajar. Berpengalaman dalam desain interaktif dan strategi marketing digital.
                             </p>
                             
-                            
                             <div class="flex justify-center space-x-4">
-                                <a href="#" class="w-12 h-12 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all hover:scale-110">
-                                    <i class="fab fa-linkedin text-lg"></i>
+                                <a href="#" class="w-10 sm:w-12 h-10 sm:h-12 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all hover:scale-110">
+                                    <i class="fab fa-linkedin text-base sm:text-lg"></i>
                                 </a>
-                                <a href="#" class="w-12 h-12 bg-pink-100 text-pink-600 rounded-xl flex items-center justify-center hover:bg-pink-500 hover:text-white transition-all hover:scale-110">
-                                    <i class="fab fa-instagram text-lg"></i>
+                                <a href="#" class="w-10 sm:w-12 h-10 sm:h-12 bg-pink-100 text-pink-600 rounded-xl flex items-center justify-center hover:bg-pink-500 hover:text-white transition-all hover:scale-110">
+                                    <i class="fab fa-instagram text-base sm:text-lg"></i>
                                 </a>
-                                <a href="#" class="w-12 h-12 bg-slate-100 text-slate-600 rounded-xl flex items-center justify-center hover:bg-slate-500 hover:text-white transition-all hover:scale-110">
-                                    <i class="fas fa-envelope text-lg"></i>
+                                <a href="#" class="w-10 sm:w-12 h-10 sm:h-12 bg-slate-100 text-slate-600 rounded-xl flex items-center justify-center hover:bg-slate-500 hover:text-white transition-all hover:scale-110">
+                                    <i class="fas fa-envelope text-base sm:text-lg"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tim Member 2 -->
                 <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 relative">
-                    <!-- Decorative Elements -->
-                    <div class="absolute -top-4 -left-4 w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl opacity-10 animate-float" style="animation-delay: -1s;"></div>
-                    <div class="absolute -bottom-4 -right-4 w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl opacity-10 animate-float" style="animation-delay: -3s;"></div>
+                    <div class="absolute -top-4 -left-4 w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl opacity-10 animate-float"></div>
+                    <div class="absolute -bottom-4 -right-4 w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl opacity-10 animate-float-delay"></div>
                     
-                    <div class="p-10">
-                        <div class="text-center mb-8">
+                    <div class="p-6 sm:p-8 lg:p-10">
+                        <div class="text-center mb-6 sm:mb-8">
                             <div class="relative inline-block">
-                                <div class="w-40 h-40 rounded-3xl overflow-hidden mx-auto mb-6 shadow-2xl ring-4 ring-white">
+                                <div class="w-32 sm:w-40 h-32 sm:h-40 rounded-3xl overflow-hidden mx-auto mb-4 sm:mb-6 shadow-2xl ring-4 ring-white">
                                     <img src="assets/img/heru.jpg" alt="Heru Kristanto" class="w-full h-full object-cover">
                                 </div>
-                               
                             </div>
                         </div>
                         
                         <div class="text-center">
-                            <h4 class="font-outfit text-2xl font-bold mb-3 text-slate-900">HERU KRISTANTO</h4>
-                            <p class="text-accent-600 font-semibold mb-6 text-lg">Web Developer</p>
-                            <p class="text-slate-600 font-inter mb-8 leading-relaxed text-lg">
+                            <h4 class="font-outfit text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-slate-900">HERU KRISTANTO</h4>
+                            <p class="text-accent-600 font-semibold mb-4 sm:mb-6 text-base sm:text-lg">Web Developer</p>
+                            <p class="text-slate-600 font-inter mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base lg:text-lg">
                                 Memiliki keahlian dalam pengembangan web interaktif dan responsif. Berdedikasi untuk membuat platform edukasi yang user-friendly untuk UMKM.
                             </p>
                             
-                            
                             <div class="flex justify-center space-x-4">
-                                <a href="#" class="w-12 h-12 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all hover:scale-110">
-                                    <i class="fab fa-linkedin text-lg"></i>
+                                <a href="#" class="w-10 sm:w-12 h-10 sm:h-12 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all hover:scale-110">
+                                    <i class="fab fa-linkedin text-base sm:text-lg"></i>
                                 </a>
-                                <a href="#" class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all hover:scale-110">
-                                    <i class="fab fa-facebook text-lg"></i>
+                                <a href="#" class="w-10 sm:w-12 h-10 sm:h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all hover:scale-110">
+                                    <i class="fab fa-facebook text-base sm:text-lg"></i>
                                 </a>
-                                <a href="#" class="w-12 h-12 bg-slate-100 text-slate-600 rounded-xl flex items-center justify-center hover:bg-slate-500 hover:text-white transition-all hover:scale-110">
-                                    <i class="fas fa-envelope text-lg"></i>
+                                <a href="#" class="w-10 sm:w-12 h-10 sm:h-12 bg-slate-100 text-slate-600 rounded-xl flex items-center justify-center hover:bg-slate-500 hover:text-white transition-all hover:scale-110">
+                                    <i class="fas fa-envelope text-base sm:text-lg"></i>
                                 </a>
                             </div>
                         </div>
@@ -592,172 +485,194 @@
         </div>
     </section>
 
-    <!-- Partners Section dengan Marquee -->
-    <section class="py-20 bg-white overflow-hidden">
-        <div class="mx-auto px-6">
-            <div class="text-center mb-16">
+    <!-- Partners Section -->
+    <section class="py-16 sm:py-20 lg:py-24 bg-white overflow-hidden">
+        <div class="mx-auto px-6 xl:px-8">
+            <div class="text-center mb-12 sm:mb-16 lg:mb-20 max-w-6xl mx-auto">
                 <div class="inline-flex items-center px-6 py-3 bg-slate-900 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
                     <div class="w-2 h-2 bg-accent-500 rounded-full mr-3 animate-pulse"></div>
                     Mitra Kami
                 </div>
-                <h2 class="font-outfit text-4xl lg:text-6xl font-extrabold mb-6 text-slate-900 tracking-tight">
-                    Kolaborasi Bersama <span class="gradient-text">Perusahaan Terkemuka</span> 
+                <h2 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-6 xl:mb-8 text-slate-900 tracking-tight">
+                    Kolaborasi Bersama <span class="bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">Perusahaan Terkemuka</span> 
                 </h2>
-                <div class="flex items-center justify-center space-x-2 mb-6">
-                    <div class="w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
-                    <div class="w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
-                    <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
+                <div class="flex items-center justify-center space-x-2 mb-6 xl:mb-8">
+                    <div class="w-12 sm:w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                    <div class="w-6 sm:w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
+                    <div class="w-3 sm:w-4 h-1 bg-emerald-400 rounded-full"></div>
                 </div>
-                <p class="text-xl text-slate-600 max-w-3xl mx-auto font-inter leading-relaxed">
+                <p class="text-base sm:text-lg lg:text-xl text-slate-600 max-w-4xl mx-auto font-inter leading-relaxed">
                    Kami bekerja sama dengan berbagai perusahaan ternama untuk memperkuat ekosistem usaha dan mendukung pertumbuhan UMKM di Indonesia.
                 </p>
             </div>
             
-            <!-- Marquee 1 - Kiri ke Kanan -->
             <div class="relative overflow-hidden mb-8">
-                <div class="flex animate-marquee-left bg-gradient-to-r w-[200%] from-primary-500 to-primary-700 text-white py-6 text-2xl font-bold whitespace-nowrap">
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-building mr-4"></i>
-                        GOJEK
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-shopping-cart mr-4"></i>
-                        TOKOPEDIA
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-university mr-4"></i>
-                        BANK BCA
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-landmark mr-4"></i>
-                        BANK MANDIRI
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-mobile-alt mr-4"></i>
-                        TELKOMSEL
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-store mr-4"></i>
-                        SHOPEE
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-car mr-4"></i>
-                        GRAB
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-building mr-4"></i>
-                        GOJEK
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-shopping-cart mr-4"></i>
-                        TOKOPEDIA
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-university mr-4"></i>
-                        BANK BCA
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-landmark mr-4"></i>
-                        BANK MANDIRI
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-mobile-alt mr-4"></i>
-                        TELKOMSEL
-                    </span>
+                <div class="flex animate-marquee-left bg-gradient-to-r w-[200%] from-primary-500 to-primary-700 text-white py-4 sm:py-6 text-lg sm:text-xl lg:text-2xl font-bold whitespace-nowrap">
+                    <div class="flex">
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-building mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            GOJEK
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-shopping-cart mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            TOKOPEDIA
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-university mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            BANK BCA
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-landmark mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            BANK MANDIRI
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-mobile-alt mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            TELKOMSEL
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-store mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            SHOPEE
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-car mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            GRAB
+                        </span>
+                    </div>
+                    <div class="flex">
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-building mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            GOJEK
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-shopping-cart mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            TOKOPEDIA
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-university mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            BANK BCA
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-landmark mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            BANK MANDIRI
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-mobile-alt mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            TELKOMSEL
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-store mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            SHOPEE
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-car mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            GRAB
+                        </span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Marquee 2 - Kanan ke Kiri -->
             <div class="relative overflow-hidden mb-8">
-                <div class="flex animate-marquee-right bg-white w-[200%] border-2 border-primary-200 text-slate-800 py-6 text-2xl font-bold whitespace-nowrap">
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-industry text-primary-500 mr-4"></i>
-                        INDOFOOD
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-credit-card text-primary-500 mr-4"></i>
-                        OVO
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-shipping-fast text-primary-500 mr-4"></i>
-                        JNE
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-gas-pump text-primary-500 mr-4"></i>
-                        PERTAMINA
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-wifi text-primary-500 mr-4"></i>
-                        INDOSAT
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-coins text-primary-500 mr-4"></i>
-                        DANA
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-shopping-bag text-primary-500 mr-4"></i>
-                        BUKALAPAK
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-industry text-primary-500 mr-4"></i>
-                        INDOFOOD
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-credit-card text-primary-500 mr-4"></i>
-                        OVO
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-shipping-fast text-primary-500 mr-4"></i>
-                        JNE
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-gas-pump text-primary-500 mr-4"></i>
-                        PERTAMINA
-                    </span>
-                    <span class="mx-16 flex items-center">
-                        <i class="fas fa-wifi text-primary-500 mr-4"></i>
-                        INDOSAT
-                    </span>
+                <div class="flex animate-marquee-right bg-white w-[200%] border-2 border-primary-200 text-slate-800 py-4 sm:py-6 text-lg sm:text-xl lg:text-2xl font-bold whitespace-nowrap">
+                    <div class="flex">
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-industry text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            INDOFOOD
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-credit-card text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            OVO
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-shipping-fast text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            JNE
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-gas-pump text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            PERTAMINA
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-wifi text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            INDOSAT
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-coins text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            DANA
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-shopping-bag text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            BUKALAPAK
+                        </span>
+                    </div>
+                    <div class="flex">
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-industry text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            INDOFOOD
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-credit-card text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            OVO
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-shipping-fast text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            JNE
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-gas-pump text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            PERTAMINA
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-wifi text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            INDOSAT
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-coins text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            DANA
+                        </span>
+                        <span class="mx-8 sm:mx-16 flex items-center">
+                            <i class="fas fa-shopping-bag text-primary-500 mr-2 sm:mr-4 text-sm sm:text-base lg:text-lg"></i>
+                            BUKALAPAK
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-primary-500 to-primary-700 text-white relative overflow-hidden">
+    <section class="py-16 sm:py-20 lg:py-24 bg-gradient-to-r from-primary-500 to-primary-700 text-white relative overflow-hidden">
         <div class="absolute inset-0">
             <div class="absolute top-1/4 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
             <div class="absolute bottom-1/4 right-10 w-80 h-80 bg-accent-500/20 rounded-full blur-3xl"></div>
         </div>
 
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center max-w-4xl mx-auto">
-                <div class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-sm font-medium mb-8">
+        <div class="max-w-7xl mx-auto px-6 xl:px-8 relative z-10">
+            <div class="text-center">
+                <div class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-sm font-medium mb-6 sm:mb-8">
                     <div class="w-2 h-2 bg-accent-400 rounded-full mr-3 animate-pulse"></div>
                     <span class="text-white font-semibold">Mulai Perjalanan Bersama Kami</span>
                 </div>
                 
-                <h2 class="font-outfit text-5xl lg:text-7xl font-extrabold mb-8 text-white tracking-tight">
+                <h2 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-6 sm:mb-8 text-white tracking-tight">
                     SIAP BERGABUNG<br>
                     <span class="text-accent-400">DENGAN VITA?</span>
                 </h2>
                 
-                <div class="flex items-center justify-center space-x-2 mb-8">
-                    <div class="w-16 h-1 bg-white rounded-full"></div>
-                    <div class="w-8 h-1 bg-accent-400 rounded-full"></div>
-                    <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
+                <div class="flex items-center justify-center space-x-2 mb-6 sm:mb-8">
+                    <div class="w-12 sm:w-16 h-1 bg-white rounded-full"></div>
+                    <div class="w-6 sm:w-8 h-1 bg-accent-400 rounded-full"></div>
+                    <div class="w-3 sm:w-4 h-1 bg-emerald-400 rounded-full"></div>
                 </div>
                 
-                <p class="text-xl mb-12 max-w-3xl mx-auto text-blue-100 font-inter leading-relaxed">
+                <p class="text-base sm:text-lg lg:text-xl mb-8 sm:mb-12 max-w-4xl mx-auto text-blue-100 font-inter leading-relaxed">
                     Akses semua materi edukasi bisnis secara gratis dan tingkatkan level usahamu bersama ribuan UMKM lainnya!
                 </p>
                 
-                <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                    <button class="btn-secondary px-8 py-4 font-semibold text-lg rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all">
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
+                    <button class="bg-white text-primary-700 border-2 border-white px-6 sm:px-8 py-3 sm:py-4 font-semibold text-base sm:text-lg rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:bg-slate-50 transition-all duration-300">
                         <i class="fas fa-graduation-cap mr-3"></i>
                         Mulai Belajar Sekarang
                     </button>
-                    <button class="bg-white/20 border-2 border-white/30 backdrop-blur-sm text-white px-8 py-4 font-semibold text-lg rounded-xl hover:bg-white hover:text-primary-600 transition-colors">
+                    <button class="bg-white/20 border-2 border-white/30 backdrop-blur-sm text-white px-6 sm:px-8 py-3 sm:py-4 font-semibold text-base sm:text-lg rounded-xl hover:bg-white hover:text-primary-600 transition-colors duration-300">
                         <i class="fas fa-star mr-3"></i>
                         Lihat Kisah Sukses
                     </button>
@@ -767,9 +682,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-white py-16">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-8 mb-12">
+    <footer class="bg-slate-900 text-white py-12 sm:py-16 lg:py-20">
+        <div class="max-w-7xl mx-auto px-6 xl:px-8">
+            <div class="grid md:grid-cols-4 gap-8 xl:gap-10 mb-8 sm:mb-12">
                 <div class="space-y-6">
                     <div class="flex items-center space-x-3">
                         <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
@@ -779,20 +694,20 @@
                             <div class="font-outfit text-2xl font-semibold text-white">Vita</div>
                         </div>
                     </div>
-                    <p class="text-slate-300 font-inter leading-relaxed">
+                    <p class="text-slate-300 font-inter leading-relaxed text-sm sm:text-base">
                         Platform edukasi interaktif untuk membantu UMKM lokal belajar bisnis secara mandiri, gratis, dan efektif.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors duration-300">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors duration-300">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors duration-300">
                             <i class="fab fa-telegram"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors duration-300">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
@@ -801,21 +716,21 @@
                 <div>
                     <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Navigasi</h5>
                     <ul class="space-y-3">
-                        <li><a href="index.html" class="text-slate-300 hover:text-primary-400 transition-colors">Beranda</a></li>
-                        <li><a href="tentang.html" class="text-slate-300 hover:text-primary-400 transition-colors">Tentang Kami</a></li>
-                        <li><a href="#" class="text-slate-300 hover:text-primary-400 transition-colors">Materi Bisnis</a></li>
-                        <li><a href="kisah-sukses.html" class="text-slate-300 hover:text-primary-400 transition-colors">Kisah Sukses</a></li>
-                        <li><a href="pelatihan-materi.html" class="text-slate-300 hover:text-primary-400 transition-colors">Pelatihan & Materi</a></li>
-                        <li><a href="hubungi.html" class="text-slate-300 hover:text-primary-400 transition-colors">Hubungi Kami</a></li>
+                        <li><a href="index.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Beranda</a></li>
+                        <li><a href="tentang.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Tentang Kami</a></li>
+                        <li><a href="#" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Materi Bisnis</a></li>
+                        <li><a href="kisah-sukses.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Kisah Sukses</a></li>
+                        <li><a href="pelatihan-materi.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Pelatihan & Materi</a></li>
+                        <li><a href="hubungi.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Hubungi Kami</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Materi</h5>
                     <ul class="space-y-3">
-                        <li><a href="pemasaran-digital.html" class="text-slate-300 hover:text-primary-400 transition-colors">Pemasaran Digital</a></li>
-                        <li><a href="manajemen-keuangan.html" class="text-slate-300 hover:text-primary-400 transition-colors">Manajemen Keuangan</a></li>
-                        <li><a href="panduan-memulai.html" class="text-slate-300 hover:text-primary-400 transition-colors">Panduan Memulai</a></li>
+                        <li><a href="pemasaran-digital.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Pemasaran Digital</a></li>
+                        <li><a href="manajemen-keuangan.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Manajemen Keuangan</a></li>
+                        <li><a href="panduan-memulai.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Panduan Memulai</a></li>
                     </ul>
                 </div>
 
@@ -827,8 +742,8 @@
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div>
-                                <div class="text-slate-300">Email</div>
-                                <div class="text-sm text-slate-400">support@vita.com</div>
+                                <div class="text-slate-300 text-sm sm:text-base">Email</div>
+                                <div class="text-xs sm:text-sm text-slate-400">support@vita.com</div>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
@@ -836,8 +751,8 @@
                                 <i class="fas fa-phone"></i>
                             </div>
                             <div>
-                                <div class="text-slate-300">Telepon</div>
-                                <div class="text-sm text-slate-400">+62 859 1264 62972</div>
+                                <div class="text-slate-300 text-sm sm:text-base">Telepon</div>
+                                <div class="text-xs sm:text-sm text-slate-400">+62 859 1264 62972</div>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
@@ -845,8 +760,8 @@
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div>
-                                <div class="text-slate-300">Lokasi</div>
-                                <div class="text-sm text-slate-400">Yogyakarta, Indonesia</div>
+                                <div class="text-slate-300 text-sm sm:text-base">Lokasi</div>
+                                <div class="text-xs sm:text-sm text-slate-400">Yogyakarta, Indonesia</div>
                             </div>
                         </div>
                     </div>
@@ -855,13 +770,13 @@
 
             <div class="border-t border-slate-800 pt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                    <div class="text-slate-400 text-sm">
+                    <div class="text-slate-400 text-xs sm:text-sm">
                         © 2025 Vita. All rights reserved.
                     </div>
-                    <div class="flex items-center space-x-6 text-sm">
-                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Kebijakan Privasi</a>
-                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Syarat & Ketentuan</a>
-                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Bantuan</a>
+                    <div class="flex items-center space-x-6 text-xs sm:text-sm">
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors duration-300">Kebijakan Privasi</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors duration-300">Syarat & Ketentuan</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors duration-300">Bantuan</a>
                     </div>
                 </div>
             </div>
@@ -869,8 +784,8 @@
     </footer>
 
     <script>
-        // Mobile menu functionality
         document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu functionality
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
             
@@ -879,50 +794,71 @@
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    mobileMenu.classList.toggle('active');
-                    
-                    const icon = mobileMenuBtn.querySelector('i');
-                    if (mobileMenu.classList.contains('active')) {
-                        icon.className = 'fas fa-times text-xl';
+                    if (mobileMenu.classList.contains('max-h-0')) {
+                        mobileMenu.classList.remove('max-h-0', 'opacity-0', '-translate-y-2');
+                        mobileMenu.classList.add('max-h-screen', 'opacity-100', 'translate-y-0');
+                        mobileMenuBtn.querySelector('i').className = 'fas fa-times text-xl';
                         mobileMenuBtn.setAttribute('aria-expanded', 'true');
                     } else {
-                        icon.className = 'fas fa-bars text-xl';
+                        mobileMenu.classList.add('max-h-0', 'opacity-0', '-translate-y-2');
+                        mobileMenu.classList.remove('max-h-screen', 'opacity-100', 'translate-y-0');
+                        mobileMenuBtn.querySelector('i').className = 'fas fa-bars text-xl';
                         mobileMenuBtn.setAttribute('aria-expanded', 'false');
                     }
                 };
 
                 mobileMenuBtn.addEventListener('click', toggleMenu);
-                mobileMenuBtn.addEventListener('touchend', toggleMenu, { passive: false });
 
-                // Close mobile menu when clicking outside
+                // Close menu when clicking outside
                 document.addEventListener('click', (e) => {
                     if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                        mobileMenu.classList.remove('active');
-                        const icon = mobileMenuBtn.querySelector('i');
-                        icon.className = 'fas fa-bars text-xl';
+                        mobileMenu.classList.add('max-h-0', 'opacity-0', '-translate-y-2');
+                        mobileMenu.classList.remove('max-h-screen', 'opacity-100', 'translate-y-0');
+                        mobileMenuBtn.querySelector('i').className = 'fas fa-bars text-xl';
                         mobileMenuBtn.setAttribute('aria-expanded', 'false');
                     }
                 });
 
-                // Handle window resize
+                // Close menu on window resize
                 window.addEventListener('resize', () => {
-                    if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
-                        mobileMenu.classList.remove('active');
-                        const icon = mobileMenuBtn.querySelector('i');
-                        icon.className = 'fas fa-bars text-xl';
+                    if (window.innerWidth >= 768) {
+                        mobileMenu.classList.add('max-h-0', 'opacity-0', '-translate-y-2');
+                        mobileMenu.classList.remove('max-h-screen', 'opacity-100', 'translate-y-0');
+                        mobileMenuBtn.querySelector('i').className = 'fas fa-bars text-xl';
                         mobileMenuBtn.setAttribute('aria-expanded', 'false');
                     }
                 });
             }
 
-            // Navbar scroll behavior
+            // Navbar scroll effect
             const navbar = document.getElementById('mainNav');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 100) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
+            if (navbar) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 100) {
+                        navbar.classList.remove('bg-white/95');
+                        navbar.classList.add('bg-white/85', 'shadow-lg');
+                    } else {
+                        navbar.classList.remove('bg-white/85', 'shadow-lg');
+                        navbar.classList.add('bg-white/95');
+                    }
+                });
+            }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const navHeight = navbar ? navbar.offsetHeight : 0;
+                        const targetPosition = target.offsetTop - navHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
         });
     </script>

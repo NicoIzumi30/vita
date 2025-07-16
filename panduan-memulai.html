@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,33 +37,6 @@
                         'fade-in': 'fade-in 0.8s ease-out',
                         'scale-in': 'scale-in 0.5s ease-out',
                         'shimmer': 'shimmer 2s linear infinite'
-                    },
-                    keyframes: {
-                        'float': {
-                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-                            '50%': { transform: 'translateY(-12px) rotate(1deg)' }
-                        },
-                        'pulse-ring': {
-                            '0%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0.4)' },
-                            '70%': { boxShadow: '0 0 0 15px rgba(14, 165, 233, 0)' },
-                            '100%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0)' }
-                        },
-                        'slide-up': {
-                            'from': { transform: 'translateY(30px)', opacity: '0' },
-                            'to': { transform: 'translateY(0)', opacity: '1' }
-                        },
-                        'fade-in': {
-                            'from': { opacity: '0' },
-                            'to': { opacity: '1' }
-                        },
-                        'scale-in': {
-                            'from': { transform: 'scale(0.95)', opacity: '0' },
-                            'to': { transform: 'scale(1)', opacity: '1' }
-                        },
-                        'shimmer': {
-                            '0%': { backgroundPosition: '-468px 0' },
-                            '100%': { backgroundPosition: '468px 0' }
-                        }
                     }
                 }
             }
@@ -71,6 +44,37 @@
     </script>
     
     <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+        }
+        
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(14, 165, 233, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+        }
+        
+        @keyframes slide-up {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes scale-in {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -468px 0; }
+            100% { background-position: 468px 0; }
+        }
+
         .glass {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -197,36 +201,52 @@
         .group:hover .dropdown-menu {
             transform: translateY(0);
         }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-float-delay {
+            animation: float 6s ease-in-out infinite -2s;
+        }
+        
+        .animate-slide-up {
+            animation: slide-up 0.6s ease-out;
+        }
+        
+        .animate-fade-in {
+            animation: fade-in 0.8s ease-out;
+        }
     </style>
 </head>
 
 <body class="font-inter bg-gradient-to-b from-white to-slate-50 text-slate-800 scroll-smooth">
     <!-- Navbar -->
-    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20 transition-all duration-300">
-        <div class="container mx-auto px-6">
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-white/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 xl:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
                         <i class="fas fa-graduation-cap text-white text-lg"></i>
                     </div>
                     <div>
-                        <div class="font-outfit text-2xl font-semibold gradient-text">Vita</div>
+                        <div class="font-outfit text-2xl font-semibold bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">Vita</div>
                     </div>
                 </div>
 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Beranda</a>
-                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Tentang Kami</a>
+                    <a href="index.html" class="relative text-slate-700 hover:text-primary-600 font-medium transition-colors after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-500 after:to-accent-500 after:transition-all after:duration-300 after:-translate-x-1/2 hover:after:w-full">Beranda</a>
+                    <a href="tentang.html" class="relative text-slate-700 hover:text-primary-600 font-medium transition-colors after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-500 after:to-accent-500 after:transition-all after:duration-300 after:-translate-x-1/2 hover:after:w-full">Tentang Kami</a>
                     
                     <!-- Dropdown Materi Bisnis -->
                     <div class="relative group">
-                        <button class="nav-link text-primary-600 font-medium transition-colors flex items-center active">
+                        <button class="relative text-primary-600 font-medium transition-colors flex items-center after:absolute after:bottom-0 after:left-1/2 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-primary-500 after:to-accent-500 after:transition-all after:duration-300 after:-translate-x-1/2">
                             Materi Bisnis
-                            <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"></i>
+                            <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform duration-300"></i>
                         </button>
                         
-                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform -translate-y-2 group-hover:translate-y-0">
                             <div class="py-3">
                                 <a href="panduan-memulai.html" class="block px-4 py-3 text-primary-600 bg-primary-50 font-medium transition-colors">
                                     <i class="fas fa-rocket text-primary-500 mr-3 w-4"></i>
@@ -244,9 +264,9 @@
                         </div>
                     </div>
                     
-                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Kisah Sukses</a>
-                    <a href="pelatihan-materi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Pelatihan & Materi</a>
-                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Hubungi Kami</a>
+                    <a href="kisah-sukses.html" class="relative text-slate-700 hover:text-primary-600 font-medium transition-colors after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-500 after:to-accent-500 after:transition-all after:duration-300 after:-translate-x-1/2 hover:after:w-full">Kisah Sukses</a>
+                    <a href="pelatihan-materi.html" class="relative text-slate-700 hover:text-primary-600 font-medium transition-colors after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-500 after:to-accent-500 after:transition-all after:duration-300 after:-translate-x-1/2 hover:after:w-full">Pelatihan & Materi</a>
+                    <a href="hubungi.html" class="relative text-slate-700 hover:text-primary-600 font-medium transition-colors after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-500 after:to-accent-500 after:transition-all after:duration-300 after:-translate-x-1/2 hover:after:w-full">Hubungi Kami</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -283,50 +303,50 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen items-center flex pt-32 sm:pt-0 sm:pb-0 pb-20 overflow-hidden">
+    <section class="relative min-h-screen items-center flex pt-24 sm:pt-32 pb-12 sm:pb-20 overflow-hidden">
         <!-- Background Elements -->
         <div class="absolute inset-0">
-            <div class="absolute top-20 right-1/4 w-96 h-96 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full opacity-10 blur-3xl animate-float"></div>
-            <div class="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full opacity-10 blur-3xl animate-float" style="animation-delay: -2s;"></div>
-            <div class="absolute top-1/3 left-10 w-16 h-16 bg-accent-500/20 rounded-2xl flex items-center justify-center animate-float">
-                <i class="fas fa-lightbulb text-2xl text-accent-500"></i>
+            <div class="absolute top-20 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full opacity-10 blur-3xl animate-float"></div>
+            <div class="absolute bottom-20 left-1/4 w-48 h-48 sm:w-80 sm:h-80 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full opacity-10 blur-3xl animate-float-delay"></div>
+            <div class="absolute top-1/3 left-4 sm:left-10 w-12 h-12 sm:w-16 sm:h-16 bg-accent-500/20 rounded-2xl flex items-center justify-center animate-float">
+                <i class="fas fa-lightbulb text-xl sm:text-2xl text-accent-500"></i>
             </div>
-            <div class="absolute top-1/2 right-10 w-16 h-16 bg-primary-500/20 rounded-2xl flex items-center justify-center animate-float" style="animation-delay: -1s;">
-                <i class="fas fa-rocket text-2xl text-primary-500"></i>
+            <div class="absolute top-1/2 right-4 sm:right-10 w-12 h-12 sm:w-16 sm:h-16 bg-primary-500/20 rounded-2xl flex items-center justify-center animate-float-delay">
+                <i class="fas fa-rocket text-xl sm:text-2xl text-primary-500"></i>
             </div>
         </div>
 
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="space-y-8 animate-slide-up">
+        <div class="max-w-7xl mx-auto px-6 xl:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center">
+                <div class="space-y-6 sm:space-y-8 animate-slide-up">
                     <div class="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm border border-primary-200 rounded-full text-sm font-medium shadow-lg">
                         <div class="w-2 h-2 bg-emerald-500 rounded-full mr-3 animate-pulse"></div>
-                        <span class="gradient-text font-semibold">Panduan Praktis</span>
+                        <span class="bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent font-semibold">Panduan Praktis</span>
                     </div>
 
-                    <div class="space-y-6">
-                        <h1 class="font-outfit text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+                    <div class="space-y-4 sm:space-y-6">
+                        <h1 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight tracking-tight">
                             <span class="text-slate-900">Panduan </span>
-                            <span class="gradient-text">Memulai Usaha</span>
+                            <span class="bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">Memulai Usaha</span>
                         </h1>
                         
                         <div class="flex items-center space-x-4">
-                            <div class="w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
-                            <div class="w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
-                            <div class="w-4 h-1 bg-emerald-400 rounded-full"></div>
+                            <div class="w-12 sm:w-16 h-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full"></div>
+                            <div class="w-6 sm:w-8 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full"></div>
+                            <div class="w-3 sm:w-4 h-1 bg-emerald-400 rounded-full"></div>
                         </div>
                     </div>
                     
-                    <p class="text-xl text-slate-600 leading-relaxed">
+                    <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed">
                         Langkah-langkah praktis untuk memulai usaha dari nol, dirancang khusus untuk <span class="font-semibold text-primary-600">UMKM Indonesia</span> dengan panduan yang mudah diikuti dan aplikatif.
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#langkah1" class="btn-primary px-8 py-4 text-lg flex items-center justify-center group text-white font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary-500/30 transition-all">
+                        <a href="#langkah1" class="btn-primary px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg flex items-center justify-center group text-white font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300">
                             <i class="fas fa-play mr-3 group-hover:rotate-12 transition-transform"></i>
                             Mulai Belajar
                         </a>
-                        <a href="#checklist" class="btn-secondary px-8 py-4 text-lg flex items-center justify-center group font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all">
+                        <a href="#checklist" class="btn-secondary px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg flex items-center justify-center group font-semibold rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
                             <i class="fas fa-tasks mr-3 group-hover:rotate-12 transition-transform"></i>
                             Lihat Checklist
                         </a>
@@ -345,14 +365,14 @@
     </section>
 
     <!-- Main Content -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-4 gap-8">
+    <section class="py-16 sm:py-20 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 xl:px-8">
+            <div class="grid lg:grid-cols-4 gap-8 xl:gap-10">
                 <!-- Sidebar -->
                 <div class="lg:col-span-1">
                     <div class="sidebar-sticky">
                         <div class="glass rounded-2xl p-6 border border-slate-200">
-                            <h3 class="font-outfit text-xl font-bold mb-6 gradient-text border-b border-primary/20 pb-3">
+                            <h3 class="font-outfit text-lg sm:text-xl font-bold mb-6 gradient-text border-b border-primary/20 pb-3">
                                 Langkah-langkah
                             </h3>
                             <nav class="space-y-3">
@@ -360,71 +380,58 @@
                                     <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-xl flex items-center justify-center mr-3 text-sm">
                                         <i class="fas fa-lightbulb"></i>
                                     </div>
-                                    <span class="font-medium">1. Temukan Ide Usaha</span>
+                                    <span class="font-medium text-sm">1. Temukan Ide Usaha</span>
                                 </a>
                                 <a href="#langkah2" class="sidebar-link flex items-center p-3 rounded-xl transition-all duration-300 text-slate-700 hover:bg-primary-50 hover:text-primary-600">
                                     <div class="w-10 h-10 bg-gradient-to-br from-slate-400 to-slate-600 text-white rounded-xl flex items-center justify-center mr-3 text-sm">
                                         <i class="fas fa-search"></i>
                                     </div>
-                                    <span class="font-medium">2. Analisis Pasar</span>
+                                    <span class="font-medium text-sm">2. Analisis Pasar</span>
                                 </a>
                                 <a href="#langkah3" class="sidebar-link flex items-center p-3 rounded-xl transition-all duration-300 text-slate-700 hover:bg-primary-50 hover:text-primary-600">
                                     <div class="w-10 h-10 bg-gradient-to-br from-slate-400 to-slate-600 text-white rounded-xl flex items-center justify-center mr-3 text-sm">
                                         <i class="fas fa-file-alt"></i>
                                     </div>
-                                    <span class="font-medium">3. Urus Izin Usaha</span>
+                                    <span class="font-medium text-sm">3. Urus Izin Usaha</span>
                                 </a>
                                 <a href="#langkah4" class="sidebar-link flex items-center p-3 rounded-xl transition-all duration-300 text-slate-700 hover:bg-primary-50 hover:text-primary-600">
                                     <div class="w-10 h-10 bg-gradient-to-br from-slate-400 to-slate-600 text-white rounded-xl flex items-center justify-center mr-3 text-sm">
                                         <i class="fas fa-seedling"></i>
                                     </div>
-                                    <span class="font-medium">4. Mulai Kecil</span>
+                                    <span class="font-medium text-sm">4. Mulai Kecil</span>
                                 </a>
                                 <a href="#checklist" class="sidebar-link flex items-center p-3 rounded-xl transition-all duration-300 text-slate-700 hover:bg-primary-50 hover:text-primary-600">
                                     <div class="w-10 h-10 bg-gradient-to-br from-slate-400 to-slate-600 text-white rounded-xl flex items-center justify-center mr-3 text-sm">
                                         <i class="fas fa-tasks"></i>
                                     </div>
-                                    <span class="font-medium">Checklist Memulai</span>
+                                    <span class="font-medium text-sm">Checklist Memulai</span>
                                 </a>
                             </nav>
-                            
-                            <div class="mt-8 bg-gradient-to-br from-primary-50 to-slate-50 rounded-2xl p-6 text-center border border-primary-200">
-                                <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-2xl flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-question-circle text-2xl"></i>
-                                </div>
-                                <h4 class="font-outfit text-lg font-bold text-slate-900 mb-2">Butuh bantuan?</h4>
-                                <p class="text-sm text-slate-600 mb-4">
-                                    Masih bingung tentang langkah memulai usaha?
-                                </p>
-                                <a href="hubungi.html" class="btn-primary px-6 py-3 text-sm font-medium rounded-xl text-white hover:-translate-y-0.5 transition-all block">
-                                    Hubungi Kami
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Content -->
-                <div class="lg:col-span-3 space-y-20">
+                <div class="lg:col-span-3 space-y-16 sm:space-y-20 lg:space-y-24">
                     <!-- Langkah 1 -->
                     <div id="langkah1" class="scroll-mt-24">
-                        <div class="mb-12">
+                        <div class="mb-12 sm:mb-16">
                             <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-700 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
                                 <span class="w-6 h-6 bg-white text-primary-600 rounded-full flex items-center justify-center mr-3 text-xs font-bold">1</span>
                                 Langkah Pertama
                             </div>
-                            <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                            <h2 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">
                                 Temukan Ide Usaha
                             </h2>
-                            <p class="text-xl text-slate-600 leading-relaxed">
+                            <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed">
                                 Menemukan ide usaha yang tepat adalah langkah awal yang krusial. Ide usaha yang baik haruslah sesuai dengan passion, kemampuan, dan memiliki potensi pasar yang jelas.
                             </p>
                         </div>
                         
-                        <div class="grid lg:grid-cols-3 gap-8">
+                        <div class="grid lg:grid-cols-3 gap-8 xl:gap-10">
                             <div class="lg:col-span-2">
-                                <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30">
-                                    <h4 class="font-outfit text-2xl font-bold mb-8 text-slate-900 border-b border-primary/20 pb-4">
+                                <div class="step-card rounded-3xl p-6 sm:p-8 shadow-xl border border-white/30">
+                                    <h4 class="font-outfit text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-slate-900 border-b border-primary/20 pb-4">
                                         Tips menemukan ide usaha:
                                     </h4>
                                     <div class="space-y-6">
@@ -434,7 +441,7 @@
                                             </div>
                                             <div>
                                                 <h5 class="font-outfit text-lg font-bold text-slate-900 mb-2">Amati kebutuhan sekitar</h5>
-                                                <p class="text-slate-600">
+                                                <p class="text-sm sm:text-base text-slate-600">
                                                     Perhatikan masalah yang sering muncul di lingkungan Anda. Solusi untuk masalah tersebut bisa menjadi peluang bisnis.
                                                 </p>
                                             </div>
@@ -445,7 +452,7 @@
                                             </div>
                                             <div>
                                                 <h5 class="font-outfit text-lg font-bold text-slate-900 mb-2">Kembangkan hobi</h5>
-                                                <p class="text-slate-600">
+                                                <p class="text-sm sm:text-base text-slate-600">
                                                     Hobi yang Anda tekuni bisa menjadi sumber penghasilan jika dikembangkan dengan serius.
                                                 </p>
                                             </div>
@@ -456,7 +463,7 @@
                                             </div>
                                             <div>
                                                 <h5 class="font-outfit text-lg font-bold text-slate-900 mb-2">Pelajari tren terkini</h5>
-                                                <p class="text-slate-600">
+                                                <p class="text-sm sm:text-base text-slate-600">
                                                     Ikuti perkembangan tren bisnis, terutama yang sedang naik daun.
                                                 </p>
                                             </div>
@@ -467,7 +474,7 @@
                                             </div>
                                             <div>
                                                 <h5 class="font-outfit text-lg font-bold text-slate-900 mb-2">Manfaatkan keahlian yang dimiliki</h5>
-                                                <p class="text-slate-600">
+                                                <p class="text-sm sm:text-base text-slate-600">
                                                     Keahlian khusus yang Anda miliki bisa menjadi modal untuk memulai usaha.
                                                 </p>
                                             </div>
@@ -485,27 +492,27 @@
                                         Contoh Ide Usaha Modal Kecil:
                                     </h5>
                                     <ul class="space-y-3">
-                                        <li class="flex items-center text-slate-700">
+                                        <li class="flex items-center text-sm sm:text-base text-slate-700">
                                             <i class="fas fa-check-circle text-emerald-500 mr-3"></i>
                                             <span>Jualan makanan homemade</span>
                                         </li>
-                                        <li class="flex items-center text-slate-700">
+                                        <li class="flex items-center text-sm sm:text-base text-slate-700">
                                             <i class="fas fa-check-circle text-emerald-500 mr-3"></i>
                                             <span>Jasa desain grafis online</span>
                                         </li>
-                                        <li class="flex items-center text-slate-700">
+                                        <li class="flex items-center text-sm sm:text-base text-slate-700">
                                             <i class="fas fa-check-circle text-emerald-500 mr-3"></i>
                                             <span>Kerajinan tangan dari barang bekas</span>
                                         </li>
-                                        <li class="flex items-center text-slate-700">
+                                        <li class="flex items-center text-sm sm:text-base text-slate-700">
                                             <i class="fas fa-check-circle text-emerald-500 mr-3"></i>
                                             <span>Usaha cuci sepatu</span>
                                         </li>
-                                        <li class="flex items-center text-slate-700">
+                                        <li class="flex items-center text-sm sm:text-base text-slate-700">
                                             <i class="fas fa-check-circle text-emerald-500 mr-3"></i>
                                             <span>Jasa fotografi sederhana</span>
                                         </li>
-                                        <li class="flex items-center text-slate-700">
+                                        <li class="flex items-center text-sm sm:text-base text-slate-700">
                                             <i class="fas fa-check-circle text-emerald-500 mr-3"></i>
                                             <span>Content creator media sosial</span>
                                         </li>
@@ -517,23 +524,23 @@
 
                     <!-- Langkah 2 -->
                     <div id="langkah2" class="scroll-mt-24">
-                        <div class="mb-12">
+                        <div class="mb-12 sm:mb-16">
                             <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-700 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
                                 <span class="w-6 h-6 bg-white text-primary-600 rounded-full flex items-center justify-center mr-3 text-xs font-bold">2</span>
                                 Langkah Kedua
                             </div>
-                            <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                            <h2 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">
                                 Analisis Pasar
                             </h2>
-                            <p class="text-xl text-slate-600 leading-relaxed">
+                            <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed">
                                 Setelah menemukan ide, langkah berikutnya adalah menganalisis pasar untuk memastikan produk atau jasa Anda akan diterima dan memiliki prospek yang baik.
                             </p>
                         </div>
                         
-                        <div class="grid lg:grid-cols-3 gap-8">
+                        <div class="grid lg:grid-cols-3 gap-8 xl:gap-10">
                             <div class="lg:col-span-2">
-                                <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30">
-                                    <h4 class="font-outfit text-2xl font-bold mb-8 text-slate-900 border-b border-primary/20 pb-4">
+                                <div class="step-card rounded-3xl p-6 sm:p-8 shadow-xl border border-white/30">
+                                    <h4 class="font-outfit text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-slate-900 border-b border-primary/20 pb-4">
                                         Cara melakukan analisis pasar sederhana:
                                     </h4>
                                     <div class="space-y-6">
@@ -543,7 +550,7 @@
                                             </div>
                                             <div>
                                                 <h5 class="font-outfit text-lg font-bold text-slate-900 mb-2">Identifikasi target pelanggan</h5>
-                                                <p class="text-slate-600">
+                                                <p class="text-sm sm:text-base text-slate-600">
                                                     Tentukan siapa yang akan membeli produk/jasa Anda. Apa usia, profesi, dan kebutuhan mereka?
                                                 </p>
                                             </div>
@@ -554,7 +561,7 @@
                                             </div>
                                             <div>
                                                 <h5 class="font-outfit text-lg font-bold text-slate-900 mb-2">Pelajari pesaing</h5>
-                                                <p class="text-slate-600">
+                                                <p class="text-sm sm:text-base text-slate-600">
                                                     Cari tahu siapa saja pesaing Anda. Apa kelebihan dan kekurangan mereka?
                                                 </p>
                                             </div>
@@ -565,7 +572,7 @@
                                             </div>
                                             <div>
                                                 <h5 class="font-outfit text-lg font-bold text-slate-900 mb-2">Tentukan nilai unik</h5>
-                                                <p class="text-slate-600">
+                                                <p class="text-sm sm:text-base text-slate-600">
                                                     Apa yang membedakan produk/jasa Anda dari yang sudah ada di pasaran?
                                                 </p>
                                             </div>
@@ -576,7 +583,7 @@
                                             </div>
                                             <div>
                                                 <h5 class="font-outfit text-lg font-bold text-slate-900 mb-2">Lakukan survei kecil-kecilan</h5>
-                                                <p class="text-slate-600">
+                                                <p class="text-sm sm:text-base text-slate-600">
                                                     Tanyakan pendapat teman, keluarga, atau calon pelanggan tentang ide usaha Anda.
                                                 </p>
                                             </div>
@@ -596,23 +603,23 @@
                                     <ol class="space-y-4">
                                         <li class="flex items-start">
                                             <span class="bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">1</span>
-                                            <span class="text-slate-700">Apakah produk/jasa ini dibutuhkan?</span>
+                                            <span class="text-sm text-slate-700">Apakah produk/jasa ini dibutuhkan?</span>
                                         </li>
                                         <li class="flex items-start">
                                             <span class="bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">2</span>
-                                            <span class="text-slate-700">Siapa yang akan membeli produk/jasa ini?</span>
+                                            <span class="text-sm text-slate-700">Siapa yang akan membeli produk/jasa ini?</span>
                                         </li>
                                         <li class="flex items-start">
                                             <span class="bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">3</span>
-                                            <span class="text-slate-700">Berapa harga yang pantas?</span>
+                                            <span class="text-sm text-slate-700">Berapa harga yang pantas?</span>
                                         </li>
                                         <li class="flex items-start">
                                             <span class="bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">4</span>
-                                            <span class="text-slate-700">Siapa pesaing terbesar?</span>
+                                            <span class="text-sm text-slate-700">Siapa pesaing terbesar?</span>
                                         </li>
                                         <li class="flex items-start">
                                             <span class="bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">5</span>
-                                            <span class="text-slate-700">Apa kelebihan produk/jasa dibanding pesaing?</span>
+                                            <span class="text-sm text-slate-700">Apa kelebihan produk/jasa dibanding pesaing?</span>
                                         </li>
                                     </ol>
                                 </div>
@@ -622,32 +629,32 @@
 
                     <!-- Langkah 3 -->
                     <div id="langkah3" class="scroll-mt-24">
-                        <div class="mb-12">
+                        <div class="mb-12 sm:mb-16">
                             <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-700 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
                                 <span class="w-6 h-6 bg-white text-primary-600 rounded-full flex items-center justify-center mr-3 text-xs font-bold">3</span>
                                 Langkah Ketiga
                             </div>
-                            <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                            <h2 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">
                                 Urus Izin Usaha
                             </h2>
-                            <p class="text-xl text-slate-600 leading-relaxed">
+                            <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed">
                                 Untuk usaha yang legal, Anda perlu mengurus beberapa izin dasar. Izin ini akan memberikan perlindungan hukum dan membuka peluang akses ke pembiayaan atau kerja sama dengan pihak lain.
                             </p>
                         </div>
                         
-                        <div class="grid md:grid-cols-2 gap-8 mb-8">
-                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                        <div class="grid md:grid-cols-2 gap-8 xl:gap-10 mb-8">
+                            <div class="step-card rounded-3xl p-6 sm:p-8 shadow-xl border border-white/30 card-hover">
                                 <div class="flex items-center mb-6">
                                     <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-2xl flex items-center justify-center mr-4">
                                         <i class="fas fa-id-card text-2xl"></i>
                                     </div>
                                     <h4 class="font-outfit text-xl font-bold text-slate-900">NIB (Nomor Induk Berusaha)</h4>
                                 </div>
-                                <p class="text-slate-600 mb-6">
+                                <p class="text-sm sm:text-base text-slate-600 mb-6">
                                     NIB adalah identitas pelaku usaha yang dikeluarkan melalui sistem OSS (Online Single Submission).
                                 </p>
-                                <h6 class="font-outfit font-bold text-slate-900 mb-4">Cara Mengurus:</h6>
-                                <ol class="space-y-3 text-slate-600 mb-6">
+                                <h6 class="font-outfit font-bold text-slate-900 mb-4 text-sm sm:text-base">Cara Mengurus:</h6>
+                                <ol class="space-y-3 text-sm sm:text-base text-slate-600 mb-6">
                                     <li class="flex items-start">
                                         <span class="bg-primary-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">1</span>
                                         Buat akun di <a href="https://oss.go.id" target="_blank" class="text-primary-600 hover:text-accent-500 underline font-medium">oss.go.id</a>
@@ -666,25 +673,25 @@
                                     </li>
                                 </ol>
                                 <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
-                                    <p class="text-emerald-700 font-medium">
+                                    <p class="text-emerald-700 font-medium text-sm sm:text-base">
                                         <i class="fas fa-info-circle mr-2"></i>
                                         Gratis, proses 1-3 hari kerja
                                     </p>
                                 </div>
                             </div>
                             
-                            <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 card-hover">
+                            <div class="step-card rounded-3xl p-6 sm:p-8 shadow-xl border border-white/30 card-hover">
                                 <div class="flex items-center mb-6">
                                     <div class="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-2xl flex items-center justify-center mr-4">
                                         <i class="fas fa-utensils text-2xl"></i>
                                     </div>
                                     <h4 class="font-outfit text-xl font-bold text-slate-900">PIRT (Untuk Usaha Makanan)</h4>
                                 </div>
-                                <p class="text-slate-600 mb-6">
+                                <p class="text-sm sm:text-base text-slate-600 mb-6">
                                     PIRT (Pangan Industri Rumah Tangga) adalah izin edar untuk produk makanan/minuman olahan.
                                 </p>
-                                <h6 class="font-outfit font-bold text-slate-900 mb-4">Cara Mengurus:</h6>
-                                <ol class="space-y-3 text-slate-600 mb-6">
+                                <h6 class="font-outfit font-bold text-slate-900 mb-4 text-sm sm:text-base">Cara Mengurus:</h6>
+                                <ol class="space-y-3 text-sm sm:text-base text-slate-600 mb-6">
                                     <li class="flex items-start">
                                         <span class="bg-accent-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">1</span>
                                         Ajukan permohonan ke Dinas Kesehatan setempat
@@ -703,7 +710,7 @@
                                     </li>
                                 </ol>
                                 <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
-                                    <p class="text-blue-700 font-medium">
+                                    <p class="text-blue-700 font-medium text-sm sm:text-base">
                                         <i class="fas fa-info-circle mr-2"></i>
                                         Gratis (di sebagian besar daerah), proses 1-2 minggu
                                     </p>
@@ -711,14 +718,14 @@
                             </div>
                         </div>
                         
-                        <div class="bg-gradient-to-r from-blue-50 to-primary-50 border border-blue-200 rounded-3xl p-8">
+                        <div class="bg-gradient-to-r from-blue-50 to-primary-50 border border-blue-200 rounded-3xl p-6 sm:p-8">
                             <div class="flex items-start">
                                 <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl flex items-center justify-center mr-6 flex-shrink-0">
                                     <i class="fas fa-info-circle text-2xl"></i>
                                 </div>
                                 <div>
                                     <h5 class="font-outfit text-xl font-bold text-blue-900 mb-3">Tahukah Anda?</h5>
-                                    <p class="text-blue-800 leading-relaxed">
+                                    <p class="text-sm sm:text-base text-blue-800 leading-relaxed">
                                         Sejak tahun 2022, pemerintah menyederhanakan proses perizinan UMKM melalui program OSS. Usaha mikro dan kecil cukup memiliki NIB sebagai identitas legalitas usaha.
                                     </p>
                                 </div>
@@ -728,23 +735,23 @@
 
                     <!-- Langkah 4 -->
                     <div id="langkah4" class="scroll-mt-24">
-                        <div class="mb-12">
+                        <div class="mb-12 sm:mb-16">
                             <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-700 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
                                 <span class="w-6 h-6 bg-white text-primary-600 rounded-full flex items-center justify-center mr-3 text-xs font-bold">4</span>
                                 Langkah Keempat
                             </div>
-                            <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                            <h2 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">
                                 Mulai Kecil
                             </h2>
-                            <p class="text-xl text-slate-600 leading-relaxed">
+                            <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed">
                                 Memulai dari skala kecil adalah strategi yang tepat untuk menguji pasar dan belajar dari pengalaman tanpa risiko kerugian besar.
                             </p>
                         </div>
                         
-                        <div class="grid lg:grid-cols-5 gap-8">
+                        <div class="grid lg:grid-cols-5 gap-8 xl:gap-10">
                             <div class="lg:col-span-3">
-                                <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30">
-                                    <h4 class="font-outfit text-2xl font-bold mb-8 text-slate-900 border-b border-primary/20 pb-4">
+                                <div class="step-card rounded-3xl p-6 sm:p-8 shadow-xl border border-white/30">
+                                    <h4 class="font-outfit text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-slate-900 border-b border-primary/20 pb-4">
                                         Tips memulai usaha dengan skala kecil:
                                     </h4>
                                     <div class="space-y-6">
@@ -752,37 +759,37 @@
                                             <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
                                                 <i class="fas fa-wallet text-white text-sm"></i>
                                             </div>
-                                            <span class="text-slate-700"><strong>Mulai dari modal yang Anda miliki</strong> - Hindari utang di awal usaha.</span>
+                                            <span class="text-sm sm:text-base text-slate-700"><strong>Mulai dari modal yang Anda miliki</strong> - Hindari utang di awal usaha.</span>
                                         </div>
                                         <div class="flex items-start space-x-4 checklist-item p-4 rounded-2xl">
                                             <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
                                                 <i class="fas fa-hashtag text-white text-sm"></i>
                                             </div>
-                                            <span class="text-slate-700"><strong>Gunakan media sosial sebagai platform jualan</strong> - Gratis dan mudah dijangkau target pasar.</span>
+                                            <span class="text-sm sm:text-base text-slate-700"><strong>Gunakan media sosial sebagai platform jualan</strong> - Gratis dan mudah dijangkau target pasar.</span>
                                         </div>
                                         <div class="flex items-start space-x-4 checklist-item p-4 rounded-2xl">
                                             <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
                                                 <i class="fas fa-clipboard-list text-white text-sm"></i>
                                             </div>
-                                            <span class="text-slate-700"><strong>Produksi berdasarkan pesanan</strong> - Untuk menghindari stok menumpuk dan modal tertahan.</span>
+                                            <span class="text-sm sm:text-base text-slate-700"><strong>Produksi berdasarkan pesanan</strong> - Untuk menghindari stok menumpuk dan modal tertahan.</span>
                                         </div>
                                         <div class="flex items-start space-x-4 checklist-item p-4 rounded-2xl">
                                             <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
                                                 <i class="fas fa-users text-white text-sm"></i>
                                             </div>
-                                            <span class="text-slate-700"><strong>Uji coba produk ke lingkaran terdekat</strong> - Dapatkan feedback jujur dari keluarga dan teman.</span>
+                                            <span class="text-sm sm:text-base text-slate-700"><strong>Uji coba produk ke lingkaran terdekat</strong> - Dapatkan feedback jujur dari keluarga dan teman.</span>
                                         </div>
                                         <div class="flex items-start space-x-4 checklist-item p-4 rounded-2xl">
                                             <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
                                                 <i class="fas fa-book text-white text-sm"></i>
                                             </div>
-                                            <span class="text-slate-700"><strong>Catat semua transaksi</strong> - Mulai disiplin dengan pembukuan sederhana.</span>
+                                            <span class="text-sm sm:text-base text-slate-700"><strong>Catat semua transaksi</strong> - Mulai disiplin dengan pembukuan sederhana.</span>
                                         </div>
                                         <div class="flex items-start space-x-4 checklist-item p-4 rounded-2xl">
                                             <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
                                                 <i class="fas fa-sync-alt text-white text-sm"></i>
                                             </div>
-                                            <span class="text-slate-700"><strong>Evaluasi berkala</strong> - Tinjau penjualan dan feedback pelanggan secara rutin.</span>
+                                            <span class="text-sm sm:text-base text-slate-700"><strong>Evaluasi berkala</strong> - Tinjau penjualan dan feedback pelanggan secara rutin.</span>
                                         </div>
                                     </div>
                                 </div>
@@ -801,29 +808,29 @@
                                         <div class="timeline-item flex items-start">
                                             <div class="w-4 h-4 bg-primary-600 rounded-full mr-4 mt-2 flex-shrink-0"></div>
                                             <div>
-                                                <h6 class="font-outfit font-bold text-slate-900">Bulan 1-2</h6>
-                                                <p class="text-sm text-slate-600">Riset pasar, uji coba produk, persiapan awal</p>
+                                                <h6 class="font-outfit font-bold text-slate-900 text-sm sm:text-base">Bulan 1-2</h6>
+                                                <p class="text-xs sm:text-sm text-slate-600">Riset pasar, uji coba produk, persiapan awal</p>
                                             </div>
                                         </div>
                                         <div class="timeline-item flex items-start">
                                             <div class="w-4 h-4 bg-accent-500 rounded-full mr-4 mt-2 flex-shrink-0"></div>
                                             <div>
-                                                <h6 class="font-outfit font-bold text-slate-900">Bulan 3-4</h6>
-                                                <p class="text-sm text-slate-600">Penjualan ke lingkaran terdekat, evaluasi produk</p>
+                                                <h6 class="font-outfit font-bold text-slate-900 text-sm sm:text-base">Bulan 3-4</h6>
+                                                <p class="text-xs sm:text-sm text-slate-600">Penjualan ke lingkaran terdekat, evaluasi produk</p>
                                             </div>
                                         </div>
                                         <div class="timeline-item flex items-start">
                                             <div class="w-4 h-4 bg-emerald-500 rounded-full mr-4 mt-2 flex-shrink-0"></div>
                                             <div>
-                                                <h6 class="font-outfit font-bold text-slate-900">Bulan 5-6</h6>
-                                                <p class="text-sm text-slate-600">Perluasan pasar, mulai promosi di media sosial</p>
+                                                <h6 class="font-outfit font-bold text-slate-900 text-sm sm:text-base">Bulan 5-6</h6>
+                                                <p class="text-xs sm:text-sm text-slate-600">Perluasan pasar, mulai promosi di media sosial</p>
                                             </div>
                                         </div>
                                         <div class="timeline-item flex items-start">
                                             <div class="w-4 h-4 bg-purple-500 rounded-full mr-4 mt-2 flex-shrink-0"></div>
                                             <div>
-                                                <h6 class="font-outfit font-bold text-slate-900">Bulan 7-12</h6>
-                                                <p class="text-sm text-slate-600">Stabilisasi usaha, pengembangan produk/jasa</p>
+                                                <h6 class="font-outfit font-bold text-slate-900 text-sm sm:text-base">Bulan 7-12</h6>
+                                                <p class="text-xs sm:text-sm text-slate-600">Stabilisasi usaha, pengembangan produk/jasa</p>
                                             </div>
                                         </div>
                                     </div>
@@ -834,25 +841,25 @@
 
                     <!-- Checklist -->
                     <div id="checklist" class="scroll-mt-24">
-                        <div class="mb-12">
+                        <div class="mb-12 sm:mb-16">
                             <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-full text-sm font-medium mb-6 shadow-lg">
                                 <i class="fas fa-tasks mr-3"></i>
                                 Panduan Praktis
                             </div>
-                            <h2 class="font-outfit text-4xl lg:text-5xl font-bold mb-6 gradient-text">
+                            <h2 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">
                                 Checklist Memulai Usaha
                             </h2>
-                            <p class="text-xl text-slate-600 leading-relaxed">
+                            <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed">
                                 Gunakan checklist ini untuk memastikan persiapan usaha Anda sudah lengkap:
                             </p>
                         </div>
                         
-                        <div class="step-card rounded-3xl p-8 shadow-xl border border-white/30 relative overflow-hidden">
+                        <div class="step-card rounded-3xl p-6 sm:p-8 shadow-xl border border-white/30 relative overflow-hidden">
                             <div class="absolute top-0 left-0 w-32 h-32 bg-primary-500/5 rounded-full blur-3xl"></div>
                             <div class="absolute bottom-0 right-0 w-32 h-32 bg-accent-500/5 rounded-full blur-3xl"></div>
                             
                             <form id="businessChecklist" class="relative">
-                                <div class="grid md:grid-cols-2 gap-8">
+                                <div class="grid md:grid-cols-2 gap-8 xl:gap-10">
                                     <div class="space-y-4">
                                         <div class="checklist-item flex items-center p-4 rounded-2xl transition-all duration-300">
                                             <input class="w-5 h-5 text-primary-600 rounded mr-4" type="checkbox" id="check1">
@@ -860,7 +867,7 @@
                                                 <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center mr-4">
                                                     <i class="fas fa-lightbulb text-white text-sm"></i>
                                                 </div>
-                                                <span class="font-medium text-slate-700">Ide usaha sudah ditentukan</span>
+                                                <span class="font-medium text-sm sm:text-base text-slate-700">Ide usaha sudah ditentukan</span>
                                             </label>
                                         </div>
                                         <div class="checklist-item flex items-center p-4 rounded-2xl transition-all duration-300">
@@ -869,7 +876,7 @@
                                                 <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-4">
                                                     <i class="fas fa-users text-white text-sm"></i>
                                                 </div>
-                                                <span class="font-medium text-slate-700">Target pasar sudah diidentifikasi</span>
+                                                <span class="font-medium text-sm sm:text-base text-slate-700">Target pasar sudah diidentifikasi</span>
                                             </label>
                                         </div>
                                         <div class="checklist-item flex items-center p-4 rounded-2xl transition-all duration-300">
@@ -878,7 +885,7 @@
                                                 <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mr-4">
                                                     <i class="fas fa-search text-white text-sm"></i>
                                                 </div>
-                                                <span class="font-medium text-slate-700">Pesaing sudah dianalisis</span>
+                                                <span class="font-medium text-sm sm:text-base text-slate-700">Pesaing sudah dianalisis</span>
                                             </label>
                                         </div>
                                         <div class="checklist-item flex items-center p-4 rounded-2xl transition-all duration-300">
@@ -887,7 +894,7 @@
                                                 <div class="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center mr-4">
                                                     <i class="fas fa-flask text-white text-sm"></i>
                                                 </div>
-                                                <span class="font-medium text-slate-700">Produk/jasa sudah diuji coba</span>
+                                                <span class="font-medium text-sm sm:text-base text-slate-700">Produk/jasa sudah diuji coba</span>
                                             </label>
                                         </div>
                                         <div class="checklist-item flex items-center p-4 rounded-2xl transition-all duration-300">
@@ -896,7 +903,7 @@
                                                 <div class="w-8 h-8 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center mr-4">
                                                     <i class="fas fa-tags text-white text-sm"></i>
                                                 </div>
-                                                <span class="font-medium text-slate-700">Harga sudah ditetapkan</span>
+                                                <span class="font-medium text-sm sm:text-base text-slate-700">Harga sudah ditetapkan</span>
                                             </label>
                                         </div>
                                     </div>
@@ -907,7 +914,7 @@
                                                 <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mr-4">
                                                     <i class="fas fa-palette text-white text-sm"></i>
                                                 </div>
-                                                <span class="font-medium text-slate-700">Branding dasar sudah dibuat (nama, logo)</span>
+                                                <span class="font-medium text-sm sm:text-base text-slate-700">Branding dasar sudah dibuat (nama, logo)</span>
                                             </label>
                                         </div>
                                         <div class="checklist-item flex items-center p-4 rounded-2xl transition-all duration-300">
@@ -916,7 +923,7 @@
                                                 <div class="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mr-4">
                                                     <i class="fas fa-hashtag text-white text-sm"></i>
                                                 </div>
-                                                <span class="font-medium text-slate-700">Akun media sosial bisnis sudah dibuat</span>
+                                                <span class="font-medium text-sm sm:text-base text-slate-700">Akun media sosial bisnis sudah dibuat</span>
                                             </label>
                                         </div>
                                         <div class="checklist-item flex items-center p-4 rounded-2xl transition-all duration-300">
@@ -925,7 +932,7 @@
                                                 <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mr-4">
                                                     <i class="fas fa-file-alt text-white text-sm"></i>
                                                 </div>
-                                                <span class="font-medium text-slate-700">Perizinan dasar sudah diurus</span>
+                                                <span class="font-medium text-sm sm:text-base text-slate-700">Perizinan dasar sudah diurus</span>
                                             </label>
                                         </div>
                                         <div class="checklist-item flex items-center p-4 rounded-2xl transition-all duration-300">
@@ -934,7 +941,7 @@
                                                 <div class="w-8 h-8 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center mr-4">
                                                     <i class="fas fa-book text-white text-sm"></i>
                                                 </div>
-                                                <span class="font-medium text-slate-700">Sistem pembukuan sederhana sudah disiapkan</span>
+                                                <span class="font-medium text-sm sm:text-base text-slate-700">Sistem pembukuan sederhana sudah disiapkan</span>
                                             </label>
                                         </div>
                                         <div class="checklist-item flex items-center p-4 rounded-2xl transition-all duration-300">
@@ -943,13 +950,13 @@
                                                 <div class="w-8 h-8 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mr-4">
                                                     <i class="fas fa-coins text-white text-sm"></i>
                                                 </div>
-                                                <span class="font-medium text-slate-700">Modal awal sudah disiapkan</span>
+                                                <span class="font-medium text-sm sm:text-base text-slate-700">Modal awal sudah disiapkan</span>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="text-center mt-12">
-                                    <button type="button" class="btn-primary px-12 py-4 font-bold text-lg rounded-xl text-white hover:-translate-y-1 transition-all duration-300 shadow-lg animate-pulse-ring" id="checkResult">
+                                    <button type="button" class="btn-primary px-8 sm:px-12 py-3 sm:py-4 font-bold text-base sm:text-lg rounded-xl text-white hover:-translate-y-1 transition-all duration-300 shadow-lg animate-pulse-ring" id="checkResult">
                                         <i class="fas fa-chart-bar mr-3"></i>Lihat Hasil Checklist
                                     </button>
                                 </div>
@@ -959,27 +966,27 @@
                     </div>
 
                     <!-- CTA Final -->
-                    <div class="bg-gradient-to-r from-primary-500 to-primary-700 text-white rounded-3xl p-12 text-center relative overflow-hidden">
+                    <div class="bg-gradient-to-r from-primary-500 to-primary-700 text-white rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
                         <div class="absolute inset-0">
                             <div class="absolute top-1/4 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
                             <div class="absolute bottom-1/4 right-10 w-40 h-40 bg-accent-500/20 rounded-full blur-3xl"></div>
                         </div>
                         
                         <div class="relative z-10">
-                            <div class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-sm font-medium mb-8">
+                            <div class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-sm font-medium mb-6 sm:mb-8">
                                 <div class="w-2 h-2 bg-accent-400 rounded-full mr-3 animate-pulse"></div>
                                 <span class="text-white font-semibold">Siap Memulai Perjalanan?</span>
                             </div>
                             
-                            <h3 class="font-outfit text-3xl lg:text-4xl font-bold mb-6">Butuh Panduan Lebih Lanjut?</h3>
-                            <p class="text-xl opacity-90 mb-10 max-w-2xl mx-auto leading-relaxed">
+                            <h3 class="font-outfit text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">Butuh Panduan Lebih Lanjut?</h3>
+                            <p class="text-base sm:text-lg lg:text-xl opacity-90 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed">
                                 Kami menyediakan berbagai materi dan pelatihan untuk membantu Anda memulai usaha dengan percaya diri
                             </p>
-                            <div class="flex flex-col sm:flex-row justify-center gap-6">
-                                <a href="pelatihan-materi.html" class="btn-secondary px-8 py-4 font-semibold text-lg rounded-xl hover:-translate-y-1 transition-all duration-300">
+                            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+                                <a href="pelatihan-materi.html" class="btn-secondary px-6 sm:px-8 py-3 sm:py-4 font-semibold text-base sm:text-lg rounded-xl hover:-translate-y-1 transition-all duration-300">
                                     <i class="fas fa-book-open mr-3"></i>Lihat Materi Pelatihan
                                 </a>
-                                <a href="hubungi.html" class="bg-white/20 border-2 border-white/30 backdrop-blur-sm text-white px-8 py-4 font-semibold text-lg rounded-xl hover:bg-white hover:text-primary-600 transition-colors">
+                                <a href="hubungi.html" class="bg-white/20 border-2 border-white/30 backdrop-blur-sm text-white px-6 sm:px-8 py-3 sm:py-4 font-semibold text-base sm:text-lg rounded-xl hover:bg-white hover:text-primary-600 transition-colors duration-300">
                                     <i class="fas fa-headset mr-3"></i>Hubungi Kami
                                 </a>
                             </div>
@@ -991,9 +998,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-white py-16">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-8 mb-12">
+    <footer class="bg-slate-900 text-white py-12 sm:py-16 lg:py-20">
+        <div class="max-w-7xl mx-auto px-6 xl:px-8">
+            <div class="grid md:grid-cols-4 gap-8 xl:gap-10 mb-8 sm:mb-12">
                 <div class="space-y-6">
                     <div class="flex items-center space-x-3">
                         <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
@@ -1003,20 +1010,20 @@
                             <div class="font-outfit text-2xl font-semibold text-white">Vita</div>
                         </div>
                     </div>
-                    <p class="text-slate-300 font-inter leading-relaxed">
+                    <p class="text-slate-300 font-inter leading-relaxed text-sm sm:text-base">
                         Platform edukasi interaktif untuk membantu UMKM lokal belajar bisnis secara mandiri, gratis, dan efektif.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors duration-300">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors duration-300">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors duration-300">
                             <i class="fab fa-telegram"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-colors duration-300">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
@@ -1025,20 +1032,20 @@
                 <div>
                     <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Navigasi</h5>
                     <ul class="space-y-3">
-                        <li><a href="index.html" class="text-slate-300 hover:text-primary-400 transition-colors">Beranda</a></li>
-                        <li><a href="tentang.html" class="text-slate-300 hover:text-primary-400 transition-colors">Tentang Kami</a></li>
-                        <li><a href="kisah-sukses.html" class="text-slate-300 hover:text-primary-400 transition-colors">Kisah Sukses</a></li>
-                        <li><a href="pelatihan-materi.html" class="text-slate-300 hover:text-primary-400 transition-colors">Pelatihan & Materi</a></li>
-                        <li><a href="hubungi.html" class="text-slate-300 hover:text-primary-400 transition-colors">Hubungi Kami</a></li>
+                        <li><a href="index.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Beranda</a></li>
+                        <li><a href="tentang.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Tentang Kami</a></li>
+                        <li><a href="kisah-sukses.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Kisah Sukses</a></li>
+                        <li><a href="pelatihan-materi.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Pelatihan & Materi</a></li>
+                        <li><a href="hubungi.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Hubungi Kami</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h5 class="font-outfit text-lg font-semibold mb-6 text-white">Materi</h5>
                     <ul class="space-y-3">
-                        <li><a href="panduan-memulai.html" class="text-primary-400 font-medium">Panduan Memulai</a></li>
-                        <li><a href="pemasaran-digital.html" class="text-slate-300 hover:text-primary-400 transition-colors">Pemasaran Digital</a></li>
-                        <li><a href="manajemen-keuangan.html" class="text-slate-300 hover:text-primary-400 transition-colors">Manajemen Keuangan</a></li>
+                        <li><a href="panduan-memulai.html" class="text-primary-400 font-medium text-sm sm:text-base">Panduan Memulai</a></li>
+                        <li><a href="pemasaran-digital.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Pemasaran Digital</a></li>
+                        <li><a href="manajemen-keuangan.html" class="text-slate-300 hover:text-primary-400 transition-colors duration-300 text-sm sm:text-base">Manajemen Keuangan</a></li>
                     </ul>
                 </div>
 
@@ -1050,8 +1057,8 @@
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div>
-                                <div class="text-slate-300">Email</div>
-                                <div class="text-sm text-slate-400">support@vita.com</div>
+                                <div class="text-slate-300 text-sm sm:text-base">Email</div>
+                                <div class="text-xs sm:text-sm text-slate-400">support@vita.com</div>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
@@ -1059,8 +1066,8 @@
                                 <i class="fas fa-phone"></i>
                             </div>
                             <div>
-                                <div class="text-slate-300">Telepon</div>
-                                <div class="text-sm text-slate-400">+62 859 1264 62972</div>
+                                <div class="text-slate-300 text-sm sm:text-base">Telepon</div>
+                                <div class="text-xs sm:text-sm text-slate-400">+62 859 1264 62972</div>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
@@ -1068,8 +1075,8 @@
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div>
-                                <div class="text-slate-300">Lokasi</div>
-                                <div class="text-sm text-slate-400">Yogyakarta, Indonesia</div>
+                                <div class="text-slate-300 text-sm sm:text-base">Lokasi</div>
+                                <div class="text-xs sm:text-sm text-slate-400">Yogyakarta, Indonesia</div>
                             </div>
                         </div>
                     </div>
@@ -1078,13 +1085,13 @@
 
             <div class="border-t border-slate-800 pt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                    <div class="text-slate-400 text-sm">
+                    <div class="text-slate-400 text-xs sm:text-sm">
                         © 2025 Vita. All rights reserved.
                     </div>
-                    <div class="flex items-center space-x-6 text-sm">
-                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Kebijakan Privasi</a>
-                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Syarat & Ketentuan</a>
-                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Bantuan</a>
+                    <div class="flex items-center space-x-6 text-xs sm:text-sm">
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors duration-300">Kebijakan Privasi</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors duration-300">Syarat & Ketentuan</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors duration-300">Bantuan</a>
                     </div>
                 </div>
             </div>
@@ -1142,9 +1149,11 @@
             const navbar = document.getElementById('mainNav');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 100) {
-                    navbar.classList.add('scrolled');
+                    navbar.classList.remove('bg-white/95');
+                    navbar.classList.add('bg-white/85', 'shadow-lg');
                 } else {
-                    navbar.classList.remove('scrolled');
+                    navbar.classList.remove('bg-white/85', 'shadow-lg');
+                    navbar.classList.add('bg-white/95');
                 }
             });
 
@@ -1158,8 +1167,11 @@
                     const targetElement = document.querySelector(targetId);
                     
                     if (targetElement) {
+                        const navHeight = navbar ? navbar.offsetHeight : 0;
+                        const targetPosition = targetElement.offsetTop - navHeight - 20;
+                        
                         window.scrollTo({
-                            top: targetElement.offsetTop - 120,
+                            top: targetPosition,
                             behavior: 'smooth'
                         });
                         
@@ -1168,15 +1180,19 @@
                             innerLink.classList.remove('active', 'bg-primary-50', 'text-primary-600');
                             innerLink.classList.add('text-slate-700');
                             const icon = innerLink.querySelector('.w-10');
-                            icon.classList.remove('from-primary-500', 'to-primary-700');
-                            icon.classList.add('from-slate-400', 'to-slate-600');
+                            if (icon) {
+                                icon.classList.remove('from-primary-500', 'to-primary-700');
+                                icon.classList.add('from-slate-400', 'to-slate-600');
+                            }
                         });
                         
                         this.classList.add('active', 'bg-primary-50', 'text-primary-600');
                         this.classList.remove('text-slate-700');
                         const activeIcon = this.querySelector('.w-10');
-                        activeIcon.classList.remove('from-slate-400', 'to-slate-600');
-                        activeIcon.classList.add('from-primary-500', 'to-primary-700');
+                        if (activeIcon) {
+                            activeIcon.classList.remove('from-slate-400', 'to-slate-600');
+                            activeIcon.classList.add('from-primary-500', 'to-primary-700');
+                        }
                     }
                 });
             });
@@ -1189,8 +1205,11 @@
                     
                     if (targetElement) {
                         e.preventDefault();
+                        const navHeight = navbar ? navbar.offsetHeight : 0;
+                        const targetPosition = targetElement.offsetTop - navHeight - 20;
+                        
                         window.scrollTo({
-                            top: targetElement.offsetTop - 120,
+                            top: targetPosition,
                             behavior: 'smooth'
                         });
                     }
@@ -1238,11 +1257,11 @@
                     }
                     
                     checklistResult.innerHTML = `
-                        <div class="bg-gradient-to-r ${alertClass} border rounded-3xl p-8 shadow-lg">
-                            <div class="flex items-center">
-                                <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mr-6 shadow-lg">
+                        <div class="bg-gradient-to-r ${alertClass} border rounded-3xl p-6 sm:p-8 shadow-lg">
+                            <div class="flex flex-col sm:flex-row items-center">
+                                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-2xl flex items-center justify-center mb-4 sm:mb-0 sm:mr-6 shadow-lg">
                                     <div class="relative">
-                                        <svg class="w-12 h-12 progress-ring" viewBox="0 0 36 36">
+                                        <svg class="w-10 h-10 sm:w-12 sm:h-12 progress-ring" viewBox="0 0 36 36">
                                             <path class="text-gray-200" stroke="currentColor" stroke-width="3" fill="none" d="M18,2.0845 a 15.9155,15.9155 0 0,1 0,31.831 a 15.9155,15.9155 0 0,1 0,-31.831"/>
                                             <path class="text-primary-600" stroke="currentColor" stroke-width="3" stroke-dasharray="${percentage}, 100" fill="none" d="M18,2.0845 a 15.9155,15.9155 0 0,1 0,31.831 a 15.9155,15.9155 0 0,1 0,-31.831"/>
                                         </svg>
@@ -1251,12 +1270,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center mb-3">
-                                        <i class="${iconClass} text-2xl mr-3"></i>
-                                        <h5 class="font-outfit text-xl font-bold text-slate-900">Hasil Kesiapan Usaha</h5>
+                                <div class="flex-1 text-center sm:text-left">
+                                    <div class="flex items-center justify-center sm:justify-start mb-2 sm:mb-3">
+                                        <i class="${iconClass} text-xl sm:text-2xl mr-3"></i>
+                                        <h5 class="font-outfit text-lg sm:text-xl font-bold text-slate-900">Hasil Kesiapan Usaha</h5>
                                     </div>
-                                    <p class="text-slate-800 text-lg leading-relaxed">${message}</p>
+                                    <p class="text-slate-800 text-sm sm:text-base lg:text-lg leading-relaxed">${message}</p>
                                 </div>
                             </div>
                         </div>
@@ -1284,15 +1303,19 @@
                                 link.classList.remove('active', 'bg-primary-50', 'text-primary-600');
                                 link.classList.add('text-slate-700');
                                 const icon = link.querySelector('.w-10');
-                                icon.classList.remove('from-primary-500', 'to-primary-700');
-                                icon.classList.add('from-slate-400', 'to-slate-600');
+                                if (icon) {
+                                    icon.classList.remove('from-primary-500', 'to-primary-700');
+                                    icon.classList.add('from-slate-400', 'to-slate-600');
+                                }
                                 
                                 if (link.getAttribute('href') === '#' + section.id) {
                                     link.classList.add('active', 'bg-primary-50', 'text-primary-600');
                                     link.classList.remove('text-slate-700');
                                     const activeIcon = link.querySelector('.w-10');
-                                    activeIcon.classList.remove('from-slate-400', 'to-slate-600');
-                                    activeIcon.classList.add('from-primary-500', 'to-primary-700');
+                                    if (activeIcon) {
+                                        activeIcon.classList.remove('from-slate-400', 'to-slate-600');
+                                        activeIcon.classList.add('from-primary-500', 'to-primary-700');
+                                    }
                                 }
                             });
                         }

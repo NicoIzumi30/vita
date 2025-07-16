@@ -6,159 +6,472 @@
     <title>Social Media Marketing untuk UMKM - Vita</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        primary: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e'
+                        },
+                        accent: {
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        }
                     },
-                    fontFamily: { 'inter': ['Inter', 'sans-serif'], 'outfit': ['Outfit', 'sans-serif'] }
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'outfit': ['Outfit', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-ring': 'pulse-ring 2s infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'fade-in': 'fade-in 0.8s ease-out',
+                        'scale-in': 'scale-in 0.5s ease-out',
+                        'shimmer': 'shimmer 2s linear infinite'
+                    },
+                    keyframes: {
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-12px) rotate(1deg)' }
+                        },
+                        'pulse-ring': {
+                            '0%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0.4)' },
+                            '70%': { boxShadow: '0 0 0 15px rgba(14, 165, 233, 0)' },
+                            '100%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0)' }
+                        },
+                        'slide-up': {
+                            'from': { transform: 'translateY(30px)', opacity: '0' },
+                            'to': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        'fade-in': {
+                            'from': { opacity: '0' },
+                            'to': { opacity: '1' }
+                        },
+                        'scale-in': {
+                            'from': { transform: 'scale(0.95)', opacity: '0' },
+                            'to': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        'shimmer': {
+                            '0%': { backgroundPosition: '-468px 0' },
+                            '100%': { backgroundPosition: '468px 0' }
+                        }
+                    }
                 }
             }
         }
     </script>
+    
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #0ea5e9, #f59e0b);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #0369a1;
+            border: 2px solid #0ea5e9;
+        }
+        
+        .btn-secondary:hover {
+            background: #0ea5e9;
+            color: white;
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .platform-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.8) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        #mobileMenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        
+        #mobileMenu.active {
+            max-height: 500px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu {
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .group:hover .dropdown-menu {
+            transform: translateY(0);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
+
+        .video-container.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            padding-bottom: 0;
+            border-radius: 0;
+        }
+
+        .video-container.fullscreen iframe {
+            border-radius: 0;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0ea5e9 0%, #f59e0b 100%);
+            transition: width 0.3s ease;
+        }
+
+        .course-item {
+            transition: all 0.3s ease;
+        }
+
+        .course-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .course-item.completed {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgb(34, 197, 94);
+        }
+
+        .course-item.current {
+            background: rgba(14, 165, 233, 0.1);
+            border-color: #0ea5e9;
+            border-width: 2px;
+        }
+
+        .sticky-sidebar {
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .share-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .share-modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .sticky-sidebar {
+                position: static;
+                max-height: none;
+                overflow-y: visible;
+            }
+        }
+    </style>
 </head>
+
 <body class="font-inter bg-gradient-to-b from-white to-slate-50 text-slate-800 scroll-smooth">
-    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20 transition-all duration-300">
-        <div class="container mx-auto px-6">
-            <div class="flex items-center justify-between h-16">
-                <a href="index.html" class="flex items-center space-x-2" data-aos="fade-right" data-aos-duration="800">
-                    <span class="text-xl font-bold gradient-text">Vita</span>
-                </a>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Beranda</a>
-                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Tentang Kami</a>
+    <!-- Navbar -->
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-white/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-14 sm:h-16">
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg sm:rounded-xl flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-sm sm:text-lg"></i>
+                    </div>
+                    <div class="font-outfit text-xl sm:text-2xl font-semibold gradient-text">Vita</div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors text-sm lg:text-base">Beranda</a>
+                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors text-sm lg:text-base">Tentang Kami</a>
                     
+                    <!-- Dropdown Materi Bisnis -->
                     <div class="relative group">
-                        <button class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors flex items-center">
-                            Materi Bisnis <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"></i>
+                        <button class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors flex items-center text-sm lg:text-base">
+                            Materi Bisnis
+                            <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"></i>
                         </button>
-                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                        
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-64 lg:w-80 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                             <div class="py-3">
-                                <a href="panduan-memulai.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
-                                    <i class="fas fa-rocket text-primary-500 mr-3 w-4"></i>Panduan Memulai
+                                <a href="panduan-memulai.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors text-sm lg:text-base">
+                                    <i class="fas fa-rocket text-primary-500 mr-3 w-4"></i>
+                                    Panduan Memulai
                                 </a>
-                                <a href="pemasaran-digital.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
-                                    <i class="fas fa-bullhorn text-accent-500 mr-3 w-4"></i>Pemasaran Digital
+                                <a href="pemasaran-digital.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors text-sm lg:text-base">
+                                    <i class="fas fa-bullhorn text-accent-500 mr-3 w-4"></i>
+                                    Pemasaran Digital
                                 </a>
-                                <a href="manajemen-keuangan.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
-                                    <i class="fas fa-chart-line text-emerald-500 mr-3 w-4"></i>Manajemen Keuangan
+                                <a href="manajemen-keuangan.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors text-sm lg:text-base">
+                                    <i class="fas fa-chart-line text-emerald-500 mr-3 w-4"></i>
+                                    Manajemen Keuangan
                                 </a>
                             </div>
                         </div>
                     </div>
                     
-                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Kisah Sukses</a>
-                    <a href="pelatihan-materi.html" class="nav-link active text-primary-600 font-medium transition-colors">Pelatihan & Materi</a>
-                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors">Hubungi Kami</a>
-                    
-                    <button id="darkModeToggle" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors pulse-animation">
-                        <i class="fas fa-moon text-xl"></i>
-                    </button>
+                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors text-sm lg:text-base">Kisah Sukses</a>
+                    <a href="pelatihan-materi.html" class="nav-link text-primary-600 font-medium transition-colors active text-sm lg:text-base">Pelatihan & Materi</a>
+                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors text-sm lg:text-base">Hubungi Kami</a>
                 </div>
-                
-                <button id="mobileMenuBtn" class="md:hidden w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors">
-                    <i class="fas fa-bars text-xl"></i>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden w-8 h-8 sm:w-10 sm:h-10 bg-slate-100 hover:bg-slate-200 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors">
+                    <i class="fas fa-bars text-sm sm:text-xl"></i>
                 </button>
             </div>
-            
+
+            <!-- Mobile Navigation -->
             <div id="mobileMenu" class="md:hidden border-t border-slate-200 bg-white/98 backdrop-blur-sm rounded-b-2xl shadow-lg">
-                <div class="flex flex-col space-y-4 py-4">
-                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Beranda</a>
-                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Tentang Kami</a>
-                    <div class="border-l-2 border-primary-200 pl-4 ml-2">
-                        <div class="text-sm font-semibold text-slate-600 mb-2">Materi Bisnis</div>
-                        <a href="panduan-memulai.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                <div class="flex flex-col space-y-3 sm:space-y-4 py-3 sm:py-4">
+                    <a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1 text-sm sm:text-base">Beranda</a>
+                    <a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1 text-sm sm:text-base">Tentang Kami</a>
+                    
+                    <div class="border-l-2 border-primary-200 pl-3 sm:pl-4 ml-2">
+                        <div class="text-xs sm:text-sm font-semibold text-slate-600 mb-2">Materi Bisnis</div>
+                        <a href="panduan-memulai.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors text-sm">
                             <i class="fas fa-rocket text-primary-500 mr-2"></i>Panduan Memulai
                         </a>
-                        <a href="pemasaran-digital.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                        <a href="pemasaran-digital.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors text-sm">
                             <i class="fas fa-bullhorn text-accent-500 mr-2"></i>Pemasaran Digital
                         </a>
-                        <a href="manajemen-keuangan.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors">
+                        <a href="manajemen-keuangan.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors text-sm">
                             <i class="fas fa-chart-line text-emerald-500 mr-2"></i>Manajemen Keuangan
                         </a>
                     </div>
-                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Kisah Sukses</a>
-                    <a href="pelatihan-materi.html" class="nav-link text-primary-600 font-medium transition-colors px-2 py-1">Pelatihan & Materi</a>
-                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1">Hubungi Kami</a>
+                    
+                    <a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1 text-sm sm:text-base">Kisah Sukses</a>
+                    <a href="pelatihan-materi.html" class="nav-link text-primary-600 font-medium transition-colors px-2 py-1 text-sm sm:text-base">Pelatihan & Materi</a>
+                    <a href="hubungi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1 text-sm sm:text-base">Hubungi Kami</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <section class="pt-20 pb-4 bg-slate-50">
-        <div class="container mx-auto px-6">
-            <nav class="flex items-center space-x-2 text-sm" data-aos="fade-right">
-                <a href="index.html" class="text-gray-500 hover:text-primary transition-colors">
+    <!-- Breadcrumb Section -->
+    <section class="pt-16 sm:pt-20 pb-2 sm:pb-4 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm" data-aos="fade-right">
+                <a href="index.html" class="text-slate-500 hover:text-primary-600 transition-colors">
                     <i class="fas fa-home mr-1"></i>Beranda
                 </a>
-                <i class="fas fa-chevron-right text-gray-400"></i>
-                <a href="pelatihan-materi.html" class="text-gray-500 hover:text-primary transition-colors">Pelatihan & Materi</a>
-                <i class="fas fa-chevron-right text-gray-400"></i>
-                <span class="text-primary font-medium">Social Media Marketing untuk UMKM</span>
+                <i class="fas fa-chevron-right text-slate-400 text-xs"></i>
+                <a href="pelatihan-materi.html" class="text-slate-500 hover:text-primary-600 transition-colors">Pelatihan & Materi</a>
+                <i class="fas fa-chevron-right text-slate-400 text-xs"></i>
+                <span class="text-primary-600 font-medium">Social Media Marketing untuk UMKM</span>
             </nav>
         </div>
     </section>
 
-    <section class="py-8 bg-slate-50">
-        <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-3 gap-8">
+    <!-- Course Header Section -->
+    <section class="py-4 sm:py-6 lg:py-8 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-3 gap-6 sm:gap-8">
                 <div class="lg:col-span-2" data-aos="fade-up">
-                    <div class="mb-4">
-                        <span class="inline-block px-3 py-1 bg-accent-500 text-white rounded-full text-sm font-medium mb-4">Marketing Digital</span>
-                        <h1 class="text-3xl lg:text-4xl font-bold text-slate-800 mb-4">Social Media Marketing untuk UMKM</h1>
-                        <p class="text-lg text-slate-600 mb-6">Pelajari strategi pemasaran media sosial yang efektif untuk meningkatkan brand awareness dan penjualan UMKM Anda. Dari content planning hingga engagement optimization.</p>
+                    <div class="mb-4 sm:mb-6">
+                        <span class="inline-block px-3 py-1 bg-accent-500 text-white rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">Marketing Digital</span>
+                        <h1 class="font-outfit text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-3 sm:mb-4">Social Media Marketing untuk UMKM</h1>
+                        <p class="text-base sm:text-lg text-slate-600 mb-4 sm:mb-6">Pelajari strategi pemasaran media sosial yang efektif untuk meningkatkan brand awareness dan penjualan UMKM Anda. Dari content planning hingga engagement optimization.</p>
                     </div>
                     
-                    <div class="flex flex-wrap gap-6 mb-6">
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6">
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="fas fa-clock text-primary-600"></i>
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-2 sm:mr-3">
+                                <i class="fas fa-clock text-primary-600 text-sm sm:text-base"></i>
                             </div>
                             <div>
-                                <div class="text-sm text-slate-500">Durasi</div>
-                                <div class="font-semibold text-slate-800">2.5 Jam</div>
+                                <div class="text-xs sm:text-sm text-slate-500">Durasi</div>
+                                <div class="font-semibold text-slate-800 text-sm sm:text-base">2.5 Jam</div>
                             </div>
                         </div>
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="fas fa-users text-primary-600"></i>
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-2 sm:mr-3">
+                                <i class="fas fa-users text-primary-600 text-sm sm:text-base"></i>
                             </div>
                             <div>
-                                <div class="text-sm text-slate-500">Learners</div>
-                                <div class="font-semibold text-slate-800">2,431</div>
+                                <div class="text-xs sm:text-sm text-slate-500">Learners</div>
+                                <div class="font-semibold text-slate-800 text-sm sm:text-base">2,431</div>
                             </div>
                         </div>
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="fas fa-star text-primary-600"></i>
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-2 sm:mr-3">
+                                <i class="fas fa-star text-primary-600 text-sm sm:text-base"></i>
                             </div>
                             <div>
-                                <div class="text-sm text-slate-500">Rating</div>
-                                <div class="font-semibold text-slate-800">4.9/5</div>
+                                <div class="text-xs sm:text-sm text-slate-500">Rating</div>
+                                <div class="font-semibold text-slate-800 text-sm sm:text-base">4.9/5</div>
                             </div>
                         </div>
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="fas fa-signal text-primary-600"></i>
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-2 sm:mr-3">
+                                <i class="fas fa-signal text-primary-600 text-sm sm:text-base"></i>
                             </div>
                             <div>
-                                <div class="text-sm text-slate-500">Level</div>
-                                <div class="font-semibold text-slate-800">Menengah</div>
+                                <div class="text-xs sm:text-sm text-slate-500">Level</div>
+                                <div class="font-semibold text-slate-800 text-sm sm:text-base">Menengah</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mb-6">
+                    <div class="mb-4 sm:mb-6">
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-sm font-medium text-slate-700">Progress Course</span>
-                            <span class="text-sm text-slate-500" id="progressText">2 dari 8 materi</span>
+                            <span class="text-xs sm:text-sm text-slate-500" id="progressText">2 dari 8 materi</span>
                         </div>
                         <div class="progress-bar">
                             <div class="progress-fill" id="progressBar" style="width: 25%"></div>
@@ -167,41 +480,41 @@
                 </div>
 
                 <div class="lg:col-span-1" data-aos="fade-left">
-                    <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24 border border-slate-200">
-                        <div class="text-center mb-6">
-                            <div class="text-3xl font-bold gradient-text mb-2">GRATIS</div>
-                            <p class="text-slate-600">Akses selamanya</p>
+                    <div class="platform-card rounded-xl shadow-lg p-4 sm:p-6 sticky top-20 sm:top-24">
+                        <div class="text-center mb-4 sm:mb-6">
+                            <div class="text-2xl sm:text-3xl font-bold gradient-text mb-2">GRATIS</div>
+                            <p class="text-slate-600 text-sm sm:text-base">Akses selamanya</p>
                         </div>
                         
-                        <div class="space-y-4 mb-6">
-                            <div class="flex items-center justify-between text-sm">
+                        <div class="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
+                            <div class="flex items-center justify-between text-xs sm:text-sm">
                                 <span class="text-slate-600">8 Video Pembelajaran</span>
-                                <i class="fas fa-check text-green-500"></i>
+                                <i class="fas fa-check text-emerald-500"></i>
                             </div>
-                            <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center justify-between text-xs sm:text-sm">
                                 <span class="text-slate-600">Materi Downloadable</span>
-                                <i class="fas fa-check text-green-500"></i>
+                                <i class="fas fa-check text-emerald-500"></i>
                             </div>
-                            <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center justify-between text-xs sm:text-sm">
                                 <span class="text-slate-600">Quiz Interaktif</span>
-                                <i class="fas fa-check text-green-500"></i>
+                                <i class="fas fa-check text-emerald-500"></i>
                             </div>
-                            <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center justify-between text-xs sm:text-sm">
                                 <span class="text-slate-600">Sertifikat Digital</span>
-                                <i class="fas fa-check text-green-500"></i>
+                                <i class="fas fa-check text-emerald-500"></i>
                             </div>
                         </div>
 
-                        <button onclick="toggleBookmark()" id="bookmarkBtn" class="w-full bg-primary-500 text-white py-3 rounded-lg font-semibold hover:bg-primary-600 transition-colors mb-4 pulse-animation">
+                        <button onclick="toggleBookmark()" id="bookmarkBtn" class="w-full btn-primary text-white py-2 sm:py-3 rounded-lg font-semibold hover:-translate-y-0.5 transition-all mb-3 sm:mb-4 text-sm sm:text-base">
                             <i class="fas fa-bookmark mr-2"></i>Simpan Course
                         </button>
                         
                         <div class="flex gap-2">
-                            <button onclick="openShareModal()" class="flex-1 border border-slate-300 text-slate-700 py-2 rounded-lg hover:bg-slate-100 transition-colors">
-                                <i class="fas fa-share-alt mr-2"></i>Bagikan
+                            <button onclick="openShareModal()" class="flex-1 border border-slate-300 text-slate-700 py-2 rounded-lg hover:bg-slate-50 transition-colors text-xs sm:text-sm">
+                                <i class="fas fa-share-alt mr-1 sm:mr-2"></i>Bagikan
                             </button>
-                            <button onclick="toggleFavorite()" id="favoriteBtn" class="flex-1 border border-slate-300 text-slate-700 py-2 rounded-lg hover:bg-slate-100 transition-colors">
-                                <i class="fas fa-heart mr-2"></i>Favorit
+                            <button onclick="toggleFavorite()" id="favoriteBtn" class="flex-1 border border-slate-300 text-slate-700 py-2 rounded-lg hover:bg-slate-50 transition-colors text-xs sm:text-sm">
+                                <i class="fas fa-heart mr-1 sm:mr-2"></i>Favorit
                             </button>
                         </div>
                     </div>
@@ -210,12 +523,13 @@
         </div>
     </section>
 
-    <section class="py-8">
-        <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 space-y-8">
+    <!-- Course Content Section -->
+    <section class="py-6 sm:py-8 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-3 gap-6 sm:gap-8">
+                <div class="lg:col-span-2 space-y-6 sm:space-y-8">
                     <div data-aos="fade-up">
-                        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
+                        <div class="platform-card rounded-xl shadow-lg overflow-hidden">
                             <div class="video-container" id="videoContainer">
                                 <iframe 
                                     id="youtubePlayer"
@@ -229,22 +543,22 @@
                     </div>
 
                     <div data-aos="fade-up" data-aos-delay="100">
-                        <div class="bg-white rounded-xl shadow-lg p-6 border border-slate-200">
-                            <div class="flex flex-wrap items-center justify-between gap-4">
-                                <button onclick="navigateToPrevious()" class="flex items-center px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors">
+                        <div class="platform-card rounded-xl shadow-lg p-4 sm:p-6">
+                            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+                                <button onclick="navigateToPrevious()" class="w-full sm:w-auto flex items-center justify-center px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors text-sm sm:text-base">
                                     <i class="fas fa-chevron-left mr-2"></i>Materi Sebelumnya
                                 </button>
                                 
-                                <div class="flex items-center gap-4">
-                                    <button onclick="refreshVideo()" class="w-10 h-10 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors" title="Refresh Video">
-                                        <i class="fas fa-redo"></i>
+                                <div class="flex items-center gap-3 sm:gap-4">
+                                    <button onclick="refreshVideo()" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-100 text-slate-700 rounded-full flex items-center justify-center hover:bg-slate-200 transition-colors" title="Refresh Video">
+                                        <i class="fas fa-redo text-sm sm:text-base"></i>
                                     </button>
-                                    <button onclick="toggleFullscreen()" class="w-10 h-10 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors" title="Fullscreen">
-                                        <i class="fas fa-expand" id="fullscreenIcon"></i>
+                                    <button onclick="toggleFullscreen()" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-100 text-slate-700 rounded-full flex items-center justify-center hover:bg-slate-200 transition-colors" title="Fullscreen">
+                                        <i class="fas fa-expand text-sm sm:text-base" id="fullscreenIcon"></i>
                                     </button>
                                 </div>
                                 
-                                <button onclick="navigateToNext()" class="flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors">
+                                <button onclick="navigateToNext()" class="w-full sm:w-auto flex items-center justify-center px-4 py-2 btn-primary text-white rounded-lg hover:-translate-y-0.5 transition-all text-sm sm:text-base">
                                     Materi Selanjutnya<i class="fas fa-chevron-right ml-2"></i>
                                 </button>
                             </div>
@@ -252,47 +566,47 @@
                     </div>
 
                     <div data-aos="fade-up" data-aos-delay="200">
-                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-                            <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white" id="currentVideoTitle">Pengenalan Instagram Marketing</h3>
-                            <div class="prose prose-gray dark:prose-invert max-w-none">
-                                <p class="text-gray-600 dark:text-gray-300 mb-4" id="currentVideoDescription">
+                        <div class="platform-card rounded-xl shadow-lg p-4 sm:p-6">
+                            <h3 class="font-outfit text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-slate-900" id="currentVideoTitle">Pengenalan Instagram Marketing</h3>
+                            <div class="prose prose-slate max-w-none">
+                                <p class="text-slate-600 mb-3 sm:mb-4 text-sm sm:text-base" id="currentVideoDescription">
                                     Dalam video ini, Anda akan mempelajari dasar-dasar Instagram marketing yang efektif untuk UMKM. Materi mencakup:
                                 </p>
-                                <ul class="space-y-2 text-gray-600 dark:text-gray-300" id="currentVideoPoints">
+                                <ul class="space-y-2 text-slate-600 text-sm sm:text-base" id="currentVideoPoints">
                                     <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        <i class="fas fa-check text-emerald-500 mr-2 sm:mr-3 mt-1 text-xs sm:text-sm"></i>
                                         Mengoptimalkan profil Instagram business
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        <i class="fas fa-check text-emerald-500 mr-2 sm:mr-3 mt-1 text-xs sm:text-sm"></i>
                                         Strategi content planning yang konsisten
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        <i class="fas fa-check text-emerald-500 mr-2 sm:mr-3 mt-1 text-xs sm:text-sm"></i>
                                         Menggunakan hashtag untuk reach maksimal
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        <i class="fas fa-check text-emerald-500 mr-2 sm:mr-3 mt-1 text-xs sm:text-sm"></i>
                                         Memahami algoritma Instagram terbaru
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        <i class="fas fa-check text-emerald-500 mr-2 sm:mr-3 mt-1 text-xs sm:text-sm"></i>
                                         Tips engagement dan community building
                                     </li>
                                 </ul>
                             </div>
                             
-                            <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                                <h4 class="font-semibold mb-3 text-gray-800 dark:text-white">Materi Tambahan</h4>
-                                <div class="flex flex-wrap gap-3" id="downloadMaterials">
-                                    <button onclick="downloadMaterial('pdf')" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-white dark:hover:bg-gray-600 transition-colors">
-                                        <i class="fas fa-file-pdf mr-2 text-red-500"></i>Template Content Calendar
+                            <div class="mt-4 sm:mt-6 p-3 sm:p-4 bg-slate-50 rounded-lg">
+                                <h4 class="font-semibold mb-2 sm:mb-3 text-slate-800 text-sm sm:text-base">Materi Tambahan</h4>
+                                <div class="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3" id="downloadMaterials">
+                                    <button onclick="downloadMaterial('pdf')" class="inline-flex items-center px-3 sm:px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-white transition-colors text-xs sm:text-sm">
+                                        <i class="fas fa-file-pdf mr-1 sm:mr-2 text-red-500"></i>Template Content Calendar
                                     </button>
-                                    <button onclick="downloadMaterial('guide')" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-white dark:hover:bg-gray-600 transition-colors">
-                                        <i class="fas fa-file-alt mr-2 text-blue-500"></i>Hashtag Research Guide
+                                    <button onclick="downloadMaterial('guide')" class="inline-flex items-center px-3 sm:px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-white transition-colors text-xs sm:text-sm">
+                                        <i class="fas fa-file-alt mr-1 sm:mr-2 text-blue-500"></i>Hashtag Research Guide
                                     </button>
-                                    <button onclick="downloadMaterial('templates')" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-white dark:hover:bg-gray-600 transition-colors">
-                                        <i class="fas fa-images mr-2 text-green-500"></i>Design Template Pack
+                                    <button onclick="downloadMaterial('templates')" class="inline-flex items-center px-3 sm:px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-white transition-colors text-xs sm:text-sm">
+                                        <i class="fas fa-images mr-1 sm:mr-2 text-emerald-500"></i>Design Template Pack
                                     </button>
                                 </div>
                             </div>
@@ -302,13 +616,13 @@
 
                 <div class="lg:col-span-1">
                     <div class="sticky-sidebar">
-                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden" data-aos="fade-left">
-                            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
-                                <h3 class="text-lg font-bold text-gray-800 dark:text-white">Daftar Materi</h3>
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">8 video • 2.5 jam total</p>
+                        <div class="platform-card rounded-xl shadow-lg overflow-hidden" data-aos="fade-left">
+                            <div class="p-4 sm:p-6 border-b border-slate-200">
+                                <h3 class="font-outfit text-base sm:text-lg font-bold text-slate-900">Daftar Materi</h3>
+                                <p class="text-xs sm:text-sm text-slate-500 mt-1">8 video • 2.5 jam total</p>
                             </div>
                             
-                            <div class="p-4 space-y-3" id="courseList">
+                            <div class="p-3 sm:p-4 space-y-2 sm:space-y-3" id="courseList">
                             </div>
                         </div>
                     </div>
@@ -317,38 +631,39 @@
         </div>
     </section>
 
+    <!-- Share Modal -->
     <div class="share-modal" id="shareModal">
-        <div class="share-modal-content">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-gray-800 dark:text-white">Bagikan Course</h3>
-                <button onclick="closeShareModal()" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-                    <i class="fas fa-times text-gray-600 dark:text-gray-400"></i>
+        <div class="share-modal-content mx-4">
+            <div class="flex justify-between items-center mb-4 sm:mb-6">
+                <h3 class="font-outfit text-lg sm:text-xl font-bold text-slate-900">Bagikan Course</h3>
+                <button onclick="closeShareModal()" class="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200 transition-colors">
+                    <i class="fas fa-times text-slate-600 text-sm"></i>
                 </button>
             </div>
             
-            <div class="mb-6">
-                <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Link Course</label>
+            <div class="mb-4 sm:mb-6">
+                <label class="block text-sm font-medium mb-2 text-slate-700">Link Course</label>
                 <div class="flex">
-                    <input type="text" id="shareLink" value="" readonly class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-l-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white">
-                    <button onclick="copyLink()" class="px-4 py-2 bg-primary text-white rounded-r-lg hover:bg-primary-dark transition-colors">
+                    <input type="text" id="shareLink" value="" readonly class="flex-1 px-3 py-2 border border-slate-300 rounded-l-lg bg-slate-50 text-slate-800 text-sm">
+                    <button onclick="copyLink()" class="px-3 sm:px-4 py-2 btn-primary text-white rounded-r-lg hover:-translate-y-0.5 transition-all text-sm">
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
             </div>
             
             <div>
-                <label class="block text-sm font-medium mb-4 text-gray-700 dark:text-gray-300">Bagikan ke</label>
-                <div class="grid grid-cols-3 gap-3">
-                    <button onclick="shareToWhatsApp()" class="p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors flex flex-col items-center">
-                        <i class="fab fa-whatsapp text-xl mb-1"></i>
+                <label class="block text-sm font-medium mb-3 sm:mb-4 text-slate-700">Bagikan ke</label>
+                <div class="grid grid-cols-3 gap-2 sm:gap-3">
+                    <button onclick="shareToWhatsApp()" class="p-2 sm:p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors flex flex-col items-center">
+                        <i class="fab fa-whatsapp text-lg sm:text-xl mb-1"></i>
                         <span class="text-xs">WhatsApp</span>
                     </button>
-                    <button onclick="shareToFacebook()" class="p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex flex-col items-center">
-                        <i class="fab fa-facebook text-xl mb-1"></i>
+                    <button onclick="shareToFacebook()" class="p-2 sm:p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex flex-col items-center">
+                        <i class="fab fa-facebook text-lg sm:text-xl mb-1"></i>
                         <span class="text-xs">Facebook</span>
                     </button>
-                    <button onclick="shareToLinkedIn()" class="p-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors flex flex-col items-center">
-                        <i class="fab fa-linkedin text-xl mb-1"></i>
+                    <button onclick="shareToLinkedIn()" class="p-2 sm:p-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors flex flex-col items-center">
+                        <i class="fab fa-linkedin text-lg sm:text-xl mb-1"></i>
                         <span class="text-xs">LinkedIn</span>
                     </button>
                 </div>
@@ -356,102 +671,148 @@
         </div>
     </div>
 
+    <!-- Notification -->
     <div class="notification" id="notification">
         <i class="fas fa-check mr-2"></i>
         <span id="notificationText">Berhasil!</span>
     </div>
 
-    <section class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 lg:p-12 text-center text-white relative overflow-hidden" data-aos="fade-up">
-                <div class="absolute inset-0 opacity-10">
-                    <div class="absolute top-4 left-4 w-16 h-16 bg-secondary rounded-full floating-animation"></div>
-                    <div class="absolute top-12 right-8 w-12 h-12 bg-secondary/50 rounded-full floating-animation-delay"></div>
-                    <div class="absolute bottom-8 left-1/3 w-8 h-8 bg-secondary/30 rounded-full floating-animation-delay-2"></div>
+    <!-- CTA Section -->
+    <section class="py-12 sm:py-16 bg-gradient-to-r from-primary-500 to-primary-700 text-white relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-6 sm:left-10 w-24 h-24 sm:w-32 sm:h-32 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-6 sm:right-10 w-32 h-32 sm:w-40 sm:h-40 bg-accent-500/20 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto" data-aos="fade-up">
+                <div class="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8">
+                    <div class="w-2 h-2 bg-accent-400 rounded-full mr-2 sm:mr-3 animate-pulse"></div>
+                    <span class="text-white font-semibold">Jelajahi Lebih Banyak Course</span>
                 </div>
                 
-                <div class="relative">
-                    <h2 class="text-3xl lg:text-4xl font-bold mb-4">Jelajahi Lebih Banyak Course</h2>
-                    <p class="text-xl mb-8 text-white/90 max-w-2xl mx-auto">Tingkatkan skill bisnis Anda dengan ratusan course berkualitas lainnya yang tersedia gratis.</p>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <a href="pelatihan-materi.html" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center">
-                            <i class="fas fa-graduation-cap mr-2"></i>Lihat Semua Course
-                        </a>
-                        <a href="hubungi.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors inline-flex items-center">
-                            <i class="fas fa-comments mr-2"></i>Butuh Bantuan?
-                        </a>
-                    </div>
+                <h2 class="font-outfit text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6 text-white">
+                    Tingkatkan Skill Bisnis Anda
+                </h2>
+                
+                <p class="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 text-blue-100 max-w-2xl mx-auto">
+                    Ratusan course berkualitas lainnya tersedia gratis untuk mengembangkan bisnis UMKM Anda.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+                    <a href="pelatihan-materi.html" class="btn-secondary px-6 sm:px-8 py-3 sm:py-4 font-semibold text-base sm:text-lg rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all inline-flex items-center justify-center">
+                        <i class="fas fa-graduation-cap mr-2"></i>Lihat Semua Course
+                    </a>
+                    <a href="hubungi.html" class="bg-white/20 border-2 border-white/30 backdrop-blur-sm text-white px-6 sm:px-8 py-3 sm:py-4 font-semibold text-base sm:text-lg rounded-xl hover:bg-white hover:text-primary-600 transition-colors inline-flex items-center justify-center">
+                        <i class="fas fa-comments mr-2"></i>Butuh Bantuan?
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-gray-800 text-white py-16">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">Vita</h3>
-                    <p class="text-gray-300 mb-4">
-                        Website edukasi interaktif untuk membantu UMKM lokal belajar bisnis secara mandiri, gratis, dan menyenangkan.
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
+                <div class="space-y-4 sm:space-y-6 sm:col-span-2 md:col-span-1">
+                    <div class="flex items-center space-x-2 sm:space-x-3">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg sm:rounded-xl flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-lg sm:text-xl"></i>
+                        </div>
+                        <div class="font-outfit text-xl sm:text-2xl font-semibold text-white">Vita</div>
+                    </div>
+                    <p class="text-slate-300 font-inter leading-relaxed text-sm sm:text-base">
+                        Platform edukasi interaktif untuk membantu UMKM lokal belajar bisnis secara mandiri, gratis, dan efektif.
                     </p>
+                    <div class="flex space-x-3 sm:space-x-4">
+                        <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-800 hover:bg-primary-600 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-instagram text-sm sm:text-base"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-800 hover:bg-primary-600 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-youtube text-sm sm:text-base"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-800 hover:bg-primary-600 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-telegram text-sm sm:text-base"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-800 hover:bg-primary-600 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors">
+                            <i class="fab fa-whatsapp text-sm sm:text-base"></i>
+                        </a>
+                    </div>
                 </div>
-                
+
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">Navigasi</h3>
-                    <ul class="space-y-2">
-                        <li><a href="index.html" class="text-gray-300 hover:text-secondary transition-colors">Beranda</a></li>
-                        <li><a href="tentang.html" class="text-gray-300 hover:text-secondary transition-colors">Tentang Kami</a></li>
+                    <h5 class="font-outfit text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Navigasi</h5>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li><a href="index.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Beranda</a></li>
+                        <li><a href="tentang.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Tentang Kami</a></li>
+                        <li><a href="kisah-sukses.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Kisah Sukses</a></li>
+                        <li><a href="pelatihan-materi.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Pelatihan & Materi</a></li>
+                        <li><a href="hubungi.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Hubungi Kami</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">Materi</h3>
-                    <ul class="space-y-2">
-                        <li><a href="pemasaran-digital.html" class="text-gray-300 hover:text-secondary transition-colors">Pemasaran Digital</a></li>
-                        <li><a href="manajemen-keuangan.html" class="text-gray-300 hover:text-secondary transition-colors">Manajemen Keuangan</a></li>
-                        <li><a href="panduan-memulai.html" class="text-gray-300 hover:text-secondary transition-colors">Panduan Memulai</a></li>
+                    <h5 class="font-outfit text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Materi</h5>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li><a href="panduan-memulai.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Panduan Memulai</a></li>
+                        <li><a href="pemasaran-digital.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Pemasaran Digital</a></li>
+                        <li><a href="manajemen-keuangan.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Manajemen Keuangan</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">Hubungi Kami</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center text-gray-300">
-                            <i class="fas fa-envelope mr-3"></i>
-                                <div class="text-sm text-slate-400">support@vita.com</div>
-                        </li>
-                        <li class="flex items-center text-gray-300">
-                            <i class="fas fa-phone mr-3"></i>
-                            0859126462972
-                        </li>
-                        <li class="flex items-center text-gray-300">
-                            <i class="fas fa-map-marker-alt mr-3"></i>
-                            Jl. Ring Road Utara, Ngringin, Condongcatur, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281
-                        </li>
-                    </ul>
+                    <h5 class="font-outfit text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Kontak</h5>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div class="flex items-start space-x-2 sm:space-x-3">
+                            <div class="w-4 h-4 sm:w-5 sm:h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-envelope text-xs"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300 text-sm sm:text-base">Email</div>
+                                <div class="text-xs sm:text-sm text-slate-400">support@vita.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-2 sm:space-x-3">
+                            <div class="w-4 h-4 sm:w-5 sm:h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-phone text-xs"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300 text-sm sm:text-base">Telepon</div>
+                                <div class="text-xs sm:text-sm text-slate-400">+62 859 1264 62972</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-2 sm:space-x-3">
+                            <div class="w-4 h-4 sm:w-5 sm:h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+                                <i class="fas fa-map-marker-alt text-xs"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-300 text-sm sm:text-base">Lokasi</div>
+                                <div class="text-xs sm:text-sm text-slate-400">Yogyakarta, Indonesia</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-300">&copy; 2025 Vita. Hak Cipta Dilindungi.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <a href="#" class="text-gray-300 hover:text-secondary transition-colors">
-                        <i class="fab fa-instagram text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-secondary transition-colors">
-                        <i class="fab fa-facebook text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-secondary transition-colors">
-                        <i class="fab fa-youtube text-xl"></i>
-                    </a>
+
+            <div class="border-t border-slate-800 pt-6 sm:pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
+                    <div class="text-slate-400 text-xs sm:text-sm">
+                        © 2025 Vita. All rights reserved.
+                    </div>
+                    <div class="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm">
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Kebijakan Privasi</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Syarat & Ketentuan</a>
+                        <a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Bantuan</a>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="assets/js/main.js"></script>
     <script>
+        // Course data with status tracking
         const courseData = [
             {
                 id: 1,
@@ -531,8 +892,8 @@
             },
             {
                 id: 5,
-                title: "Instagram Ads Tutorial",
-                description: "Membuat iklan di instagram",
+                title: "Instagram Stories Strategy",
+                description: "Maksimalkan fitur Stories untuk engagement",
                 duration: "16 min",
                 videoId: "N8WoRLlPdV8",
                 status: "upcoming",
@@ -611,6 +972,63 @@
         let isBookmarked = false;
         let isFavorited = false;
 
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                const toggleMenu = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    mobileMenu.classList.toggle('active');
+                    
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (mobileMenu.classList.contains('active')) {
+                        icon.className = 'fas fa-times text-sm sm:text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                    } else {
+                        icon.className = 'fas fa-bars text-sm sm:text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                };
+
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+                mobileMenuBtn.addEventListener('touchend', toggleMenu, { passive: false });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        mobileMenu.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.className = 'fas fa-bars text-sm sm:text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.className = 'fas fa-bars text-sm sm:text-xl';
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+
+            initializeCourse();
+        });
+
         function initializeCourse() {
             updateCurrentVideo();
             renderCourseList();
@@ -630,15 +1048,15 @@
             const pointsList = document.getElementById('currentVideoPoints');
             pointsList.innerHTML = current.points.map(point => `
                 <li class="flex items-start">
-                    <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                    <i class="fas fa-check text-emerald-500 mr-2 sm:mr-3 mt-1 text-xs sm:text-sm"></i>
                     ${point}
                 </li>
             `).join('');
             
             const materialsContainer = document.getElementById('downloadMaterials');
             materialsContainer.innerHTML = current.materials.map(material => `
-                <button onclick="downloadMaterial('${material.type}')" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-white dark:hover:bg-gray-600 transition-colors">
-                    <i class="fas fa-file-${material.type === 'pdf' ? 'pdf' : material.type === 'templates' ? 'images' : 'alt'} mr-2 text-${material.type === 'pdf' ? 'red' : material.type === 'templates' ? 'green' : 'blue'}-500"></i>
+                <button onclick="downloadMaterial('${material.type}')" class="inline-flex items-center px-3 sm:px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-white transition-colors text-xs sm:text-sm">
+                    <i class="fas fa-file-${material.type === 'pdf' ? 'pdf' : material.type === 'templates' ? 'images' : 'alt'} mr-1 sm:mr-2 text-${material.type === 'pdf' ? 'red' : material.type === 'templates' ? 'emerald' : 'blue'}-500"></i>
                     ${material.name}
                 </button>
             `).join('');
@@ -653,31 +1071,31 @@
                 
                 if (course.status === 'completed') {
                     statusClass = 'course-item completed';
-                    statusIcon = '<i class="fas fa-check text-sm"></i>';
+                    statusIcon = '<i class="fas fa-check text-xs sm:text-sm"></i>';
                     statusText = 'Selesai';
                 } else if (course.status === 'current' || index === currentCourseIndex) {
                     statusClass = 'course-item current';
-                    statusIcon = '<i class="fas fa-play text-sm"></i>';
+                    statusIcon = '<i class="fas fa-play text-xs sm:text-sm"></i>';
                     statusText = 'Sedang Dipelajari';
                 } else {
                     statusClass = 'course-item';
-                    statusIcon = `<span class="text-sm font-bold">${index + 1}</span>`;
+                    statusIcon = `<span class="text-xs sm:text-sm font-bold">${index + 1}</span>`;
                     statusText = 'Belum Dimulai';
                 }
                 
                 return `
-                    <div class="${statusClass} p-4 border border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary transition-colors" onclick="navigateToVideo(${index})">
+                    <div class="${statusClass} p-3 sm:p-4 border border-slate-200 rounded-lg cursor-pointer hover:border-primary-500 transition-colors" onclick="navigateToVideo(${index})">
                         <div class="flex items-center justify-between mb-2">
                             <div class="flex items-center">
-                                <div class="w-8 h-8 ${course.status === 'completed' ? 'bg-green-500 text-white' : index === currentCourseIndex ? 'bg-primary text-white' : 'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-400'} rounded-full flex items-center justify-center mr-3">
+                                <div class="w-6 h-6 sm:w-8 sm:h-8 ${course.status === 'completed' ? 'bg-emerald-500 text-white' : index === currentCourseIndex ? 'bg-primary-500 text-white' : 'bg-slate-200 text-slate-600'} rounded-full flex items-center justify-center mr-2 sm:mr-3">
                                     ${statusIcon}
                                 </div>
-                                <span class="font-medium ${course.status === 'completed' ? 'text-green-700 dark:text-green-400' : index === currentCourseIndex ? 'text-primary' : 'text-gray-500 dark:text-gray-400'}">${statusText}</span>
+                                <span class="font-medium ${course.status === 'completed' ? 'text-emerald-700' : index === currentCourseIndex ? 'text-primary-600' : 'text-slate-500'} text-xs sm:text-sm">${statusText}</span>
                             </div>
-                            <span class="text-sm text-gray-500">${course.duration}</span>
+                            <span class="text-xs sm:text-sm text-slate-500">${course.duration}</span>
                         </div>
-                        <h4 class="font-semibold text-gray-800 dark:text-white mb-1">${course.id}. ${course.title}</h4>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">${course.description}</p>
+                        <h4 class="font-semibold text-slate-800 mb-1 text-sm sm:text-base">${course.id}. ${course.title}</h4>
+                        <p class="text-xs sm:text-sm text-slate-600">${course.description}</p>
                     </div>
                 `;
             }).join('');
@@ -763,13 +1181,13 @@
             
             if (isBookmarked) {
                 btn.innerHTML = '<i class="fas fa-bookmark-o mr-2"></i>Tersimpan';
-                btn.classList.add('bg-green-500');
-                btn.classList.remove('bg-primary');
+                btn.classList.add('bg-emerald-500');
+                btn.classList.remove('btn-primary');
                 showNotification('Course disimpan ke bookmark');
             } else {
                 btn.innerHTML = '<i class="fas fa-bookmark mr-2"></i>Simpan Course';
-                btn.classList.remove('bg-green-500');
-                btn.classList.add('bg-primary');
+                btn.classList.remove('bg-emerald-500');
+                btn.classList.add('btn-primary');
                 showNotification('Course dihapus dari bookmark');
             }
         }
@@ -816,12 +1234,6 @@
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
         }
 
-        function shareToTwitter() {
-            const text = encodeURIComponent('Belajar Social Media Marketing untuk UMKM di KEINGINAN usaha');
-            const url = encodeURIComponent(window.location.href);
-            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
-        }
-
         function shareToLinkedIn() {
             const url = encodeURIComponent(window.location.href);
             window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
@@ -845,17 +1257,6 @@
                 notification.classList.remove('show');
             }, 3000);
         }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true,
-                mirror: false
-            });
-
-            initializeCourse();
-        });
 
         document.addEventListener('fullscreenchange', () => {
             const videoContainer = document.getElementById('videoContainer');
@@ -903,6 +1304,3 @@
     </script>
 </body>
 </html>
-
-
-live

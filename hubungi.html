@@ -1,0 +1,1077 @@
+
+</html><!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hubungi Kami - Vita</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: {
+50: '#f0f9ff',
+100: '#e0f2fe',
+500: '#0ea5e9',
+600: '#0284c7',
+700: '#0369a1',
+900: '#0c4a6e'
+},
+accent: {
+500: '#f59e0b',
+600: '#d97706'
+}
+},
+fontFamily: {
+'inter': ['Inter', 'sans-serif'],
+'outfit': ['Outfit', 'sans-serif']
+},
+animation: {
+'float': 'float 6s ease-in-out infinite',
+'pulse-ring': 'pulse-ring 2s infinite',
+'slide-up': 'slide-up 0.6s ease-out',
+'fade-in': 'fade-in 0.8s ease-out',
+'scale-in': 'scale-in 0.5s ease-out',
+'shimmer': 'shimmer 2s linear infinite'
+},
+keyframes: {
+'float': {
+'0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+'50%': { transform: 'translateY(-12px) rotate(1deg)' }
+},
+'pulse-ring': {
+'0%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0.4)' },
+'70%': { boxShadow: '0 0 0 15px rgba(14, 165, 233, 0)' },
+'100%': { boxShadow: '0 0 0 0 rgba(14, 165, 233, 0)' }
+},
+'slide-up': {
+'from': { transform: 'translateY(30px)', opacity: '0' },
+'to': { transform: 'translateY(0)', opacity: '1' }
+},
+'fade-in': {
+'from': { opacity: '0' },
+'to': { opacity: '1' }
+},
+'scale-in': {
+'from': { transform: 'scale(0.95)', opacity: '0' },
+'to': { transform: 'scale(1)', opacity: '1' }
+},
+'shimmer': {
+'0%': { backgroundPosition: '-468px 0' },
+'100%': { backgroundPosition: '468px 0' }
+}
+}
+}
+}
+}
+</script>
+
+<style>
+.glass {
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border: 1px solid rgba(255, 255, 255, 0.2);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.gradient-text {
+background: linear-gradient(135deg, #0ea5e9, #0369a1);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.nav-link {
+position: relative;
+overflow: hidden;
+}
+
+.nav-link::before {
+content: '';
+position: absolute;
+bottom: 0;
+left: 50%;
+width: 0;
+height: 2px;
+background: linear-gradient(135deg, #0ea5e9, #f59e0b);
+transition: all 0.3s ease;
+transform: translateX(-50%);
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+width: 100%;
+}
+
+.btn-primary {
+background: linear-gradient(135deg, #0ea5e9, #0369a1);
+position: relative;
+overflow: hidden;
+}
+
+.btn-primary::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+left: 100%;
+}
+
+.btn-secondary {
+background: white;
+color: #0369a1;
+border: 2px solid #0ea5e9;
+}
+
+.btn-secondary:hover {
+background: #0ea5e9;
+color: white;
+}
+
+.card-hover {
+transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card-hover:hover {
+transform: translateY(-8px);
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.platform-card {
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.8) 100%);
+backdrop-filter: blur(20px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#mobileMenu {
+max-height: 0;
+overflow: hidden;
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+opacity: 0;
+transform: translateY(-10px);
+}
+
+#mobileMenu.active {
+max-height: 500px;
+opacity: 1;
+transform: translateY(0);
+}
+
+.dropdown-menu {
+transform: translateY(-10px);
+transition: all 0.3s ease;
+}
+
+.group:hover .dropdown-menu {
+transform: translateY(0);
+}
+
+.hero-bg {
+background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%);
+}
+
+.faq-content {
+max-height: 0;
+overflow: hidden;
+transition: all 0.5s ease-in-out;
+}
+
+.faq-item.active .faq-content {
+max-height: 500px;
+}
+
+.faq-toggle {
+transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-toggle {
+transform: rotate(180deg);
+}
+
+.contact-input {
+transition: all 0.3s ease;
+}
+
+.contact-input:focus {
+transform: translateY(-2px);
+box-shadow: 0 10px 25px rgba(14, 165, 233, 0.1);
+}
+</style>
+</head>
+
+<body class="font-inter bg-gradient-to-b from-white to-slate-50 text-slate-800 scroll-smooth">
+<!-- Navbar -->
+<nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-white/20 transition-all duration-300">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-14 sm:h-16">
+<div class="flex items-center space-x-2 sm:space-x-3">
+<div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg sm:rounded-xl flex items-center justify-center">
+<i class="fas fa-graduation-cap text-white text-sm sm:text-lg"></i>
+</div>
+<div class="font-outfit text-xl sm:text-2xl font-semibold gradient-text">Vita</div>
+</div>
+
+<!-- Desktop Navigation -->
+<div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+<a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors text-sm lg:text-base">Beranda</a>
+<a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors text-sm lg:text-base">Tentang Kami</a>
+
+<!-- Dropdown Materi Bisnis -->
+<div class="relative group">
+<button class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors flex items-center text-sm lg:text-base">
+Materi Bisnis
+<i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"></i>
+</button>
+
+<div class="dropdown-menu absolute top-full left-0 mt-2 w-64 lg:w-80 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+<div class="py-3">
+<a href="panduan-memulai.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors text-sm lg:text-base">
+<i class="fas fa-rocket text-primary-500 mr-3 w-4"></i>
+Panduan Memulai
+</a>
+<a href="pemasaran-digital.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors text-sm lg:text-base">
+<i class="fas fa-bullhorn text-accent-500 mr-3 w-4"></i>
+Pemasaran Digital
+</a>
+<a href="manajemen-keuangan.html" class="block px-4 py-3 text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors text-sm lg:text-base">
+<i class="fas fa-chart-line text-emerald-500 mr-3 w-4"></i>
+Manajemen Keuangan
+</a>
+</div>
+</div>
+</div>
+
+<a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors text-sm lg:text-base">Kisah Sukses</a>
+<a href="pelatihan-materi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors text-sm lg:text-base">Pelatihan & Materi</a>
+<a href="hubungi.html" class="nav-link text-primary-600 font-medium transition-colors active text-sm lg:text-base">Hubungi Kami</a>
+</div>
+
+<!-- Mobile Menu Button -->
+<button id="mobileMenuBtn" class="md:hidden w-8 h-8 sm:w-10 sm:h-10 bg-slate-100 hover:bg-slate-200 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors">
+<i class="fas fa-bars text-sm sm:text-xl"></i>
+</button>
+</div>
+
+<!-- Mobile Navigation -->
+<div id="mobileMenu" class="md:hidden border-t border-slate-200 bg-white/98 backdrop-blur-sm rounded-b-2xl shadow-lg">
+<div class="flex flex-col space-y-3 sm:space-y-4 py-3 sm:py-4">
+<a href="index.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1 text-sm sm:text-base">Beranda</a>
+<a href="tentang.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1 text-sm sm:text-base">Tentang Kami</a>
+
+<div class="border-l-2 border-primary-200 pl-3 sm:pl-4 ml-2">
+<div class="text-xs sm:text-sm font-semibold text-slate-600 mb-2">Materi Bisnis</div>
+<a href="panduan-memulai.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors text-sm">
+<i class="fas fa-rocket text-primary-500 mr-2"></i>Panduan Memulai
+</a>
+<a href="pemasaran-digital.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors text-sm">
+<i class="fas fa-bullhorn text-accent-500 mr-2"></i>Pemasaran Digital
+</a>
+<a href="manajemen-keuangan.html" class="block py-2 text-slate-600 hover:text-primary-600 transition-colors text-sm">
+<i class="fas fa-chart-line text-emerald-500 mr-2"></i>Manajemen Keuangan
+</a>
+</div>
+
+<a href="kisah-sukses.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1 text-sm sm:text-base">Kisah Sukses</a>
+<a href="pelatihan-materi.html" class="nav-link text-slate-700 hover:text-primary-600 font-medium transition-colors px-2 py-1 text-sm sm:text-base">Pelatihan & Materi</a>
+<a href="hubungi.html" class="nav-link text-primary-600 font-medium transition-colors px-2 py-1 text-sm sm:text-base">Hubungi Kami</a>
+</div>
+</div>
+</div>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero-bg text-white pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 relative overflow-hidden">
+<div class="absolute inset-0">
+<div class="absolute top-1/4 left-6 sm:left-10 w-24 h-24 sm:w-32 sm:h-32 bg-white/10 rounded-full blur-3xl animate-float"></div>
+<div class="absolute bottom-1/4 right-6 sm:right-10 w-32 h-32 sm:w-40 sm:h-40 bg-accent-500/20 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center min-h-[50vh] sm:min-h-[60vh]">
+<div class="space-y-4 sm:space-y-6" data-aos="fade-right" data-aos-duration="1000">
+<div data-aos="fade-down" data-aos-delay="100">
+<span class="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-xs sm:text-sm font-medium">
+<i class="fas fa-comments mr-2"></i>
+<span class="text-white font-semibold">Hubungi Kami</span>
+</span>
+</div>
+
+<h1 class="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight" data-aos="fade-up" data-aos-delay="200">
+<span class="text-white">Kami Senang </span>
+<span class="text-accent-400">Mendengar Dari Anda</span>
+</h1>
+
+<div class="flex items-center space-x-3 sm:space-x-4" data-aos="fade-up" data-aos-delay="300">
+<div class="w-12 sm:w-16 h-1 bg-white rounded-full"></div>
+<div class="w-6 sm:w-8 h-1 bg-accent-400 rounded-full"></div>
+<div class="w-3 sm:w-4 h-1 bg-emerald-400 rounded-full"></div>
+</div>
+
+<p class="text-base sm:text-lg lg:text-xl text-blue-100 leading-relaxed" data-aos="fade-up" data-aos-delay="400">
+Kami senang mendengar masukan, pertanyaan, atau ide dari kamu. Jangan ragu untuk
+menghubungi kami melalui berbagai kanal yang tersedia.
+</p>
+
+<div class="flex flex-col sm:flex-row gap-3 sm:gap-4" data-aos="fade-up" data-aos-delay="500">
+<a href="#contactForm" class="btn-secondary px-6 sm:px-8 py-3 sm:py-4 font-semibold text-base sm:text-lg rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all inline-flex items-center justify-center">
+<i class="fas fa-paper-plane mr-2"></i>Kirim Pesan
+</a>
+<a href="#contactInfo" class="bg-white/20 border-2 border-white/30 backdrop-blur-sm text-white px-6 sm:px-8 py-3 sm:py-4 font-semibold text-base sm:text-lg rounded-xl hover:bg-white hover:text-primary-600 transition-colors inline-flex items-center justify-center">
+<i class="fas fa-info-circle mr-2"></i>Informasi Kontak
+</a>
+</div>
+</div>
+
+<div class="hidden lg:block relative" data-aos="fade-left" data-aos-duration="1000">
+<div class="absolute inset-0">
+<!-- Floating Contact Icons -->
+<div class="absolute top-1/4 -left-3 sm:-left-5 w-12 h-12 sm:w-16 sm:h-16 bg-white/20 backdrop-blur-sm text-white rounded-lg sm:rounded-xl flex items-center justify-center text-lg sm:text-2xl animate-float" data-aos="zoom-in" data-aos-delay="300">
+<i class="fas fa-envelope"></i>
+</div>
+<div class="absolute top-3/5 -right-3 sm:-right-5 w-12 h-12 sm:w-16 sm:h-16 bg-green-500 text-white rounded-lg sm:rounded-xl flex items-center justify-center text-lg sm:text-2xl animate-float" style="animation-delay: -1s;" data-aos="zoom-in" data-aos-delay="500">
+<i class="fab fa-whatsapp"></i>
+</div>
+<div class="absolute bottom-1/4 left-1/3 w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary-500 to-accent-500 text-white rounded-lg sm:rounded-xl flex items-center justify-center text-lg sm:text-2xl animate-float" style="animation-delay: -2s;" data-aos="zoom-in" data-aos-delay="700">
+<i class="fas fa-map-marker-alt"></i>
+</div>
+</div>
+<img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Ilustrasi Kontak" class="w-full rounded-2xl sm:rounded-3xl shadow-2xl relative z-10">
+</div>
+</div>
+</div>
+</header>
+
+<!-- Contact Info & Form Section -->
+<section id="contactInfo" class="py-12 sm:py-16 -mt-8 sm:-mt-12 relative z-20 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-5 gap-6 sm:gap-8">
+<!-- Contact Info -->
+<div class="lg:col-span-2">
+<div class="platform-card rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 lg:p-8" data-aos="fade-up" data-aos-duration="1000">
+<div class="mb-6 sm:mb-8">
+<span class="inline-block px-3 sm:px-4 py-1 sm:py-2 bg-accent-500 text-white rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4" data-aos="zoom-in" data-aos-delay="100">Pilihan Kontak</span>
+<h2 class="font-outfit text-2xl sm:text-3xl font-bold text-slate-900 mb-3 sm:mb-4" data-aos="fade-right" data-aos-delay="200">Informasi Kontak</h2>
+<p class="text-slate-600 leading-relaxed text-sm sm:text-base" data-aos="fade-right" data-aos-delay="300">
+Kami senang mendengar dari Anda! Silakan gunakan salah satu metode kontak di bawah
+ini atau isi formulir untuk menghubungi kami.
+</p>
+</div>
+
+<div class="space-y-4 sm:space-y-6">
+<!-- Email Contact -->
+<div class="platform-card rounded-lg sm:rounded-xl p-4 sm:p-6 card-hover" data-aos="fade-up" data-aos-delay="100">
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-lg sm:rounded-xl flex items-center justify-center text-lg sm:text-xl mr-3 sm:mr-4">
+        <i class="fas fa-envelope"></i>
+    </div>
+    <div>
+        <h3 class="font-semibold text-slate-900 text-sm sm:text-base">Email</h3>
+        <p class="text-slate-900 font-medium text-sm sm:text-base">support@vita.com</p>
+        <p class="text-xs sm:text-sm text-slate-500">Respon dalam 1-2 hari kerja</p>
+    </div>
+</div>
+<a href="mailto:support@vita.com" class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-100 text-primary-600 rounded-lg sm:rounded-xl flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all duration-300 hover:scale-110">
+    <i class="fas fa-paper-plane text-sm sm:text-base"></i>
+</a>
+</div>
+</div>
+
+<!-- Phone Contact -->
+<div class="platform-card rounded-lg sm:rounded-xl p-4 sm:p-6 card-hover" data-aos="fade-up" data-aos-delay="200">
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-lg sm:rounded-xl flex items-center justify-center text-lg sm:text-xl mr-3 sm:mr-4">
+        <i class="fas fa-phone"></i>
+    </div>
+    <div>
+        <h3 class="font-semibold text-slate-900 text-sm sm:text-base">Telepon</h3>
+        <p class="text-slate-900 font-medium text-sm sm:text-base">+62 859 1264 62972</p>
+        <p class="text-xs sm:text-sm text-slate-500">Senin - Jumat, 09:00 - 17:00</p>
+    </div>
+</div>
+<a href="tel:+6285912646297" class="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-100 text-emerald-600 rounded-lg sm:rounded-xl flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-all duration-300 hover:scale-110">
+    <i class="fas fa-phone text-sm sm:text-base"></i>
+</a>
+</div>
+</div>
+
+<!-- Social Media -->
+<div class="platform-card rounded-lg sm:rounded-xl p-4 sm:p-6" data-aos="fade-up" data-aos-delay="300">
+<div class="flex items-center mb-3 sm:mb-4">
+<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-lg sm:rounded-xl flex items-center justify-center text-lg sm:text-xl mr-3 sm:mr-4">
+    <i class="fas fa-share-alt"></i>
+</div>
+<div>
+    <h3 class="font-semibold text-slate-900 text-sm sm:text-base">Media Sosial</h3>
+    <p class="text-slate-600 text-xs sm:text-sm">Ikuti kami untuk update terbaru</p>
+</div>
+</div>
+<div class="flex space-x-2 sm:space-x-3">
+<a href="#" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-100 text-slate-600 rounded-lg sm:rounded-xl flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all duration-300 text-sm sm:text-base">
+    <i class="fab fa-instagram"></i>
+</a>
+<a href="#" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-100 text-slate-600 rounded-lg sm:rounded-xl flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all duration-300 text-sm sm:text-base">
+    <i class="fab fa-youtube"></i>
+</a>
+<a href="#" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-100 text-slate-600 rounded-lg sm:rounded-xl flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all duration-300 text-sm sm:text-base">
+    <i class="fab fa-telegram"></i>
+</a>
+
+<a href="#" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-100 text-slate-600 rounded-lg sm:rounded-xl flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all duration-300 text-sm sm:text-base">
+    <i class="fab fa-whatsapp"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Contact Form -->
+<div class="lg:col-span-3">
+<div class="platform-card rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 lg:p-8 h-full" data-aos="fade-left" data-aos-duration="1000">
+<div class="mb-6 sm:mb-8" id="contactForm">
+<h2 class="font-outfit text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Kirim Pesan</h2>
+<p class="text-slate-600 text-sm sm:text-base">
+Ada pertanyaan, saran, atau ingin berbagi kisah sukses? Isi formulir di bawah ini dan kami akan menghubungi Anda segera.
+</p>
+</div>
+
+<form class="needs-validation space-y-4 sm:space-y-6" novalidate>
+<div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
+<div data-aos="fade-right" data-aos-delay="100">
+<div class="relative">
+    <i class="fas fa-user absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-primary-600 text-sm sm:text-base"></i>
+    <input type="text" id="name" class="contact-input w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2 sm:py-3 border border-slate-300 rounded-lg sm:rounded-xl bg-white text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base" placeholder="Nama Lengkap" required>
+</div>
+</div>
+<div data-aos="fade-left" data-aos-delay="200">
+<div class="relative">
+    <i class="fas fa-envelope absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-primary-600 text-sm sm:text-base"></i>
+    <input type="email" id="email" class="contact-input w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2 sm:py-3 border border-slate-300 rounded-lg sm:rounded-xl bg-white text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base" placeholder="Email" required>
+</div>
+</div>
+</div>
+
+<div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
+<div data-aos="fade-right" data-aos-delay="300">
+<div class="relative">
+    <i class="fas fa-phone absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-primary-600 text-sm sm:text-base"></i>
+    <input type="tel" id="phone" class="contact-input w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2 sm:py-3 border border-slate-300 rounded-lg sm:rounded-xl bg-white text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base" placeholder="Nomor Telepon (Opsional)">
+</div>
+</div>
+<div data-aos="fade-left" data-aos-delay="400">
+<div class="relative">
+    <i class="fas fa-tag absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-primary-600 text-sm sm:text-base"></i>
+    <select id="subject" class="contact-input w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2 sm:py-3 border border-slate-300 rounded-lg sm:rounded-xl bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base" required>
+        <option value="" disabled selected>Pilih subjek</option>
+        <option value="pertanyaan">Pertanyaan</option>
+        <option value="saran">Saran/Masukan</option>
+        <option value="kerjasama">Kerjasama</option>
+        <option value="kisahsukses">Berbagi Kisah Sukses</option>
+        <option value="lainnya">Lainnya</option>
+    </select>
+</div>
+</div>
+</div>
+
+<div data-aos="fade-up" data-aos-delay="500">
+<div class="relative">
+<i class="fas fa-comment-alt absolute left-3 sm:left-4 top-4 sm:top-6 text-primary-600 text-sm sm:text-base"></i>
+<textarea id="message" class="contact-input w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2 sm:py-3 border border-slate-300 rounded-lg sm:rounded-xl bg-white text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 h-24 sm:h-32 resize-none text-sm sm:text-base" placeholder="Pesan" required></textarea>
+</div>
+</div>
+
+<div class="flex items-start sm:items-center" data-aos="fade-up" data-aos-delay="600">
+<input type="checkbox" id="newsletter" class="w-4 h-4 sm:w-5 sm:h-5 text-primary-500 bg-slate-100 border-slate-300 rounded focus:ring-primary-500 focus:ring-2 mt-1 sm:mt-0" checked>
+<label for="newsletter" class="ml-2 sm:ml-3 text-xs sm:text-sm text-slate-600">
+Saya ingin menerima materi edukasi dan update terbaru dari Vita
+</label>
+</div>
+
+<div data-aos="fade-up" data-aos-delay="700">
+<button type="submit" class="w-full btn-primary text-white px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold hover:-translate-y-0.5 transition-all duration-300 group text-sm sm:text-base">
+<span>Kirim Pesan</span>
+<i class="fas fa-paper-plane ml-2 group-hover:translate-x-1 transition-transform"></i>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Location Section -->
+<section class="py-12 sm:py-16 bg-slate-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-8 sm:mb-12" data-aos="fade-up">
+<div class="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-white/80 backdrop-blur-sm border border-primary-200 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6 shadow-lg">
+<div class="w-2 h-2 bg-emerald-500 rounded-full mr-2 sm:mr-3 animate-pulse"></div>
+<span class="gradient-text font-semibold">Lokasi</span>
+</div>
+<h2 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900">Lokasi Kami</h2>
+</div>
+
+<div class="platform-card rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+<div class="relative">
+<div class="absolute top-3 sm:top-5 left-3 sm:left-5 z-10">
+<div class="platform-card rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-lg min-w-[240px] sm:min-w-[280px]">
+<div class="flex items-center mb-2">
+<i class="fas fa-map-marker-alt text-primary-600 text-lg sm:text-xl mr-2 sm:mr-3"></i>
+<h3 class="font-semibold text-slate-900 text-sm sm:text-base">Vita</h3>
+</div>
+<p class="text-slate-600 text-xs sm:text-sm mb-2 sm:mb-3">Yogyakarta, Indonesia</p>
+<button class="expand-map btn-primary text-white px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium hover:-translate-y-0.5 transition-all">
+<i class="fas fa-expand-alt mr-1 sm:mr-2"></i>Perbesar Peta
+</button>
+</div>
+</div>
+<div class="aspect-[16/9] sm:aspect-[21/9]">
+<iframe
+src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63245.97055414075!2d110.33011238108328!3d-7.803250426730492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5787bd5b6bc5%3A0x21723fd4d3684f71!2sYogyakarta%2C%20Kota%20Yogyakarta%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1655178234875!5m2!1sid!2sid"
+class="w-full h-full border-0"
+allowfullscreen="" 
+loading="lazy"
+referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+</div>
+</div>
+<div class="p-4 sm:p-6 border-t border-slate-200">
+<div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+<a href="https://goo.gl/maps/yourmaplink" target="_blank" class="flex-1 btn-secondary px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:-translate-y-0.5 transition-all duration-300 inline-flex items-center justify-center text-sm sm:text-base">
+<i class="fas fa-directions mr-2"></i>Petunjuk Arah
+</a>
+<button class="share-location flex-1 bg-white border-2 border-slate-300 text-slate-700 px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-slate-50 hover:-translate-y-0.5 transition-all duration-300 inline-flex items-center justify-center text-sm sm:text-base">
+<i class="fas fa-share-alt mr-2"></i>Bagikan Lokasi
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-12 sm:py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-8 sm:mb-12" data-aos="fade-up">
+<div class="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-slate-900 text-white rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6 shadow-lg">
+<div class="w-2 h-2 bg-accent-500 rounded-full mr-2 sm:mr-3 animate-pulse"></div>
+Bantuan
+</div>
+<h2 class="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900">Pertanyaan yang Sering Diajukan</h2>
+</div>
+
+<div class="max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="300">
+<div class="space-y-3 sm:space-y-4">
+<!-- FAQ Item 1 -->
+<div class="faq-item platform-card rounded-lg sm:rounded-xl shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+<button class="w-full p-4 sm:p-6 text-left flex items-center justify-between" onclick="toggleFAQ(this)">
+<div class="flex items-center">
+<div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-full flex items-center justify-center mr-3 sm:mr-4">
+<i class="fas fa-question text-sm sm:text-base"></i>
+</div>
+<span class="font-semibold text-slate-900 text-sm sm:text-base">Apakah semua materi di Vita benar-benar gratis?</span>
+</div>
+<i class="fas fa-chevron-down faq-toggle text-slate-400 transform transition-transform duration-300 text-sm sm:text-base"></i>
+</button>
+<div class="faq-content">
+<div class="p-4 sm:p-6 pt-0 pl-12 sm:pl-20">
+<p class="text-slate-600 mb-3 sm:mb-4 text-sm sm:text-base">Ya, semua materi edukasi, simulasi, dan kuis di Vita dapat diakses secara gratis. Kami berkomitmen untuk menyediakan akses pendidikan bisnis yang terjangkau untuk semua UMKM di Indonesia.</p>
+<p class="text-slate-600 text-sm sm:text-base">Misi kami adalah membantu UMKM Indonesia bertumbuh melalui edukasi yang praktis dan relevan tanpa hambatan biaya.</p>
+</div>
+</div>
+</div>
+
+<!-- FAQ Item 2 -->
+<div class="faq-item platform-card rounded-lg sm:rounded-xl shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+<button class="w-full p-4 sm:p-6 text-left flex items-center justify-between" onclick="toggleFAQ(this)">
+<div class="flex items-center">
+<div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-full flex items-center justify-center mr-3 sm:mr-4">
+<i class="fas fa-hands-helping text-sm sm:text-base"></i>
+</div>
+<span class="font-semibold text-slate-900 text-sm sm:text-base">Bagaimana cara berkontribusi atau berbagi pengalaman?</span>
+</div>
+<i class="fas fa-chevron-down faq-toggle text-slate-400 transform transition-transform duration-300 text-sm sm:text-base"></i>
+</button>
+<div class="faq-content">
+<div class="p-4 sm:p-6 pt-0 pl-12 sm:pl-20">
+<p class="text-slate-600 mb-3 sm:mb-4 text-sm sm:text-base">Kami sangat terbuka untuk kontribusi dari pelaku UMKM yang ingin berbagi pengalaman atau kisah sukses. Anda dapat menghubungi kami melalui:</p>
+<ul class="list-disc list-inside text-slate-600 space-y-1 sm:space-y-2 mb-3 sm:mb-4 text-sm sm:text-base">
+<li>Mengisi formulir kontak di halaman ini</li>
+<li>Mengirim email ke support@vita.com</li>
+<li>Menghubungi kami melalui WhatsApp</li>
+</ul>
+<p class="text-slate-600 text-sm sm:text-base">Tim kami akan meninjau kontribusi Anda dan menghubungi Anda untuk diskusi lebih lanjut.</p>
+</div>
+</div>
+</div>
+
+<!-- FAQ Item 3 -->
+<div class="faq-item platform-card rounded-lg sm:rounded-xl shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+<button class="w-full p-4 sm:p-6 text-left flex items-center justify-between" onclick="toggleFAQ(this)">
+<div class="flex items-center">
+<div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-full flex items-center justify-center mr-3 sm:mr-4">
+<i class="fas fa-users text-sm sm:text-base"></i>
+</div>
+<span class="font-semibold text-slate-900 text-sm sm:text-base">Apakah ada komunitas untuk sesama pelaku UMKM?</span>
+</div>
+<i class="fas fa-chevron-down faq-toggle text-slate-400 transform transition-transform duration-300 text-sm sm:text-base"></i>
+</button>
+<div class="faq-content">
+<div class="p-4 sm:p-6 pt-0 pl-12 sm:pl-20">
+<p class="text-slate-600 mb-3 sm:mb-4 text-sm sm:text-base">Ya, kami memiliki grup komunitas di WhatsApp dan Telegram untuk sesama pelaku UMKM. Di komunitas ini, Anda dapat:</p>
+<div class="grid sm:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
+<ul class="list-disc list-inside text-slate-600 space-y-1 sm:space-y-2 text-sm sm:text-base">
+    <li>Berbagi pengalaman dan tantangan</li>
+    <li>Mendapatkan dukungan dari sesama pelaku UMKM</li>
+</ul>
+<ul class="list-disc list-inside text-slate-600 space-y-1 sm:space-y-2 text-sm sm:text-base">
+    <li>Mendapat informasi tentang event dan pelatihan</li>
+    <li>Membangun jaringan bisnis potensial</li>
+</ul>
+</div>
+<p class="text-slate-600 text-sm sm:text-base">Untuk bergabung, silakan hubungi kami melalui WhatsApp atau isi formulir kontak dengan subjek "Bergabung Komunitas".</p>
+</div>
+</div>
+</div>
+
+<!-- FAQ Item 4 -->
+<div class="faq-item platform-card rounded-lg sm:rounded-xl shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="400">
+<button class="w-full p-4 sm:p-6 text-left flex items-center justify-between" onclick="toggleFAQ(this)">
+<div class="flex items-center">
+<div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-full flex items-center justify-center mr-3 sm:mr-4">
+<i class="fas fa-comments text-sm sm:text-base"></i>
+</div>
+<span class="font-semibold text-slate-900 text-sm sm:text-base">Apakah Vita menyediakan konsultasi bisnis?</span>
+</div>
+<i class="fas fa-chevron-down faq-toggle text-slate-400 transform transition-transform duration-300 text-sm sm:text-base"></i>
+</button>
+<div class="faq-content">
+<div class="p-4 sm:p-6 pt-0 pl-12 sm:pl-20">
+<p class="text-slate-600 mb-3 sm:mb-4 text-sm sm:text-base">Saat ini Vita fokus pada penyediaan materi edukasi dan simulasi self-learning. Namun, kami juga menyediakan sesi konsultasi gratis melalui webinar bulanan yang dapat diikuti oleh siapa saja.</p>
+<p class="text-slate-600 text-sm sm:text-base">Kami juga berencana untuk mengembangkan layanan konsultasi bisnis one-on-one di masa depan. Pantau terus pengumuman kami melalui newsletter atau media sosial untuk informasi lebih lanjut.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-slate-900 text-white py-12 sm:py-16">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
+<div class="space-y-4 sm:space-y-6 sm:col-span-2 md:col-span-1">
+<div class="flex items-center space-x-2 sm:space-x-3">
+<div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg sm:rounded-xl flex items-center justify-center">
+<i class="fas fa-graduation-cap text-white text-lg sm:text-xl"></i>
+</div>
+<div class="font-outfit text-xl sm:text-2xl font-semibold text-white">Vita</div>
+</div>
+<p class="text-slate-300 font-inter leading-relaxed text-sm sm:text-base">
+Platform edukasi interaktif untuk membantu UMKM lokal belajar bisnis secara mandiri, gratis, dan efektif.
+</p>
+<div class="flex space-x-3 sm:space-x-4">
+<a href="#" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-800 hover:bg-primary-600 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors text-sm sm:text-base">
+<i class="fab fa-instagram"></i>
+</a>
+<a href="#" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-800 hover:bg-primary-600 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors text-sm sm:text-base">
+<i class="fab fa-youtube"></i>
+</a>
+<a href="#" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-800 hover:bg-primary-600 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors text-sm sm:text-base">
+<i class="fab fa-telegram"></i>
+</a>
+<a href="#" class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-800 hover:bg-primary-600 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors text-sm sm:text-base">
+<i class="fab fa-whatsapp"></i>
+</a>
+</div>
+</div>
+
+<div>
+<h5 class="font-outfit text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Navigasi</h5>
+<ul class="space-y-2 sm:space-y-3">
+<li><a href="index.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Beranda</a></li>
+<li><a href="tentang.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Tentang Kami</a></li>
+<li><a href="kisah-sukses.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Kisah Sukses</a></li>
+<li><a href="pelatihan-materi.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Pelatihan & Materi</a></li>
+<li><a href="hubungi.html" class="text-primary-400 font-medium text-sm sm:text-base">Hubungi Kami</a></li>
+</ul>
+</div>
+
+<div>
+<h5 class="font-outfit text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Materi</h5>
+<ul class="space-y-2 sm:space-y-3">
+<li><a href="panduan-memulai.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Panduan Memulai</a></li>
+<li><a href="pemasaran-digital.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Pemasaran Digital</a></li>
+<li><a href="manajemen-keuangan.html" class="text-slate-300 hover:text-primary-400 transition-colors text-sm sm:text-base">Manajemen Keuangan</a></li>
+</ul>
+</div>
+
+<div>
+<h5 class="font-outfit text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Kontak</h5>
+<div class="space-y-3 sm:space-y-4">
+<div class="flex items-start space-x-2 sm:space-x-3">
+<div class="w-4 h-4 sm:w-5 sm:h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+<i class="fas fa-envelope text-xs"></i>
+</div>
+<div>
+<div class="text-slate-300 text-sm sm:text-base">Email</div>
+<div class="text-xs sm:text-sm text-slate-400">support@vita.com</div>
+</div>
+</div>
+<div class="flex items-start space-x-2 sm:space-x-3">
+<div class="w-4 h-4 sm:w-5 sm:h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+<i class="fas fa-phone text-xs"></i>
+</div>
+<div>
+<div class="text-slate-300 text-sm sm:text-base">Telepon</div>
+<div class="text-xs sm:text-sm text-slate-400">+62 859 1264 62972</div>
+</div>
+</div>
+<div class="flex items-start space-x-2 sm:space-x-3">
+<div class="w-4 h-4 sm:w-5 sm:h-5 bg-primary-600 rounded-lg flex items-center justify-center text-xs mt-1">
+<i class="fas fa-map-marker-alt text-xs"></i>
+</div>
+<div>
+<div class="text-slate-300 text-sm sm:text-base">Lokasi</div>
+<div class="text-xs sm:text-sm text-slate-400">Yogyakarta, Indonesia</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="border-t border-slate-800 pt-6 sm:pt-8">
+<div class="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
+<div class="text-slate-400 text-xs sm:text-sm">
+© 2025 Vita. All rights reserved.
+</div>
+<div class="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm">
+<a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Kebijakan Privasi</a>
+<a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Syarat & Ketentuan</a>
+<a href="#" class="text-slate-400 hover:text-primary-400 transition-colors">Bantuan</a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+// Mobile menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+if (mobileMenuBtn && mobileMenu) {
+const toggleMenu = (e) => {
+e.preventDefault();
+e.stopPropagation();
+
+mobileMenu.classList.toggle('active');
+
+const icon = mobileMenuBtn.querySelector('i');
+if (mobileMenu.classList.contains('active')) {
+icon.className = 'fas fa-times text-sm sm:text-xl';
+mobileMenuBtn.setAttribute('aria-expanded', 'true');
+} else {
+icon.className = 'fas fa-bars text-sm sm:text-xl';
+mobileMenuBtn.setAttribute('aria-expanded', 'false');
+}
+};
+
+mobileMenuBtn.addEventListener('click', toggleMenu);
+mobileMenuBtn.addEventListener('touchend', toggleMenu, { passive: false });
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+mobileMenu.classList.remove('active');
+const icon = mobileMenuBtn.querySelector('i');
+icon.className = 'fas fa-bars text-sm sm:text-xl';
+mobileMenuBtn.setAttribute('aria-expanded', 'false');
+}
+});
+
+// Handle window resize
+window.addEventListener('resize', () => {
+if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
+mobileMenu.classList.remove('active');
+const icon = mobileMenuBtn.querySelector('i');
+icon.className = 'fas fa-bars text-sm sm:text-xl';
+mobileMenuBtn.setAttribute('aria-expanded', 'false');
+}
+});
+}
+
+// Initialize AOS
+AOS.init({
+duration: 800,
+easing: 'ease-in-out',
+once: true,
+mirror: false
+});
+
+// Form validation
+setupFormValidation();
+});
+
+// FAQ Toggle Function
+function toggleFAQ(element) {
+const faqItem = element.closest('.faq-item');
+const content = faqItem.querySelector('.faq-content');
+const toggle = faqItem.querySelector('.faq-toggle');
+const isActive = faqItem.classList.contains('active');
+
+// Close all other FAQ items
+document.querySelectorAll('.faq-item.active').forEach(item => {
+if (item !== faqItem) {
+item.classList.remove('active');
+const otherContent = item.querySelector('.faq-content');
+const otherToggle = item.querySelector('.faq-toggle');
+if (otherContent) otherContent.style.maxHeight = '0';
+if (otherToggle) otherToggle.classList.remove('rotate-180');
+}
+});
+
+// Toggle current FAQ item
+if (isActive) {
+faqItem.classList.remove('active');
+content.style.maxHeight = '0';
+toggle.classList.remove('rotate-180');
+} else {
+faqItem.classList.add('active');
+content.style.maxHeight = content.scrollHeight + 'px';
+toggle.classList.add('rotate-180');
+}
+}
+
+// Form validation setup
+function setupFormValidation() {
+const forms = document.querySelectorAll('.needs-validation');
+
+Array.from(forms).forEach(form => {
+form.addEventListener('submit', event => {
+if (!form.checkValidity()) {
+event.preventDefault();
+event.stopPropagation();
+
+const invalidInputs = form.querySelectorAll(':invalid');
+invalidInputs.forEach(input => {
+input.classList.add('border-red-500');
+input.classList.remove('border-slate-300');
+});
+} else {
+event.preventDefault();
+showFormSuccess(form);
+}
+
+form.classList.add('was-validated');
+}, false);
+});
+}
+
+// Show form success message
+function showFormSuccess(form) {
+form.style.display = 'none';
+
+const successMessage = document.createElement('div');
+successMessage.className = 'platform-card rounded-lg sm:rounded-xl p-4 sm:p-6 mt-4 border border-emerald-200';
+successMessage.innerHTML = `
+<div class="flex items-center mb-3">
+<div class="flex-shrink-0">
+<i class="fas fa-check-circle text-emerald-500 text-lg sm:text-xl"></i>
+</div>
+<div class="ml-3">
+<h4 class="text-base sm:text-lg font-medium text-emerald-800">Terima kasih!</h4>
+</div>
+</div>
+<p class="text-emerald-700 mb-3 text-sm sm:text-base">Pesan Anda telah kami terima. Team kami akan menghubungi Anda segera.</p>
+<button onclick="resetForm()" class="btn-primary text-white px-3 sm:px-4 py-2 rounded-lg hover:-translate-y-0.5 transition-all text-sm sm:text-base">
+Kirim Pesan Lain
+</button>
+`;
+
+form.parentNode.insertBefore(successMessage, form.nextSibling);
+}
+
+// Reset form function
+function resetForm() {
+const form = document.querySelector('.needs-validation');
+const successMessage = document.querySelector('.border-emerald-200');
+
+if (successMessage) {
+successMessage.remove();
+}
+
+form.reset();
+form.style.display = 'block';
+form.classList.remove('was-validated');
+
+// Reset input styles
+const inputs = form.querySelectorAll('input, select, textarea');
+inputs.forEach(input => {
+input.classList.remove('border-red-500');
+input.classList.add('border-slate-300');
+});
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+const targetId = this.getAttribute('href');
+const targetElement = document.querySelector(targetId);
+
+if (targetElement) {
+e.preventDefault();
+const navHeight = document.getElementById('mainNav')?.offsetHeight || 60;
+window.scrollTo({
+top: targetElement.offsetTop - navHeight - 20,
+behavior: 'smooth'
+});
+}
+});
+});
+
+// Navbar scroll effect
+const navbar = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+if (window.scrollY > 100) {
+navbar.classList.add('scrolled');
+navbar.classList.remove('bg-white/95');
+navbar.classList.add('bg-white/85', 'shadow-lg');
+} else {
+navbar.classList.remove('scrolled', 'bg-white/85', 'shadow-lg');
+navbar.classList.add('bg-white/95');
+}
+});
+
+// Add form input animations
+document.querySelectorAll('.contact-input').forEach(input => {
+input.addEventListener('focus', function() {
+this.parentElement.classList.add('transform', 'scale-105');
+});
+
+input.addEventListener('blur', function() {
+this.parentElement.classList.remove('transform', 'scale-105');
+});
+});
+
+// Add keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+// Escape to close FAQ
+if (e.key === 'Escape') {
+document.querySelectorAll('.faq-item.active').forEach(item => {
+item.classList.remove('active');
+const content = item.querySelector('.faq-content');
+const toggle = item.querySelector('.faq-toggle');
+if (content) content.style.maxHeight = '0';
+if (toggle) toggle.classList.remove('rotate-180');
+});
+}
+
+// Ctrl/Cmd + Enter to submit form
+if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+const form = document.querySelector('.needs-validation');
+if (form && document.activeElement.tagName !== 'TEXTAREA') {
+form.dispatchEvent(new Event('submit'));
+}
+}
+});
+
+// Add touch gestures for mobile FAQ
+let touchStartY = 0;
+let touchEndY = 0;
+
+document.addEventListener('touchstart', function(e) {
+touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+document.addEventListener('touchend', function(e) {
+touchEndY = e.changedTouches[0].screenY;
+
+// Close FAQ on swipe up gesture
+if (touchStartY - touchEndY > 50) {
+const activeFAQ = document.querySelector('.faq-item.active');
+if (activeFAQ && e.target.closest('.faq-item') === activeFAQ) {
+toggleFAQ(activeFAQ.querySelector('button'));
+}
+}
+}, { passive: true });
+
+// Add loading states to buttons
+document.querySelectorAll('button[type="submit"], .btn-primary, .btn-secondary').forEach(button => {
+button.addEventListener('click', function() {
+if (this.type === 'submit') return; // Handle submit separately
+
+const originalText = this.innerHTML;
+this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Loading...';
+this.disabled = true;
+
+setTimeout(() => {
+this.innerHTML = originalText;
+this.disabled = false;
+}, 1000);
+});
+});
+
+// Add success animations
+function addSuccessAnimation(element) {
+element.style.transform = 'scale(0.95)';
+element.style.opacity = '0';
+
+setTimeout(() => {
+element.style.transition = 'all 0.3s ease';
+element.style.transform = 'scale(1)';
+element.style.opacity = '1';
+}, 100);
+}
+
+// Enhanced form validation with better UX
+document.querySelectorAll('.contact-input').forEach(input => {
+input.addEventListener('invalid', function(e) {
+e.preventDefault();
+this.classList.add('border-red-500', 'shake');
+setTimeout(() => this.classList.remove('shake'), 500);
+});
+
+input.addEventListener('input', function() {
+if (this.checkValidity()) {
+this.classList.remove('border-red-500');
+this.classList.add('border-emerald-500');
+} else {
+this.classList.remove('border-emerald-500');
+}
+});
+});
+
+// Add shake animation for validation errors
+const shakeCSS = `
+@keyframes shake {
+0%, 100% { transform: translateX(0); }
+25% { transform: translateX(-5px); }
+75% { transform: translateX(5px); }
+}
+.shake { animation: shake 0.5s ease-in-out; }
+`;
+const style = document.createElement('style');
+style.textContent = shakeCSS;
+document.head.appendChild(style);
+</script>
+</body>
